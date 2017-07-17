@@ -5,6 +5,7 @@ eval `opam config env`
 opam install ocamlfind
 opam install base
 opam install stdio
+opam install configurator
 opam install ounit
 opam install ctypes
 opam install ctypes-foreign
