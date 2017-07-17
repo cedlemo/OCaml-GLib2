@@ -1,0 +1,21 @@
+opam-version: "1.2"
+name: "OCaml-GLib2"
+version: "~unknown"
+maintainer: "cedlemo <cedlemo@gmx.com>"
+authors: "cedlemo <cedlemo@gmx.com>"
+homepage: "https://github.com/cedlemo/OCaml-GLib2"
+bug-reports: "https://github.com/cedlemo/OCaml-GLib2/issues"
+license: "GPL3"
+dev-repo: "https://github.com/cedlemo/OCaml-GLib2"
+build: [
+  ["./configure" "--prefix=%{prefix}%"]
+  [make]
+]
+install: [make "install"]
+remove: ["ocamlfind" "remove" "OCaml-GLib"]
+depends: [
+  "ocamlfind" {build}
+  "ocamlbuild" {build}
+  "ctypes"
+  "ctypes-foreign"
+  ]
