@@ -1,7 +1,7 @@
 (jbuild_version 1)
 
 (library
- ((name        GLib2)
+ ((name        GLib)
   (public_name ocaml-glib2)
   (libraries (ctypes ctypes.foreign))
   (c_flags         (:include c_flags.sexp))
