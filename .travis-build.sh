@@ -4,6 +4,7 @@ export OPAMYES=1
 eval `opam config env`
 opam install ocamlfind
 opam install base
+opam install stdio
 opam install ounit
 opam install ctypes
 opam install ctypes-foreign
