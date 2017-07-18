@@ -1,5 +1,12 @@
+sudo apt-get update -qq
+sh .travis-gobject-introspection.sh
 sh .travis-libffi.sh
-sh .travis-ocaml.sh
+echo "yes" | sudo add-apt-repository ppa:$ppa
+sudo apt-get install -qq opam
+opam init
+opam update
+opam switch -q $OCAML_VERSION
+eval `opam config env`
 export OPAMYES=1
 eval `opam config env`
 opam install ocamlfind
@@ -10,5 +17,4 @@ opam install ctypes-foreign
 opam install base
 opam install stdio
 opam install configurator
-sh .travis-gobject-introspection.sh
 jbuilder build # jbuilder runtest when tests will be started.
