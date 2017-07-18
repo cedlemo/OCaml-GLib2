@@ -1,7 +1,7 @@
 sudo apt-get update -qq
 sh .travis-gobject-introspection.sh
 sh .travis-libffi.sh
-echo "yes" | sudo add-apt-repository ppa:$ppa
+echo "yes" | sudo add-apt-repository ppa:avsm/ocaml42+opam12
 sudo apt-get install -qq opam
 opam init
 opam update
