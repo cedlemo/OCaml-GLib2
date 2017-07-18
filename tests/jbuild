@@ -1,0 +1,11 @@
+(jbuild_version 1)
+
+(executables
+ ((names (tests))
+  (libraries   (ocaml-glib2 oUnit))
+))
+
+(alias
+ ((name    runtest)
+  (deps    (tests.exe))
+  (action  (run ${<}))))
