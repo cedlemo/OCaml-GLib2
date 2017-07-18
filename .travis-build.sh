@@ -17,4 +17,4 @@ opam install ctypes-foreign
 opam install base
 opam install stdio
 opam install configurator
-jbuilder build # jbuilder runtest when tests will be started.
+jbuilder runtest
