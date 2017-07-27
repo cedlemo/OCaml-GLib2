@@ -7,15 +7,14 @@ homepage: "https://github.com/cedlemo/OCaml-GLib2"
 bug-reports: "https://github.com/cedlemo/OCaml-GLib2/issues"
 license: "GPL3"
 dev-repo: "https://github.com/cedlemo/OCaml-GLib2"
-build: [
-  ["./configure" "--prefix=%{prefix}%"]
-  [make]
-]
-install: [make "install"]
-remove: ["ocamlfind" "remove" "OCaml-GLib"]
+build: [["jbuilder" "build" "-p" name "-j" jobs]]
+build-test: [["jbuilder" "runtest" "-p" name "-j" jobs]]
 depends: [
-  "ocamlfind" {build}
-  "ocamlbuild" {build}
+  "jbuilder" {build}
   "ctypes"
   "ctypes-foreign"
+  "ounit"
+  "base"
+  "stdio"
+  "configurator"
   ]
