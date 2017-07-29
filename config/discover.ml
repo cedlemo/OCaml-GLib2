@@ -18,7 +18,11 @@ let () =
       match C.Pkg_config.get c with
       | None -> default
       | Some pc ->
-        Option.value (C.Pkg_config.query pc ~package:"glib-2.0") ~default
+          let libffi = Option.value_exn (C.Pkg_config.query pc ~package:"libffi") in
+          let glib = Option.value (C.Pkg_config.query pc ~package:"glib-2.0") ~default in
+          let  module P = C.Pkg_config in
+          { libs = libffi.P.libs @ glib.P.libs ;
+            cflags = libffi.P.libs @ glib.P.libs }
     in
 
     write_sexp "c_flags.sexp"         (sexp_of_list sexp_of_string conf.libs);
