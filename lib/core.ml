@@ -2428,59 +2428,59 @@ let assertion_message_cmpstr =
 foreign "g_assertion_message_cmpstr" (string @-> string @-> int32_t @-> string @-> string @-> string @-> string @-> string @-> returning void)
 
 let assertion_message_error =
-foreign "g_assertion_message_error" (string @-> string @-> int32_t @-> string @-> string @-> Error.t_typ @-> uint32_t @-> int32_t @-> returning void)
+foreign "g_assertion_message_error" (string @-> string @-> int32_t @-> string @-> string @-> ptr Error.t_typ @-> uint32_t @-> int32_t @-> returning void)
 
 (* Not implemented g_atexit argument types not handled *)
 let atomic_int_add =
-foreign "g_atomic_int_add" (int32_t @-> int32_t @-> returning int32_t)
+foreign "g_atomic_int_add" (ptr int32_t @-> int32_t @-> returning int32_t)
 
 let atomic_int_and =
-foreign "g_atomic_int_and" (uint32_t @-> uint32_t @-> returning uint32_t)
+foreign "g_atomic_int_and" (ptr uint32_t @-> uint32_t @-> returning uint32_t)
 
 let atomic_int_compare_and_exchange =
-foreign "g_atomic_int_compare_and_exchange" (int32_t @-> int32_t @-> int32_t @-> returning bool)
+foreign "g_atomic_int_compare_and_exchange" (ptr int32_t @-> int32_t @-> int32_t @-> returning bool)
 
 let atomic_int_dec_and_test =
-foreign "g_atomic_int_dec_and_test" (int32_t @-> returning bool)
+foreign "g_atomic_int_dec_and_test" (ptr int32_t @-> returning bool)
 
 let atomic_int_exchange_and_add =
-foreign "g_atomic_int_exchange_and_add" (int32_t @-> int32_t @-> returning int32_t)
+foreign "g_atomic_int_exchange_and_add" (ptr int32_t @-> int32_t @-> returning int32_t)
 
 let atomic_int_get =
-foreign "g_atomic_int_get" (int32_t @-> returning int32_t)
+foreign "g_atomic_int_get" (ptr int32_t @-> returning int32_t)
 
 let atomic_int_inc =
-foreign "g_atomic_int_inc" (int32_t @-> returning void)
+foreign "g_atomic_int_inc" (ptr int32_t @-> returning void)
 
 let atomic_int_or =
-foreign "g_atomic_int_or" (uint32_t @-> uint32_t @-> returning uint32_t)
+foreign "g_atomic_int_or" (ptr uint32_t @-> uint32_t @-> returning uint32_t)
 
 let atomic_int_set =
-foreign "g_atomic_int_set" (int32_t @-> int32_t @-> returning void)
+foreign "g_atomic_int_set" (ptr int32_t @-> int32_t @-> returning void)
 
 let atomic_int_xor =
-foreign "g_atomic_int_xor" (uint32_t @-> uint32_t @-> returning uint32_t)
+foreign "g_atomic_int_xor" (ptr uint32_t @-> uint32_t @-> returning uint32_t)
 
 let atomic_pointer_add =
-foreign "g_atomic_pointer_add" (void @-> int64_t @-> returning int64_t)
+foreign "g_atomic_pointer_add" (ptr void @-> int64_t @-> returning int64_t)
 
 let atomic_pointer_and =
-foreign "g_atomic_pointer_and" (void @-> uint64_t @-> returning uint64_t)
+foreign "g_atomic_pointer_and" (ptr void @-> uint64_t @-> returning uint64_t)
 
 let atomic_pointer_compare_and_exchange =
-foreign "g_atomic_pointer_compare_and_exchange" (void @-> void @-> void @-> returning bool)
+foreign "g_atomic_pointer_compare_and_exchange" (ptr void @-> ptr void @-> ptr void @-> returning bool)
 
 let atomic_pointer_get =
-foreign "g_atomic_pointer_get" (void @-> returning void)
+foreign "g_atomic_pointer_get" (ptr void @-> returning ptr void)
 
 let atomic_pointer_or =
-foreign "g_atomic_pointer_or" (void @-> uint64_t @-> returning uint64_t)
+foreign "g_atomic_pointer_or" (ptr void @-> uint64_t @-> returning uint64_t)
 
 let atomic_pointer_set =
-foreign "g_atomic_pointer_set" (void @-> void @-> returning void)
+foreign "g_atomic_pointer_set" (ptr void @-> ptr void @-> returning void)
 
 let atomic_pointer_xor =
-foreign "g_atomic_pointer_xor" (void @-> uint64_t @-> returning uint64_t)
+foreign "g_atomic_pointer_xor" (ptr void @-> uint64_t @-> returning uint64_t)
 
 (* Not implemented g_base64_decode argument types not handled *)
 (* Not implemented g_base64_decode_inplace argument types not handled *)
@@ -2492,7 +2492,7 @@ let basename =
 foreign "g_basename" (string @-> returning string)
 
 let bit_lock =
-foreign "g_bit_lock" (int32_t @-> int32_t @-> returning void)
+foreign "g_bit_lock" (ptr int32_t @-> int32_t @-> returning void)
 
 let bit_nth_lsf =
 foreign "g_bit_nth_lsf" (uint64_t @-> int32_t @-> returning int32_t)
@@ -2504,10 +2504,10 @@ let bit_storage =
 foreign "g_bit_storage" (uint64_t @-> returning uint32_t)
 
 let bit_trylock =
-foreign "g_bit_trylock" (int32_t @-> int32_t @-> returning bool)
+foreign "g_bit_trylock" (ptr int32_t @-> int32_t @-> returning bool)
 
 let bit_unlock =
-foreign "g_bit_unlock" (int32_t @-> int32_t @-> returning void)
+foreign "g_bit_unlock" (ptr int32_t @-> int32_t @-> returning void)
 
 let bookmark_file_error_quark =
 foreign "g_bookmark_file_error_quark" (void @-> returning uint32_t)
@@ -2515,13 +2515,13 @@ foreign "g_bookmark_file_error_quark" (void @-> returning uint32_t)
 (* Not implemented g_build_filenamev argument types not handled *)
 (* Not implemented g_build_pathv argument types not handled *)
 let byte_array_free =
-foreign "g_byte_array_free" (ByteArray.t_typ @-> bool @-> returning uint8_t)
+foreign "g_byte_array_free" (ptr ByteArray.t_typ @-> bool @-> returning ptr uint8_t)
 
 (* Not implemented g_byte_array_free_to_bytes argument types not handled *)
 (* Not implemented g_byte_array_new argument types not handled *)
 (* Not implemented g_byte_array_new_take argument types not handled *)
 let byte_array_unref =
-foreign "g_byte_array_unref" (ByteArray.t_typ @-> returning void)
+foreign "g_byte_array_unref" (ptr ByteArray.t_typ @-> returning void)
 
 let chdir =
 foreign "g_chdir" (string @-> returning int32_t)
@@ -2561,13 +2561,13 @@ foreign "g_convert_error_quark" (void @-> returning uint32_t)
 (* Not implemented g_datalist_set_flags argument types not handled *)
 (* Not implemented g_datalist_unset_flags argument types not handled *)
 let dataset_destroy =
-foreign "g_dataset_destroy" (void @-> returning void)
+foreign "g_dataset_destroy" (ptr void @-> returning void)
 
 let dataset_id_get_data =
-foreign "g_dataset_id_get_data" (void @-> uint32_t @-> returning void)
+foreign "g_dataset_id_get_data" (ptr void @-> uint32_t @-> returning ptr void)
 
 let dataset_id_remove_no_notify =
-foreign "g_dataset_id_remove_no_notify" (void @-> uint32_t @-> returning void)
+foreign "g_dataset_id_remove_no_notify" (ptr void @-> uint32_t @-> returning ptr void)
 
 (* Not implemented g_dataset_id_set_data_full argument types not handled *)
 (* Not implemented g_date_get_days_in_month argument types not handled *)
@@ -2582,13 +2582,13 @@ foreign "g_date_is_leap_year" (uint16_t @-> returning bool)
 
 (* Not implemented g_date_strftime argument types not handled *)
 let date_time_compare =
-foreign "g_date_time_compare" (void @-> void @-> returning int32_t)
+foreign "g_date_time_compare" (ptr void @-> ptr void @-> returning int32_t)
 
 let date_time_equal =
-foreign "g_date_time_equal" (void @-> void @-> returning bool)
+foreign "g_date_time_equal" (ptr void @-> ptr void @-> returning bool)
 
 let date_time_hash =
-foreign "g_date_time_hash" (void @-> returning uint32_t)
+foreign "g_date_time_hash" (ptr void @-> returning uint32_t)
 
 let date_valid_day =
 foreign "g_date_valid_day" (uint8_t @-> returning bool)
@@ -2610,19 +2610,19 @@ foreign "g_dgettext" (string @-> string @-> returning string)
 
 (* Not implemented g_dir_make_tmp argument types not handled *)
 let direct_equal =
-foreign "g_direct_equal" (void @-> void @-> returning bool)
+foreign "g_direct_equal" (ptr void @-> ptr void @-> returning bool)
 
 let direct_hash =
-foreign "g_direct_hash" (void @-> returning uint32_t)
+foreign "g_direct_hash" (ptr void @-> returning uint32_t)
 
 let dngettext =
 foreign "g_dngettext" (string @-> string @-> string @-> uint64_t @-> returning string)
 
 let double_equal =
-foreign "g_double_equal" (void @-> void @-> returning bool)
+foreign "g_double_equal" (ptr void @-> ptr void @-> returning bool)
 
 let double_hash =
-foreign "g_double_hash" (void @-> returning uint32_t)
+foreign "g_double_hash" (ptr void @-> returning uint32_t)
 
 let dpgettext =
 foreign "g_dpgettext" (string @-> string @-> uint64_t @-> returning string)
@@ -2653,7 +2653,7 @@ foreign "g_file_error_quark" (void @-> returning uint32_t)
 (* Not implemented g_format_size_for_display argument types not handled *)
 (* Not implemented g_format_size_full argument types not handled *)
 let free =
-foreign "g_free" (void @-> returning void)
+foreign "g_free" (ptr void @-> returning void)
 
 let get_application_name =
 foreign "g_get_application_name" (void @-> returning string)
@@ -2714,41 +2714,41 @@ let getenv =
 foreign "g_getenv" (string @-> returning string)
 
 let hash_table_add =
-foreign "g_hash_table_add" (HashTable.t_typ @-> void @-> returning bool)
+foreign "g_hash_table_add" (ptr HashTable.t_typ @-> ptr void @-> returning bool)
 
 let hash_table_contains =
-foreign "g_hash_table_contains" (HashTable.t_typ @-> void @-> returning bool)
+foreign "g_hash_table_contains" (ptr HashTable.t_typ @-> ptr void @-> returning bool)
 
 let hash_table_destroy =
-foreign "g_hash_table_destroy" (HashTable.t_typ @-> returning void)
+foreign "g_hash_table_destroy" (ptr HashTable.t_typ @-> returning void)
 
 let hash_table_insert =
-foreign "g_hash_table_insert" (HashTable.t_typ @-> void @-> void @-> returning bool)
+foreign "g_hash_table_insert" (ptr HashTable.t_typ @-> ptr void @-> ptr void @-> returning bool)
 
 let hash_table_lookup =
-foreign "g_hash_table_lookup" (HashTable.t_typ @-> void @-> returning void)
+foreign "g_hash_table_lookup" (ptr HashTable.t_typ @-> ptr void @-> returning ptr void)
 
 (* Not implemented g_hash_table_lookup_extended argument types not handled *)
 let hash_table_remove =
-foreign "g_hash_table_remove" (HashTable.t_typ @-> void @-> returning bool)
+foreign "g_hash_table_remove" (ptr HashTable.t_typ @-> ptr void @-> returning bool)
 
 let hash_table_remove_all =
-foreign "g_hash_table_remove_all" (HashTable.t_typ @-> returning void)
+foreign "g_hash_table_remove_all" (ptr HashTable.t_typ @-> returning void)
 
 let hash_table_replace =
-foreign "g_hash_table_replace" (HashTable.t_typ @-> void @-> void @-> returning bool)
+foreign "g_hash_table_replace" (ptr HashTable.t_typ @-> ptr void @-> ptr void @-> returning bool)
 
 let hash_table_size =
-foreign "g_hash_table_size" (HashTable.t_typ @-> returning uint32_t)
+foreign "g_hash_table_size" (ptr HashTable.t_typ @-> returning uint32_t)
 
 let hash_table_steal =
-foreign "g_hash_table_steal" (HashTable.t_typ @-> void @-> returning bool)
+foreign "g_hash_table_steal" (ptr HashTable.t_typ @-> ptr void @-> returning bool)
 
 let hash_table_steal_all =
-foreign "g_hash_table_steal_all" (HashTable.t_typ @-> returning void)
+foreign "g_hash_table_steal_all" (ptr HashTable.t_typ @-> returning void)
 
 let hash_table_unref =
-foreign "g_hash_table_unref" (HashTable.t_typ @-> returning void)
+foreign "g_hash_table_unref" (ptr HashTable.t_typ @-> returning void)
 
 (* Not implemented g_hook_destroy argument types not handled *)
 (* Not implemented g_hook_destroy_link argument types not handled *)
@@ -2770,20 +2770,20 @@ foreign "g_hostname_is_non_ascii" (string @-> returning bool)
 (* Not implemented g_iconv argument types not handled *)
 (* Not implemented g_idle_add_full argument types not handled *)
 let idle_remove_by_data =
-foreign "g_idle_remove_by_data" (void @-> returning bool)
+foreign "g_idle_remove_by_data" (ptr void @-> returning bool)
 
 (* Not implemented g_idle_source_new argument types not handled *)
 let int64_equal =
-foreign "g_int64_equal" (void @-> void @-> returning bool)
+foreign "g_int64_equal" (ptr void @-> ptr void @-> returning bool)
 
 let int64_hash =
-foreign "g_int64_hash" (void @-> returning uint32_t)
+foreign "g_int64_hash" (ptr void @-> returning uint32_t)
 
 let int_equal =
-foreign "g_int_equal" (void @-> void @-> returning bool)
+foreign "g_int_equal" (ptr void @-> ptr void @-> returning bool)
 
 let int_hash =
-foreign "g_int_hash" (void @-> returning uint32_t)
+foreign "g_int_hash" (ptr void @-> returning uint32_t)
 
 let intern_static_string =
 foreign "g_intern_static_string" (string @-> returning string)
@@ -2831,16 +2831,16 @@ let main_depth =
 foreign "g_main_depth" (void @-> returning int32_t)
 
 let malloc =
-foreign "g_malloc" (uint64_t @-> returning void)
+foreign "g_malloc" (uint64_t @-> returning ptr void)
 
 let malloc0 =
-foreign "g_malloc0" (uint64_t @-> returning void)
+foreign "g_malloc0" (uint64_t @-> returning ptr void)
 
 let malloc0_n =
-foreign "g_malloc0_n" (uint64_t @-> uint64_t @-> returning void)
+foreign "g_malloc0_n" (uint64_t @-> uint64_t @-> returning ptr void)
 
 let malloc_n =
-foreign "g_malloc_n" (uint64_t @-> uint64_t @-> returning void)
+foreign "g_malloc_n" (uint64_t @-> uint64_t @-> returning ptr void)
 
 let markup_error_quark =
 foreign "g_markup_error_quark" (void @-> returning uint32_t)
@@ -2854,13 +2854,13 @@ foreign "g_mem_profile" (void @-> returning void)
 
 (* Not implemented g_mem_set_vtable argument types not handled *)
 let memdup =
-foreign "g_memdup" (void @-> uint32_t @-> returning void)
+foreign "g_memdup" (ptr void @-> uint32_t @-> returning ptr void)
 
 let mkdir_with_parents =
 foreign "g_mkdir_with_parents" (string @-> int32_t @-> returning int32_t)
 
 let nullify_pointer =
-foreign "g_nullify_pointer" (void @-> returning void)
+foreign "g_nullify_pointer" (ptr void @-> returning void)
 
 let on_error_query =
 foreign "g_on_error_query" (string @-> returning void)
@@ -2869,10 +2869,10 @@ let on_error_stack_trace =
 foreign "g_on_error_stack_trace" (string @-> returning void)
 
 let once_init_enter =
-foreign "g_once_init_enter" (void @-> returning bool)
+foreign "g_once_init_enter" (ptr void @-> returning bool)
 
 let once_init_leave =
-foreign "g_once_init_leave" (void @-> uint64_t @-> returning void)
+foreign "g_once_init_leave" (ptr void @-> uint64_t @-> returning void)
 
 let option_error_quark =
 foreign "g_option_error_quark" (void @-> returning uint32_t)
@@ -2892,13 +2892,13 @@ foreign "g_pattern_match_simple" (string @-> string @-> returning bool)
 
 (* Not implemented g_pattern_match_string argument types not handled *)
 let pointer_bit_lock =
-foreign "g_pointer_bit_lock" (void @-> int32_t @-> returning void)
+foreign "g_pointer_bit_lock" (ptr void @-> int32_t @-> returning void)
 
 let pointer_bit_trylock =
-foreign "g_pointer_bit_trylock" (void @-> int32_t @-> returning bool)
+foreign "g_pointer_bit_trylock" (ptr void @-> int32_t @-> returning bool)
 
 let pointer_bit_unlock =
-foreign "g_pointer_bit_unlock" (void @-> int32_t @-> returning void)
+foreign "g_pointer_bit_unlock" (ptr void @-> int32_t @-> returning void)
 
 (* Not implemented g_poll argument types not handled *)
 (* Not implemented g_propagate_error argument types not handled *)
@@ -2930,10 +2930,10 @@ let random_set_seed =
 foreign "g_random_set_seed" (uint32_t @-> returning void)
 
 let realloc =
-foreign "g_realloc" (void @-> uint64_t @-> returning void)
+foreign "g_realloc" (ptr void @-> uint64_t @-> returning ptr void)
 
 let realloc_n =
-foreign "g_realloc_n" (void @-> uint64_t @-> uint64_t @-> returning void)
+foreign "g_realloc_n" (ptr void @-> uint64_t @-> uint64_t @-> returning ptr void)
 
 (* Not implemented g_regex_check_replacement argument types not handled *)
 let regex_error_quark =
@@ -2973,19 +2973,19 @@ foreign "g_shell_error_quark" (void @-> returning uint32_t)
 (* Not implemented g_shell_quote argument types not handled *)
 (* Not implemented g_shell_unquote argument types not handled *)
 let slice_alloc =
-foreign "g_slice_alloc" (uint64_t @-> returning void)
+foreign "g_slice_alloc" (uint64_t @-> returning ptr void)
 
 let slice_alloc0 =
-foreign "g_slice_alloc0" (uint64_t @-> returning void)
+foreign "g_slice_alloc0" (uint64_t @-> returning ptr void)
 
 let slice_copy =
-foreign "g_slice_copy" (uint64_t @-> void @-> returning void)
+foreign "g_slice_copy" (uint64_t @-> ptr void @-> returning ptr void)
 
 let slice_free1 =
-foreign "g_slice_free1" (uint64_t @-> void @-> returning void)
+foreign "g_slice_free1" (uint64_t @-> ptr void @-> returning void)
 
 let slice_free_chain_with_offset =
-foreign "g_slice_free_chain_with_offset" (uint64_t @-> void @-> uint64_t @-> returning void)
+foreign "g_slice_free_chain_with_offset" (uint64_t @-> ptr void @-> uint64_t @-> returning void)
 
 (* Not implemented g_slice_get_config argument types not handled *)
 (* Not implemented g_slice_get_config_state argument types not handled *)
@@ -2995,7 +2995,7 @@ foreign "g_source_remove" (uint32_t @-> returning bool)
 
 (* Not implemented g_source_remove_by_funcs_user_data argument types not handled *)
 let source_remove_by_user_data =
-foreign "g_source_remove_by_user_data" (void @-> returning bool)
+foreign "g_source_remove_by_user_data" (ptr void @-> returning bool)
 
 let source_set_name_by_id =
 foreign "g_source_set_name_by_id" (uint32_t @-> string @-> returning void)
@@ -3024,7 +3024,7 @@ foreign "g_spawn_exit_error_quark" (void @-> returning uint32_t)
 (* Not implemented g_spawn_sync argument types not handled *)
 (* Not implemented g_stpcpy argument types not handled *)
 let str_equal =
-foreign "g_str_equal" (void @-> void @-> returning bool)
+foreign "g_str_equal" (ptr void @-> ptr void @-> returning bool)
 
 let str_has_prefix =
 foreign "g_str_has_prefix" (string @-> string @-> returning bool)
@@ -3033,7 +3033,7 @@ let str_has_suffix =
 foreign "g_str_has_suffix" (string @-> string @-> returning bool)
 
 let str_hash =
-foreign "g_str_hash" (void @-> returning uint32_t)
+foreign "g_str_hash" (ptr void @-> returning uint32_t)
 
 let str_is_ascii =
 foreign "g_str_is_ascii" (string @-> returning bool)
@@ -3123,7 +3123,7 @@ foreign "g_test_incomplete" (string @-> returning void)
 (* Not implemented g_test_log_type_name argument types not handled *)
 (* Not implemented g_test_queue_destroy argument types not handled *)
 let test_queue_free =
-foreign "g_test_queue_free" (void @-> returning void)
+foreign "g_test_queue_free" (ptr void @-> returning void)
 
 let test_rand_double =
 foreign "g_test_rand_double" (void @-> returning double)
@@ -3174,7 +3174,7 @@ let thread_error_quark =
 foreign "g_thread_error_quark" (void @-> returning uint32_t)
 
 let thread_exit =
-foreign "g_thread_exit" (void @-> returning void)
+foreign "g_thread_exit" (ptr void @-> returning void)
 
 let thread_pool_get_max_idle_time =
 foreign "g_thread_pool_get_max_idle_time" (void @-> returning uint32_t)
@@ -3208,22 +3208,22 @@ foreign "g_thread_yield" (void @-> returning void)
 (* Not implemented g_trash_stack_pop argument types not handled *)
 (* Not implemented g_trash_stack_push argument types not handled *)
 let try_malloc =
-foreign "g_try_malloc" (uint64_t @-> returning void)
+foreign "g_try_malloc" (uint64_t @-> returning ptr void)
 
 let try_malloc0 =
-foreign "g_try_malloc0" (uint64_t @-> returning void)
+foreign "g_try_malloc0" (uint64_t @-> returning ptr void)
 
 let try_malloc0_n =
-foreign "g_try_malloc0_n" (uint64_t @-> uint64_t @-> returning void)
+foreign "g_try_malloc0_n" (uint64_t @-> uint64_t @-> returning ptr void)
 
 let try_malloc_n =
-foreign "g_try_malloc_n" (uint64_t @-> uint64_t @-> returning void)
+foreign "g_try_malloc_n" (uint64_t @-> uint64_t @-> returning ptr void)
 
 let try_realloc =
-foreign "g_try_realloc" (void @-> uint64_t @-> returning void)
+foreign "g_try_realloc" (ptr void @-> uint64_t @-> returning ptr void)
 
 let try_realloc_n =
-foreign "g_try_realloc_n" (void @-> uint64_t @-> uint64_t @-> returning void)
+foreign "g_try_realloc_n" (ptr void @-> uint64_t @-> uint64_t @-> returning ptr void)
 
 (* Not implemented g_ucs4_to_utf16 argument types not handled *)
 (* Not implemented g_ucs4_to_utf8 argument types not handled *)
@@ -3269,7 +3269,7 @@ foreign "g_unix_error_quark" (void @-> returning uint32_t)
 (* Not implemented g_unix_fd_add_full argument types not handled *)
 (* Not implemented g_unix_fd_source_new argument types not handled *)
 let unix_open_pipe =
-foreign "g_unix_open_pipe" (int32_t @-> int32_t @-> returning bool)
+foreign "g_unix_open_pipe" (ptr int32_t @-> int32_t @-> returning bool)
 
 let unix_set_fd_nonblocking =
 foreign "g_unix_set_fd_nonblocking" (int32_t @-> bool @-> returning bool)

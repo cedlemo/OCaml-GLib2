@@ -741,59 +741,59 @@ val assertion_message_cmpstr:
 string -> string -> int32 -> string -> string -> string -> string -> string -> unit
 
 val assertion_message_error:
-string -> string -> int32 -> string -> string -> Error.t structure -> Unsigned.uint32 -> int32 -> unit
+string -> string -> int32 -> string -> string -> Error.t structure ptr -> Unsigned.uint32 -> int32 -> unit
 
 (* Not implemented g_atexit argument types not handled *)
 val atomic_int_add:
-int32 -> int32 -> int32
+int32 ptr -> int32 -> int32
 
 val atomic_int_and:
-Unsigned.uint32 -> Unsigned.uint32 -> Unsigned.uint32
+Unsigned.uint32 ptr -> Unsigned.uint32 -> Unsigned.uint32
 
 val atomic_int_compare_and_exchange:
-int32 -> int32 -> int32 -> bool
+int32 ptr -> int32 -> int32 -> bool
 
 val atomic_int_dec_and_test:
-int32 -> bool
+int32 ptr -> bool
 
 val atomic_int_exchange_and_add:
-int32 -> int32 -> int32
+int32 ptr -> int32 -> int32
 
 val atomic_int_get:
-int32 -> int32
+int32 ptr -> int32
 
 val atomic_int_inc:
-int32 -> unit
+int32 ptr -> unit
 
 val atomic_int_or:
-Unsigned.uint32 -> Unsigned.uint32 -> Unsigned.uint32
+Unsigned.uint32 ptr -> Unsigned.uint32 -> Unsigned.uint32
 
 val atomic_int_set:
-int32 -> int32 -> unit
+int32 ptr -> int32 -> unit
 
 val atomic_int_xor:
-Unsigned.uint32 -> Unsigned.uint32 -> Unsigned.uint32
+Unsigned.uint32 ptr -> Unsigned.uint32 -> Unsigned.uint32
 
 val atomic_pointer_add:
-unit -> int64 -> int64
+unit ptr -> int64 -> int64
 
 val atomic_pointer_and:
-unit -> Unsigned.uint64 -> Unsigned.uint64
+unit ptr -> Unsigned.uint64 -> Unsigned.uint64
 
 val atomic_pointer_compare_and_exchange:
-unit -> unit -> unit -> bool
+unit ptr -> unit ptr -> unit ptr -> bool
 
 val atomic_pointer_get:
-unit -> unit
+unit ptr -> unit ptr
 
 val atomic_pointer_or:
-unit -> Unsigned.uint64 -> Unsigned.uint64
+unit ptr -> Unsigned.uint64 -> Unsigned.uint64
 
 val atomic_pointer_set:
-unit -> unit -> unit
+unit ptr -> unit ptr -> unit
 
 val atomic_pointer_xor:
-unit -> Unsigned.uint64 -> Unsigned.uint64
+unit ptr -> Unsigned.uint64 -> Unsigned.uint64
 
 (* Not implemented g_base64_decode argument types not handled *)
 (* Not implemented g_base64_decode_inplace argument types not handled *)
@@ -805,7 +805,7 @@ val basename:
 string -> string
 
 val bit_lock:
-int32 -> int32 -> unit
+int32 ptr -> int32 -> unit
 
 val bit_nth_lsf:
 Unsigned.uint64 -> int32 -> int32
@@ -817,10 +817,10 @@ val bit_storage:
 Unsigned.uint64 -> Unsigned.uint32
 
 val bit_trylock:
-int32 -> int32 -> bool
+int32 ptr -> int32 -> bool
 
 val bit_unlock:
-int32 -> int32 -> unit
+int32 ptr -> int32 -> unit
 
 val bookmark_file_error_quark:
 unit -> Unsigned.uint32
@@ -828,13 +828,13 @@ unit -> Unsigned.uint32
 (* Not implemented g_build_filenamev argument types not handled *)
 (* Not implemented g_build_pathv argument types not handled *)
 val byte_array_free:
-ByteArray.t structure -> bool -> Unsigned.uint8
+ByteArray.t structure ptr -> bool -> Unsigned.uint8 ptr
 
 (* Not implemented g_byte_array_free_to_bytes return type not handled *)
 (* Not implemented g_byte_array_new return type not handled *)
 (* Not implemented g_byte_array_new_take argument types not handled *)
 val byte_array_unref:
-ByteArray.t structure -> unit
+ByteArray.t structure ptr -> unit
 
 val chdir:
 string -> int32
@@ -874,13 +874,13 @@ unit -> Unsigned.uint32
 (* Not implemented g_datalist_set_flags argument types not handled *)
 (* Not implemented g_datalist_unset_flags argument types not handled *)
 val dataset_destroy:
-unit -> unit
+unit ptr -> unit
 
 val dataset_id_get_data:
-unit -> Unsigned.uint32 -> unit
+unit ptr -> Unsigned.uint32 -> unit ptr
 
 val dataset_id_remove_no_notify:
-unit -> Unsigned.uint32 -> unit
+unit ptr -> Unsigned.uint32 -> unit ptr
 
 (* Not implemented g_dataset_id_set_data_full argument types not handled *)
 (* Not implemented g_date_get_days_in_month argument types not handled *)
@@ -895,13 +895,13 @@ Unsigned.uint16 -> bool
 
 (* Not implemented g_date_strftime argument types not handled *)
 val date_time_compare:
-unit -> unit -> int32
+unit ptr -> unit ptr -> int32
 
 val date_time_equal:
-unit -> unit -> bool
+unit ptr -> unit ptr -> bool
 
 val date_time_hash:
-unit -> Unsigned.uint32
+unit ptr -> Unsigned.uint32
 
 val date_valid_day:
 Unsigned.uint8 -> bool
@@ -923,19 +923,19 @@ string -> string -> string
 
 (* Not implemented g_dir_make_tmp return type not handled *)
 val direct_equal:
-unit -> unit -> bool
+unit ptr -> unit ptr -> bool
 
 val direct_hash:
-unit -> Unsigned.uint32
+unit ptr -> Unsigned.uint32
 
 val dngettext:
 string -> string -> string -> Unsigned.uint64 -> string
 
 val double_equal:
-unit -> unit -> bool
+unit ptr -> unit ptr -> bool
 
 val double_hash:
-unit -> Unsigned.uint32
+unit ptr -> Unsigned.uint32
 
 val dpgettext:
 string -> string -> Unsigned.uint64 -> string
@@ -966,7 +966,7 @@ unit -> Unsigned.uint32
 (* Not implemented g_format_size_for_display return type not handled *)
 (* Not implemented g_format_size_full argument types not handled *)
 val free:
-unit -> unit
+unit ptr -> unit
 
 val get_application_name:
 unit -> string
@@ -1027,41 +1027,41 @@ val getenv:
 string -> string
 
 val hash_table_add:
-HashTable.t structure -> unit -> bool
+HashTable.t structure ptr -> unit ptr -> bool
 
 val hash_table_contains:
-HashTable.t structure -> unit -> bool
+HashTable.t structure ptr -> unit ptr -> bool
 
 val hash_table_destroy:
-HashTable.t structure -> unit
+HashTable.t structure ptr -> unit
 
 val hash_table_insert:
-HashTable.t structure -> unit -> unit -> bool
+HashTable.t structure ptr -> unit ptr -> unit ptr -> bool
 
 val hash_table_lookup:
-HashTable.t structure -> unit -> unit
+HashTable.t structure ptr -> unit ptr -> unit ptr
 
 (* Not implemented g_hash_table_lookup_extended argument types not handled *)
 val hash_table_remove:
-HashTable.t structure -> unit -> bool
+HashTable.t structure ptr -> unit ptr -> bool
 
 val hash_table_remove_all:
-HashTable.t structure -> unit
+HashTable.t structure ptr -> unit
 
 val hash_table_replace:
-HashTable.t structure -> unit -> unit -> bool
+HashTable.t structure ptr -> unit ptr -> unit ptr -> bool
 
 val hash_table_size:
-HashTable.t structure -> Unsigned.uint32
+HashTable.t structure ptr -> Unsigned.uint32
 
 val hash_table_steal:
-HashTable.t structure -> unit -> bool
+HashTable.t structure ptr -> unit ptr -> bool
 
 val hash_table_steal_all:
-HashTable.t structure -> unit
+HashTable.t structure ptr -> unit
 
 val hash_table_unref:
-HashTable.t structure -> unit
+HashTable.t structure ptr -> unit
 
 (* Not implemented g_hook_destroy argument types not handled *)
 (* Not implemented g_hook_destroy_link argument types not handled *)
@@ -1083,20 +1083,20 @@ string -> bool
 (* Not implemented g_iconv argument types not handled *)
 (* Not implemented g_idle_add_full argument types not handled *)
 val idle_remove_by_data:
-unit -> bool
+unit ptr -> bool
 
 (* Not implemented g_idle_source_new return type not handled *)
 val int64_equal:
-unit -> unit -> bool
+unit ptr -> unit ptr -> bool
 
 val int64_hash:
-unit -> Unsigned.uint32
+unit ptr -> Unsigned.uint32
 
 val int_equal:
-unit -> unit -> bool
+unit ptr -> unit ptr -> bool
 
 val int_hash:
-unit -> Unsigned.uint32
+unit ptr -> Unsigned.uint32
 
 val intern_static_string:
 string -> string
@@ -1144,16 +1144,16 @@ val main_depth:
 unit -> int32
 
 val malloc:
-Unsigned.uint64 -> unit
+Unsigned.uint64 -> unit ptr
 
 val malloc0:
-Unsigned.uint64 -> unit
+Unsigned.uint64 -> unit ptr
 
 val malloc0_n:
-Unsigned.uint64 -> Unsigned.uint64 -> unit
+Unsigned.uint64 -> Unsigned.uint64 -> unit ptr
 
 val malloc_n:
-Unsigned.uint64 -> Unsigned.uint64 -> unit
+Unsigned.uint64 -> Unsigned.uint64 -> unit ptr
 
 val markup_error_quark:
 unit -> Unsigned.uint32
@@ -1167,13 +1167,13 @@ unit -> unit
 
 (* Not implemented g_mem_set_vtable argument types not handled *)
 val memdup:
-unit -> Unsigned.uint32 -> unit
+unit ptr -> Unsigned.uint32 -> unit ptr
 
 val mkdir_with_parents:
 string -> int32 -> int32
 
 val nullify_pointer:
-unit -> unit
+unit ptr -> unit
 
 val on_error_query:
 string -> unit
@@ -1182,10 +1182,10 @@ val on_error_stack_trace:
 string -> unit
 
 val once_init_enter:
-unit -> bool
+unit ptr -> bool
 
 val once_init_leave:
-unit -> Unsigned.uint64 -> unit
+unit ptr -> Unsigned.uint64 -> unit
 
 val option_error_quark:
 unit -> Unsigned.uint32
@@ -1205,13 +1205,13 @@ string -> string -> bool
 
 (* Not implemented g_pattern_match_string argument types not handled *)
 val pointer_bit_lock:
-unit -> int32 -> unit
+unit ptr -> int32 -> unit
 
 val pointer_bit_trylock:
-unit -> int32 -> bool
+unit ptr -> int32 -> bool
 
 val pointer_bit_unlock:
-unit -> int32 -> unit
+unit ptr -> int32 -> unit
 
 (* Not implemented g_poll argument types not handled *)
 (* Not implemented g_propagate_error argument types not handled *)
@@ -1243,10 +1243,10 @@ val random_set_seed:
 Unsigned.uint32 -> unit
 
 val realloc:
-unit -> Unsigned.uint64 -> unit
+unit ptr -> Unsigned.uint64 -> unit ptr
 
 val realloc_n:
-unit -> Unsigned.uint64 -> Unsigned.uint64 -> unit
+unit ptr -> Unsigned.uint64 -> Unsigned.uint64 -> unit ptr
 
 (* Not implemented g_regex_check_replacement argument types not handled *)
 val regex_error_quark:
@@ -1286,19 +1286,19 @@ unit -> Unsigned.uint32
 (* Not implemented g_shell_quote return type not handled *)
 (* Not implemented g_shell_unquote return type not handled *)
 val slice_alloc:
-Unsigned.uint64 -> unit
+Unsigned.uint64 -> unit ptr
 
 val slice_alloc0:
-Unsigned.uint64 -> unit
+Unsigned.uint64 -> unit ptr
 
 val slice_copy:
-Unsigned.uint64 -> unit -> unit
+Unsigned.uint64 -> unit ptr -> unit ptr
 
 val slice_free1:
-Unsigned.uint64 -> unit -> unit
+Unsigned.uint64 -> unit ptr -> unit
 
 val slice_free_chain_with_offset:
-Unsigned.uint64 -> unit -> Unsigned.uint64 -> unit
+Unsigned.uint64 -> unit ptr -> Unsigned.uint64 -> unit
 
 (* Not implemented g_slice_get_config argument types not handled *)
 (* Not implemented g_slice_get_config_state argument types not handled *)
@@ -1308,7 +1308,7 @@ Unsigned.uint32 -> bool
 
 (* Not implemented g_source_remove_by_funcs_user_data argument types not handled *)
 val source_remove_by_user_data:
-unit -> bool
+unit ptr -> bool
 
 val source_set_name_by_id:
 Unsigned.uint32 -> string -> unit
@@ -1337,7 +1337,7 @@ unit -> Unsigned.uint32
 (* Not implemented g_spawn_sync argument types not handled *)
 (* Not implemented g_stpcpy return type not handled *)
 val str_equal:
-unit -> unit -> bool
+unit ptr -> unit ptr -> bool
 
 val str_has_prefix:
 string -> string -> bool
@@ -1346,7 +1346,7 @@ val str_has_suffix:
 string -> string -> bool
 
 val str_hash:
-unit -> Unsigned.uint32
+unit ptr -> Unsigned.uint32
 
 val str_is_ascii:
 string -> bool
@@ -1436,7 +1436,7 @@ string -> unit
 (* Not implemented g_test_log_type_name argument types not handled *)
 (* Not implemented g_test_queue_destroy argument types not handled *)
 val test_queue_free:
-unit -> unit
+unit ptr -> unit
 
 val test_rand_double:
 unit -> float
@@ -1487,7 +1487,7 @@ val thread_error_quark:
 unit -> Unsigned.uint32
 
 val thread_exit:
-unit -> unit
+unit ptr -> unit
 
 val thread_pool_get_max_idle_time:
 unit -> Unsigned.uint32
@@ -1521,22 +1521,22 @@ unit -> unit
 (* Not implemented g_trash_stack_pop argument types not handled *)
 (* Not implemented g_trash_stack_push argument types not handled *)
 val try_malloc:
-Unsigned.uint64 -> unit
+Unsigned.uint64 -> unit ptr
 
 val try_malloc0:
-Unsigned.uint64 -> unit
+Unsigned.uint64 -> unit ptr
 
 val try_malloc0_n:
-Unsigned.uint64 -> Unsigned.uint64 -> unit
+Unsigned.uint64 -> Unsigned.uint64 -> unit ptr
 
 val try_malloc_n:
-Unsigned.uint64 -> Unsigned.uint64 -> unit
+Unsigned.uint64 -> Unsigned.uint64 -> unit ptr
 
 val try_realloc:
-unit -> Unsigned.uint64 -> unit
+unit ptr -> Unsigned.uint64 -> unit ptr
 
 val try_realloc_n:
-unit -> Unsigned.uint64 -> Unsigned.uint64 -> unit
+unit ptr -> Unsigned.uint64 -> Unsigned.uint64 -> unit ptr
 
 (* Not implemented g_ucs4_to_utf16 argument types not handled *)
 (* Not implemented g_ucs4_to_utf8 argument types not handled *)
@@ -1582,7 +1582,7 @@ unit -> Unsigned.uint32
 (* Not implemented g_unix_fd_add_full argument types not handled *)
 (* Not implemented g_unix_fd_source_new argument types not handled *)
 val unix_open_pipe:
-int32 -> int32 -> bool
+int32 ptr -> int32 -> bool
 
 val unix_set_fd_nonblocking:
 int32 -> bool -> bool
