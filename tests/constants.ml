@@ -59,6 +59,15 @@ let test_uint64_constant test_ctxt =
   assert_equal ~printer:(fun x -> Unsigned.UInt64.to_string x)
                (Unsigned.UInt64.of_string "18446744073709551615") maxuint64
 
+let test_double_constant test_ctxt =
+  let e = GLib.Core._E in
+  assert_equal ~printer:(fun x -> string_of_float x)
+               2.718282 e
+
+let test_string_constant test_ctxt =
+  let cset_a_2_z = GLib.Core._CSET_A_2_Z in
+  assert_equal "ABCDEFGHIJKLMNOPQRSTUVWXYZ" cset_a_2_z
+
 let tests =
   "GLib constants tests" >:::
   [
@@ -70,5 +79,7 @@ let tests =
     "Test int32 constant" >:: test_int32_constant;
     "Test uint32 constant" >:: test_uint32_constant;
     "Test int64 constant" >:: test_int64_constant;
-    "Test uint64 constant" >:: test_uint64_constant
+    "Test uint64 constant" >:: test_uint64_constant;
+    "Test double constant" >:: test_double_constant;
+    "Test string constant" >:: test_string_constant
   ]
