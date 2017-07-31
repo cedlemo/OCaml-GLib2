@@ -54,6 +54,11 @@ let test_int64_constant test_ctxt =
   assert_equal ~printer:(fun x -> Int64.to_string x)
                9223372036854775807L maxint64
 
+let test_uint64_constant test_ctxt =
+  let maxuint64 = GLib.Core._MAXUINT64 in
+  assert_equal ~printer:(fun x -> Unsigned.UInt64.to_string x)
+               (Unsigned.UInt64.of_string "18446744073709551615") maxuint64
+
 let tests =
   "GLib constants tests" >:::
   [
@@ -64,6 +69,6 @@ let tests =
     "Test uint16 constant" >:: test_uint16_constant;
     "Test int32 constant" >:: test_int32_constant;
     "Test uint32 constant" >:: test_uint32_constant;
-    "Test int64 constant" >:: test_int64_constant
+    "Test int64 constant" >:: test_int64_constant;
+    "Test uint64 constant" >:: test_uint64_constant
   ]
-
