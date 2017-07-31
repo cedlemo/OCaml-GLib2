@@ -30,10 +30,14 @@ let test_uint8_constant test_ctxt =
   assert_equal ~printer:(fun x -> Unsigned.UInt8.to_string x)
                (Unsigned.UInt8.of_int 255) maxuint8
 
-
 let test_int16_constant test_ctxt =
   let maxint16 = GLib.Core._MAXINT16 in
   assert_equal ~printer:(fun x -> string_of_int x) 32767 maxint16
+
+let test_uint16_constant test_ctxt =
+  let maxuint16 = GLib.Core._MAXUINT16 in
+  assert_equal ~printer:(fun x -> Unsigned.UInt16.to_string x)
+               (Unsigned.UInt16.of_int 65535) maxuint16
 
 let tests =
   "GLib constants tests" >:::
@@ -41,6 +45,7 @@ let tests =
     "Test boolean constant" >:: test_boolean_constant;
     "Test int8 constant" >:: test_int8_constant;
     "Test uint8 constant" >:: test_uint8_constant;
-    "Test int16 constant" >:: test_int16_constant
+    "Test int16 constant" >:: test_int16_constant;
+    "Test uint16 constant" >:: test_uint16_constant
   ]
 
