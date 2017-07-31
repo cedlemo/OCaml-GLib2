@@ -21,9 +21,14 @@ open OUnit2
 let test_boolean_constant test_ctxt =
   assert_equal_boolean false GLib.Core._SOURCE_REMOVE
 
+let test_int8_constant test_ctxt =
+  let maxint8 = GLib.Core._MAXINT8 in
+  assert_equal ~printer:(fun x -> string_of_int x) 127 maxint8
+
 let tests =
   "GLib constants tests" >:::
   [
-    "Test boolean constant" >:: test_boolean_constant
+    "Test boolean constant" >:: test_boolean_constant;
+    "Test int8 constant" >:: test_int8_constant
   ]
 
