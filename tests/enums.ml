@@ -23,9 +23,16 @@ let test_enum_type_of_value test_ctxt =
   let md5 = GLib.Core.checksumtype_of_value zero in
   assert_equal GLib.Core.Md5 md5
 
+let test_enum_type_to_value test_ctxt =
+  let md5 = GLib.Core.Md5 in
+  let zero = Unsigned.UInt32.zero in
+  let value = GLib.Core.checksumtype_to_value md5 in
+  assert_equal zero value
+
 let tests =
   "GLib enums tests" >:::
     [
-      "Test enum type of value conversion" >:: test_enum_type_of_value
+      "Test enum type of value conversion" >:: test_enum_type_of_value;
+      "Test enum type to value conversion" >:: test_enum_type_to_value
     ]
 
