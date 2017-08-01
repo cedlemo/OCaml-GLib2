@@ -18,8 +18,14 @@
 open TestUtils
 open OUnit2
 
+let test_enum_type_of_value test_ctxt =
+  let zero = Unsigned.UInt32.zero in
+  let md5 = GLib.Core.checksumtype_of_value zero in
+  assert_equal GLib.Core.Md5 md5
+
 let tests =
   "GLib enums tests" >:::
     [
+      "Test enum type of value conversion" >:: test_enum_type_of_value
     ]
 
