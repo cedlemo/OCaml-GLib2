@@ -29,10 +29,27 @@ let test_enum_type_to_value test_ctxt =
   let value = GLib.Core.checksumtype_to_value md5 in
   assert_equal zero value
 
+let test_flags_type_list_of_value test_ctxt =
+  let open Unsigned.UInt32 in
+  let hidden = of_int 1 in
+  let in_main = of_int 2 in
+  let hidden_and_in_main = logor hidden in_main in
+  let flags = GLib.Core.optionflags_list_of_value hidden_and_in_main in
+  let _ = assert_equal_int 2 (List.length flags) in
+  let rec check = function
+    | [] -> ()
+    | h :: q -> let t = (h == GLib.Core.Hidden || h == GLib.Core.In_main) in
+    if t == false then let v = GLib.Core.optionflags_to_value h in
+    print_endline (to_string v)
+    else let _ = assert_equal_boolean true t in check q
+  in
+  check flags
+
 let tests =
   "GLib enums tests" >:::
     [
       "Test enum type of value conversion" >:: test_enum_type_of_value;
-      "Test enum type to value conversion" >:: test_enum_type_to_value
+      "Test enum type to value conversion" >:: test_enum_type_to_value;
+      "Test flags type list to value conversion" >:: test_flags_type_list_of_value
     ]
 
