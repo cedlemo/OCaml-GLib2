@@ -5,6 +5,7 @@ let () =
   ("GLib2 tests" >:::
     [
       Constants.tests;
-      Enums.tests
+      Enums.tests;
+      Functions.tests
     ]
   )
