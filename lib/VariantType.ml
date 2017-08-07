@@ -9,7 +9,8 @@ let t_typ : t structure typ = structure "VariantType"
 (* Not implemented g_variant_type_new_maybe argument types not handled . *)
 (* Not implemented g_variant_type_new_tuple argument types not handled . *)
 (* Not implemented g_variant_type_copy return type not handled . *)
-(* Not implemented g_variant_type_dup_string return type not handled . *)
+let dup_string =
+foreign "g_variant_type_dup_string" (ptr t_typ @-> returning (string))
 (* Not implemented g_variant_type_element return type not handled . *)
 (* Not implemented g_variant_type_equal argument types not handled . *)
 (* Not implemented g_variant_type_first return type not handled . *)

@@ -87,7 +87,8 @@ t structure ptr -> bool
 (* Not implemented g_variant_lookup_value argument types not handled . *)
 val n_children:
 t structure ptr -> Unsigned.uint64
-(* Not implemented g_variant_print return type not handled . *)
+val print:
+t structure ptr -> bool -> string
 (* Not implemented g_variant_ref return type not handled . *)
 (* Not implemented g_variant_ref_sink return type not handled . *)
 val store:
@@ -100,7 +101,8 @@ t structure ptr -> string -> bool
 val is_signature:
 t structure ptr -> string -> bool
 (* Not implemented g_variant_parse argument types not handled . *)
-(* Not implemented g_variant_parse_error_print_context return type not handled . *)
+val parse_error_print_context:
+t structure ptr -> Error.t structure ptr -> string -> string
 val parse_error_quark:
 t structure ptr -> Unsigned.uint32
 val parser_get_error_quark:

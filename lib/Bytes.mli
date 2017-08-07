@@ -15,6 +15,7 @@ t structure ptr -> Unsigned.uint32
 (* Not implemented g_bytes_ref return type not handled . *)
 val unref:
 t structure ptr -> unit
-(* Not implemented g_bytes_unref_to_array return type not handled . *)
+val unref_to_array:
+t structure ptr -> ByteArray.t structure ptr
 (* Not implemented g_bytes_unref_to_data argument types not handled . *)
 

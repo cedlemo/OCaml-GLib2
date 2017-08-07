@@ -6,7 +6,10 @@ val clear:
 t structure ptr -> unit
 val free:
 t structure ptr -> unit
-(* Not implemented g_string_chunk_insert return type not handled . *)
-(* Not implemented g_string_chunk_insert_const return type not handled . *)
-(* Not implemented g_string_chunk_insert_len return type not handled . *)
+val insert:
+t structure ptr -> string -> string
+val insert_const:
+t structure ptr -> string -> string
+val insert_len:
+t structure ptr -> string -> int64 -> string
 

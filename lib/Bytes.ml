@@ -16,6 +16,7 @@ foreign "g_bytes_hash" (ptr t_typ @-> returning (uint32_t))
 (* Not implemented g_bytes_ref return type not handled . *)
 let unref =
 foreign "g_bytes_unref" (ptr t_typ @-> returning (void))
-(* Not implemented g_bytes_unref_to_array return type not handled . *)
+let unref_to_array =
+foreign "g_bytes_unref_to_array" (ptr t_typ @-> returning (ptr ByteArray.t_typ))
 (* Not implemented g_bytes_unref_to_data argument types not handled . *)
 

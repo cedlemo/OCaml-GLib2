@@ -7,7 +7,8 @@ val t_typ : t structure typ
 val free:
 t structure ptr -> unit
 (* Not implemented g_mapped_file_get_bytes return type not handled . *)
-(* Not implemented g_mapped_file_get_contents return type not handled . *)
+val get_contents:
+t structure ptr -> string
 val get_length:
 t structure ptr -> Unsigned.uint64
 (* Not implemented g_mapped_file_ref return type not handled . *)

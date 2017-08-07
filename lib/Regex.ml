@@ -32,7 +32,8 @@ foreign "g_regex_unref" (ptr t_typ @-> returning (void))
 (* Not implemented g_regex_check_replacement argument types not handled . *)
 let error_quark =
 foreign "g_regex_error_quark" (ptr t_typ @-> returning (uint32_t))
-(* Not implemented g_regex_escape_nul return type not handled . *)
+let escape_nul =
+foreign "g_regex_escape_nul" (ptr t_typ @-> string @-> int32_t @-> returning (string))
 (* Not implemented g_regex_escape_string argument types not handled . *)
 (* Not implemented g_regex_match_simple argument types not handled . *)
 (* Not implemented g_regex_split_simple argument types not handled . *)

@@ -8,7 +8,8 @@ let t_typ : t structure typ = structure "MappedFile"
 let free =
 foreign "g_mapped_file_free" (ptr t_typ @-> returning (void))
 (* Not implemented g_mapped_file_get_bytes return type not handled . *)
-(* Not implemented g_mapped_file_get_contents return type not handled . *)
+let get_contents =
+foreign "g_mapped_file_get_contents" (ptr t_typ @-> returning (string))
 let get_length =
 foreign "g_mapped_file_get_length" (ptr t_typ @-> returning (uint64_t))
 (* Not implemented g_mapped_file_ref return type not handled . *)

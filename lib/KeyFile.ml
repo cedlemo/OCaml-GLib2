@@ -7,7 +7,8 @@ let t_typ : t structure typ = structure "KeyFile"
 let get_boolean =
 foreign "g_key_file_get_boolean" (ptr t_typ @-> string @-> string @-> returning (bool))
 (* Not implemented g_key_file_get_boolean_list argument types not handled . *)
-(* Not implemented g_key_file_get_comment return type not handled . *)
+let get_comment =
+foreign "g_key_file_get_comment" (ptr t_typ @-> string @-> string @-> returning (string))
 let get_double =
 foreign "g_key_file_get_double" (ptr t_typ @-> string @-> string @-> returning (double))
 (* Not implemented g_key_file_get_double_list argument types not handled . *)
@@ -18,14 +19,18 @@ let get_integer =
 foreign "g_key_file_get_integer" (ptr t_typ @-> string @-> string @-> returning (int32_t))
 (* Not implemented g_key_file_get_integer_list argument types not handled . *)
 (* Not implemented g_key_file_get_keys argument types not handled . *)
-(* Not implemented g_key_file_get_locale_string return type not handled . *)
+let get_locale_string =
+foreign "g_key_file_get_locale_string" (ptr t_typ @-> string @-> string @-> string @-> returning (string))
 (* Not implemented g_key_file_get_locale_string_list argument types not handled . *)
-(* Not implemented g_key_file_get_start_group return type not handled . *)
-(* Not implemented g_key_file_get_string return type not handled . *)
+let get_start_group =
+foreign "g_key_file_get_start_group" (ptr t_typ @-> returning (string))
+let get_string =
+foreign "g_key_file_get_string" (ptr t_typ @-> string @-> string @-> returning (string))
 (* Not implemented g_key_file_get_string_list argument types not handled . *)
 let get_uint64 =
 foreign "g_key_file_get_uint64" (ptr t_typ @-> string @-> string @-> returning (uint64_t))
-(* Not implemented g_key_file_get_value return type not handled . *)
+let get_value =
+foreign "g_key_file_get_value" (ptr t_typ @-> string @-> string @-> returning (string))
 let has_group =
 foreign "g_key_file_has_group" (ptr t_typ @-> string @-> returning (bool))
 (* Not implemented g_key_file_load_from_bytes argument types not handled . *)

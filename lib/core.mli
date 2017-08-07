@@ -697,14 +697,17 @@ string -> int32 -> int32
 val ascii_digit_value:
 int -> int32
 
-(* Not implemented g_ascii_dtostr return type not handled . *)
+val ascii_dtostr:
+string -> int32 -> float -> string
 
-(* Not implemented g_ascii_formatd return type not handled . *)
+val ascii_formatd:
+string -> int32 -> string -> float -> string
 
 val ascii_strcasecmp:
 string -> string -> int32
 
-(* Not implemented g_ascii_strdown return type not handled . *)
+val ascii_strdown:
+string -> int64 -> string
 
 val ascii_strncasecmp:
 string -> string -> Unsigned.uint64 -> int32
@@ -715,7 +718,8 @@ string -> string -> Unsigned.uint64 -> int32
 
 (* Not implemented g_ascii_strtoull argument types not handled . *)
 
-(* Not implemented g_ascii_strup return type not handled . *)
+val ascii_strup:
+string -> int64 -> string
 
 val ascii_tolower:
 int -> int
@@ -831,7 +835,8 @@ ByteArray.t structure ptr -> bool -> Unsigned.uint8 ptr
 
 (* Not implemented g_byte_array_free_to_bytes return type not handled . *)
 
-(* Not implemented g_byte_array_new return type not handled . *)
+val byte_array_new:
+unit -> ByteArray.t structure ptr
 
 (* Not implemented g_byte_array_new_take argument types not handled . *)
 
@@ -873,7 +878,8 @@ int32 -> bool
 val convert_error_quark:
 unit -> Unsigned.uint32
 
-(* Not implemented g_convert_with_fallback return type not handled . *)
+val convert_with_fallback:
+string -> int64 -> string -> string -> string -> Unsigned.uint64 ptr -> Unsigned.uint64 ptr -> string
 
 (* Not implemented g_convert_with_iconv argument types not handled . *)
 
@@ -951,7 +957,8 @@ string -> string -> int32 -> string
 val dgettext:
 string -> string -> string
 
-(* Not implemented g_dir_make_tmp return type not handled . *)
+val dir_make_tmp:
+string -> string
 
 val direct_equal:
 unit ptr -> unit ptr -> bool
@@ -989,27 +996,33 @@ unit -> Unsigned.uint32
 
 (* Not implemented g_file_open_tmp argument types not handled . *)
 
-(* Not implemented g_file_read_link return type not handled . *)
+val file_read_link:
+string -> string
 
 (* Not implemented g_file_set_contents argument types not handled . *)
 
 (* Not implemented g_file_test argument types not handled . *)
 
-(* Not implemented g_filename_display_basename return type not handled . *)
+val filename_display_basename:
+string -> string
 
-(* Not implemented g_filename_display_name return type not handled . *)
+val filename_display_name:
+string -> string
 
 (* Not implemented g_filename_from_uri argument types not handled . *)
 
 (* Not implemented g_filename_from_utf8 argument types not handled . *)
 
-(* Not implemented g_filename_to_uri return type not handled . *)
+val filename_to_uri:
+string -> string -> string
 
 (* Not implemented g_filename_to_utf8 argument types not handled . *)
 
-(* Not implemented g_find_program_in_path return type not handled . *)
+val find_program_in_path:
+string -> string
 
-(* Not implemented g_format_size return type not handled . *)
+val format_size:
+Unsigned.uint64 -> string
 
 (*  !!! DEPRECATED : format_size_for_display . *)
 (* Not implemented g_format_size_full argument types not handled . *)
@@ -1022,9 +1035,11 @@ unit -> string
 
 (* Not implemented g_get_charset argument types not handled . *)
 
-(* Not implemented g_get_codeset return type not handled . *)
+val get_codeset:
+unit -> string
 
-(* Not implemented g_get_current_dir return type not handled . *)
+val get_current_dir:
+unit -> string
 
 (* Not implemented g_get_current_time argument types not handled . *)
 
@@ -1144,9 +1159,11 @@ string -> bool
 val hostname_is_non_ascii:
 string -> bool
 
-(* Not implemented g_hostname_to_ascii return type not handled . *)
+val hostname_to_ascii:
+string -> string
 
-(* Not implemented g_hostname_to_unicode return type not handled . *)
+val hostname_to_unicode:
+string -> string
 
 (* Not implemented g_iconv argument types not handled . *)
 
@@ -1250,7 +1267,8 @@ Unsigned.uint64 -> Unsigned.uint64 -> unit ptr
 val markup_error_quark:
 unit -> Unsigned.uint32
 
-(* Not implemented g_markup_escape_text return type not handled . *)
+val markup_escape_text:
+string -> int64 -> string
 
 (*  !!! DEPRECATED : mem_is_system_malloc . *)
 (*  !!! DEPRECATED : mem_profile . *)
@@ -1281,9 +1299,11 @@ unit -> Unsigned.uint32
 
 (* Not implemented g_parse_debug_string argument types not handled . *)
 
-(* Not implemented g_path_get_basename return type not handled . *)
+val path_get_basename:
+string -> string
 
-(* Not implemented g_path_get_dirname return type not handled . *)
+val path_get_dirname:
+string -> string
 
 val path_is_absolute:
 string -> bool
@@ -1349,7 +1369,8 @@ unit ptr -> Unsigned.uint64 -> Unsigned.uint64 -> unit ptr
 val regex_error_quark:
 unit -> Unsigned.uint32
 
-(* Not implemented g_regex_escape_nul return type not handled . *)
+val regex_escape_nul:
+string -> int32 -> string
 
 (* Not implemented g_regex_escape_string argument types not handled . *)
 
@@ -1393,9 +1414,11 @@ unit -> Unsigned.uint32
 
 (* Not implemented g_shell_parse_argv argument types not handled . *)
 
-(* Not implemented g_shell_quote return type not handled . *)
+val shell_quote:
+string -> string
 
-(* Not implemented g_shell_unquote return type not handled . *)
+val shell_unquote:
+string -> string
 
 val slice_alloc:
 Unsigned.uint64 -> unit ptr
@@ -1455,7 +1478,8 @@ unit -> Unsigned.uint32
 
 (* Not implemented g_spawn_sync argument types not handled . *)
 
-(* Not implemented g_stpcpy return type not handled . *)
+val stpcpy:
+string -> string -> string
 
 val str_equal:
 unit ptr -> unit ptr -> bool
@@ -1475,31 +1499,39 @@ string -> bool
 val str_match_string:
 string -> string -> bool -> bool
 
-(* Not implemented g_str_to_ascii return type not handled . *)
+val str_to_ascii:
+string -> string -> string
 
 (* Not implemented g_str_tokenize_and_fold argument types not handled . *)
 
-(* Not implemented g_strcanon return type not handled . *)
+val strcanon:
+string -> string -> int -> string
 
 (*  !!! DEPRECATED : strcasecmp . *)
-(* Not implemented g_strchomp return type not handled . *)
+val strchomp:
+string -> string
 
-(* Not implemented g_strchug return type not handled . *)
+val strchug:
+string -> string
 
 val strcmp0:
 string -> string -> int32
 
-(* Not implemented g_strcompress return type not handled . *)
+val strcompress:
+string -> string
 
-(* Not implemented g_strdelimit return type not handled . *)
+val strdelimit:
+string -> string -> int -> string
 
 (*  !!! DEPRECATED : strdown . *)
-(* Not implemented g_strdup return type not handled . *)
+val strdup:
+string -> string
 
 val strerror:
 int32 -> string
 
-(* Not implemented g_strescape return type not handled . *)
+val strescape:
+string -> string -> string
 
 val strfreev:
 string -> unit
@@ -1513,7 +1545,8 @@ string -> unit
 val strip_context:
 string -> string -> string
 
-(* Not implemented g_strjoinv return type not handled . *)
+val strjoinv:
+string -> string -> string
 
 val strlcat:
 string -> string -> Unsigned.uint64 -> Unsigned.uint64
@@ -1522,20 +1555,26 @@ val strlcpy:
 string -> string -> Unsigned.uint64 -> Unsigned.uint64
 
 (*  !!! DEPRECATED : strncasecmp . *)
-(* Not implemented g_strndup return type not handled . *)
+val strndup:
+string -> Unsigned.uint64 -> string
 
-(* Not implemented g_strnfill return type not handled . *)
+val strnfill:
+Unsigned.uint64 -> int -> string
 
-(* Not implemented g_strreverse return type not handled . *)
+val strreverse:
+string -> string
 
-(* Not implemented g_strrstr return type not handled . *)
+val strrstr:
+string -> string -> string
 
-(* Not implemented g_strrstr_len return type not handled . *)
+val strrstr_len:
+string -> int64 -> string -> string
 
 val strsignal:
 int32 -> string
 
-(* Not implemented g_strstr_len return type not handled . *)
+val strstr_len:
+string -> int64 -> string -> string
 
 (* Not implemented g_strtod argument types not handled . *)
 
@@ -1789,15 +1828,19 @@ string -> int32
 val unsetenv:
 string -> unit
 
-(* Not implemented g_uri_escape_string return type not handled . *)
+val uri_escape_string:
+string -> string -> bool -> string
 
 (* Not implemented g_uri_list_extract_uris return type not handled . *)
 
-(* Not implemented g_uri_parse_scheme return type not handled . *)
+val uri_parse_scheme:
+string -> string
 
-(* Not implemented g_uri_unescape_segment return type not handled . *)
+val uri_unescape_segment:
+string -> string -> string -> string
 
-(* Not implemented g_uri_unescape_string return type not handled . *)
+val uri_unescape_string:
+string -> string -> string
 
 val usleep:
 Unsigned.uint64 -> unit
@@ -1806,50 +1849,63 @@ Unsigned.uint64 -> unit
 
 (* Not implemented g_utf16_to_utf8 argument types not handled . *)
 
-(* Not implemented g_utf8_casefold return type not handled . *)
+val utf8_casefold:
+string -> int64 -> string
 
 val utf8_collate:
 string -> string -> int32
 
-(* Not implemented g_utf8_collate_key return type not handled . *)
+val utf8_collate_key:
+string -> int64 -> string
 
-(* Not implemented g_utf8_collate_key_for_filename return type not handled . *)
+val utf8_collate_key_for_filename:
+string -> int64 -> string
 
-(* Not implemented g_utf8_find_next_char return type not handled . *)
+val utf8_find_next_char:
+string -> string -> string
 
-(* Not implemented g_utf8_find_prev_char return type not handled . *)
+val utf8_find_prev_char:
+string -> string -> string
 
 (* Not implemented g_utf8_get_char return type not handled . *)
 
 (* Not implemented g_utf8_get_char_validated return type not handled . *)
 
-(* Not implemented g_utf8_make_valid return type not handled . *)
+val utf8_make_valid:
+string -> int64 -> string
 
 (* Not implemented g_utf8_normalize argument types not handled . *)
 
-(* Not implemented g_utf8_offset_to_pointer return type not handled . *)
+val utf8_offset_to_pointer:
+string -> int64 -> string
 
 val utf8_pointer_to_offset:
 string -> string -> int64
 
-(* Not implemented g_utf8_prev_char return type not handled . *)
+val utf8_prev_char:
+string -> string
 
 (* Not implemented g_utf8_strchr argument types not handled . *)
 
-(* Not implemented g_utf8_strdown return type not handled . *)
+val utf8_strdown:
+string -> int64 -> string
 
 val utf8_strlen:
 string -> int64 -> int64
 
-(* Not implemented g_utf8_strncpy return type not handled . *)
+val utf8_strncpy:
+string -> string -> Unsigned.uint64 -> string
 
 (* Not implemented g_utf8_strrchr argument types not handled . *)
 
-(* Not implemented g_utf8_strreverse return type not handled . *)
+val utf8_strreverse:
+string -> int64 -> string
 
-(* Not implemented g_utf8_strup return type not handled . *)
+val utf8_strup:
+string -> int64 -> string
 
-(* Not implemented g_utf8_substring return type not handled . *)
+val utf8_substring:
+string -> int64 -> int64 -> string
 
 (* Not implemented g_utf8_to_ucs4 argument types not handled . *)
 
@@ -1862,7 +1918,8 @@ string -> int64 -> int64
 val uuid_string_is_valid:
 string -> bool
 
-(* Not implemented g_uuid_string_random return type not handled . *)
+val uuid_string_random:
+unit -> string
 
 (* Not implemented g_variant_get_gtype return type not handled . *)
 
@@ -1874,7 +1931,8 @@ string -> bool
 
 (* Not implemented g_variant_parse argument types not handled . *)
 
-(* Not implemented g_variant_parse_error_print_context return type not handled . *)
+val variant_parse_error_print_context:
+Error.t structure ptr -> string -> string
 
 val variant_parse_error_quark:
 unit -> Unsigned.uint32

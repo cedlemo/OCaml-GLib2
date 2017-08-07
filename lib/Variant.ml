@@ -88,7 +88,8 @@ foreign "g_variant_is_normal_form" (ptr t_typ @-> returning (bool))
 (* Not implemented g_variant_lookup_value argument types not handled . *)
 let n_children =
 foreign "g_variant_n_children" (ptr t_typ @-> returning (uint64_t))
-(* Not implemented g_variant_print return type not handled . *)
+let print =
+foreign "g_variant_print" (ptr t_typ @-> bool @-> returning (string))
 (* Not implemented g_variant_ref return type not handled . *)
 (* Not implemented g_variant_ref_sink return type not handled . *)
 let store =
@@ -101,7 +102,8 @@ foreign "g_variant_is_object_path" (ptr t_typ @-> string @-> returning (bool))
 let is_signature =
 foreign "g_variant_is_signature" (ptr t_typ @-> string @-> returning (bool))
 (* Not implemented g_variant_parse argument types not handled . *)
-(* Not implemented g_variant_parse_error_print_context return type not handled . *)
+let parse_error_print_context =
+foreign "g_variant_parse_error_print_context" (ptr t_typ @-> ptr Error.t_typ @-> string @-> returning (string))
 let parse_error_quark =
 foreign "g_variant_parse_error_quark" (ptr t_typ @-> returning (uint32_t))
 let parser_get_error_quark =

@@ -12,17 +12,20 @@ val get_added:
 t structure ptr -> string -> int64
 (* Not implemented g_bookmark_file_get_app_info argument types not handled . *)
 (* Not implemented g_bookmark_file_get_applications argument types not handled . *)
-(* Not implemented g_bookmark_file_get_description return type not handled . *)
+val get_description:
+t structure ptr -> string -> string
 (* Not implemented g_bookmark_file_get_groups argument types not handled . *)
 (* Not implemented g_bookmark_file_get_icon argument types not handled . *)
 val get_is_private:
 t structure ptr -> string -> bool
-(* Not implemented g_bookmark_file_get_mime_type return type not handled . *)
+val get_mime_type:
+t structure ptr -> string -> string
 val get_modified:
 t structure ptr -> string -> int64
 val get_size:
 t structure ptr -> int32
-(* Not implemented g_bookmark_file_get_title return type not handled . *)
+val get_title:
+t structure ptr -> string -> string
 (* Not implemented g_bookmark_file_get_uris argument types not handled . *)
 val get_visited:
 t structure ptr -> string -> int64

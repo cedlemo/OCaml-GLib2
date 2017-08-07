@@ -2336,14 +2336,17 @@ foreign "g_access" (string @-> int32_t @-> returning (int32_t))
 let ascii_digit_value =
 foreign "g_ascii_digit_value" (int8_t @-> returning (int32_t))
 
-(* Not implemented g_ascii_dtostr return type not handled . *)
+let ascii_dtostr =
+foreign "g_ascii_dtostr" (string @-> int32_t @-> double @-> returning (string))
 
-(* Not implemented g_ascii_formatd return type not handled . *)
+let ascii_formatd =
+foreign "g_ascii_formatd" (string @-> int32_t @-> string @-> double @-> returning (string))
 
 let ascii_strcasecmp =
 foreign "g_ascii_strcasecmp" (string @-> string @-> returning (int32_t))
 
-(* Not implemented g_ascii_strdown return type not handled . *)
+let ascii_strdown =
+foreign "g_ascii_strdown" (string @-> int64_t @-> returning (string))
 
 let ascii_strncasecmp =
 foreign "g_ascii_strncasecmp" (string @-> string @-> uint64_t @-> returning (int32_t))
@@ -2354,7 +2357,8 @@ foreign "g_ascii_strncasecmp" (string @-> string @-> uint64_t @-> returning (int
 
 (* Not implemented g_ascii_strtoull argument types not handled . *)
 
-(* Not implemented g_ascii_strup return type not handled . *)
+let ascii_strup =
+foreign "g_ascii_strup" (string @-> int64_t @-> returning (string))
 
 let ascii_tolower =
 foreign "g_ascii_tolower" (int8_t @-> returning (int8_t))
@@ -2467,7 +2471,8 @@ foreign "g_byte_array_free" (ptr ByteArray.t_typ @-> bool @-> returning (ptr uin
 
 (* Not implemented g_byte_array_free_to_bytes return type not handled . *)
 
-(* Not implemented g_byte_array_new return type not handled . *)
+let byte_array_new =
+foreign "g_byte_array_new" (void @-> returning (ptr ByteArray.t_typ))
 
 (* Not implemented g_byte_array_new_take argument types not handled . *)
 
@@ -2509,7 +2514,8 @@ foreign "g_close" (int32_t @-> returning (bool))
 let convert_error_quark =
 foreign "g_convert_error_quark" (void @-> returning (uint32_t))
 
-(* Not implemented g_convert_with_fallback return type not handled . *)
+let convert_with_fallback =
+foreign "g_convert_with_fallback" (string @-> int64_t @-> string @-> string @-> string @-> ptr uint64_t @-> ptr uint64_t @-> returning (string))
 
 (* Not implemented g_convert_with_iconv argument types not handled . *)
 
@@ -2587,7 +2593,8 @@ foreign "g_dcgettext" (string @-> string @-> int32_t @-> returning (string))
 let dgettext =
 foreign "g_dgettext" (string @-> string @-> returning (string))
 
-(* Not implemented g_dir_make_tmp return type not handled . *)
+let dir_make_tmp =
+foreign "g_dir_make_tmp" (string @-> returning (string))
 
 let direct_equal =
 foreign "g_direct_equal" (ptr void @-> ptr void @-> returning (bool))
@@ -2625,27 +2632,33 @@ foreign "g_file_error_quark" (void @-> returning (uint32_t))
 
 (* Not implemented g_file_open_tmp argument types not handled . *)
 
-(* Not implemented g_file_read_link return type not handled . *)
+let file_read_link =
+foreign "g_file_read_link" (string @-> returning (string))
 
 (* Not implemented g_file_set_contents argument types not handled . *)
 
 (* Not implemented g_file_test argument types not handled . *)
 
-(* Not implemented g_filename_display_basename return type not handled . *)
+let filename_display_basename =
+foreign "g_filename_display_basename" (string @-> returning (string))
 
-(* Not implemented g_filename_display_name return type not handled . *)
+let filename_display_name =
+foreign "g_filename_display_name" (string @-> returning (string))
 
 (* Not implemented g_filename_from_uri argument types not handled . *)
 
 (* Not implemented g_filename_from_utf8 argument types not handled . *)
 
-(* Not implemented g_filename_to_uri return type not handled . *)
+let filename_to_uri =
+foreign "g_filename_to_uri" (string @-> string @-> returning (string))
 
 (* Not implemented g_filename_to_utf8 argument types not handled . *)
 
-(* Not implemented g_find_program_in_path return type not handled . *)
+let find_program_in_path =
+foreign "g_find_program_in_path" (string @-> returning (string))
 
-(* Not implemented g_format_size return type not handled . *)
+let format_size =
+foreign "g_format_size" (uint64_t @-> returning (string))
 
 (* Not implemented g_format_size_full argument types not handled . *)
 
@@ -2657,9 +2670,11 @@ foreign "g_get_application_name" (void @-> returning (string))
 
 (* Not implemented g_get_charset argument types not handled . *)
 
-(* Not implemented g_get_codeset return type not handled . *)
+let get_codeset =
+foreign "g_get_codeset" (void @-> returning (string))
 
-(* Not implemented g_get_current_dir return type not handled . *)
+let get_current_dir =
+foreign "g_get_current_dir" (void @-> returning (string))
 
 (* Not implemented g_get_current_time argument types not handled . *)
 
@@ -2779,9 +2794,11 @@ foreign "g_hostname_is_ip_address" (string @-> returning (bool))
 let hostname_is_non_ascii =
 foreign "g_hostname_is_non_ascii" (string @-> returning (bool))
 
-(* Not implemented g_hostname_to_ascii return type not handled . *)
+let hostname_to_ascii =
+foreign "g_hostname_to_ascii" (string @-> returning (string))
 
-(* Not implemented g_hostname_to_unicode return type not handled . *)
+let hostname_to_unicode =
+foreign "g_hostname_to_unicode" (string @-> returning (string))
 
 (* Not implemented g_iconv argument types not handled . *)
 
@@ -2885,7 +2902,8 @@ foreign "g_malloc_n" (uint64_t @-> uint64_t @-> returning (ptr void))
 let markup_error_quark =
 foreign "g_markup_error_quark" (void @-> returning (uint32_t))
 
-(* Not implemented g_markup_escape_text return type not handled . *)
+let markup_escape_text =
+foreign "g_markup_escape_text" (string @-> int64_t @-> returning (string))
 
 let memdup =
 foreign "g_memdup" (ptr void @-> uint32_t @-> returning (ptr void))
@@ -2913,9 +2931,11 @@ foreign "g_option_error_quark" (void @-> returning (uint32_t))
 
 (* Not implemented g_parse_debug_string argument types not handled . *)
 
-(* Not implemented g_path_get_basename return type not handled . *)
+let path_get_basename =
+foreign "g_path_get_basename" (string @-> returning (string))
 
-(* Not implemented g_path_get_dirname return type not handled . *)
+let path_get_dirname =
+foreign "g_path_get_dirname" (string @-> returning (string))
 
 let path_is_absolute =
 foreign "g_path_is_absolute" (string @-> returning (bool))
@@ -2981,7 +3001,8 @@ foreign "g_realloc_n" (ptr void @-> uint64_t @-> uint64_t @-> returning (ptr voi
 let regex_error_quark =
 foreign "g_regex_error_quark" (void @-> returning (uint32_t))
 
-(* Not implemented g_regex_escape_nul return type not handled . *)
+let regex_escape_nul =
+foreign "g_regex_escape_nul" (string @-> int32_t @-> returning (string))
 
 (* Not implemented g_regex_escape_string argument types not handled . *)
 
@@ -3025,9 +3046,11 @@ foreign "g_shell_error_quark" (void @-> returning (uint32_t))
 
 (* Not implemented g_shell_parse_argv argument types not handled . *)
 
-(* Not implemented g_shell_quote return type not handled . *)
+let shell_quote =
+foreign "g_shell_quote" (string @-> returning (string))
 
-(* Not implemented g_shell_unquote return type not handled . *)
+let shell_unquote =
+foreign "g_shell_unquote" (string @-> returning (string))
 
 let slice_alloc =
 foreign "g_slice_alloc" (uint64_t @-> returning (ptr void))
@@ -3087,7 +3110,8 @@ foreign "g_spawn_exit_error_quark" (void @-> returning (uint32_t))
 
 (* Not implemented g_spawn_sync argument types not handled . *)
 
-(* Not implemented g_stpcpy return type not handled . *)
+let stpcpy =
+foreign "g_stpcpy" (string @-> string @-> returning (string))
 
 let str_equal =
 foreign "g_str_equal" (ptr void @-> ptr void @-> returning (bool))
@@ -3107,29 +3131,37 @@ foreign "g_str_is_ascii" (string @-> returning (bool))
 let str_match_string =
 foreign "g_str_match_string" (string @-> string @-> bool @-> returning (bool))
 
-(* Not implemented g_str_to_ascii return type not handled . *)
+let str_to_ascii =
+foreign "g_str_to_ascii" (string @-> string @-> returning (string))
 
 (* Not implemented g_str_tokenize_and_fold argument types not handled . *)
 
-(* Not implemented g_strcanon return type not handled . *)
+let strcanon =
+foreign "g_strcanon" (string @-> string @-> int8_t @-> returning (string))
 
-(* Not implemented g_strchomp return type not handled . *)
+let strchomp =
+foreign "g_strchomp" (string @-> returning (string))
 
-(* Not implemented g_strchug return type not handled . *)
+let strchug =
+foreign "g_strchug" (string @-> returning (string))
 
 let strcmp0 =
 foreign "g_strcmp0" (string @-> string @-> returning (int32_t))
 
-(* Not implemented g_strcompress return type not handled . *)
+let strcompress =
+foreign "g_strcompress" (string @-> returning (string))
 
-(* Not implemented g_strdelimit return type not handled . *)
+let strdelimit =
+foreign "g_strdelimit" (string @-> string @-> int8_t @-> returning (string))
 
-(* Not implemented g_strdup return type not handled . *)
+let strdup =
+foreign "g_strdup" (string @-> returning (string))
 
 let strerror =
 foreign "g_strerror" (int32_t @-> returning (string))
 
-(* Not implemented g_strescape return type not handled . *)
+let strescape =
+foreign "g_strescape" (string @-> string @-> returning (string))
 
 let strfreev =
 foreign "g_strfreev" (string @-> returning (void))
@@ -3143,7 +3175,8 @@ foreign "g_strfreev" (string @-> returning (void))
 let strip_context =
 foreign "g_strip_context" (string @-> string @-> returning (string))
 
-(* Not implemented g_strjoinv return type not handled . *)
+let strjoinv =
+foreign "g_strjoinv" (string @-> string @-> returning (string))
 
 let strlcat =
 foreign "g_strlcat" (string @-> string @-> uint64_t @-> returning (uint64_t))
@@ -3151,20 +3184,26 @@ foreign "g_strlcat" (string @-> string @-> uint64_t @-> returning (uint64_t))
 let strlcpy =
 foreign "g_strlcpy" (string @-> string @-> uint64_t @-> returning (uint64_t))
 
-(* Not implemented g_strndup return type not handled . *)
+let strndup =
+foreign "g_strndup" (string @-> uint64_t @-> returning (string))
 
-(* Not implemented g_strnfill return type not handled . *)
+let strnfill =
+foreign "g_strnfill" (uint64_t @-> int8_t @-> returning (string))
 
-(* Not implemented g_strreverse return type not handled . *)
+let strreverse =
+foreign "g_strreverse" (string @-> returning (string))
 
-(* Not implemented g_strrstr return type not handled . *)
+let strrstr =
+foreign "g_strrstr" (string @-> string @-> returning (string))
 
-(* Not implemented g_strrstr_len return type not handled . *)
+let strrstr_len =
+foreign "g_strrstr_len" (string @-> int64_t @-> string @-> returning (string))
 
 let strsignal =
 foreign "g_strsignal" (int32_t @-> returning (string))
 
-(* Not implemented g_strstr_len return type not handled . *)
+let strstr_len =
+foreign "g_strstr_len" (string @-> int64_t @-> string @-> returning (string))
 
 (* Not implemented g_strtod argument types not handled . *)
 
@@ -3411,15 +3450,19 @@ foreign "g_unlink" (string @-> returning (int32_t))
 let unsetenv =
 foreign "g_unsetenv" (string @-> returning (void))
 
-(* Not implemented g_uri_escape_string return type not handled . *)
+let uri_escape_string =
+foreign "g_uri_escape_string" (string @-> string @-> bool @-> returning (string))
 
 (* Not implemented g_uri_list_extract_uris return type not handled . *)
 
-(* Not implemented g_uri_parse_scheme return type not handled . *)
+let uri_parse_scheme =
+foreign "g_uri_parse_scheme" (string @-> returning (string))
 
-(* Not implemented g_uri_unescape_segment return type not handled . *)
+let uri_unescape_segment =
+foreign "g_uri_unescape_segment" (string @-> string @-> string @-> returning (string))
 
-(* Not implemented g_uri_unescape_string return type not handled . *)
+let uri_unescape_string =
+foreign "g_uri_unescape_string" (string @-> string @-> returning (string))
 
 let usleep =
 foreign "g_usleep" (uint64_t @-> returning (void))
@@ -3428,50 +3471,63 @@ foreign "g_usleep" (uint64_t @-> returning (void))
 
 (* Not implemented g_utf16_to_utf8 argument types not handled . *)
 
-(* Not implemented g_utf8_casefold return type not handled . *)
+let utf8_casefold =
+foreign "g_utf8_casefold" (string @-> int64_t @-> returning (string))
 
 let utf8_collate =
 foreign "g_utf8_collate" (string @-> string @-> returning (int32_t))
 
-(* Not implemented g_utf8_collate_key return type not handled . *)
+let utf8_collate_key =
+foreign "g_utf8_collate_key" (string @-> int64_t @-> returning (string))
 
-(* Not implemented g_utf8_collate_key_for_filename return type not handled . *)
+let utf8_collate_key_for_filename =
+foreign "g_utf8_collate_key_for_filename" (string @-> int64_t @-> returning (string))
 
-(* Not implemented g_utf8_find_next_char return type not handled . *)
+let utf8_find_next_char =
+foreign "g_utf8_find_next_char" (string @-> string @-> returning (string))
 
-(* Not implemented g_utf8_find_prev_char return type not handled . *)
+let utf8_find_prev_char =
+foreign "g_utf8_find_prev_char" (string @-> string @-> returning (string))
 
 (* Not implemented g_utf8_get_char return type not handled . *)
 
 (* Not implemented g_utf8_get_char_validated return type not handled . *)
 
-(* Not implemented g_utf8_make_valid return type not handled . *)
+let utf8_make_valid =
+foreign "g_utf8_make_valid" (string @-> int64_t @-> returning (string))
 
 (* Not implemented g_utf8_normalize argument types not handled . *)
 
-(* Not implemented g_utf8_offset_to_pointer return type not handled . *)
+let utf8_offset_to_pointer =
+foreign "g_utf8_offset_to_pointer" (string @-> int64_t @-> returning (string))
 
 let utf8_pointer_to_offset =
 foreign "g_utf8_pointer_to_offset" (string @-> string @-> returning (int64_t))
 
-(* Not implemented g_utf8_prev_char return type not handled . *)
+let utf8_prev_char =
+foreign "g_utf8_prev_char" (string @-> returning (string))
 
 (* Not implemented g_utf8_strchr argument types not handled . *)
 
-(* Not implemented g_utf8_strdown return type not handled . *)
+let utf8_strdown =
+foreign "g_utf8_strdown" (string @-> int64_t @-> returning (string))
 
 let utf8_strlen =
 foreign "g_utf8_strlen" (string @-> int64_t @-> returning (int64_t))
 
-(* Not implemented g_utf8_strncpy return type not handled . *)
+let utf8_strncpy =
+foreign "g_utf8_strncpy" (string @-> string @-> uint64_t @-> returning (string))
 
 (* Not implemented g_utf8_strrchr argument types not handled . *)
 
-(* Not implemented g_utf8_strreverse return type not handled . *)
+let utf8_strreverse =
+foreign "g_utf8_strreverse" (string @-> int64_t @-> returning (string))
 
-(* Not implemented g_utf8_strup return type not handled . *)
+let utf8_strup =
+foreign "g_utf8_strup" (string @-> int64_t @-> returning (string))
 
-(* Not implemented g_utf8_substring return type not handled . *)
+let utf8_substring =
+foreign "g_utf8_substring" (string @-> int64_t @-> int64_t @-> returning (string))
 
 (* Not implemented g_utf8_to_ucs4 argument types not handled . *)
 
@@ -3484,7 +3540,8 @@ foreign "g_utf8_strlen" (string @-> int64_t @-> returning (int64_t))
 let uuid_string_is_valid =
 foreign "g_uuid_string_is_valid" (string @-> returning (bool))
 
-(* Not implemented g_uuid_string_random return type not handled . *)
+let uuid_string_random =
+foreign "g_uuid_string_random" (void @-> returning (string))
 
 (* Not implemented g_variant_get_gtype return type not handled . *)
 
@@ -3496,7 +3553,8 @@ foreign "g_variant_is_signature" (string @-> returning (bool))
 
 (* Not implemented g_variant_parse argument types not handled . *)
 
-(* Not implemented g_variant_parse_error_print_context return type not handled . *)
+let variant_parse_error_print_context =
+foreign "g_variant_parse_error_print_context" (ptr Error.t_typ @-> string @-> returning (string))
 
 let variant_parse_error_quark =
 foreign "g_variant_parse_error_quark" (void @-> returning (uint32_t))

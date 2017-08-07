@@ -2,10 +2,13 @@ open Ctypes
 
 type t
 val t_typ : t structure typ
-(* Not implemented g_match_info_expand_references return type not handled . *)
-(* Not implemented g_match_info_fetch return type not handled . *)
+val expand_references:
+t structure ptr -> string -> string
+val fetch:
+t structure ptr -> int32 -> string
 (* Not implemented g_match_info_fetch_all return type not handled . *)
-(* Not implemented g_match_info_fetch_named return type not handled . *)
+val fetch_named:
+t structure ptr -> string -> string
 (* Not implemented g_match_info_fetch_named_pos argument types not handled . *)
 (* Not implemented g_match_info_fetch_pos argument types not handled . *)
 val free:

@@ -23,7 +23,8 @@ let t_typ : t structure typ = structure "DateTime"
 (* Not implemented g_date_time_add_weeks return type not handled . *)
 (* Not implemented g_date_time_add_years return type not handled . *)
 (* Not implemented g_date_time_difference argument types not handled . *)
-(* Not implemented g_date_time_format return type not handled . *)
+let format =
+foreign "g_date_time_format" (ptr t_typ @-> string @-> returning (string))
 let get_day_of_month =
 foreign "g_date_time_get_day_of_month" (ptr t_typ @-> returning (int32_t))
 let get_day_of_week =

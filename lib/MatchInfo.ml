@@ -3,10 +3,13 @@ open Foreign
 
 type t
 let t_typ : t structure typ = structure "MatchInfo"
-(* Not implemented g_match_info_expand_references return type not handled . *)
-(* Not implemented g_match_info_fetch return type not handled . *)
+let expand_references =
+foreign "g_match_info_expand_references" (ptr t_typ @-> string @-> returning (string))
+let fetch =
+foreign "g_match_info_fetch" (ptr t_typ @-> int32_t @-> returning (string))
 (* Not implemented g_match_info_fetch_all return type not handled . *)
-(* Not implemented g_match_info_fetch_named return type not handled . *)
+let fetch_named =
+foreign "g_match_info_fetch_named" (ptr t_typ @-> string @-> returning (string))
 (* Not implemented g_match_info_fetch_named_pos argument types not handled . *)
 (* Not implemented g_match_info_fetch_pos argument types not handled . *)
 let free =

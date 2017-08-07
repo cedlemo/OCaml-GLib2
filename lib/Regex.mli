@@ -31,7 +31,8 @@ t structure ptr -> unit
 (* Not implemented g_regex_check_replacement argument types not handled . *)
 val error_quark:
 t structure ptr -> Unsigned.uint32
-(* Not implemented g_regex_escape_nul return type not handled . *)
+val escape_nul:
+t structure ptr -> string -> int32 -> string
 (* Not implemented g_regex_escape_string argument types not handled . *)
 (* Not implemented g_regex_match_simple argument types not handled . *)
 (* Not implemented g_regex_split_simple argument types not handled . *)

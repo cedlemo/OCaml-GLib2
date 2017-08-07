@@ -22,7 +22,8 @@ val t_typ : t structure typ
 (* Not implemented g_date_time_add_weeks return type not handled . *)
 (* Not implemented g_date_time_add_years return type not handled . *)
 (* Not implemented g_date_time_difference argument types not handled . *)
-(* Not implemented g_date_time_format return type not handled . *)
+val format:
+t structure ptr -> string -> string
 val get_day_of_month:
 t structure ptr -> int32
 val get_day_of_week:

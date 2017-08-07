@@ -6,7 +6,8 @@ val t_typ : t structure typ
 val get_boolean:
 t structure ptr -> string -> string -> bool
 (* Not implemented g_key_file_get_boolean_list argument types not handled . *)
-(* Not implemented g_key_file_get_comment return type not handled . *)
+val get_comment:
+t structure ptr -> string -> string -> string
 val get_double:
 t structure ptr -> string -> string -> float
 (* Not implemented g_key_file_get_double_list argument types not handled . *)
@@ -17,14 +18,18 @@ val get_integer:
 t structure ptr -> string -> string -> int32
 (* Not implemented g_key_file_get_integer_list argument types not handled . *)
 (* Not implemented g_key_file_get_keys argument types not handled . *)
-(* Not implemented g_key_file_get_locale_string return type not handled . *)
+val get_locale_string:
+t structure ptr -> string -> string -> string -> string
 (* Not implemented g_key_file_get_locale_string_list argument types not handled . *)
-(* Not implemented g_key_file_get_start_group return type not handled . *)
-(* Not implemented g_key_file_get_string return type not handled . *)
+val get_start_group:
+t structure ptr -> string
+val get_string:
+t structure ptr -> string -> string -> string
 (* Not implemented g_key_file_get_string_list argument types not handled . *)
 val get_uint64:
 t structure ptr -> string -> string -> Unsigned.uint64
-(* Not implemented g_key_file_get_value return type not handled . *)
+val get_value:
+t structure ptr -> string -> string -> string
 val has_group:
 t structure ptr -> string -> bool
 (* Not implemented g_key_file_load_from_bytes argument types not handled . *)

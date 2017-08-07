@@ -13,17 +13,20 @@ let get_added =
 foreign "g_bookmark_file_get_added" (ptr t_typ @-> string @-> returning (int64_t))
 (* Not implemented g_bookmark_file_get_app_info argument types not handled . *)
 (* Not implemented g_bookmark_file_get_applications argument types not handled . *)
-(* Not implemented g_bookmark_file_get_description return type not handled . *)
+let get_description =
+foreign "g_bookmark_file_get_description" (ptr t_typ @-> string @-> returning (string))
 (* Not implemented g_bookmark_file_get_groups argument types not handled . *)
 (* Not implemented g_bookmark_file_get_icon argument types not handled . *)
 let get_is_private =
 foreign "g_bookmark_file_get_is_private" (ptr t_typ @-> string @-> returning (bool))
-(* Not implemented g_bookmark_file_get_mime_type return type not handled . *)
+let get_mime_type =
+foreign "g_bookmark_file_get_mime_type" (ptr t_typ @-> string @-> returning (string))
 let get_modified =
 foreign "g_bookmark_file_get_modified" (ptr t_typ @-> string @-> returning (int64_t))
 let get_size =
 foreign "g_bookmark_file_get_size" (ptr t_typ @-> returning (int32_t))
-(* Not implemented g_bookmark_file_get_title return type not handled . *)
+let get_title =
+foreign "g_bookmark_file_get_title" (ptr t_typ @-> string @-> returning (string))
 (* Not implemented g_bookmark_file_get_uris argument types not handled . *)
 let get_visited =
 foreign "g_bookmark_file_get_visited" (ptr t_typ @-> string @-> returning (int64_t))
