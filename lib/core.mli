@@ -856,10 +856,10 @@ Unsigned.uint32 -> Unsigned.uint32 -> Unsigned.uint32 -> string
 (* Not implemented g_child_watch_source_new return type not handled . *)
 
 val clear_error:
-unit -> unit
+unit -> Error.t structure ptr ptr option -> unit
 
 val close:
-int32 -> bool
+int32 -> Error.t structure ptr ptr option -> bool
 
 (* Not implemented g_compute_checksum_for_bytes argument types not handled . *)
 
@@ -879,7 +879,7 @@ val convert_error_quark:
 unit -> Unsigned.uint32
 
 val convert_with_fallback:
-string -> int64 -> string -> string -> string -> Unsigned.uint64 ptr -> Unsigned.uint64 ptr -> string
+string -> int64 -> string -> string -> string -> Unsigned.uint64 ptr -> Unsigned.uint64 ptr -> Error.t structure ptr ptr option -> string
 
 (* Not implemented g_convert_with_iconv argument types not handled . *)
 
@@ -958,7 +958,7 @@ val dgettext:
 string -> string -> string
 
 val dir_make_tmp:
-string -> string
+string -> Error.t structure ptr ptr option -> string
 
 val direct_equal:
 unit ptr -> unit ptr -> bool
@@ -997,7 +997,7 @@ unit -> Unsigned.uint32
 (* Not implemented g_file_open_tmp argument types not handled . *)
 
 val file_read_link:
-string -> string
+string -> Error.t structure ptr ptr option -> string
 
 (* Not implemented g_file_set_contents argument types not handled . *)
 
@@ -1014,7 +1014,7 @@ string -> string
 (* Not implemented g_filename_from_utf8 argument types not handled . *)
 
 val filename_to_uri:
-string -> string -> string
+string -> string -> Error.t structure ptr ptr option -> string
 
 (* Not implemented g_filename_to_utf8 argument types not handled . *)
 
@@ -1418,7 +1418,7 @@ val shell_quote:
 string -> string
 
 val shell_unquote:
-string -> string
+string -> Error.t structure ptr ptr option -> string
 
 val slice_alloc:
 Unsigned.uint64 -> unit ptr
@@ -1460,13 +1460,13 @@ Unsigned.uint32 -> Unsigned.uint32
 (* Not implemented g_spawn_async_with_pipes argument types not handled . *)
 
 val spawn_check_exit_status:
-int32 -> bool
+int32 -> Error.t structure ptr ptr option -> bool
 
 val spawn_close_pid:
 int32 -> unit
 
 val spawn_command_line_async:
-string -> bool
+string -> Error.t structure ptr ptr option -> bool
 
 (* Not implemented g_spawn_command_line_sync argument types not handled . *)
 
@@ -1813,10 +1813,10 @@ unit -> Unsigned.uint32
 (* Not implemented g_unix_fd_source_new argument types not handled . *)
 
 val unix_open_pipe:
-int32 ptr -> int32 -> bool
+int32 ptr -> int32 -> Error.t structure ptr ptr option -> bool
 
 val unix_set_fd_nonblocking:
-int32 -> bool -> bool
+int32 -> bool -> Error.t structure ptr ptr option -> bool
 
 (* Not implemented g_unix_signal_add_full argument types not handled . *)
 

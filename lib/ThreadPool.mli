@@ -14,9 +14,9 @@ t structure ptr -> Unsigned.uint32
 val move_to_front:
 t structure ptr -> unit ptr -> bool
 val push:
-t structure ptr -> unit ptr -> bool
+t structure ptr -> unit ptr -> Error.t structure ptr ptr option -> bool
 val set_max_threads:
-t structure ptr -> int32 -> bool
+t structure ptr -> int32 -> Error.t structure ptr ptr option -> bool
 val unprocessed:
 t structure ptr -> Unsigned.uint32
 val get_max_idle_time:

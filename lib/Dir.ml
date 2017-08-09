@@ -10,5 +10,5 @@ foreign "g_dir_read_name" (ptr t_typ @-> returning (string))
 let rewind =
 foreign "g_dir_rewind" (ptr t_typ @-> returning (void))
 let make_tmp =
-foreign "g_dir_make_tmp" (ptr t_typ @-> string @-> returning (string))
+foreign "g_dir_make_tmp" (ptr t_typ @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
 

@@ -9,50 +9,50 @@ t structure ptr -> string -> string -> unit
 val free:
 t structure ptr -> unit
 val get_added:
-t structure ptr -> string -> int64
+t structure ptr -> string -> Error.t structure ptr ptr option -> int64
 (* Not implemented g_bookmark_file_get_app_info argument types not handled . *)
 (* Not implemented g_bookmark_file_get_applications argument types not handled . *)
 val get_description:
-t structure ptr -> string -> string
+t structure ptr -> string -> Error.t structure ptr ptr option -> string
 (* Not implemented g_bookmark_file_get_groups argument types not handled . *)
 (* Not implemented g_bookmark_file_get_icon argument types not handled . *)
 val get_is_private:
-t structure ptr -> string -> bool
+t structure ptr -> string -> Error.t structure ptr ptr option -> bool
 val get_mime_type:
-t structure ptr -> string -> string
+t structure ptr -> string -> Error.t structure ptr ptr option -> string
 val get_modified:
-t structure ptr -> string -> int64
+t structure ptr -> string -> Error.t structure ptr ptr option -> int64
 val get_size:
 t structure ptr -> int32
 val get_title:
-t structure ptr -> string -> string
+t structure ptr -> string -> Error.t structure ptr ptr option -> string
 (* Not implemented g_bookmark_file_get_uris argument types not handled . *)
 val get_visited:
-t structure ptr -> string -> int64
+t structure ptr -> string -> Error.t structure ptr ptr option -> int64
 val has_application:
-t structure ptr -> string -> string -> bool
+t structure ptr -> string -> string -> Error.t structure ptr ptr option -> bool
 val has_group:
-t structure ptr -> string -> string -> bool
+t structure ptr -> string -> string -> Error.t structure ptr ptr option -> bool
 val has_item:
 t structure ptr -> string -> bool
 val load_from_data:
-t structure ptr -> string -> Unsigned.uint64 -> bool
+t structure ptr -> string -> Unsigned.uint64 -> Error.t structure ptr ptr option -> bool
 val load_from_data_dirs:
-t structure ptr -> string -> string -> bool
+t structure ptr -> string -> string -> Error.t structure ptr ptr option -> bool
 val load_from_file:
-t structure ptr -> string -> bool
+t structure ptr -> string -> Error.t structure ptr ptr option -> bool
 val move_item:
-t structure ptr -> string -> string -> bool
+t structure ptr -> string -> string -> Error.t structure ptr ptr option -> bool
 val remove_application:
-t structure ptr -> string -> string -> bool
+t structure ptr -> string -> string -> Error.t structure ptr ptr option -> bool
 val remove_group:
-t structure ptr -> string -> string -> bool
+t structure ptr -> string -> string -> Error.t structure ptr ptr option -> bool
 val remove_item:
-t structure ptr -> string -> bool
+t structure ptr -> string -> Error.t structure ptr ptr option -> bool
 val set_added:
 t structure ptr -> string -> int64 -> unit
 val set_app_info:
-t structure ptr -> string -> string -> string -> int32 -> int64 -> bool
+t structure ptr -> string -> string -> string -> int32 -> int64 -> Error.t structure ptr ptr option -> bool
 val set_description:
 t structure ptr -> string -> string -> unit
 val set_groups:
@@ -71,7 +71,7 @@ val set_visited:
 t structure ptr -> string -> int64 -> unit
 (* Not implemented g_bookmark_file_to_data argument types not handled . *)
 val to_file:
-t structure ptr -> string -> bool
+t structure ptr -> string -> Error.t structure ptr ptr option -> bool
 val error_quark:
 t structure ptr -> Unsigned.uint32
 

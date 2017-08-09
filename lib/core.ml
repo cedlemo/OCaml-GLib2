@@ -2492,10 +2492,10 @@ foreign "glib_check_version" (uint32_t @-> uint32_t @-> uint32_t @-> returning (
 (* Not implemented g_child_watch_source_new return type not handled . *)
 
 let clear_error =
-foreign "g_clear_error" (void @-> returning (void))
+foreign "g_clear_error" (void  @-> ptr_opt (ptr Error.t_typ) @-> returning (void))
 
 let close =
-foreign "g_close" (int32_t @-> returning (bool))
+foreign "g_close" (int32_t  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 
 (* Not implemented g_compute_checksum_for_bytes argument types not handled . *)
 
@@ -2515,7 +2515,7 @@ let convert_error_quark =
 foreign "g_convert_error_quark" (void @-> returning (uint32_t))
 
 let convert_with_fallback =
-foreign "g_convert_with_fallback" (string @-> int64_t @-> string @-> string @-> string @-> ptr uint64_t @-> ptr uint64_t @-> returning (string))
+foreign "g_convert_with_fallback" (string @-> int64_t @-> string @-> string @-> string @-> ptr uint64_t @-> ptr uint64_t  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
 
 (* Not implemented g_convert_with_iconv argument types not handled . *)
 
@@ -2594,7 +2594,7 @@ let dgettext =
 foreign "g_dgettext" (string @-> string @-> returning (string))
 
 let dir_make_tmp =
-foreign "g_dir_make_tmp" (string @-> returning (string))
+foreign "g_dir_make_tmp" (string  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
 
 let direct_equal =
 foreign "g_direct_equal" (ptr void @-> ptr void @-> returning (bool))
@@ -2633,7 +2633,7 @@ foreign "g_file_error_quark" (void @-> returning (uint32_t))
 (* Not implemented g_file_open_tmp argument types not handled . *)
 
 let file_read_link =
-foreign "g_file_read_link" (string @-> returning (string))
+foreign "g_file_read_link" (string  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
 
 (* Not implemented g_file_set_contents argument types not handled . *)
 
@@ -2650,7 +2650,7 @@ foreign "g_filename_display_name" (string @-> returning (string))
 (* Not implemented g_filename_from_utf8 argument types not handled . *)
 
 let filename_to_uri =
-foreign "g_filename_to_uri" (string @-> string @-> returning (string))
+foreign "g_filename_to_uri" (string @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
 
 (* Not implemented g_filename_to_utf8 argument types not handled . *)
 
@@ -3050,7 +3050,7 @@ let shell_quote =
 foreign "g_shell_quote" (string @-> returning (string))
 
 let shell_unquote =
-foreign "g_shell_unquote" (string @-> returning (string))
+foreign "g_shell_unquote" (string  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
 
 let slice_alloc =
 foreign "g_slice_alloc" (uint64_t @-> returning (ptr void))
@@ -3092,13 +3092,13 @@ foreign "g_spaced_primes_closest" (uint32_t @-> returning (uint32_t))
 (* Not implemented g_spawn_async_with_pipes argument types not handled . *)
 
 let spawn_check_exit_status =
-foreign "g_spawn_check_exit_status" (int32_t @-> returning (bool))
+foreign "g_spawn_check_exit_status" (int32_t  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 
 let spawn_close_pid =
 foreign "g_spawn_close_pid" (int32_t @-> returning (void))
 
 let spawn_command_line_async =
-foreign "g_spawn_command_line_async" (string @-> returning (bool))
+foreign "g_spawn_command_line_async" (string  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 
 (* Not implemented g_spawn_command_line_sync argument types not handled . *)
 
@@ -3435,10 +3435,10 @@ foreign "g_unix_error_quark" (void @-> returning (uint32_t))
 (* Not implemented g_unix_fd_source_new argument types not handled . *)
 
 let unix_open_pipe =
-foreign "g_unix_open_pipe" (ptr int32_t @-> int32_t @-> returning (bool))
+foreign "g_unix_open_pipe" (ptr int32_t @-> int32_t  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 
 let unix_set_fd_nonblocking =
-foreign "g_unix_set_fd_nonblocking" (int32_t @-> bool @-> returning (bool))
+foreign "g_unix_set_fd_nonblocking" (int32_t @-> bool  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 
 (* Not implemented g_unix_signal_add_full argument types not handled . *)
 

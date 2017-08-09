@@ -15,9 +15,9 @@ foreign "g_thread_pool_get_num_threads" (ptr t_typ @-> returning (uint32_t))
 let move_to_front =
 foreign "g_thread_pool_move_to_front" (ptr t_typ @-> ptr void @-> returning (bool))
 let push =
-foreign "g_thread_pool_push" (ptr t_typ @-> ptr void @-> returning (bool))
+foreign "g_thread_pool_push" (ptr t_typ @-> ptr void  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 let set_max_threads =
-foreign "g_thread_pool_set_max_threads" (ptr t_typ @-> int32_t @-> returning (bool))
+foreign "g_thread_pool_set_max_threads" (ptr t_typ @-> int32_t  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 let unprocessed =
 foreign "g_thread_pool_unprocessed" (ptr t_typ @-> returning (uint32_t))
 let get_max_idle_time =

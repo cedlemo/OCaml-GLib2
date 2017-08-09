@@ -4,7 +4,7 @@ type t
 val t_typ : t structure typ
 (* Not implemented g_markup_parse_context_new argument types not handled . *)
 val end_parse:
-t structure ptr -> bool
+t structure ptr -> Error.t structure ptr ptr option -> bool
 val free:
 t structure ptr -> unit
 val get_element:
@@ -14,7 +14,7 @@ t structure ptr -> int32 ptr -> int32 ptr -> unit
 val get_user_data:
 t structure ptr -> unit ptr
 val parse:
-t structure ptr -> string -> int64 -> bool
+t structure ptr -> string -> int64 -> Error.t structure ptr ptr option -> bool
 val pop:
 t structure ptr -> unit ptr
 (* Not implemented g_markup_parse_context_push argument types not handled . *)

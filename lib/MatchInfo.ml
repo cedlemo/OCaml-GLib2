@@ -4,7 +4,7 @@ open Foreign
 type t
 let t_typ : t structure typ = structure "MatchInfo"
 let expand_references =
-foreign "g_match_info_expand_references" (ptr t_typ @-> string @-> returning (string))
+foreign "g_match_info_expand_references" (ptr t_typ @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
 let fetch =
 foreign "g_match_info_fetch" (ptr t_typ @-> int32_t @-> returning (string))
 (* Not implemented g_match_info_fetch_all return type not handled . *)
@@ -24,7 +24,7 @@ foreign "g_match_info_is_partial_match" (ptr t_typ @-> returning (bool))
 let matches =
 foreign "g_match_info_matches" (ptr t_typ @-> returning (bool))
 let next =
-foreign "g_match_info_next" (ptr t_typ @-> returning (bool))
+foreign "g_match_info_next" (ptr t_typ  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 (* Not implemented g_match_info_ref return type not handled . *)
 let unref =
 foreign "g_match_info_unref" (ptr t_typ @-> returning (void))

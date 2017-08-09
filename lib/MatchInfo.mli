@@ -3,7 +3,7 @@ open Ctypes
 type t
 val t_typ : t structure typ
 val expand_references:
-t structure ptr -> string -> string
+t structure ptr -> string -> Error.t structure ptr ptr option -> string
 val fetch:
 t structure ptr -> int32 -> string
 (* Not implemented g_match_info_fetch_all return type not handled . *)
@@ -23,7 +23,7 @@ t structure ptr -> bool
 val matches:
 t structure ptr -> bool
 val next:
-t structure ptr -> bool
+t structure ptr -> Error.t structure ptr ptr option -> bool
 (* Not implemented g_match_info_ref return type not handled . *)
 val unref:
 t structure ptr -> unit
