@@ -9,33 +9,33 @@ t structure ptr -> int32
 val lock:
 t structure ptr -> unit
 val pop:
-t structure ptr -> unit ptr
+t structure ptr -> unit ptr option
 val pop_unlocked:
-t structure ptr -> unit ptr
+t structure ptr -> unit ptr option
 val push:
-t structure ptr -> unit ptr -> unit
+t structure ptr -> unit ptr option -> unit
 val push_front:
-t structure ptr -> unit ptr -> unit
+t structure ptr -> unit ptr option -> unit
 val push_front_unlocked:
-t structure ptr -> unit ptr -> unit
+t structure ptr -> unit ptr option -> unit
 val push_unlocked:
-t structure ptr -> unit ptr -> unit
+t structure ptr -> unit ptr option -> unit
 val ref_unlocked:
 t structure ptr -> unit
 val remove:
-t structure ptr -> unit ptr -> bool
+t structure ptr -> unit ptr option -> bool
 val remove_unlocked:
-t structure ptr -> unit ptr -> bool
+t structure ptr -> unit ptr option -> bool
 (* Not implemented g_async_queue_timed_pop argument types not handled . *)
 (* Not implemented g_async_queue_timed_pop_unlocked argument types not handled . *)
 val timeout_pop:
-t structure ptr -> Unsigned.uint64 -> unit ptr
+t structure ptr -> Unsigned.uint64 -> unit ptr option
 val timeout_pop_unlocked:
-t structure ptr -> Unsigned.uint64 -> unit ptr
+t structure ptr -> Unsigned.uint64 -> unit ptr option
 val try_pop:
-t structure ptr -> unit ptr
+t structure ptr -> unit ptr option
 val try_pop_unlocked:
-t structure ptr -> unit ptr
+t structure ptr -> unit ptr option
 val unlock:
 t structure ptr -> unit
 val unref:

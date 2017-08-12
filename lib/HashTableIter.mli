@@ -14,7 +14,7 @@ t structure ptr -> HashTable.t structure ptr -> unit
 val remove:
 t structure ptr -> unit
 val replace:
-t structure ptr -> unit ptr -> unit
+t structure ptr -> unit ptr option -> unit
 val steal:
 t structure ptr -> unit
 

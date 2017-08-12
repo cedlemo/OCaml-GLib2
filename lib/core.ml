@@ -2415,16 +2415,16 @@ let atomic_pointer_and =
 foreign "g_atomic_pointer_and" (ptr void @-> uint64_t @-> returning (uint64_t))
 
 let atomic_pointer_compare_and_exchange =
-foreign "g_atomic_pointer_compare_and_exchange" (ptr void @-> ptr void @-> ptr void @-> returning (bool))
+foreign "g_atomic_pointer_compare_and_exchange" (ptr void @-> ptr_opt void @-> ptr_opt void @-> returning (bool))
 
 let atomic_pointer_get =
-foreign "g_atomic_pointer_get" (ptr void @-> returning (ptr void))
+foreign "g_atomic_pointer_get" (ptr void @-> returning (ptr_opt void))
 
 let atomic_pointer_or =
 foreign "g_atomic_pointer_or" (ptr void @-> uint64_t @-> returning (uint64_t))
 
 let atomic_pointer_set =
-foreign "g_atomic_pointer_set" (ptr void @-> ptr void @-> returning (void))
+foreign "g_atomic_pointer_set" (ptr void @-> ptr_opt void @-> returning (void))
 
 let atomic_pointer_xor =
 foreign "g_atomic_pointer_xor" (ptr void @-> uint64_t @-> returning (uint64_t))
@@ -2543,10 +2543,10 @@ let dataset_destroy =
 foreign "g_dataset_destroy" (ptr void @-> returning (void))
 
 let dataset_id_get_data =
-foreign "g_dataset_id_get_data" (ptr void @-> uint32_t @-> returning (ptr void))
+foreign "g_dataset_id_get_data" (ptr void @-> uint32_t @-> returning (ptr_opt void))
 
 let dataset_id_remove_no_notify =
-foreign "g_dataset_id_remove_no_notify" (ptr void @-> uint32_t @-> returning (ptr void))
+foreign "g_dataset_id_remove_no_notify" (ptr void @-> uint32_t @-> returning (ptr_opt void))
 
 (* Not implemented g_dataset_id_set_data_full argument types not handled . *)
 
@@ -2597,10 +2597,10 @@ let dir_make_tmp =
 foreign "g_dir_make_tmp" (string  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
 
 let direct_equal =
-foreign "g_direct_equal" (ptr void @-> ptr void @-> returning (bool))
+foreign "g_direct_equal" (ptr_opt void @-> ptr_opt void @-> returning (bool))
 
 let direct_hash =
-foreign "g_direct_hash" (ptr void @-> returning (uint32_t))
+foreign "g_direct_hash" (ptr_opt void @-> returning (uint32_t))
 
 let dngettext =
 foreign "g_dngettext" (string @-> string @-> string @-> uint64_t @-> returning (string))
@@ -2663,7 +2663,7 @@ foreign "g_format_size" (uint64_t @-> returning (string))
 (* Not implemented g_format_size_full argument types not handled . *)
 
 let free =
-foreign "g_free" (ptr void @-> returning (void))
+foreign "g_free" (ptr_opt void @-> returning (void))
 
 let get_application_name =
 foreign "g_get_application_name" (void @-> returning (string))
@@ -2736,36 +2736,36 @@ let getenv =
 foreign "g_getenv" (string @-> returning (string))
 
 let hash_table_add =
-foreign "g_hash_table_add" (ptr HashTable.t_typ @-> ptr void @-> returning (bool))
+foreign "g_hash_table_add" (ptr HashTable.t_typ @-> ptr_opt void @-> returning (bool))
 
 let hash_table_contains =
-foreign "g_hash_table_contains" (ptr HashTable.t_typ @-> ptr void @-> returning (bool))
+foreign "g_hash_table_contains" (ptr HashTable.t_typ @-> ptr_opt void @-> returning (bool))
 
 let hash_table_destroy =
 foreign "g_hash_table_destroy" (ptr HashTable.t_typ @-> returning (void))
 
 let hash_table_insert =
-foreign "g_hash_table_insert" (ptr HashTable.t_typ @-> ptr void @-> ptr void @-> returning (bool))
+foreign "g_hash_table_insert" (ptr HashTable.t_typ @-> ptr_opt void @-> ptr_opt void @-> returning (bool))
 
 let hash_table_lookup =
-foreign "g_hash_table_lookup" (ptr HashTable.t_typ @-> ptr void @-> returning (ptr void))
+foreign "g_hash_table_lookup" (ptr HashTable.t_typ @-> ptr_opt void @-> returning (ptr_opt void))
 
 (* Not implemented g_hash_table_lookup_extended argument types not handled . *)
 
 let hash_table_remove =
-foreign "g_hash_table_remove" (ptr HashTable.t_typ @-> ptr void @-> returning (bool))
+foreign "g_hash_table_remove" (ptr HashTable.t_typ @-> ptr_opt void @-> returning (bool))
 
 let hash_table_remove_all =
 foreign "g_hash_table_remove_all" (ptr HashTable.t_typ @-> returning (void))
 
 let hash_table_replace =
-foreign "g_hash_table_replace" (ptr HashTable.t_typ @-> ptr void @-> ptr void @-> returning (bool))
+foreign "g_hash_table_replace" (ptr HashTable.t_typ @-> ptr_opt void @-> ptr_opt void @-> returning (bool))
 
 let hash_table_size =
 foreign "g_hash_table_size" (ptr HashTable.t_typ @-> returning (uint32_t))
 
 let hash_table_steal =
-foreign "g_hash_table_steal" (ptr HashTable.t_typ @-> ptr void @-> returning (bool))
+foreign "g_hash_table_steal" (ptr HashTable.t_typ @-> ptr_opt void @-> returning (bool))
 
 let hash_table_steal_all =
 foreign "g_hash_table_steal_all" (ptr HashTable.t_typ @-> returning (void))
@@ -2805,7 +2805,7 @@ foreign "g_hostname_to_unicode" (string @-> returning (string))
 (* Not implemented g_idle_add_full argument types not handled . *)
 
 let idle_remove_by_data =
-foreign "g_idle_remove_by_data" (ptr void @-> returning (bool))
+foreign "g_idle_remove_by_data" (ptr_opt void @-> returning (bool))
 
 (* Not implemented g_idle_source_new return type not handled . *)
 
@@ -2888,16 +2888,16 @@ let main_depth =
 foreign "g_main_depth" (void @-> returning (int32_t))
 
 let malloc =
-foreign "g_malloc" (uint64_t @-> returning (ptr void))
+foreign "g_malloc" (uint64_t @-> returning (ptr_opt void))
 
 let malloc0 =
-foreign "g_malloc0" (uint64_t @-> returning (ptr void))
+foreign "g_malloc0" (uint64_t @-> returning (ptr_opt void))
 
 let malloc0_n =
-foreign "g_malloc0_n" (uint64_t @-> uint64_t @-> returning (ptr void))
+foreign "g_malloc0_n" (uint64_t @-> uint64_t @-> returning (ptr_opt void))
 
 let malloc_n =
-foreign "g_malloc_n" (uint64_t @-> uint64_t @-> returning (ptr void))
+foreign "g_malloc_n" (uint64_t @-> uint64_t @-> returning (ptr_opt void))
 
 let markup_error_quark =
 foreign "g_markup_error_quark" (void @-> returning (uint32_t))
@@ -2906,7 +2906,7 @@ let markup_escape_text =
 foreign "g_markup_escape_text" (string @-> int64_t @-> returning (string))
 
 let memdup =
-foreign "g_memdup" (ptr void @-> uint32_t @-> returning (ptr void))
+foreign "g_memdup" (ptr_opt void @-> uint32_t @-> returning (ptr_opt void))
 
 let mkdir_with_parents =
 foreign "g_mkdir_with_parents" (string @-> int32_t @-> returning (int32_t))
@@ -2991,10 +2991,10 @@ let random_set_seed =
 foreign "g_random_set_seed" (uint32_t @-> returning (void))
 
 let realloc =
-foreign "g_realloc" (ptr void @-> uint64_t @-> returning (ptr void))
+foreign "g_realloc" (ptr_opt void @-> uint64_t @-> returning (ptr_opt void))
 
 let realloc_n =
-foreign "g_realloc_n" (ptr void @-> uint64_t @-> uint64_t @-> returning (ptr void))
+foreign "g_realloc_n" (ptr_opt void @-> uint64_t @-> uint64_t @-> returning (ptr_opt void))
 
 (* Not implemented g_regex_check_replacement argument types not handled . *)
 
@@ -3053,19 +3053,19 @@ let shell_unquote =
 foreign "g_shell_unquote" (string  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
 
 let slice_alloc =
-foreign "g_slice_alloc" (uint64_t @-> returning (ptr void))
+foreign "g_slice_alloc" (uint64_t @-> returning (ptr_opt void))
 
 let slice_alloc0 =
-foreign "g_slice_alloc0" (uint64_t @-> returning (ptr void))
+foreign "g_slice_alloc0" (uint64_t @-> returning (ptr_opt void))
 
 let slice_copy =
-foreign "g_slice_copy" (uint64_t @-> ptr void @-> returning (ptr void))
+foreign "g_slice_copy" (uint64_t @-> ptr_opt void @-> returning (ptr_opt void))
 
 let slice_free1 =
-foreign "g_slice_free1" (uint64_t @-> ptr void @-> returning (void))
+foreign "g_slice_free1" (uint64_t @-> ptr_opt void @-> returning (void))
 
 let slice_free_chain_with_offset =
-foreign "g_slice_free_chain_with_offset" (uint64_t @-> ptr void @-> uint64_t @-> returning (void))
+foreign "g_slice_free_chain_with_offset" (uint64_t @-> ptr_opt void @-> uint64_t @-> returning (void))
 
 (* Not implemented g_slice_get_config argument types not handled . *)
 
@@ -3079,7 +3079,7 @@ foreign "g_source_remove" (uint32_t @-> returning (bool))
 (* Not implemented g_source_remove_by_funcs_user_data argument types not handled . *)
 
 let source_remove_by_user_data =
-foreign "g_source_remove_by_user_data" (ptr void @-> returning (bool))
+foreign "g_source_remove_by_user_data" (ptr_opt void @-> returning (bool))
 
 let source_set_name_by_id =
 foreign "g_source_set_name_by_id" (uint32_t @-> string @-> returning (void))
@@ -3248,7 +3248,7 @@ foreign "g_test_incomplete" (string @-> returning (void))
 (* Not implemented g_test_queue_destroy argument types not handled . *)
 
 let test_queue_free =
-foreign "g_test_queue_free" (ptr void @-> returning (void))
+foreign "g_test_queue_free" (ptr_opt void @-> returning (void))
 
 let test_rand_double =
 foreign "g_test_rand_double" (void @-> returning (double))
@@ -3300,7 +3300,7 @@ let thread_error_quark =
 foreign "g_thread_error_quark" (void @-> returning (uint32_t))
 
 let thread_exit =
-foreign "g_thread_exit" (ptr void @-> returning (void))
+foreign "g_thread_exit" (ptr_opt void @-> returning (void))
 
 let thread_pool_get_max_idle_time =
 foreign "g_thread_pool_get_max_idle_time" (void @-> returning (uint32_t))
@@ -3336,22 +3336,22 @@ foreign "g_thread_yield" (void @-> returning (void))
 (* Not implemented g_timeout_source_new_seconds return type not handled . *)
 
 let try_malloc =
-foreign "g_try_malloc" (uint64_t @-> returning (ptr void))
+foreign "g_try_malloc" (uint64_t @-> returning (ptr_opt void))
 
 let try_malloc0 =
-foreign "g_try_malloc0" (uint64_t @-> returning (ptr void))
+foreign "g_try_malloc0" (uint64_t @-> returning (ptr_opt void))
 
 let try_malloc0_n =
-foreign "g_try_malloc0_n" (uint64_t @-> uint64_t @-> returning (ptr void))
+foreign "g_try_malloc0_n" (uint64_t @-> uint64_t @-> returning (ptr_opt void))
 
 let try_malloc_n =
-foreign "g_try_malloc_n" (uint64_t @-> uint64_t @-> returning (ptr void))
+foreign "g_try_malloc_n" (uint64_t @-> uint64_t @-> returning (ptr_opt void))
 
 let try_realloc =
-foreign "g_try_realloc" (ptr void @-> uint64_t @-> returning (ptr void))
+foreign "g_try_realloc" (ptr_opt void @-> uint64_t @-> returning (ptr_opt void))
 
 let try_realloc_n =
-foreign "g_try_realloc_n" (ptr void @-> uint64_t @-> uint64_t @-> returning (ptr void))
+foreign "g_try_realloc_n" (ptr_opt void @-> uint64_t @-> uint64_t @-> returning (ptr_opt void))
 
 (* Not implemented g_ucs4_to_utf16 argument types not handled . *)
 

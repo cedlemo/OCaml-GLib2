@@ -15,7 +15,7 @@ foreign "g_hash_table_iter_init" (ptr t_typ @-> ptr HashTable.t_typ @-> returnin
 let remove =
 foreign "g_hash_table_iter_remove" (ptr t_typ @-> returning (void))
 let replace =
-foreign "g_hash_table_iter_replace" (ptr t_typ @-> ptr void @-> returning (void))
+foreign "g_hash_table_iter_replace" (ptr t_typ @-> ptr_opt void @-> returning (void))
 let steal =
 foreign "g_hash_table_iter_steal" (ptr t_typ @-> returning (void))
 

@@ -46,7 +46,7 @@ t structure ptr -> Unsigned.uint8
 (* Not implemented g_variant_get_bytestring_array argument types not handled . *)
 (* Not implemented g_variant_get_child_value return type not handled . *)
 val get_data:
-t structure ptr -> unit ptr
+t structure ptr -> unit ptr option
 (* Not implemented g_variant_get_data_as_bytes return type not handled . *)
 val get_double:
 t structure ptr -> float

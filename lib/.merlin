@@ -1,0 +1,12 @@
+B ../_build/default/lib
+FLG -open GLib -w -40
+PKG bigarray
+PKG bytes
+PKG ctypes
+PKG ctypes.foreign
+PKG ctypes.foreign.base
+PKG ctypes.foreign.threaded
+PKG integers
+PKG threads
+PKG threads.posix
+PKG unix

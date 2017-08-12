@@ -63,7 +63,7 @@ let remove =
 foreign "g_source_remove" (ptr t_typ @-> uint32_t @-> returning (bool))
 (* Not implemented g_source_remove_by_funcs_user_data argument types not handled . *)
 let remove_by_user_data =
-foreign "g_source_remove_by_user_data" (ptr t_typ @-> ptr void @-> returning (bool))
+foreign "g_source_remove_by_user_data" (ptr t_typ @-> ptr_opt void @-> returning (bool))
 let set_name_by_id =
 foreign "g_source_set_name_by_id" (ptr t_typ @-> uint32_t @-> string @-> returning (void))
 

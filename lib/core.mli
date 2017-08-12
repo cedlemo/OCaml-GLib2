@@ -778,16 +778,16 @@ val atomic_pointer_and:
 unit ptr -> Unsigned.uint64 -> Unsigned.uint64
 
 val atomic_pointer_compare_and_exchange:
-unit ptr -> unit ptr -> unit ptr -> bool
+unit ptr -> unit ptr option -> unit ptr option -> bool
 
 val atomic_pointer_get:
-unit ptr -> unit ptr
+unit ptr -> unit ptr option
 
 val atomic_pointer_or:
 unit ptr -> Unsigned.uint64 -> Unsigned.uint64
 
 val atomic_pointer_set:
-unit ptr -> unit ptr -> unit
+unit ptr -> unit ptr option -> unit
 
 val atomic_pointer_xor:
 unit ptr -> Unsigned.uint64 -> Unsigned.uint64
@@ -907,10 +907,10 @@ val dataset_destroy:
 unit ptr -> unit
 
 val dataset_id_get_data:
-unit ptr -> Unsigned.uint32 -> unit ptr
+unit ptr -> Unsigned.uint32 -> unit ptr option
 
 val dataset_id_remove_no_notify:
-unit ptr -> Unsigned.uint32 -> unit ptr
+unit ptr -> Unsigned.uint32 -> unit ptr option
 
 (* Not implemented g_dataset_id_set_data_full argument types not handled . *)
 
@@ -961,10 +961,10 @@ val dir_make_tmp:
 string -> Error.t structure ptr ptr option -> string
 
 val direct_equal:
-unit ptr -> unit ptr -> bool
+unit ptr option -> unit ptr option -> bool
 
 val direct_hash:
-unit ptr -> Unsigned.uint32
+unit ptr option -> Unsigned.uint32
 
 val dngettext:
 string -> string -> string -> Unsigned.uint64 -> string
@@ -1028,7 +1028,7 @@ Unsigned.uint64 -> string
 (* Not implemented g_format_size_full argument types not handled . *)
 
 val free:
-unit ptr -> unit
+unit ptr option -> unit
 
 val get_application_name:
 unit -> string
@@ -1101,36 +1101,36 @@ val getenv:
 string -> string
 
 val hash_table_add:
-HashTable.t structure ptr -> unit ptr -> bool
+HashTable.t structure ptr -> unit ptr option -> bool
 
 val hash_table_contains:
-HashTable.t structure ptr -> unit ptr -> bool
+HashTable.t structure ptr -> unit ptr option -> bool
 
 val hash_table_destroy:
 HashTable.t structure ptr -> unit
 
 val hash_table_insert:
-HashTable.t structure ptr -> unit ptr -> unit ptr -> bool
+HashTable.t structure ptr -> unit ptr option -> unit ptr option -> bool
 
 val hash_table_lookup:
-HashTable.t structure ptr -> unit ptr -> unit ptr
+HashTable.t structure ptr -> unit ptr option -> unit ptr option
 
 (* Not implemented g_hash_table_lookup_extended argument types not handled . *)
 
 val hash_table_remove:
-HashTable.t structure ptr -> unit ptr -> bool
+HashTable.t structure ptr -> unit ptr option -> bool
 
 val hash_table_remove_all:
 HashTable.t structure ptr -> unit
 
 val hash_table_replace:
-HashTable.t structure ptr -> unit ptr -> unit ptr -> bool
+HashTable.t structure ptr -> unit ptr option -> unit ptr option -> bool
 
 val hash_table_size:
 HashTable.t structure ptr -> Unsigned.uint32
 
 val hash_table_steal:
-HashTable.t structure ptr -> unit ptr -> bool
+HashTable.t structure ptr -> unit ptr option -> bool
 
 val hash_table_steal_all:
 HashTable.t structure ptr -> unit
@@ -1170,7 +1170,7 @@ string -> string
 (* Not implemented g_idle_add_full argument types not handled . *)
 
 val idle_remove_by_data:
-unit ptr -> bool
+unit ptr option -> bool
 
 (* Not implemented g_idle_source_new return type not handled . *)
 
@@ -1253,16 +1253,16 @@ val main_depth:
 unit -> int32
 
 val malloc:
-Unsigned.uint64 -> unit ptr
+Unsigned.uint64 -> unit ptr option
 
 val malloc0:
-Unsigned.uint64 -> unit ptr
+Unsigned.uint64 -> unit ptr option
 
 val malloc0_n:
-Unsigned.uint64 -> Unsigned.uint64 -> unit ptr
+Unsigned.uint64 -> Unsigned.uint64 -> unit ptr option
 
 val malloc_n:
-Unsigned.uint64 -> Unsigned.uint64 -> unit ptr
+Unsigned.uint64 -> Unsigned.uint64 -> unit ptr option
 
 val markup_error_quark:
 unit -> Unsigned.uint32
@@ -1274,7 +1274,7 @@ string -> int64 -> string
 (*  !!! DEPRECATED : mem_profile . *)
 (*  !!! DEPRECATED : mem_set_vtable . *)
 val memdup:
-unit ptr -> Unsigned.uint32 -> unit ptr
+unit ptr option -> Unsigned.uint32 -> unit ptr option
 
 val mkdir_with_parents:
 string -> int32 -> int32
@@ -1359,10 +1359,10 @@ val random_set_seed:
 Unsigned.uint32 -> unit
 
 val realloc:
-unit ptr -> Unsigned.uint64 -> unit ptr
+unit ptr option -> Unsigned.uint64 -> unit ptr option
 
 val realloc_n:
-unit ptr -> Unsigned.uint64 -> Unsigned.uint64 -> unit ptr
+unit ptr option -> Unsigned.uint64 -> Unsigned.uint64 -> unit ptr option
 
 (* Not implemented g_regex_check_replacement argument types not handled . *)
 
@@ -1421,19 +1421,19 @@ val shell_unquote:
 string -> Error.t structure ptr ptr option -> string
 
 val slice_alloc:
-Unsigned.uint64 -> unit ptr
+Unsigned.uint64 -> unit ptr option
 
 val slice_alloc0:
-Unsigned.uint64 -> unit ptr
+Unsigned.uint64 -> unit ptr option
 
 val slice_copy:
-Unsigned.uint64 -> unit ptr -> unit ptr
+Unsigned.uint64 -> unit ptr option -> unit ptr option
 
 val slice_free1:
-Unsigned.uint64 -> unit ptr -> unit
+Unsigned.uint64 -> unit ptr option -> unit
 
 val slice_free_chain_with_offset:
-Unsigned.uint64 -> unit ptr -> Unsigned.uint64 -> unit
+Unsigned.uint64 -> unit ptr option -> Unsigned.uint64 -> unit
 
 (* Not implemented g_slice_get_config argument types not handled . *)
 
@@ -1447,7 +1447,7 @@ Unsigned.uint32 -> bool
 (* Not implemented g_source_remove_by_funcs_user_data argument types not handled . *)
 
 val source_remove_by_user_data:
-unit ptr -> bool
+unit ptr option -> bool
 
 val source_set_name_by_id:
 Unsigned.uint32 -> string -> unit
@@ -1620,7 +1620,7 @@ string -> unit
 (* Not implemented g_test_queue_destroy argument types not handled . *)
 
 val test_queue_free:
-unit ptr -> unit
+unit ptr option -> unit
 
 val test_rand_double:
 unit -> float
@@ -1673,7 +1673,7 @@ val thread_error_quark:
 unit -> Unsigned.uint32
 
 val thread_exit:
-unit ptr -> unit
+unit ptr option -> unit
 
 val thread_pool_get_max_idle_time:
 unit -> Unsigned.uint32
@@ -1713,22 +1713,22 @@ unit -> unit
 (*  !!! DEPRECATED : trash_stack_pop . *)
 (*  !!! DEPRECATED : trash_stack_push . *)
 val try_malloc:
-Unsigned.uint64 -> unit ptr
+Unsigned.uint64 -> unit ptr option
 
 val try_malloc0:
-Unsigned.uint64 -> unit ptr
+Unsigned.uint64 -> unit ptr option
 
 val try_malloc0_n:
-Unsigned.uint64 -> Unsigned.uint64 -> unit ptr
+Unsigned.uint64 -> Unsigned.uint64 -> unit ptr option
 
 val try_malloc_n:
-Unsigned.uint64 -> Unsigned.uint64 -> unit ptr
+Unsigned.uint64 -> Unsigned.uint64 -> unit ptr option
 
 val try_realloc:
-unit ptr -> Unsigned.uint64 -> unit ptr
+unit ptr option -> Unsigned.uint64 -> unit ptr option
 
 val try_realloc_n:
-unit ptr -> Unsigned.uint64 -> Unsigned.uint64 -> unit ptr
+unit ptr option -> Unsigned.uint64 -> Unsigned.uint64 -> unit ptr option
 
 (* Not implemented g_ucs4_to_utf16 argument types not handled . *)
 

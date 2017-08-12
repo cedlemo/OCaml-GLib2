@@ -62,7 +62,7 @@ val remove:
 t structure ptr -> Unsigned.uint32 -> bool
 (* Not implemented g_source_remove_by_funcs_user_data argument types not handled . *)
 val remove_by_user_data:
-t structure ptr -> unit ptr -> bool
+t structure ptr -> unit ptr option -> bool
 val set_name_by_id:
 t structure ptr -> Unsigned.uint32 -> string -> unit
 

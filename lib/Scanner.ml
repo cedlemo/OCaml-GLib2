@@ -39,12 +39,12 @@ foreign "g_scanner_input_file" (ptr t_typ @-> int32_t @-> returning (void))
 let input_text =
 foreign "g_scanner_input_text" (ptr t_typ @-> string @-> uint32_t @-> returning (void))
 let lookup_symbol =
-foreign "g_scanner_lookup_symbol" (ptr t_typ @-> string @-> returning (ptr void))
+foreign "g_scanner_lookup_symbol" (ptr t_typ @-> string @-> returning (ptr_opt void))
 (* Not implemented g_scanner_peek_next_token return type not handled . *)
 let scope_add_symbol =
-foreign "g_scanner_scope_add_symbol" (ptr t_typ @-> uint32_t @-> string @-> ptr void @-> returning (void))
+foreign "g_scanner_scope_add_symbol" (ptr t_typ @-> uint32_t @-> string @-> ptr_opt void @-> returning (void))
 let scope_lookup_symbol =
-foreign "g_scanner_scope_lookup_symbol" (ptr t_typ @-> uint32_t @-> string @-> returning (ptr void))
+foreign "g_scanner_scope_lookup_symbol" (ptr t_typ @-> uint32_t @-> string @-> returning (ptr_opt void))
 let scope_remove_symbol =
 foreign "g_scanner_scope_remove_symbol" (ptr t_typ @-> uint32_t @-> string @-> returning (void))
 let set_scope =

@@ -38,12 +38,12 @@ t structure ptr -> int32 -> unit
 val input_text:
 t structure ptr -> string -> Unsigned.uint32 -> unit
 val lookup_symbol:
-t structure ptr -> string -> unit ptr
+t structure ptr -> string -> unit ptr option
 (* Not implemented g_scanner_peek_next_token return type not handled . *)
 val scope_add_symbol:
-t structure ptr -> Unsigned.uint32 -> string -> unit ptr -> unit
+t structure ptr -> Unsigned.uint32 -> string -> unit ptr option -> unit
 val scope_lookup_symbol:
-t structure ptr -> Unsigned.uint32 -> string -> unit ptr
+t structure ptr -> Unsigned.uint32 -> string -> unit ptr option
 val scope_remove_symbol:
 t structure ptr -> Unsigned.uint32 -> string -> unit
 val set_scope:

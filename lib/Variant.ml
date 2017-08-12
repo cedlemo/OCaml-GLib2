@@ -47,7 +47,7 @@ foreign "g_variant_get_byte" (ptr t_typ @-> returning (uint8_t))
 (* Not implemented g_variant_get_bytestring_array argument types not handled . *)
 (* Not implemented g_variant_get_child_value return type not handled . *)
 let get_data =
-foreign "g_variant_get_data" (ptr t_typ @-> returning (ptr void))
+foreign "g_variant_get_data" (ptr t_typ @-> returning (ptr_opt void))
 (* Not implemented g_variant_get_data_as_bytes return type not handled . *)
 let get_double =
 foreign "g_variant_get_double" (ptr t_typ @-> returning (double))

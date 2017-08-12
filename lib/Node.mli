@@ -8,7 +8,7 @@ val f_data: (unit ptr, t structure) field
 (* TODO Struct field Node : interface tag not implemented . *)
 (* TODO Struct field Node : interface tag not implemented . *)
 val child_index:
-t structure ptr -> unit ptr -> int32
+t structure ptr -> unit ptr option -> int32
 (* Not implemented g_node_child_position argument types not handled . *)
 val depth:
 t structure ptr -> Unsigned.uint32

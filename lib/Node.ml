@@ -9,7 +9,7 @@ let f_data = field t_typ "data" (ptr void)
 (* TODO Struct field Node : interface tag not implemented . *)
 (* TODO Struct field Node : interface tag not implemented . *)
 let child_index =
-foreign "g_node_child_index" (ptr t_typ @-> ptr void @-> returning (int32_t))
+foreign "g_node_child_index" (ptr t_typ @-> ptr_opt void @-> returning (int32_t))
 (* Not implemented g_node_child_position argument types not handled . *)
 let depth =
 foreign "g_node_depth" (ptr t_typ @-> returning (uint32_t))
