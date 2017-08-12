@@ -8,7 +8,7 @@ let get_boolean =
 foreign "g_key_file_get_boolean" (ptr t_typ @-> string @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 (* Not implemented g_key_file_get_boolean_list argument types not handled . *)
 let get_comment =
-foreign "g_key_file_get_comment" (ptr t_typ @-> string @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
+foreign "g_key_file_get_comment" (ptr t_typ @-> string_opt @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
 let get_double =
 foreign "g_key_file_get_double" (ptr t_typ @-> string @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (double))
 (* Not implemented g_key_file_get_double_list argument types not handled . *)
@@ -20,7 +20,7 @@ foreign "g_key_file_get_integer" (ptr t_typ @-> string @-> string  @-> ptr_opt (
 (* Not implemented g_key_file_get_integer_list argument types not handled . *)
 (* Not implemented g_key_file_get_keys argument types not handled . *)
 let get_locale_string =
-foreign "g_key_file_get_locale_string" (ptr t_typ @-> string @-> string @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
+foreign "g_key_file_get_locale_string" (ptr t_typ @-> string @-> string @-> string_opt  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
 (* Not implemented g_key_file_get_locale_string_list argument types not handled . *)
 let get_start_group =
 foreign "g_key_file_get_start_group" (ptr t_typ @-> returning (string))
@@ -39,7 +39,7 @@ foreign "g_key_file_has_group" (ptr t_typ @-> string @-> returning (bool))
 (* Not implemented g_key_file_load_from_dirs argument types not handled . *)
 (* Not implemented g_key_file_load_from_file argument types not handled . *)
 let remove_comment =
-foreign "g_key_file_remove_comment" (ptr t_typ @-> string @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
+foreign "g_key_file_remove_comment" (ptr t_typ @-> string_opt @-> string_opt  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 let remove_group =
 foreign "g_key_file_remove_group" (ptr t_typ @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 let remove_key =
@@ -50,7 +50,7 @@ let set_boolean =
 foreign "g_key_file_set_boolean" (ptr t_typ @-> string @-> string @-> bool @-> returning (void))
 (* Not implemented g_key_file_set_boolean_list argument types not handled . *)
 let set_comment =
-foreign "g_key_file_set_comment" (ptr t_typ @-> string @-> string @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
+foreign "g_key_file_set_comment" (ptr t_typ @-> string_opt @-> string_opt @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 let set_double =
 foreign "g_key_file_set_double" (ptr t_typ @-> string @-> string @-> double @-> returning (void))
 (* Not implemented g_key_file_set_double_list argument types not handled . *)

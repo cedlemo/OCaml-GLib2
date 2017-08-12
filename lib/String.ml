@@ -18,7 +18,7 @@ let f_allocated_len = field t_typ "allocated_len" (uint64_t)
 (* Not implemented g_string_equal argument types not handled . *)
 (* Not implemented g_string_erase return type not handled . *)
 let free =
-foreign "g_string_free" (ptr t_typ @-> bool @-> returning (string))
+foreign "g_string_free" (ptr t_typ @-> bool @-> returning (string_opt))
 (* Not implemented g_string_free_to_bytes return type not handled . *)
 let hash =
 foreign "g_string_hash" (ptr t_typ @-> returning (uint32_t))

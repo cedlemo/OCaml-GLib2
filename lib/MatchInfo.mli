@@ -3,12 +3,12 @@ open Ctypes
 type t
 val t_typ : t structure typ
 val expand_references:
-t structure ptr -> string -> Error.t structure ptr ptr option -> string
+t structure ptr -> string -> Error.t structure ptr ptr option -> string option
 val fetch:
-t structure ptr -> int32 -> string
+t structure ptr -> int32 -> string option
 (* Not implemented g_match_info_fetch_all return type not handled . *)
 val fetch_named:
-t structure ptr -> string -> string
+t structure ptr -> string -> string option
 (* Not implemented g_match_info_fetch_named_pos argument types not handled . *)
 (* Not implemented g_match_info_fetch_pos argument types not handled . *)
 val free:

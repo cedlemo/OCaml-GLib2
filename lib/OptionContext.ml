@@ -22,7 +22,7 @@ foreign "g_option_context_get_summary" (ptr t_typ @-> returning (string))
 (* Not implemented g_option_context_parse argument types not handled . *)
 (* Not implemented g_option_context_parse_strv argument types not handled . *)
 let set_description =
-foreign "g_option_context_set_description" (ptr t_typ @-> string @-> returning (void))
+foreign "g_option_context_set_description" (ptr t_typ @-> string_opt @-> returning (void))
 let set_help_enabled =
 foreign "g_option_context_set_help_enabled" (ptr t_typ @-> bool @-> returning (void))
 let set_ignore_unknown_options =
@@ -31,7 +31,7 @@ foreign "g_option_context_set_ignore_unknown_options" (ptr t_typ @-> bool @-> re
 let set_strict_posix =
 foreign "g_option_context_set_strict_posix" (ptr t_typ @-> bool @-> returning (void))
 let set_summary =
-foreign "g_option_context_set_summary" (ptr t_typ @-> string @-> returning (void))
+foreign "g_option_context_set_summary" (ptr t_typ @-> string_opt @-> returning (void))
 (* Not implemented g_option_context_set_translate_func argument types not handled . *)
 let set_translation_domain =
 foreign "g_option_context_set_translation_domain" (ptr t_typ @-> string @-> returning (void))

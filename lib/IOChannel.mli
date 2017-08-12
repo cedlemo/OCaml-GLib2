@@ -59,7 +59,7 @@ t structure ptr -> bool -> unit
 (* Not implemented g_io_channel_set_encoding return type not handled . *)
 (* Not implemented g_io_channel_set_flags argument types not handled . *)
 val set_line_term:
-t structure ptr -> string -> int32 -> unit
+t structure ptr -> string option -> int32 -> unit
 (* Not implemented g_io_channel_shutdown return type not handled . *)
 val unix_get_fd:
 t structure ptr -> int32

@@ -2588,13 +2588,13 @@ let date_valid_year =
 foreign "g_date_valid_year" (uint16_t @-> returning (bool))
 
 let dcgettext =
-foreign "g_dcgettext" (string @-> string @-> int32_t @-> returning (string))
+foreign "g_dcgettext" (string_opt @-> string @-> int32_t @-> returning (string))
 
 let dgettext =
-foreign "g_dgettext" (string @-> string @-> returning (string))
+foreign "g_dgettext" (string_opt @-> string @-> returning (string))
 
 let dir_make_tmp =
-foreign "g_dir_make_tmp" (string  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
+foreign "g_dir_make_tmp" (string_opt  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
 
 let direct_equal =
 foreign "g_direct_equal" (ptr_opt void @-> ptr_opt void @-> returning (bool))
@@ -2603,7 +2603,7 @@ let direct_hash =
 foreign "g_direct_hash" (ptr_opt void @-> returning (uint32_t))
 
 let dngettext =
-foreign "g_dngettext" (string @-> string @-> string @-> uint64_t @-> returning (string))
+foreign "g_dngettext" (string_opt @-> string @-> string @-> uint64_t @-> returning (string))
 
 let double_equal =
 foreign "g_double_equal" (ptr void @-> ptr void @-> returning (bool))
@@ -2612,10 +2612,10 @@ let double_hash =
 foreign "g_double_hash" (ptr void @-> returning (uint32_t))
 
 let dpgettext =
-foreign "g_dpgettext" (string @-> string @-> uint64_t @-> returning (string))
+foreign "g_dpgettext" (string_opt @-> string @-> uint64_t @-> returning (string))
 
 let dpgettext2 =
-foreign "g_dpgettext2" (string @-> string @-> string @-> returning (string))
+foreign "g_dpgettext2" (string_opt @-> string @-> string @-> returning (string))
 
 (* Not implemented g_environ_getenv argument types not handled . *)
 
@@ -2650,7 +2650,7 @@ foreign "g_filename_display_name" (string @-> returning (string))
 (* Not implemented g_filename_from_utf8 argument types not handled . *)
 
 let filename_to_uri =
-foreign "g_filename_to_uri" (string @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
+foreign "g_filename_to_uri" (string @-> string_opt  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
 
 (* Not implemented g_filename_to_utf8 argument types not handled . *)
 
@@ -2822,10 +2822,10 @@ let int_hash =
 foreign "g_int_hash" (ptr void @-> returning (uint32_t))
 
 let intern_static_string =
-foreign "g_intern_static_string" (string @-> returning (string))
+foreign "g_intern_static_string" (string_opt @-> returning (string))
 
 let intern_string =
-foreign "g_intern_string" (string @-> returning (string))
+foreign "g_intern_string" (string_opt @-> returning (string))
 
 (* Not implemented g_io_add_watch_full argument types not handled . *)
 
@@ -2941,7 +2941,7 @@ let path_is_absolute =
 foreign "g_path_is_absolute" (string @-> returning (bool))
 
 let path_skip_root =
-foreign "g_path_skip_root" (string @-> returning (string))
+foreign "g_path_skip_root" (string @-> returning (string_opt))
 
 (* Not implemented g_pattern_match argument types not handled . *)
 
@@ -2964,16 +2964,16 @@ foreign "g_pointer_bit_unlock" (ptr void @-> int32_t @-> returning (void))
 (* Not implemented g_propagate_error argument types not handled . *)
 
 let quark_from_static_string =
-foreign "g_quark_from_static_string" (string @-> returning (uint32_t))
+foreign "g_quark_from_static_string" (string_opt @-> returning (uint32_t))
 
 let quark_from_string =
-foreign "g_quark_from_string" (string @-> returning (uint32_t))
+foreign "g_quark_from_string" (string_opt @-> returning (uint32_t))
 
 let quark_to_string =
 foreign "g_quark_to_string" (uint32_t @-> returning (string))
 
 let quark_try_string =
-foreign "g_quark_try_string" (string @-> returning (uint32_t))
+foreign "g_quark_try_string" (string_opt @-> returning (uint32_t))
 
 let random_double =
 foreign "g_random_double" (void @-> returning (double))
@@ -3132,7 +3132,7 @@ let str_match_string =
 foreign "g_str_match_string" (string @-> string @-> bool @-> returning (bool))
 
 let str_to_ascii =
-foreign "g_str_to_ascii" (string @-> string @-> returning (string))
+foreign "g_str_to_ascii" (string @-> string_opt @-> returning (string))
 
 (* Not implemented g_str_tokenize_and_fold argument types not handled . *)
 
@@ -3146,25 +3146,25 @@ let strchug =
 foreign "g_strchug" (string @-> returning (string))
 
 let strcmp0 =
-foreign "g_strcmp0" (string @-> string @-> returning (int32_t))
+foreign "g_strcmp0" (string_opt @-> string_opt @-> returning (int32_t))
 
 let strcompress =
 foreign "g_strcompress" (string @-> returning (string))
 
 let strdelimit =
-foreign "g_strdelimit" (string @-> string @-> int8_t @-> returning (string))
+foreign "g_strdelimit" (string @-> string_opt @-> int8_t @-> returning (string))
 
 let strdup =
-foreign "g_strdup" (string @-> returning (string))
+foreign "g_strdup" (string_opt @-> returning (string))
 
 let strerror =
 foreign "g_strerror" (int32_t @-> returning (string))
 
 let strescape =
-foreign "g_strescape" (string @-> string @-> returning (string))
+foreign "g_strescape" (string @-> string_opt @-> returning (string))
 
 let strfreev =
-foreign "g_strfreev" (string @-> returning (void))
+foreign "g_strfreev" (string_opt @-> returning (void))
 
 (* Not implemented g_string_new return type not handled . *)
 
@@ -3176,7 +3176,7 @@ let strip_context =
 foreign "g_strip_context" (string @-> string @-> returning (string))
 
 let strjoinv =
-foreign "g_strjoinv" (string @-> string @-> returning (string))
+foreign "g_strjoinv" (string_opt @-> string @-> returning (string))
 
 let strlcat =
 foreign "g_strlcat" (string @-> string @-> uint64_t @-> returning (uint64_t))
@@ -3241,7 +3241,7 @@ foreign "g_test_failed" (void @-> returning (bool))
 (* Not implemented g_test_get_dir argument types not handled . *)
 
 let test_incomplete =
-foreign "g_test_incomplete" (string @-> returning (void))
+foreign "g_test_incomplete" (string_opt @-> returning (void))
 
 (* Not implemented g_test_log_type_name argument types not handled . *)
 
@@ -3271,7 +3271,7 @@ let test_set_nonfatal_assertions =
 foreign "g_test_set_nonfatal_assertions" (void @-> returning (void))
 
 let test_skip =
-foreign "g_test_skip" (string @-> returning (void))
+foreign "g_test_skip" (string_opt @-> returning (void))
 
 let test_subprocess =
 foreign "g_test_subprocess" (void @-> returning (bool))
@@ -3451,7 +3451,7 @@ let unsetenv =
 foreign "g_unsetenv" (string @-> returning (void))
 
 let uri_escape_string =
-foreign "g_uri_escape_string" (string @-> string @-> bool @-> returning (string))
+foreign "g_uri_escape_string" (string @-> string_opt @-> bool @-> returning (string))
 
 (* Not implemented g_uri_list_extract_uris return type not handled . *)
 
@@ -3459,10 +3459,10 @@ let uri_parse_scheme =
 foreign "g_uri_parse_scheme" (string @-> returning (string))
 
 let uri_unescape_segment =
-foreign "g_uri_unescape_segment" (string @-> string @-> string @-> returning (string))
+foreign "g_uri_unescape_segment" (string_opt @-> string_opt @-> string_opt @-> returning (string))
 
 let uri_unescape_string =
-foreign "g_uri_unescape_string" (string @-> string @-> returning (string))
+foreign "g_uri_unescape_string" (string @-> string_opt @-> returning (string))
 
 let usleep =
 foreign "g_usleep" (uint64_t @-> returning (void))
@@ -3484,7 +3484,7 @@ let utf8_collate_key_for_filename =
 foreign "g_utf8_collate_key_for_filename" (string @-> int64_t @-> returning (string))
 
 let utf8_find_next_char =
-foreign "g_utf8_find_next_char" (string @-> string @-> returning (string))
+foreign "g_utf8_find_next_char" (string @-> string_opt @-> returning (string))
 
 let utf8_find_prev_char =
 foreign "g_utf8_find_prev_char" (string @-> string @-> returning (string))

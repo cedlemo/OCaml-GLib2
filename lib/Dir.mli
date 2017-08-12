@@ -9,5 +9,5 @@ t structure ptr -> string
 val rewind:
 t structure ptr -> unit
 val make_tmp:
-t structure ptr -> string -> Error.t structure ptr ptr option -> string
+t structure ptr -> string option -> Error.t structure ptr ptr option -> string
 

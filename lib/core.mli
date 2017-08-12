@@ -952,13 +952,13 @@ val date_valid_year:
 Unsigned.uint16 -> bool
 
 val dcgettext:
-string -> string -> int32 -> string
+string option -> string -> int32 -> string
 
 val dgettext:
-string -> string -> string
+string option -> string -> string
 
 val dir_make_tmp:
-string -> Error.t structure ptr ptr option -> string
+string option -> Error.t structure ptr ptr option -> string
 
 val direct_equal:
 unit ptr option -> unit ptr option -> bool
@@ -967,7 +967,7 @@ val direct_hash:
 unit ptr option -> Unsigned.uint32
 
 val dngettext:
-string -> string -> string -> Unsigned.uint64 -> string
+string option -> string -> string -> Unsigned.uint64 -> string
 
 val double_equal:
 unit ptr -> unit ptr -> bool
@@ -976,10 +976,10 @@ val double_hash:
 unit ptr -> Unsigned.uint32
 
 val dpgettext:
-string -> string -> Unsigned.uint64 -> string
+string option -> string -> Unsigned.uint64 -> string
 
 val dpgettext2:
-string -> string -> string -> string
+string option -> string -> string -> string
 
 (* Not implemented g_environ_getenv argument types not handled . *)
 
@@ -1014,7 +1014,7 @@ string -> string
 (* Not implemented g_filename_from_utf8 argument types not handled . *)
 
 val filename_to_uri:
-string -> string -> Error.t structure ptr ptr option -> string
+string -> string option -> Error.t structure ptr ptr option -> string
 
 (* Not implemented g_filename_to_utf8 argument types not handled . *)
 
@@ -1187,10 +1187,10 @@ val int_hash:
 unit ptr -> Unsigned.uint32
 
 val intern_static_string:
-string -> string
+string option -> string
 
 val intern_string:
-string -> string
+string option -> string
 
 (* Not implemented g_io_add_watch_full argument types not handled . *)
 
@@ -1309,7 +1309,7 @@ val path_is_absolute:
 string -> bool
 
 val path_skip_root:
-string -> string
+string -> string option
 
 (* Not implemented g_pattern_match argument types not handled . *)
 
@@ -1332,16 +1332,16 @@ unit ptr -> int32 -> unit
 (* Not implemented g_propagate_error argument types not handled . *)
 
 val quark_from_static_string:
-string -> Unsigned.uint32
+string option -> Unsigned.uint32
 
 val quark_from_string:
-string -> Unsigned.uint32
+string option -> Unsigned.uint32
 
 val quark_to_string:
 Unsigned.uint32 -> string
 
 val quark_try_string:
-string -> Unsigned.uint32
+string option -> Unsigned.uint32
 
 val random_double:
 unit -> float
@@ -1500,7 +1500,7 @@ val str_match_string:
 string -> string -> bool -> bool
 
 val str_to_ascii:
-string -> string -> string
+string -> string option -> string
 
 (* Not implemented g_str_tokenize_and_fold argument types not handled . *)
 
@@ -1515,26 +1515,26 @@ val strchug:
 string -> string
 
 val strcmp0:
-string -> string -> int32
+string option -> string option -> int32
 
 val strcompress:
 string -> string
 
 val strdelimit:
-string -> string -> int -> string
+string -> string option -> int -> string
 
 (*  !!! DEPRECATED : strdown . *)
 val strdup:
-string -> string
+string option -> string
 
 val strerror:
 int32 -> string
 
 val strescape:
-string -> string -> string
+string -> string option -> string
 
 val strfreev:
-string -> unit
+string option -> unit
 
 (* Not implemented g_string_new return type not handled . *)
 
@@ -1546,7 +1546,7 @@ val strip_context:
 string -> string -> string
 
 val strjoinv:
-string -> string -> string
+string option -> string -> string
 
 val strlcat:
 string -> string -> Unsigned.uint64 -> Unsigned.uint64
@@ -1613,7 +1613,7 @@ unit -> bool
 (* Not implemented g_test_get_dir argument types not handled . *)
 
 val test_incomplete:
-string -> unit
+string option -> unit
 
 (* Not implemented g_test_log_type_name argument types not handled . *)
 
@@ -1643,7 +1643,7 @@ val test_set_nonfatal_assertions:
 unit -> unit
 
 val test_skip:
-string -> unit
+string option -> unit
 
 val test_subprocess:
 unit -> bool
@@ -1829,7 +1829,7 @@ val unsetenv:
 string -> unit
 
 val uri_escape_string:
-string -> string -> bool -> string
+string -> string option -> bool -> string
 
 (* Not implemented g_uri_list_extract_uris return type not handled . *)
 
@@ -1837,10 +1837,10 @@ val uri_parse_scheme:
 string -> string
 
 val uri_unescape_segment:
-string -> string -> string -> string
+string option -> string option -> string option -> string
 
 val uri_unescape_string:
-string -> string -> string
+string -> string option -> string
 
 val usleep:
 Unsigned.uint64 -> unit
@@ -1862,7 +1862,7 @@ val utf8_collate_key_for_filename:
 string -> int64 -> string
 
 val utf8_find_next_char:
-string -> string -> string
+string -> string option -> string
 
 val utf8_find_prev_char:
 string -> string -> string

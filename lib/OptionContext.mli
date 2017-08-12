@@ -21,7 +21,7 @@ t structure ptr -> string
 (* Not implemented g_option_context_parse argument types not handled . *)
 (* Not implemented g_option_context_parse_strv argument types not handled . *)
 val set_description:
-t structure ptr -> string -> unit
+t structure ptr -> string option -> unit
 val set_help_enabled:
 t structure ptr -> bool -> unit
 val set_ignore_unknown_options:
@@ -30,7 +30,7 @@ t structure ptr -> bool -> unit
 val set_strict_posix:
 t structure ptr -> bool -> unit
 val set_summary:
-t structure ptr -> string -> unit
+t structure ptr -> string option -> unit
 (* Not implemented g_option_context_set_translate_func argument types not handled . *)
 val set_translation_domain:
 t structure ptr -> string -> unit

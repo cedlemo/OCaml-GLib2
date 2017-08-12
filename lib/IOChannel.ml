@@ -60,7 +60,7 @@ foreign "g_io_channel_set_close_on_unref" (ptr t_typ @-> bool @-> returning (voi
 (* Not implemented g_io_channel_set_encoding return type not handled . *)
 (* Not implemented g_io_channel_set_flags argument types not handled . *)
 let set_line_term =
-foreign "g_io_channel_set_line_term" (ptr t_typ @-> string @-> int32_t @-> returning (void))
+foreign "g_io_channel_set_line_term" (ptr t_typ @-> string_opt @-> int32_t @-> returning (void))
 (* Not implemented g_io_channel_shutdown return type not handled . *)
 let unix_get_fd =
 foreign "g_io_channel_unix_get_fd" (ptr t_typ @-> returning (int32_t))

@@ -17,7 +17,7 @@ val f_allocated_len: (Unsigned.uint64, t structure) field
 (* Not implemented g_string_equal argument types not handled . *)
 (* Not implemented g_string_erase return type not handled . *)
 val free:
-t structure ptr -> bool -> string
+t structure ptr -> bool -> string option
 (* Not implemented g_string_free_to_bytes return type not handled . *)
 val hash:
 t structure ptr -> Unsigned.uint32
