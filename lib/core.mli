@@ -847,7 +847,7 @@ val chdir:
 string -> int32
 
 val check_version:
-Unsigned.uint32 -> Unsigned.uint32 -> Unsigned.uint32 -> string
+Unsigned.uint32 -> Unsigned.uint32 -> Unsigned.uint32 -> string option
 
 (* Not implemented g_checksum_type_get_length argument types not handled . *)
 
