@@ -3,6 +3,7 @@
 (executables
  ((names (tests))
   (libraries   (ocaml-glib2 oUnit))
+  (flags (-ccopt ("-Wl,-no-as-needed")))
 ))
 
 (alias
