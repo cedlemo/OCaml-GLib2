@@ -29,9 +29,8 @@ let () =
           let libffi = Option.value (C.Pkg_config.query pc ~package:"libffi") ~default:default_ffi in
           let glib = Option.value (C.Pkg_config.query pc ~package:"glib-2.0") ~default in
           let  module P = C.Pkg_config in
-          { libs = libffi.P.libs @ glib.P.libs ;
-            cflags = libffi.P.cflags @ glib.P.cflags }
-    in
+         { libs = (libffi.P.libs @ gobject.P.libs) @ ["-L/usr/lib/x86_64-linux-gnu";"-L/usr/lib"];
+           cflags = (libffi.P.cflags @ gobject.P.cflags) @ ["-I/usr/include"; "-I/usr/include/x86_64-linux-gnu"] }    in
     let _ = print_endline "==================== Configurator ================" in
     let _ = print_endline ">>>>>>>>>>>>>>>>>>>>> libs : <<<<<<<<<<<<<<<<<<<<<<" in
     let _ = print_endline (Sexp.to_string (sexp_of_list sexp_of_string conf.libs)) in
