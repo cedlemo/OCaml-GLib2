@@ -30,7 +30,7 @@ let () =
           let glib = Option.value (C.Pkg_config.query pc ~package:"glib-2.0") ~default in
           let  module P = C.Pkg_config in
           { libs = libffi.P.libs @ glib.P.libs ;
-            cflags = libffi.P.libs @ glib.P.libs }
+            cflags = libffi.P.cflags @ glib.P.cflags }
     in
     let _ = print_endline "==================== Configurator ================" in
     let _ = print_endline ">>>>>>>>>>>>>>>>>>>>> libs : <<<<<<<<<<<<<<<<<<<<<<" in
