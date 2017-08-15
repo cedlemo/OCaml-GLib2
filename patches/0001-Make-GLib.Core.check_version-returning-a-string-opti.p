@@ -1,17 +1,15 @@
-From 286bba51c76a035bf7d64398e4b6a36ed5ceab5a Mon Sep 17 00:00:00 2001
+From d005deae542f5e508376f1af182d88d75211d62f Mon Sep 17 00:00:00 2001
 From: cedlemo <cedlemo@gmx.com>
-Date: Sat, 12 Aug 2017 19:05:12 +0200
-Subject: [PATCH] Make GLib.Core.check_version returning a string option type.
+Date: Tue, 15 Aug 2017 15:31:41 +0200
+Subject: [PATCH] Make Core.check_version returning string option type
 
-The auto-generated bindings (maybe because of the GObjectIntrospection files)
-does not set the returning value as a string option, it only create a string type.
 ---
  lib/core.ml  | 308 +++++++++++++++++++++++++++++------------------------------
  lib/core.mli |   2 +-
  2 files changed, 155 insertions(+), 155 deletions(-)
 
 diff --git a/lib/core.ml b/lib/core.ml
-index 3ffc837..0e5203c 100644
+index 0b7c2e7..39bace7 100644
 --- a/lib/core.ml
 +++ b/lib/core.ml
 @@ -52,9 +52,9 @@ let acc' = logor acc v in
@@ -684,10 +682,10 @@ index 3ffc837..0e5203c 100644
 -foreign "glib_check_version" (uint32_t @-> uint32_t @-> uint32_t @-> returning (string))
 +foreign "glib_check_version" (uint32_t @-> uint32_t @-> uint32_t @-> returning (string_opt))
  
- (* Not implemented g_checksum_type_get_length argument types not handled . *)
- 
+ let checksum_type_get_length =
+ foreign "g_checksum_type_get_length" (checksumtype @-> returning (int64_t))
 diff --git a/lib/core.mli b/lib/core.mli
-index 30532d8..14ed1df 100644
+index 516edfb..cafc268 100644
 --- a/lib/core.mli
 +++ b/lib/core.mli
 @@ -847,7 +847,7 @@ val chdir:
@@ -697,8 +695,8 @@ index 30532d8..14ed1df 100644
 -Unsigned.uint32 -> Unsigned.uint32 -> Unsigned.uint32 -> string
 +Unsigned.uint32 -> Unsigned.uint32 -> Unsigned.uint32 -> string option
  
- (* Not implemented g_checksum_type_get_length argument types not handled . *)
- 
+ val checksum_type_get_length:
+ checksumtype -> int64
 -- 
-2.14.0
+2.14.1
 
