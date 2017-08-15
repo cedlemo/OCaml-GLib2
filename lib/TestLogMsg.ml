@@ -3,7 +3,7 @@ open Foreign
 
 type t
 let t_typ : t structure typ = structure "TestLogMsg"
-(* TODO Struct field TestLogMsg : interface tag not implemented . *)
+let f_log_type = field t_typ "log_type" (Core.testlogtype)
 let f_n_strings = field t_typ "n_strings" (uint32_t)
 let f_strings = field t_typ "strings" (string)
 let f_n_nums = field t_typ "n_nums" (uint32_t)

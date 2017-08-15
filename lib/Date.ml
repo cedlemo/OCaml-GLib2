@@ -10,7 +10,7 @@ let f_day = field t_typ "day" (uint32_t)
 let f_month = field t_typ "month" (uint32_t)
 let f_year = field t_typ "year" (uint32_t)
 (* Not implemented g_date_new return type not handled . *)
-(* Not implemented g_date_new_dmy argument types not handled . *)
+(* Not implemented g_date_new_dmy return type not handled . *)
 (* Not implemented g_date_new_julian return type not handled . *)
 let add_days =
 foreign "g_date_add_days" (ptr t_typ @-> uint32_t @-> returning (void))
@@ -35,10 +35,12 @@ let get_julian =
 foreign "g_date_get_julian" (ptr t_typ @-> returning (uint32_t))
 let get_monday_week_of_year =
 foreign "g_date_get_monday_week_of_year" (ptr t_typ @-> returning (uint32_t))
-(* Not implemented g_date_get_month return type not handled . *)
+let get_month =
+foreign "g_date_get_month" (ptr t_typ @-> returning (Core.datemonth))
 let get_sunday_week_of_year =
 foreign "g_date_get_sunday_week_of_year" (ptr t_typ @-> returning (uint32_t))
-(* Not implemented g_date_get_weekday return type not handled . *)
+let get_weekday =
+foreign "g_date_get_weekday" (ptr t_typ @-> returning (Core.dateweekday))
 let get_year =
 foreign "g_date_get_year" (ptr t_typ @-> returning (uint16_t))
 let is_first_of_month =
@@ -48,10 +50,12 @@ foreign "g_date_is_last_of_month" (ptr t_typ @-> returning (bool))
 (* Not implemented g_date_order argument types not handled . *)
 let set_day =
 foreign "g_date_set_day" (ptr t_typ @-> uint8_t @-> returning (void))
-(* Not implemented g_date_set_dmy argument types not handled . *)
+let set_dmy =
+foreign "g_date_set_dmy" (ptr t_typ @-> uint8_t @-> Core.datemonth @-> uint16_t @-> returning (void))
 let set_julian =
 foreign "g_date_set_julian" (ptr t_typ @-> uint32_t @-> returning (void))
-(* Not implemented g_date_set_month argument types not handled . *)
+let set_month =
+foreign "g_date_set_month" (ptr t_typ @-> Core.datemonth @-> returning (void))
 let set_parse =
 foreign "g_date_set_parse" (ptr t_typ @-> string @-> returning (void))
 let set_time =
@@ -71,7 +75,8 @@ let to_struct_tm =
 foreign "g_date_to_struct_tm" (ptr t_typ @-> ptr void @-> returning (void))
 let valid =
 foreign "g_date_valid" (ptr t_typ @-> returning (bool))
-(* Not implemented g_date_get_days_in_month argument types not handled . *)
+let get_days_in_month =
+foreign "g_date_get_days_in_month" (ptr t_typ @-> Core.datemonth @-> uint16_t @-> returning (uint8_t))
 let get_monday_weeks_in_year =
 foreign "g_date_get_monday_weeks_in_year" (ptr t_typ @-> uint16_t @-> returning (uint8_t))
 let get_sunday_weeks_in_year =
@@ -81,11 +86,14 @@ foreign "g_date_is_leap_year" (ptr t_typ @-> uint16_t @-> returning (bool))
 (* Not implemented g_date_strftime argument types not handled . *)
 let valid_day =
 foreign "g_date_valid_day" (ptr t_typ @-> uint8_t @-> returning (bool))
-(* Not implemented g_date_valid_dmy argument types not handled . *)
+let valid_dmy =
+foreign "g_date_valid_dmy" (ptr t_typ @-> uint8_t @-> Core.datemonth @-> uint16_t @-> returning (bool))
 let valid_julian =
 foreign "g_date_valid_julian" (ptr t_typ @-> uint32_t @-> returning (bool))
-(* Not implemented g_date_valid_month argument types not handled . *)
-(* Not implemented g_date_valid_weekday argument types not handled . *)
+let valid_month =
+foreign "g_date_valid_month" (ptr t_typ @-> Core.datemonth @-> returning (bool))
+let valid_weekday =
+foreign "g_date_valid_weekday" (ptr t_typ @-> Core.dateweekday @-> returning (bool))
 let valid_year =
 foreign "g_date_valid_year" (ptr t_typ @-> uint16_t @-> returning (bool))
 

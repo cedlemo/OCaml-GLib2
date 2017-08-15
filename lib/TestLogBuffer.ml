@@ -3,7 +3,7 @@ open Foreign
 
 type t
 let t_typ : t structure typ = structure "TestLogBuffer"
-(* TODO Struct field TestLogBuffer : interface tag not implemented . *)
+(* TODO Struct field TestLogBuffer : struct tag not implemented . *)
 let f_msgs = field t_typ "msgs" (ptr SList.t_typ)
 let free =
 foreign "g_test_log_buffer_free" (ptr t_typ @-> returning (void))

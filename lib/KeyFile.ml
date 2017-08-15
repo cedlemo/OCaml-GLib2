@@ -34,10 +34,12 @@ foreign "g_key_file_get_value" (ptr t_typ @-> string @-> string  @-> ptr_opt (pt
 let has_group =
 foreign "g_key_file_has_group" (ptr t_typ @-> string @-> returning (bool))
 (* Not implemented g_key_file_load_from_bytes argument types not handled . *)
-(* Not implemented g_key_file_load_from_data argument types not handled . *)
+let load_from_data =
+foreign "g_key_file_load_from_data" (ptr t_typ @-> string @-> uint64_t @-> Core.keyfileflags_list  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 (* Not implemented g_key_file_load_from_data_dirs argument types not handled . *)
 (* Not implemented g_key_file_load_from_dirs argument types not handled . *)
-(* Not implemented g_key_file_load_from_file argument types not handled . *)
+let load_from_file =
+foreign "g_key_file_load_from_file" (ptr t_typ @-> string @-> Core.keyfileflags_list  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 let remove_comment =
 foreign "g_key_file_remove_comment" (ptr t_typ @-> string_opt @-> string_opt  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 let remove_group =

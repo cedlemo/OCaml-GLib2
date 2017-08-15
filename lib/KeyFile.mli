@@ -33,10 +33,12 @@ t structure ptr -> string -> string -> Error.t structure ptr ptr option -> strin
 val has_group:
 t structure ptr -> string -> bool
 (* Not implemented g_key_file_load_from_bytes argument types not handled . *)
-(* Not implemented g_key_file_load_from_data argument types not handled . *)
+val load_from_data:
+t structure ptr -> string -> Unsigned.uint64 -> Core.keyfileflags_list -> Error.t structure ptr ptr option -> bool
 (* Not implemented g_key_file_load_from_data_dirs argument types not handled . *)
 (* Not implemented g_key_file_load_from_dirs argument types not handled . *)
-(* Not implemented g_key_file_load_from_file argument types not handled . *)
+val load_from_file:
+t structure ptr -> string -> Core.keyfileflags_list -> Error.t structure ptr ptr option -> bool
 val remove_comment:
 t structure ptr -> string option -> string option -> Error.t structure ptr ptr option -> bool
 val remove_group:

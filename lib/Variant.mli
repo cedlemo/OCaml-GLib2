@@ -30,7 +30,8 @@ val t_typ : t structure typ
 (* Not implemented g_variant_byteswap return type not handled . *)
 val check_format_string:
 t structure ptr -> string -> bool -> bool
-(* Not implemented g_variant_classify return type not handled . *)
+val classify:
+t structure ptr -> Core.variantclass
 (* Not implemented g_variant_compare argument types not handled . *)
 (* Not implemented g_variant_dup_bytestring argument types not handled . *)
 (* Not implemented g_variant_dup_bytestring_array argument types not handled . *)

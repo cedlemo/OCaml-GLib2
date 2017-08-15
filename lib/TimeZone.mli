@@ -5,8 +5,10 @@ val t_typ : t structure typ
 (* Not implemented g_time_zone_new return type not handled . *)
 (* Not implemented g_time_zone_new_local return type not handled . *)
 (* Not implemented g_time_zone_new_utc return type not handled . *)
-(* Not implemented g_time_zone_adjust_time argument types not handled . *)
-(* Not implemented g_time_zone_find_interval argument types not handled . *)
+val adjust_time:
+t structure ptr -> Core.timetype -> int64 ptr -> int32
+val find_interval:
+t structure ptr -> Core.timetype -> int64 -> int32
 val get_abbreviation:
 t structure ptr -> int32 -> string
 val get_offset:

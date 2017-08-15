@@ -31,7 +31,8 @@ let t_typ : t structure typ = structure "Variant"
 (* Not implemented g_variant_byteswap return type not handled . *)
 let check_format_string =
 foreign "g_variant_check_format_string" (ptr t_typ @-> string @-> bool @-> returning (bool))
-(* Not implemented g_variant_classify return type not handled . *)
+let classify =
+foreign "g_variant_classify" (ptr t_typ @-> returning (Core.variantclass))
 (* Not implemented g_variant_compare argument types not handled . *)
 (* Not implemented g_variant_dup_bytestring argument types not handled . *)
 (* Not implemented g_variant_dup_bytestring_array argument types not handled . *)
