@@ -5,7 +5,10 @@
   (public_name ocaml-glib2)
   (libraries (ctypes ctypes.foreign))
   (c_flags         (:include c_flags.sexp))
-  (c_library_flags (:include c_library_flags.sexp))))
+  (c_library_flags (:include c_library_flags.sexp))
+  (ocamlopt_flags (-ccopt ("-Wl,-no-as-needed")))
+ )
+)
 
 (rule
  ((targets (c_flags.sexp
