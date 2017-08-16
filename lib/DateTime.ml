@@ -3,26 +3,46 @@ open Foreign
 
 type t
 let t_typ : t structure typ = structure "DateTime"
-(* Not implemented g_date_time_new argument types not handled . *)
-(* Not implemented g_date_time_new_from_timeval_local argument types not handled . *)
-(* Not implemented g_date_time_new_from_timeval_utc argument types not handled . *)
-(* Not implemented g_date_time_new_from_unix_local return type not handled . *)
-(* Not implemented g_date_time_new_from_unix_utc return type not handled . *)
-(* Not implemented g_date_time_new_local return type not handled . *)
-(* Not implemented g_date_time_new_now argument types not handled . *)
-(* Not implemented g_date_time_new_now_local return type not handled . *)
-(* Not implemented g_date_time_new_now_utc return type not handled . *)
-(* Not implemented g_date_time_new_utc return type not handled . *)
-(* Not implemented g_date_time_add return type not handled . *)
-(* Not implemented g_date_time_add_days return type not handled . *)
-(* Not implemented g_date_time_add_full return type not handled . *)
-(* Not implemented g_date_time_add_hours return type not handled . *)
-(* Not implemented g_date_time_add_minutes return type not handled . *)
-(* Not implemented g_date_time_add_months return type not handled . *)
-(* Not implemented g_date_time_add_seconds return type not handled . *)
-(* Not implemented g_date_time_add_weeks return type not handled . *)
-(* Not implemented g_date_time_add_years return type not handled . *)
-(* Not implemented g_date_time_difference argument types not handled . *)
+let _new =
+foreign "g_date_time_new" (ptr t_typ @-> ptr TimeZone.t_typ @-> int32_t @-> int32_t @-> int32_t @-> int32_t @-> int32_t @-> double @-> returning (ptr t_typ))
+let new_from_timeval_local =
+foreign "g_date_time_new_from_timeval_local" (ptr t_typ @-> ptr TimeVal.t_typ @-> returning (ptr t_typ))
+let new_from_timeval_utc =
+foreign "g_date_time_new_from_timeval_utc" (ptr t_typ @-> ptr TimeVal.t_typ @-> returning (ptr t_typ))
+let new_from_unix_local =
+foreign "g_date_time_new_from_unix_local" (ptr t_typ @-> int64_t @-> returning (ptr t_typ))
+let new_from_unix_utc =
+foreign "g_date_time_new_from_unix_utc" (ptr t_typ @-> int64_t @-> returning (ptr t_typ))
+let new_local =
+foreign "g_date_time_new_local" (ptr t_typ @-> int32_t @-> int32_t @-> int32_t @-> int32_t @-> int32_t @-> double @-> returning (ptr t_typ))
+let new_now =
+foreign "g_date_time_new_now" (ptr t_typ @-> ptr TimeZone.t_typ @-> returning (ptr t_typ))
+let new_now_local =
+foreign "g_date_time_new_now_local" (ptr t_typ @-> returning (ptr t_typ))
+let new_now_utc =
+foreign "g_date_time_new_now_utc" (ptr t_typ @-> returning (ptr t_typ))
+let new_utc =
+foreign "g_date_time_new_utc" (ptr t_typ @-> int32_t @-> int32_t @-> int32_t @-> int32_t @-> int32_t @-> double @-> returning (ptr t_typ))
+let add =
+foreign "g_date_time_add" (ptr t_typ @-> int64_t @-> returning (ptr t_typ))
+let add_days =
+foreign "g_date_time_add_days" (ptr t_typ @-> int32_t @-> returning (ptr t_typ))
+let add_full =
+foreign "g_date_time_add_full" (ptr t_typ @-> int32_t @-> int32_t @-> int32_t @-> int32_t @-> int32_t @-> double @-> returning (ptr t_typ))
+let add_hours =
+foreign "g_date_time_add_hours" (ptr t_typ @-> int32_t @-> returning (ptr t_typ))
+let add_minutes =
+foreign "g_date_time_add_minutes" (ptr t_typ @-> int32_t @-> returning (ptr t_typ))
+let add_months =
+foreign "g_date_time_add_months" (ptr t_typ @-> int32_t @-> returning (ptr t_typ))
+let add_seconds =
+foreign "g_date_time_add_seconds" (ptr t_typ @-> double @-> returning (ptr t_typ))
+let add_weeks =
+foreign "g_date_time_add_weeks" (ptr t_typ @-> int32_t @-> returning (ptr t_typ))
+let add_years =
+foreign "g_date_time_add_years" (ptr t_typ @-> int32_t @-> returning (ptr t_typ))
+let difference =
+foreign "g_date_time_difference" (ptr t_typ @-> ptr t_typ @-> returning (int64_t))
 let format =
 foreign "g_date_time_format" (ptr t_typ @-> string @-> returning (string))
 let get_day_of_month =
@@ -56,13 +76,18 @@ foreign "g_date_time_get_year" (ptr t_typ @-> returning (int32_t))
 (* Not implemented g_date_time_get_ymd argument types not handled . *)
 let is_daylight_savings =
 foreign "g_date_time_is_daylight_savings" (ptr t_typ @-> returning (bool))
-(* Not implemented g_date_time_ref return type not handled . *)
-(* Not implemented g_date_time_to_local return type not handled . *)
-(* Not implemented g_date_time_to_timeval argument types not handled . *)
-(* Not implemented g_date_time_to_timezone argument types not handled . *)
+let ref =
+foreign "g_date_time_ref" (ptr t_typ @-> returning (ptr t_typ))
+let to_local =
+foreign "g_date_time_to_local" (ptr t_typ @-> returning (ptr t_typ))
+let to_timeval =
+foreign "g_date_time_to_timeval" (ptr t_typ @-> ptr TimeVal.t_typ @-> returning (bool))
+let to_timezone =
+foreign "g_date_time_to_timezone" (ptr t_typ @-> ptr TimeZone.t_typ @-> returning (ptr t_typ))
 let to_unix =
 foreign "g_date_time_to_unix" (ptr t_typ @-> returning (int64_t))
-(* Not implemented g_date_time_to_utc return type not handled . *)
+let to_utc =
+foreign "g_date_time_to_utc" (ptr t_typ @-> returning (ptr t_typ))
 let unref =
 foreign "g_date_time_unref" (ptr t_typ @-> returning (void))
 let compare =

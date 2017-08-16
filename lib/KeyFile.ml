@@ -3,7 +3,8 @@ open Foreign
 
 type t
 let t_typ : t structure typ = structure "KeyFile"
-(* Not implemented g_key_file_new return type not handled . *)
+let _new =
+foreign "g_key_file_new" (ptr t_typ @-> returning (ptr t_typ))
 let get_boolean =
 foreign "g_key_file_get_boolean" (ptr t_typ @-> string @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 (* Not implemented g_key_file_get_boolean_list argument types not handled . *)
@@ -33,7 +34,8 @@ let get_value =
 foreign "g_key_file_get_value" (ptr t_typ @-> string @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (string))
 let has_group =
 foreign "g_key_file_has_group" (ptr t_typ @-> string @-> returning (bool))
-(* Not implemented g_key_file_load_from_bytes argument types not handled . *)
+let load_from_bytes =
+foreign "g_key_file_load_from_bytes" (ptr t_typ @-> ptr Bytes.t_typ @-> Core.keyfileflags_list  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 let load_from_data =
 foreign "g_key_file_load_from_data" (ptr t_typ @-> string @-> uint64_t @-> Core.keyfileflags_list  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 (* Not implemented g_key_file_load_from_data_dirs argument types not handled . *)

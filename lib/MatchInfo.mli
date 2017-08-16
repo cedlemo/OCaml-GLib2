@@ -15,7 +15,8 @@ val free:
 t structure ptr -> unit
 val get_match_count:
 t structure ptr -> int32
-(* Not implemented g_match_info_get_regex return type not handled . *)
+val get_regex:
+t structure ptr -> Regex.t structure ptr
 val get_string:
 t structure ptr -> string
 val is_partial_match:
@@ -24,7 +25,8 @@ val matches:
 t structure ptr -> bool
 val next:
 t structure ptr -> Error.t structure ptr ptr option -> bool
-(* Not implemented g_match_info_ref return type not handled . *)
+val ref:
+t structure ptr -> t structure ptr
 val unref:
 t structure ptr -> unit
 

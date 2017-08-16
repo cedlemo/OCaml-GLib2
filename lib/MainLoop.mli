@@ -2,13 +2,16 @@ open Ctypes
 
 type t
 val t_typ : t structure typ
-(* Not implemented g_main_loop_new argument types not handled . *)
-(* Not implemented g_main_loop_get_context return type not handled . *)
+val _new:
+t structure ptr -> MainContext.t structure ptr option -> bool -> t structure ptr
+val get_context:
+t structure ptr -> MainContext.t structure ptr
 val is_running:
 t structure ptr -> bool
 val quit:
 t structure ptr -> unit
-(* Not implemented g_main_loop_ref return type not handled . *)
+val ref:
+t structure ptr -> t structure ptr
 val run:
 t structure ptr -> unit
 val unref:

@@ -3,7 +3,8 @@ open Foreign
 
 type t
 let t_typ : t structure typ = structure "SequenceIter"
-(* Not implemented g_sequence_iter_compare argument types not handled . *)
+let compare =
+foreign "g_sequence_iter_compare" (ptr t_typ @-> ptr t_typ @-> returning (int32_t))
 let get_position =
 foreign "g_sequence_iter_get_position" (ptr t_typ @-> returning (int32_t))
 let is_begin =

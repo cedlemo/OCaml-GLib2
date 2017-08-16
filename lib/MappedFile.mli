@@ -2,16 +2,20 @@ open Ctypes
 
 type t
 val t_typ : t structure typ
-(* Not implemented g_mapped_file_new return type not handled . *)
-(* Not implemented g_mapped_file_new_from_fd return type not handled . *)
+val _new:
+t structure ptr -> string -> bool -> Error.t structure ptr ptr option -> t structure ptr
+val new_from_fd:
+t structure ptr -> int32 -> bool -> Error.t structure ptr ptr option -> t structure ptr
 val free:
 t structure ptr -> unit
-(* Not implemented g_mapped_file_get_bytes return type not handled . *)
+val get_bytes:
+t structure ptr -> Bytes.t structure ptr
 val get_contents:
 t structure ptr -> string
 val get_length:
 t structure ptr -> Unsigned.uint64
-(* Not implemented g_mapped_file_ref return type not handled . *)
+val ref:
+t structure ptr -> t structure ptr
 val unref:
 t structure ptr -> unit
 

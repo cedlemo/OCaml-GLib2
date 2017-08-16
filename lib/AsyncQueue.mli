@@ -26,8 +26,10 @@ val remove:
 t structure ptr -> unit ptr option -> bool
 val remove_unlocked:
 t structure ptr -> unit ptr option -> bool
-(* Not implemented g_async_queue_timed_pop argument types not handled . *)
-(* Not implemented g_async_queue_timed_pop_unlocked argument types not handled . *)
+val timed_pop:
+t structure ptr -> TimeVal.t structure ptr -> unit ptr option
+val timed_pop_unlocked:
+t structure ptr -> TimeVal.t structure ptr -> unit ptr option
 val timeout_pop:
 t structure ptr -> Unsigned.uint64 -> unit ptr option
 val timeout_pop_unlocked:

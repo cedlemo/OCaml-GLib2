@@ -18,8 +18,10 @@ let parse =
 foreign "g_markup_parse_context_parse" (ptr t_typ @-> string @-> int64_t  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 let pop =
 foreign "g_markup_parse_context_pop" (ptr t_typ @-> returning (ptr_opt void))
-(* Not implemented g_markup_parse_context_push argument types not handled . *)
-(* Not implemented g_markup_parse_context_ref return type not handled . *)
+let push =
+foreign "g_markup_parse_context_push" (ptr t_typ @-> ptr MarkupParser.t_typ @-> ptr_opt void @-> returning (void))
+let ref =
+foreign "g_markup_parse_context_ref" (ptr t_typ @-> returning (ptr t_typ))
 let unref =
 foreign "g_markup_parse_context_unref" (ptr t_typ @-> returning (void))
 

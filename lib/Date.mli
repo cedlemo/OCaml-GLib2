@@ -8,20 +8,26 @@ val f_dmy: (Unsigned.uint32, t structure) field
 val f_day: (Unsigned.uint32, t structure) field
 val f_month: (Unsigned.uint32, t structure) field
 val f_year: (Unsigned.uint32, t structure) field
-(* Not implemented g_date_new return type not handled . *)
-(* Not implemented g_date_new_dmy return type not handled . *)
-(* Not implemented g_date_new_julian return type not handled . *)
+val _new:
+t structure ptr -> t structure ptr
+val new_dmy:
+t structure ptr -> Unsigned.uint8 -> Core.datemonth -> Unsigned.uint16 -> t structure ptr
+val new_julian:
+t structure ptr -> Unsigned.uint32 -> t structure ptr
 val add_days:
 t structure ptr -> Unsigned.uint32 -> unit
 val add_months:
 t structure ptr -> Unsigned.uint32 -> unit
 val add_years:
 t structure ptr -> Unsigned.uint32 -> unit
-(* Not implemented g_date_clamp argument types not handled . *)
+val clamp:
+t structure ptr -> t structure ptr -> t structure ptr -> unit
 val clear:
 t structure ptr -> Unsigned.uint32 -> unit
-(* Not implemented g_date_compare argument types not handled . *)
-(* Not implemented g_date_days_between argument types not handled . *)
+val compare:
+t structure ptr -> t structure ptr -> int32
+val days_between:
+t structure ptr -> t structure ptr -> int32
 val free:
 t structure ptr -> unit
 val get_day:
@@ -46,7 +52,8 @@ val is_first_of_month:
 t structure ptr -> bool
 val is_last_of_month:
 t structure ptr -> bool
-(* Not implemented g_date_order argument types not handled . *)
+val order:
+t structure ptr -> t structure ptr -> unit
 val set_day:
 t structure ptr -> Unsigned.uint8 -> unit
 val set_dmy:
@@ -61,7 +68,8 @@ val set_time:
 t structure ptr -> int32 -> unit
 val set_time_t:
 t structure ptr -> int64 -> unit
-(* Not implemented g_date_set_time_val argument types not handled . *)
+val set_time_val:
+t structure ptr -> TimeVal.t structure ptr -> unit
 val set_year:
 t structure ptr -> Unsigned.uint16 -> unit
 val subtract_days:
@@ -82,7 +90,8 @@ val get_sunday_weeks_in_year:
 t structure ptr -> Unsigned.uint16 -> Unsigned.uint8
 val is_leap_year:
 t structure ptr -> Unsigned.uint16 -> bool
-(* Not implemented g_date_strftime argument types not handled . *)
+val strftime:
+t structure ptr -> string -> Unsigned.uint64 -> string -> t structure ptr -> Unsigned.uint64
 val valid_day:
 t structure ptr -> Unsigned.uint8 -> bool
 val valid_dmy:

@@ -2,26 +2,46 @@ open Ctypes
 
 type t
 val t_typ : t structure typ
-(* Not implemented g_date_time_new argument types not handled . *)
-(* Not implemented g_date_time_new_from_timeval_local argument types not handled . *)
-(* Not implemented g_date_time_new_from_timeval_utc argument types not handled . *)
-(* Not implemented g_date_time_new_from_unix_local return type not handled . *)
-(* Not implemented g_date_time_new_from_unix_utc return type not handled . *)
-(* Not implemented g_date_time_new_local return type not handled . *)
-(* Not implemented g_date_time_new_now argument types not handled . *)
-(* Not implemented g_date_time_new_now_local return type not handled . *)
-(* Not implemented g_date_time_new_now_utc return type not handled . *)
-(* Not implemented g_date_time_new_utc return type not handled . *)
-(* Not implemented g_date_time_add return type not handled . *)
-(* Not implemented g_date_time_add_days return type not handled . *)
-(* Not implemented g_date_time_add_full return type not handled . *)
-(* Not implemented g_date_time_add_hours return type not handled . *)
-(* Not implemented g_date_time_add_minutes return type not handled . *)
-(* Not implemented g_date_time_add_months return type not handled . *)
-(* Not implemented g_date_time_add_seconds return type not handled . *)
-(* Not implemented g_date_time_add_weeks return type not handled . *)
-(* Not implemented g_date_time_add_years return type not handled . *)
-(* Not implemented g_date_time_difference argument types not handled . *)
+val _new:
+t structure ptr -> TimeZone.t structure ptr -> int32 -> int32 -> int32 -> int32 -> int32 -> float -> t structure ptr
+val new_from_timeval_local:
+t structure ptr -> TimeVal.t structure ptr -> t structure ptr
+val new_from_timeval_utc:
+t structure ptr -> TimeVal.t structure ptr -> t structure ptr
+val new_from_unix_local:
+t structure ptr -> int64 -> t structure ptr
+val new_from_unix_utc:
+t structure ptr -> int64 -> t structure ptr
+val new_local:
+t structure ptr -> int32 -> int32 -> int32 -> int32 -> int32 -> float -> t structure ptr
+val new_now:
+t structure ptr -> TimeZone.t structure ptr -> t structure ptr
+val new_now_local:
+t structure ptr -> t structure ptr
+val new_now_utc:
+t structure ptr -> t structure ptr
+val new_utc:
+t structure ptr -> int32 -> int32 -> int32 -> int32 -> int32 -> float -> t structure ptr
+val add:
+t structure ptr -> int64 -> t structure ptr
+val add_days:
+t structure ptr -> int32 -> t structure ptr
+val add_full:
+t structure ptr -> int32 -> int32 -> int32 -> int32 -> int32 -> float -> t structure ptr
+val add_hours:
+t structure ptr -> int32 -> t structure ptr
+val add_minutes:
+t structure ptr -> int32 -> t structure ptr
+val add_months:
+t structure ptr -> int32 -> t structure ptr
+val add_seconds:
+t structure ptr -> float -> t structure ptr
+val add_weeks:
+t structure ptr -> int32 -> t structure ptr
+val add_years:
+t structure ptr -> int32 -> t structure ptr
+val difference:
+t structure ptr -> t structure ptr -> int64
 val format:
 t structure ptr -> string -> string
 val get_day_of_month:
@@ -55,13 +75,18 @@ t structure ptr -> int32
 (* Not implemented g_date_time_get_ymd argument types not handled . *)
 val is_daylight_savings:
 t structure ptr -> bool
-(* Not implemented g_date_time_ref return type not handled . *)
-(* Not implemented g_date_time_to_local return type not handled . *)
-(* Not implemented g_date_time_to_timeval argument types not handled . *)
-(* Not implemented g_date_time_to_timezone argument types not handled . *)
+val ref:
+t structure ptr -> t structure ptr
+val to_local:
+t structure ptr -> t structure ptr
+val to_timeval:
+t structure ptr -> TimeVal.t structure ptr -> bool
+val to_timezone:
+t structure ptr -> TimeZone.t structure ptr -> t structure ptr
 val to_unix:
 t structure ptr -> int64
-(* Not implemented g_date_time_to_utc return type not handled . *)
+val to_utc:
+t structure ptr -> t structure ptr
 val unref:
 t structure ptr -> unit
 val compare:

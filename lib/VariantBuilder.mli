@@ -2,13 +2,18 @@ open Ctypes
 
 type t
 val t_typ : t structure typ
-(* Not implemented g_variant_builder_new argument types not handled . *)
-(* Not implemented g_variant_builder_add_value argument types not handled . *)
+val _new:
+t structure ptr -> VariantType.t structure ptr -> t structure ptr
+val add_value:
+t structure ptr -> Variant.t structure ptr -> unit
 val close:
 t structure ptr -> unit
-(* Not implemented g_variant_builder_end return type not handled . *)
-(* Not implemented g_variant_builder_open argument types not handled . *)
-(* Not implemented g_variant_builder_ref return type not handled . *)
+val _end:
+t structure ptr -> Variant.t structure ptr
+val _open:
+t structure ptr -> VariantType.t structure ptr -> unit
+val ref:
+t structure ptr -> t structure ptr
 val unref:
 t structure ptr -> unit
 

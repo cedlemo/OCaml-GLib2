@@ -3,8 +3,10 @@ open Foreign
 
 type t
 let t_typ : t structure typ = structure "Checksum"
-(* Not implemented g_checksum_new return type not handled . *)
-(* Not implemented g_checksum_copy return type not handled . *)
+let _new =
+foreign "g_checksum_new" (ptr t_typ @-> Core.checksumtype @-> returning (ptr t_typ))
+let copy =
+foreign "g_checksum_copy" (ptr t_typ @-> returning (ptr t_typ))
 let free =
 foreign "g_checksum_free" (ptr t_typ @-> returning (void))
 let get_string =

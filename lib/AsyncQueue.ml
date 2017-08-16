@@ -27,8 +27,10 @@ let remove =
 foreign "g_async_queue_remove" (ptr t_typ @-> ptr_opt void @-> returning (bool))
 let remove_unlocked =
 foreign "g_async_queue_remove_unlocked" (ptr t_typ @-> ptr_opt void @-> returning (bool))
-(* Not implemented g_async_queue_timed_pop argument types not handled . *)
-(* Not implemented g_async_queue_timed_pop_unlocked argument types not handled . *)
+let timed_pop =
+foreign "g_async_queue_timed_pop" (ptr t_typ @-> ptr TimeVal.t_typ @-> returning (ptr_opt void))
+let timed_pop_unlocked =
+foreign "g_async_queue_timed_pop_unlocked" (ptr t_typ @-> ptr TimeVal.t_typ @-> returning (ptr_opt void))
 let timeout_pop =
 foreign "g_async_queue_timeout_pop" (ptr t_typ @-> uint64_t @-> returning (ptr_opt void))
 let timeout_pop_unlocked =

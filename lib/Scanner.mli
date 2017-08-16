@@ -6,8 +6,8 @@ val f_user_data: (unit ptr, t structure) field
 val f_max_parse_errors: (Unsigned.uint32, t structure) field
 val f_parse_errors: (Unsigned.uint32, t structure) field
 val f_input_name: (string, t structure) field
-(* TODO Struct field Scanner : struct tag not implemented . *)
-(* TODO Struct field Scanner : struct tag not implemented . *)
+val f_qdata: (Data.t structure ptr, t structure) field
+val f_config: (ScannerConfig.t structure ptr, t structure) field
 val f_token: (Core.tokentype, t structure) field
 (* TODO Struct field Scanner : union tag not implemented . *)
 val f_line: (Unsigned.uint32, t structure) field

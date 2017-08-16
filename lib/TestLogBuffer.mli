@@ -2,7 +2,7 @@ open Ctypes
 
 type t
 val t_typ : t structure typ
-(* TODO Struct field TestLogBuffer : struct tag not implemented . *)
+val f_data: (String.t structure ptr, t structure) field
 val f_msgs: (SList.t structure ptr, t structure) field
 val free:
 t structure ptr -> unit

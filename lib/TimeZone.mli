@@ -2,9 +2,12 @@ open Ctypes
 
 type t
 val t_typ : t structure typ
-(* Not implemented g_time_zone_new return type not handled . *)
-(* Not implemented g_time_zone_new_local return type not handled . *)
-(* Not implemented g_time_zone_new_utc return type not handled . *)
+val _new:
+t structure ptr -> string option -> t structure ptr
+val new_local:
+t structure ptr -> t structure ptr
+val new_utc:
+t structure ptr -> t structure ptr
 val adjust_time:
 t structure ptr -> Core.timetype -> int64 ptr -> int32
 val find_interval:
@@ -15,7 +18,8 @@ val get_offset:
 t structure ptr -> int32 -> int32
 val is_dst:
 t structure ptr -> int32 -> bool
-(* Not implemented g_time_zone_ref return type not handled . *)
+val ref:
+t structure ptr -> t structure ptr
 val unref:
 t structure ptr -> unit
 

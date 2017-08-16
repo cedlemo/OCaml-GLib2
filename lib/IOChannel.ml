@@ -4,16 +4,16 @@ open Foreign
 type t
 let t_typ : t structure typ = structure "IOChannel"
 let f_ref_count = field t_typ "ref_count" (int32_t)
-(* TODO Struct field IOChannel : struct tag not implemented . *)
+let f_funcs = field t_typ "funcs" (ptr IOFuncs.t_typ)
 let f_encoding = field t_typ "encoding" (string)
-(* TODO Struct field IOChannel : struct tag not implemented . *)
-(* TODO Struct field IOChannel : struct tag not implemented . *)
+let f_read_cd = field t_typ "read_cd" (ptr IConv.t_typ)
+let f_write_cd = field t_typ "write_cd" (ptr IConv.t_typ)
 let f_line_term = field t_typ "line_term" (string)
 let f_line_term_len = field t_typ "line_term_len" (uint32_t)
 let f_buf_size = field t_typ "buf_size" (uint64_t)
-(* TODO Struct field IOChannel : struct tag not implemented . *)
-(* TODO Struct field IOChannel : struct tag not implemented . *)
-(* TODO Struct field IOChannel : struct tag not implemented . *)
+let f_read_buf = field t_typ "read_buf" (ptr String.t_typ)
+let f_encoded_read_buf = field t_typ "encoded_read_buf" (ptr String.t_typ)
+let f_write_buf = field t_typ "write_buf" (ptr String.t_typ)
 (* TODO Struct field IOChannel : C Array type for GITypes.Array tag tag not implemented . *)
 let f_use_buffer = field t_typ "use_buffer" (uint32_t)
 let f_do_encode = field t_typ "do_encode" (uint32_t)
@@ -23,8 +23,10 @@ let f_is_writeable = field t_typ "is_writeable" (uint32_t)
 let f_is_seekable = field t_typ "is_seekable" (uint32_t)
 let f_reserved1 = field t_typ "reserved1" (ptr void)
 let f_reserved2 = field t_typ "reserved2" (ptr void)
-(* Not implemented g_io_channel_new_file return type not handled . *)
-(* Not implemented g_io_channel_unix_new return type not handled . *)
+let new_file =
+foreign "g_io_channel_new_file" (ptr t_typ @-> string @-> string  @-> ptr_opt (ptr Error.t_typ) @-> returning (ptr t_typ))
+let unix_new =
+foreign "g_io_channel_unix_new" (ptr t_typ @-> int32_t @-> returning (ptr t_typ))
 let close =
 foreign "g_io_channel_close" (ptr t_typ @-> returning (void))
 let flush =
@@ -49,10 +51,12 @@ let read =
 foreign "g_io_channel_read" (ptr t_typ @-> string @-> uint64_t @-> ptr uint64_t @-> returning (Core.ioerror))
 (* Not implemented g_io_channel_read_chars argument types not handled . *)
 (* Not implemented g_io_channel_read_line argument types not handled . *)
-(* Not implemented g_io_channel_read_line_string argument types not handled . *)
+let read_line_string =
+foreign "g_io_channel_read_line_string" (ptr t_typ @-> ptr String.t_typ @-> ptr_opt uint64_t  @-> ptr_opt (ptr Error.t_typ) @-> returning (Core.iostatus))
 (* Not implemented g_io_channel_read_to_end argument types not handled . *)
 (* Not implemented g_io_channel_read_unichar argument types not handled . *)
-(* Not implemented g_io_channel_ref return type not handled . *)
+let ref =
+foreign "g_io_channel_ref" (ptr t_typ @-> returning (ptr t_typ))
 let seek =
 foreign "g_io_channel_seek" (ptr t_typ @-> int64_t @-> Core.seektype @-> returning (Core.ioerror))
 let seek_position =

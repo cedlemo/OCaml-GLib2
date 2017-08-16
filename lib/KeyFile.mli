@@ -2,7 +2,8 @@ open Ctypes
 
 type t
 val t_typ : t structure typ
-(* Not implemented g_key_file_new return type not handled . *)
+val _new:
+t structure ptr -> t structure ptr
 val get_boolean:
 t structure ptr -> string -> string -> Error.t structure ptr ptr option -> bool
 (* Not implemented g_key_file_get_boolean_list argument types not handled . *)
@@ -32,7 +33,8 @@ val get_value:
 t structure ptr -> string -> string -> Error.t structure ptr ptr option -> string
 val has_group:
 t structure ptr -> string -> bool
-(* Not implemented g_key_file_load_from_bytes argument types not handled . *)
+val load_from_bytes:
+t structure ptr -> Bytes.t structure ptr -> Core.keyfileflags_list -> Error.t structure ptr ptr option -> bool
 val load_from_data:
 t structure ptr -> string -> Unsigned.uint64 -> Core.keyfileflags_list -> Error.t structure ptr ptr option -> bool
 (* Not implemented g_key_file_load_from_data_dirs argument types not handled . *)

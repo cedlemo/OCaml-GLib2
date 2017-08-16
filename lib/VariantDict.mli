@@ -2,15 +2,20 @@ open Ctypes
 
 type t
 val t_typ : t structure typ
-(* Not implemented g_variant_dict_new argument types not handled . *)
+val _new:
+t structure ptr -> Variant.t structure ptr option -> t structure ptr
 val clear:
 t structure ptr -> unit
 val contains:
 t structure ptr -> string -> bool
-(* Not implemented g_variant_dict_end return type not handled . *)
-(* Not implemented g_variant_dict_insert_value argument types not handled . *)
-(* Not implemented g_variant_dict_lookup_value argument types not handled . *)
-(* Not implemented g_variant_dict_ref return type not handled . *)
+val _end:
+t structure ptr -> Variant.t structure ptr
+val insert_value:
+t structure ptr -> string -> Variant.t structure ptr -> unit
+val lookup_value:
+t structure ptr -> string -> VariantType.t structure ptr option -> Variant.t structure ptr
+val ref:
+t structure ptr -> t structure ptr
 val remove:
 t structure ptr -> string -> bool
 val unref:

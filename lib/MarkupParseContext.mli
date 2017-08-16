@@ -17,8 +17,10 @@ val parse:
 t structure ptr -> string -> int64 -> Error.t structure ptr ptr option -> bool
 val pop:
 t structure ptr -> unit ptr option
-(* Not implemented g_markup_parse_context_push argument types not handled . *)
-(* Not implemented g_markup_parse_context_ref return type not handled . *)
+val push:
+t structure ptr -> MarkupParser.t structure ptr -> unit ptr option -> unit
+val ref:
+t structure ptr -> t structure ptr
 val unref:
 t structure ptr -> unit
 

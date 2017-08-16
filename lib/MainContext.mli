@@ -2,16 +2,21 @@ open Ctypes
 
 type t
 val t_typ : t structure typ
-(* Not implemented g_main_context_new return type not handled . *)
+val _new:
+t structure ptr -> t structure ptr
 val acquire:
 t structure ptr -> bool
-(* Not implemented g_main_context_add_poll argument types not handled . *)
+val add_poll:
+t structure ptr -> PollFD.t structure ptr -> int32 -> unit
 (* Not implemented g_main_context_check argument types not handled . *)
 val dispatch:
 t structure ptr -> unit
-(* Not implemented g_main_context_find_source_by_funcs_user_data argument types not handled . *)
-(* Not implemented g_main_context_find_source_by_id return type not handled . *)
-(* Not implemented g_main_context_find_source_by_user_data return type not handled . *)
+val find_source_by_funcs_user_data:
+t structure ptr -> SourceFuncs.t structure ptr -> unit ptr option -> Source.t structure ptr
+val find_source_by_id:
+t structure ptr -> Unsigned.uint32 -> Source.t structure ptr
+val find_source_by_user_data:
+t structure ptr -> unit ptr option -> Source.t structure ptr
 (* Not implemented g_main_context_invoke_full argument types not handled . *)
 val is_owner:
 t structure ptr -> bool
@@ -26,16 +31,21 @@ t structure ptr -> int32 ptr -> bool
 val push_thread_default:
 t structure ptr -> unit
 (* Not implemented g_main_context_query argument types not handled . *)
-(* Not implemented g_main_context_ref return type not handled . *)
+val ref:
+t structure ptr -> t structure ptr
 val release:
 t structure ptr -> unit
-(* Not implemented g_main_context_remove_poll argument types not handled . *)
+val remove_poll:
+t structure ptr -> PollFD.t structure ptr -> unit
 val unref:
 t structure ptr -> unit
 (* Not implemented g_main_context_wait argument types not handled . *)
 val wakeup:
 t structure ptr -> unit
-(* Not implemented g_main_context_default return type not handled . *)
-(* Not implemented g_main_context_get_thread_default return type not handled . *)
-(* Not implemented g_main_context_ref_thread_default return type not handled . *)
+val default:
+t structure ptr -> t structure ptr
+val get_thread_default:
+t structure ptr -> t structure ptr
+val ref_thread_default:
+t structure ptr -> t structure ptr
 

@@ -2,8 +2,10 @@ open Ctypes
 
 type t
 val t_typ : t structure typ
-(* Not implemented g_checksum_new return type not handled . *)
-(* Not implemented g_checksum_copy return type not handled . *)
+val _new:
+t structure ptr -> Core.checksumtype -> t structure ptr
+val copy:
+t structure ptr -> t structure ptr
 val free:
 t structure ptr -> unit
 val get_string:

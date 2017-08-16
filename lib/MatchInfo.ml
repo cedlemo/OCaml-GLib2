@@ -16,7 +16,8 @@ let free =
 foreign "g_match_info_free" (ptr t_typ @-> returning (void))
 let get_match_count =
 foreign "g_match_info_get_match_count" (ptr t_typ @-> returning (int32_t))
-(* Not implemented g_match_info_get_regex return type not handled . *)
+let get_regex =
+foreign "g_match_info_get_regex" (ptr t_typ @-> returning (ptr Regex.t_typ))
 let get_string =
 foreign "g_match_info_get_string" (ptr t_typ @-> returning (string))
 let is_partial_match =
@@ -25,7 +26,8 @@ let matches =
 foreign "g_match_info_matches" (ptr t_typ @-> returning (bool))
 let next =
 foreign "g_match_info_next" (ptr t_typ  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
-(* Not implemented g_match_info_ref return type not handled . *)
+let ref =
+foreign "g_match_info_ref" (ptr t_typ @-> returning (ptr t_typ))
 let unref =
 foreign "g_match_info_unref" (ptr t_typ @-> returning (void))
 

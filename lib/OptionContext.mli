@@ -2,18 +2,22 @@ open Ctypes
 
 type t
 val t_typ : t structure typ
-(* Not implemented g_option_context_add_group argument types not handled . *)
-(* Not implemented g_option_context_add_main_entries argument types not handled . *)
+val add_group:
+t structure ptr -> OptionGroup.t structure ptr -> unit
+val add_main_entries:
+t structure ptr -> OptionEntry.t structure ptr -> string option -> unit
 val free:
 t structure ptr -> unit
 val get_description:
 t structure ptr -> string
-(* Not implemented g_option_context_get_help argument types not handled . *)
+val get_help:
+t structure ptr -> bool -> OptionGroup.t structure ptr option -> string
 val get_help_enabled:
 t structure ptr -> bool
 val get_ignore_unknown_options:
 t structure ptr -> bool
-(* Not implemented g_option_context_get_main_group return type not handled . *)
+val get_main_group:
+t structure ptr -> OptionGroup.t structure ptr
 val get_strict_posix:
 t structure ptr -> bool
 val get_summary:
@@ -26,7 +30,8 @@ val set_help_enabled:
 t structure ptr -> bool -> unit
 val set_ignore_unknown_options:
 t structure ptr -> bool -> unit
-(* Not implemented g_option_context_set_main_group argument types not handled . *)
+val set_main_group:
+t structure ptr -> OptionGroup.t structure ptr -> unit
 val set_strict_posix:
 t structure ptr -> bool -> unit
 val set_summary:

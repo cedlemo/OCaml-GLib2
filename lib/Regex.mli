@@ -2,7 +2,8 @@ open Ctypes
 
 type t
 val t_typ : t structure typ
-(* Not implemented g_regex_new return type not handled . *)
+val _new:
+t structure ptr -> string -> Core.regexcompileflags_list -> Core.regexmatchflags_list -> Error.t structure ptr ptr option -> Regex.t structure ptr option
 val get_capture_count:
 t structure ptr -> int32
 val get_compile_flags:
@@ -23,7 +24,8 @@ t structure ptr -> string -> int32
 (* Not implemented g_regex_match_all argument types not handled . *)
 (* Not implemented g_regex_match_all_full argument types not handled . *)
 (* Not implemented g_regex_match_full argument types not handled . *)
-(* Not implemented g_regex_ref return type not handled . *)
+val ref:
+t structure ptr -> t structure ptr
 (* Not implemented g_regex_replace argument types not handled . *)
 (* Not implemented g_regex_replace_literal argument types not handled . *)
 (* Not implemented g_regex_split return type not handled . *)

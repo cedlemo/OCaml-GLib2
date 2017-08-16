@@ -2,7 +2,8 @@ open Ctypes
 
 type t
 val t_typ : t structure typ
-(* Not implemented g_sequence_iter_compare argument types not handled . *)
+val compare:
+t structure ptr -> t structure ptr -> int32
 val get_position:
 t structure ptr -> int32
 val is_begin:
