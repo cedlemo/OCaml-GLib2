@@ -22,7 +22,7 @@ t structure ptr -> t structure ptr -> unit
 val add_poll:
 t structure ptr -> Poll_fd.t structure ptr -> unit
 val add_unix_fd:
-t structure ptr -> int32 -> Core.iocondition_list -> unit ptr
+t structure ptr -> int32 -> IOCondition.t_list -> unit ptr
 val attach:
 t structure ptr -> Main_context.t structure ptr option -> Unsigned.uint32
 val destroy:
@@ -46,9 +46,9 @@ t structure ptr -> int64
 val is_destroyed:
 t structure ptr -> bool
 val modify_unix_fd:
-t structure ptr -> unit ptr -> Core.iocondition_list -> unit
+t structure ptr -> unit ptr -> IOCondition.t_list -> unit
 val query_unix_fd:
-t structure ptr -> unit ptr -> Core.iocondition_list
+t structure ptr -> unit ptr -> IOCondition.t_list
 val ref:
 t structure ptr -> t structure ptr
 val remove_child_source:

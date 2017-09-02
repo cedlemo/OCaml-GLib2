@@ -51,7 +51,7 @@ foreign "g_variant_byteswap" (ptr t_typ @-> returning (ptr t_typ))
 let check_format_string =
 foreign "g_variant_check_format_string" (ptr t_typ @-> string @-> bool @-> returning (bool))
 let classify =
-foreign "g_variant_classify" (ptr t_typ @-> returning (Core.variant_class))
+foreign "g_variant_classify" (ptr t_typ @-> returning (Variant_class.t_view))
 let compare =
 foreign "g_variant_compare" (ptr t_typ @-> ptr t_typ @-> returning (int32_t))
 (* Not implemented g_variant_dup_bytestring argument types not handled . *)

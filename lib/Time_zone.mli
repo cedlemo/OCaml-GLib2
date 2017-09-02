@@ -9,9 +9,9 @@ t structure ptr -> t structure ptr
 val new_utc:
 t structure ptr -> t structure ptr
 val adjust_time:
-t structure ptr -> Core.time_type -> int64 ptr -> int32
+t structure ptr -> Time_type.t -> int64 ptr -> int32
 val find_interval:
-t structure ptr -> Core.time_type -> int64 -> int32
+t structure ptr -> Time_type.t -> int64 -> int32
 val get_abbreviation:
 t structure ptr -> int32 -> string
 val get_offset:

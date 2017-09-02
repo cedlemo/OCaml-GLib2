@@ -408,7 +408,7 @@ let check_version =
 foreign "glib_check_version" (uint32_t @-> uint32_t @-> uint32_t @-> returning (string))
 
 let checksum_type_get_length =
-foreign "g_checksum_type_get_length" (checksum_type @-> returning (int64_t))
+foreign "g_checksum_type_get_length" (Checksum_type.t_view @-> returning (int64_t))
 
 (* Not implemented g_child_watch_add_full argument types not handled . *)
 
@@ -422,15 +422,15 @@ let close =
 foreign "g_close" (int32_t  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
 
 let compute_checksum_for_bytes =
-foreign "g_compute_checksum_for_bytes" (checksum_type @-> ptr Bytes.t_typ @-> returning (string))
+foreign "g_compute_checksum_for_bytes" (Checksum_type.t_view @-> ptr Bytes.t_typ @-> returning (string))
 
 (* Not implemented g_compute_checksum_for_data argument types not handled . *)
 
 let compute_checksum_for_string =
-foreign "g_compute_checksum_for_string" (checksum_type @-> string @-> int64_t @-> returning (string))
+foreign "g_compute_checksum_for_string" (Checksum_type.t_view @-> string @-> int64_t @-> returning (string))
 
 let compute_hmac_for_bytes =
-foreign "g_compute_hmac_for_bytes" (checksum_type @-> ptr Bytes.t_typ @-> ptr Bytes.t_typ @-> returning (string))
+foreign "g_compute_hmac_for_bytes" (Checksum_type.t_view @-> ptr Bytes.t_typ @-> ptr Bytes.t_typ @-> returning (string))
 
 (* Not implemented g_compute_hmac_for_data argument types not handled . *)
 
@@ -487,7 +487,7 @@ foreign "g_dataset_id_remove_no_notify" (ptr void @-> uint32_t @-> returning (pt
 (* Not implemented g_dataset_id_set_data_full argument types not handled . *)
 
 let date_get_days_in_month =
-foreign "g_date_get_days_in_month" (date_month @-> uint16_t @-> returning (uint8_t))
+foreign "g_date_get_days_in_month" (Date_month.t_view @-> uint16_t @-> returning (uint8_t))
 
 let date_get_monday_weeks_in_year =
 foreign "g_date_get_monday_weeks_in_year" (uint16_t @-> returning (uint8_t))
@@ -514,16 +514,16 @@ let date_valid_day =
 foreign "g_date_valid_day" (uint8_t @-> returning (bool))
 
 let date_valid_dmy =
-foreign "g_date_valid_dmy" (uint8_t @-> date_month @-> uint16_t @-> returning (bool))
+foreign "g_date_valid_dmy" (uint8_t @-> Date_month.t_view @-> uint16_t @-> returning (bool))
 
 let date_valid_julian =
 foreign "g_date_valid_julian" (uint32_t @-> returning (bool))
 
 let date_valid_month =
-foreign "g_date_valid_month" (date_month @-> returning (bool))
+foreign "g_date_valid_month" (Date_month.t_view @-> returning (bool))
 
 let date_valid_weekday =
-foreign "g_date_valid_weekday" (date_weekday @-> returning (bool))
+foreign "g_date_valid_weekday" (Date_weekday.t_view @-> returning (bool))
 
 let date_valid_year =
 foreign "g_date_valid_year" (uint16_t @-> returning (bool))
@@ -565,7 +565,7 @@ foreign "g_dpgettext2" (string_opt @-> string @-> string @-> returning (string))
 (* Not implemented g_environ_unsetenv argument types not handled . *)
 
 let file_error_from_errno =
-foreign "g_file_error_from_errno" (int32_t @-> returning (file_error))
+foreign "g_file_error_from_errno" (int32_t @-> returning (File_error.t_view))
 
 let file_error_quark =
 foreign "g_file_error_quark" (void @-> returning (uint32_t))
@@ -580,7 +580,7 @@ foreign "g_file_read_link" (string  @-> ptr_opt (ptr Error.t_typ) @-> returning 
 (* Not implemented g_file_set_contents argument types not handled . *)
 
 let file_test =
-foreign "g_file_test" (string @-> file_test_list @-> returning (bool))
+foreign "g_file_test" (string @-> File_test.t_list_view @-> returning (bool))
 
 let filename_display_basename =
 foreign "g_filename_display_basename" (string @-> returning (string))
@@ -604,7 +604,7 @@ let format_size =
 foreign "g_format_size" (uint64_t @-> returning (string))
 
 let format_size_full =
-foreign "g_format_size_full" (uint64_t @-> format_size_flags_list @-> returning (string))
+foreign "g_format_size_full" (uint64_t @-> Format_size_flags.t_list_view @-> returning (string))
 
 let free =
 foreign "g_free" (ptr_opt void @-> returning (void))
@@ -676,7 +676,7 @@ let get_user_runtime_dir =
 foreign "g_get_user_runtime_dir" (void @-> returning (string))
 
 let get_user_special_dir =
-foreign "g_get_user_special_dir" (user_directory @-> returning (string))
+foreign "g_get_user_special_dir" (User_directory.t_view @-> returning (string))
 
 let getenv =
 foreign "g_getenv" (string @-> returning (string))
@@ -784,13 +784,13 @@ foreign "g_intern_string" (string_opt @-> returning (string))
 (* Not implemented g_io_add_watch_full argument types not handled . *)
 
 let io_channel_error_from_errno =
-foreign "g_io_channel_error_from_errno" (int32_t @-> returning (iochannel_error))
+foreign "g_io_channel_error_from_errno" (int32_t @-> returning (IOChannel_error.t_view))
 
 let io_channel_error_quark =
 foreign "g_io_channel_error_quark" (void @-> returning (uint32_t))
 
 let io_create_watch =
-foreign "g_io_create_watch" (ptr IOChannel.t_typ @-> iocondition_list @-> returning (ptr Source.t_typ))
+foreign "g_io_create_watch" (ptr IOChannel.t_typ @-> IOCondition.t_list_view @-> returning (ptr Source.t_typ))
 
 let key_file_error_quark =
 foreign "g_key_file_error_quark" (void @-> returning (uint32_t))
@@ -802,16 +802,16 @@ foreign "g_key_file_error_quark" (void @-> returning (uint32_t))
 (* Not implemented g_locale_to_utf8 argument types not handled . *)
 
 let log_default_handler =
-foreign "g_log_default_handler" (string_opt @-> log_level_flags_list @-> string_opt @-> ptr_opt void @-> returning (void))
+foreign "g_log_default_handler" (string_opt @-> Log_level_flags.t_list_view @-> string_opt @-> ptr_opt void @-> returning (void))
 
 let log_remove_handler =
 foreign "g_log_remove_handler" (string @-> uint32_t @-> returning (void))
 
 let log_set_always_fatal =
-foreign "g_log_set_always_fatal" (log_level_flags_list @-> returning (log_level_flags_list))
+foreign "g_log_set_always_fatal" (Log_level_flags.t_list_view @-> returning (Log_level_flags.t_list_view))
 
 let log_set_fatal_mask =
-foreign "g_log_set_fatal_mask" (string @-> log_level_flags_list @-> returning (log_level_flags_list))
+foreign "g_log_set_fatal_mask" (string @-> Log_level_flags.t_list_view @-> returning (Log_level_flags.t_list_view))
 
 (* Not implemented g_log_set_handler_full argument types not handled . *)
 
@@ -820,7 +820,7 @@ foreign "g_log_set_fatal_mask" (string @-> log_level_flags_list @-> returning (l
 (* Not implemented g_log_structured_array argument types not handled . *)
 
 let log_variant =
-foreign "g_log_variant" (string_opt @-> log_level_flags_list @-> ptr Variant.t_typ @-> returning (void))
+foreign "g_log_variant" (string_opt @-> Log_level_flags.t_list_view @-> ptr Variant.t_typ @-> returning (void))
 
 (* Not implemented g_log_writer_default argument types not handled . *)
 
@@ -974,7 +974,7 @@ foreign "g_regex_escape_nul" (string @-> int32_t @-> returning (string))
 (* Not implemented g_regex_escape_string argument types not handled . *)
 
 let regex_match_simple =
-foreign "g_regex_match_simple" (string @-> string @-> regex_compile_flags_list @-> regex_match_flags_list @-> returning (bool))
+foreign "g_regex_match_simple" (string @-> string @-> Regex_compile_flags.t_list_view @-> Regex_match_flags.t_list_view @-> returning (bool))
 
 (* Not implemented g_regex_split_simple return type not handled . *)
 
@@ -1043,13 +1043,13 @@ let slice_free_chain_with_offset =
 foreign "g_slice_free_chain_with_offset" (uint64_t @-> ptr_opt void @-> uint64_t @-> returning (void))
 
 let slice_get_config =
-foreign "g_slice_get_config" (slice_config @-> returning (int64_t))
+foreign "g_slice_get_config" (Slice_config.t_view @-> returning (int64_t))
 
 let slice_get_config_state =
-foreign "g_slice_get_config_state" (slice_config @-> int64_t @-> ptr uint32_t @-> returning (ptr int64_t))
+foreign "g_slice_get_config_state" (Slice_config.t_view @-> int64_t @-> ptr uint32_t @-> returning (ptr int64_t))
 
 let slice_set_config =
-foreign "g_slice_set_config" (slice_config @-> int64_t @-> returning (void))
+foreign "g_slice_set_config" (Slice_config.t_view @-> int64_t @-> returning (void))
 
 let source_remove =
 foreign "g_source_remove" (uint32_t @-> returning (bool))
@@ -1213,7 +1213,7 @@ let test_bug_base =
 foreign "g_test_bug_base" (string @-> returning (void))
 
 let test_expect_message =
-foreign "g_test_expect_message" (string_opt @-> log_level_flags_list @-> string @-> returning (void))
+foreign "g_test_expect_message" (string_opt @-> Log_level_flags.t_list_view @-> string @-> returning (void))
 
 let test_fail =
 foreign "g_test_fail" (void @-> returning (void))
@@ -1222,13 +1222,13 @@ let test_failed =
 foreign "g_test_failed" (void @-> returning (bool))
 
 let test_get_dir =
-foreign "g_test_get_dir" (test_file_type @-> returning (string))
+foreign "g_test_get_dir" (Test_file_type.t_view @-> returning (string))
 
 let test_incomplete =
 foreign "g_test_incomplete" (string_opt @-> returning (void))
 
 let test_log_type_name =
-foreign "g_test_log_type_name" (test_log_type @-> returning (string))
+foreign "g_test_log_type_name" (Test_log_type.t_view @-> returning (string))
 
 (* Not implemented g_test_queue_destroy argument types not handled . *)
 
@@ -1281,7 +1281,7 @@ let test_trap_reached_timeout =
 foreign "g_test_trap_reached_timeout" (void @-> returning (bool))
 
 let test_trap_subprocess =
-foreign "g_test_trap_subprocess" (string_opt @-> uint64_t @-> test_subprocess_flags_list @-> returning (void))
+foreign "g_test_trap_subprocess" (string_opt @-> uint64_t @-> Test_subprocess_flags.t_list_view @-> returning (void))
 
 let thread_error_quark =
 foreign "g_thread_error_quark" (void @-> returning (uint32_t))
@@ -1414,10 +1414,10 @@ foreign "g_try_realloc_n" (ptr_opt void @-> uint64_t @-> uint64_t @-> returning 
 (* Not implemented g_unicode_canonical_ordering argument types not handled . *)
 
 let unicode_script_from_iso15924 =
-foreign "g_unicode_script_from_iso15924" (uint32_t @-> returning (unicode_script))
+foreign "g_unicode_script_from_iso15924" (uint32_t @-> returning (Unicode_script.t_view))
 
 let unicode_script_to_iso15924 =
-foreign "g_unicode_script_to_iso15924" (unicode_script @-> returning (uint32_t))
+foreign "g_unicode_script_to_iso15924" (Unicode_script.t_view @-> returning (uint32_t))
 
 let unix_error_quark =
 foreign "g_unix_error_quark" (void @-> returning (uint32_t))
@@ -1425,7 +1425,7 @@ foreign "g_unix_error_quark" (void @-> returning (uint32_t))
 (* Not implemented g_unix_fd_add_full argument types not handled . *)
 
 let unix_fd_source_new =
-foreign "g_unix_fd_source_new" (int32_t @-> iocondition_list @-> returning (ptr Source.t_typ))
+foreign "g_unix_fd_source_new" (int32_t @-> IOCondition.t_list_view @-> returning (ptr Source.t_typ))
 
 let unix_open_pipe =
 foreign "g_unix_open_pipe" (ptr int32_t @-> int32_t  @-> ptr_opt (ptr Error.t_typ) @-> returning (bool))
@@ -1491,7 +1491,7 @@ let utf8_make_valid =
 foreign "g_utf8_make_valid" (string @-> int64_t @-> returning (string))
 
 let utf8_normalize =
-foreign "g_utf8_normalize" (string @-> int64_t @-> normalize_mode @-> returning (string))
+foreign "g_utf8_normalize" (string @-> int64_t @-> Normalize_mode.t_view @-> returning (string))
 
 let utf8_offset_to_pointer =
 foreign "g_utf8_offset_to_pointer" (string @-> int64_t @-> returning (string))

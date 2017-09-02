@@ -22,7 +22,7 @@ t structure ptr -> Unsigned.uint32
 val n_children:
 t structure ptr -> Unsigned.uint32
 val n_nodes:
-t structure ptr -> Core.traverse_flags_list -> Unsigned.uint32
+t structure ptr -> Traverse_flags.t_list -> Unsigned.uint32
 val reverse_children:
 t structure ptr -> unit
 val unlink:

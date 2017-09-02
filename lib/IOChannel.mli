@@ -29,9 +29,9 @@ t structure ptr -> int32 -> t structure ptr
 val close:
 t structure ptr -> unit
 val flush:
-t structure ptr -> Error.t structure ptr ptr option -> Core.iostatus
+t structure ptr -> Error.t structure ptr ptr option -> IOStatus.t
 val get_buffer_condition:
-t structure ptr -> Core.iocondition_list
+t structure ptr -> IOCondition.t_list
 val get_buffer_size:
 t structure ptr -> Unsigned.uint64
 val get_buffered:
@@ -41,25 +41,25 @@ t structure ptr -> bool
 val get_encoding:
 t structure ptr -> string
 val get_flags:
-t structure ptr -> Core.ioflags_list
+t structure ptr -> IOFlags.t_list
 val get_line_term:
 t structure ptr -> int32 ptr -> string
 val init:
 t structure ptr -> unit
 val read:
-t structure ptr -> string -> Unsigned.uint64 -> Unsigned.uint64 ptr -> Core.ioerror
+t structure ptr -> string -> Unsigned.uint64 -> Unsigned.uint64 ptr -> IOError.t
 (* Not implemented g_io_channel_read_chars argument types not handled . *)
 (* Not implemented g_io_channel_read_line argument types not handled . *)
 val read_line_string:
-t structure ptr -> String.t structure ptr -> Unsigned.uint64 ptr option -> Error.t structure ptr ptr option -> Core.iostatus
+t structure ptr -> String.t structure ptr -> Unsigned.uint64 ptr option -> Error.t structure ptr ptr option -> IOStatus.t
 (* Not implemented g_io_channel_read_to_end argument types not handled . *)
 (* Not implemented g_io_channel_read_unichar argument types not handled . *)
 val ref:
 t structure ptr -> t structure ptr
 val seek:
-t structure ptr -> int64 -> Core.seek_type -> Core.ioerror
+t structure ptr -> int64 -> Seek_type.t -> IOError.t
 val seek_position:
-t structure ptr -> int64 -> Core.seek_type -> Error.t structure ptr ptr option -> Core.iostatus
+t structure ptr -> int64 -> Seek_type.t -> Error.t structure ptr ptr option -> IOStatus.t
 val set_buffer_size:
 t structure ptr -> Unsigned.uint64 -> unit
 val set_buffered:
@@ -67,23 +67,23 @@ t structure ptr -> bool -> unit
 val set_close_on_unref:
 t structure ptr -> bool -> unit
 val set_encoding:
-t structure ptr -> string option -> Error.t structure ptr ptr option -> Core.iostatus
+t structure ptr -> string option -> Error.t structure ptr ptr option -> IOStatus.t
 val set_flags:
-t structure ptr -> Core.ioflags_list -> Error.t structure ptr ptr option -> Core.iostatus
+t structure ptr -> IOFlags.t_list -> Error.t structure ptr ptr option -> IOStatus.t
 val set_line_term:
 t structure ptr -> string option -> int32 -> unit
 val shutdown:
-t structure ptr -> bool -> Error.t structure ptr ptr option -> Core.iostatus
+t structure ptr -> bool -> Error.t structure ptr ptr option -> IOStatus.t
 val unix_get_fd:
 t structure ptr -> int32
 val unref:
 t structure ptr -> unit
 val write:
-t structure ptr -> string -> Unsigned.uint64 -> Unsigned.uint64 ptr -> Core.ioerror
+t structure ptr -> string -> Unsigned.uint64 -> Unsigned.uint64 ptr -> IOError.t
 (* Not implemented g_io_channel_write_chars argument types not handled . *)
 (* Not implemented g_io_channel_write_unichar argument types not handled . *)
 val error_from_errno:
-t structure ptr -> int32 -> Core.iochannel_error
+t structure ptr -> int32 -> IOChannel_error.t
 val error_quark:
 t structure ptr -> Unsigned.uint32
 

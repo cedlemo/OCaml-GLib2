@@ -23,7 +23,7 @@ foreign "g_source_add_child_source" (ptr t_typ @-> ptr t_typ @-> returning (void
 let add_poll =
 foreign "g_source_add_poll" (ptr t_typ @-> ptr Poll_fd.t_typ @-> returning (void))
 let add_unix_fd =
-foreign "g_source_add_unix_fd" (ptr t_typ @-> int32_t @-> Core.iocondition_list @-> returning (ptr void))
+foreign "g_source_add_unix_fd" (ptr t_typ @-> int32_t @-> IOCondition.t_list_view @-> returning (ptr void))
 let attach =
 foreign "g_source_attach" (ptr t_typ @-> ptr_opt Main_context.t_typ @-> returning (uint32_t))
 let destroy =
@@ -47,9 +47,9 @@ foreign "g_source_get_time" (ptr t_typ @-> returning (int64_t))
 let is_destroyed =
 foreign "g_source_is_destroyed" (ptr t_typ @-> returning (bool))
 let modify_unix_fd =
-foreign "g_source_modify_unix_fd" (ptr t_typ @-> ptr void @-> Core.iocondition_list @-> returning (void))
+foreign "g_source_modify_unix_fd" (ptr t_typ @-> ptr void @-> IOCondition.t_list_view @-> returning (void))
 let query_unix_fd =
-foreign "g_source_query_unix_fd" (ptr t_typ @-> ptr void @-> returning (Core.iocondition_list))
+foreign "g_source_query_unix_fd" (ptr t_typ @-> ptr void @-> returning (IOCondition.t_list_view))
 let ref =
 foreign "g_source_ref" (ptr t_typ @-> returning (ptr t_typ))
 let remove_child_source =

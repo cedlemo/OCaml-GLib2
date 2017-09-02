@@ -3,15 +3,15 @@ open Ctypes
 type t
 val t_typ : t structure typ
 val _new:
-t structure ptr -> string -> Core.regex_compile_flags_list -> Core.regex_match_flags_list -> Error.t structure ptr ptr option -> Regex.t structure ptr option
+t structure ptr -> string -> Regex_compile_flags.t_list -> Regex_match_flags.t_list -> Error.t structure ptr ptr option -> Regex.t structure ptr option
 val get_capture_count:
 t structure ptr -> int32
 val get_compile_flags:
-t structure ptr -> Core.regex_compile_flags_list
+t structure ptr -> Regex_compile_flags.t_list
 val get_has_cr_or_lf:
 t structure ptr -> bool
 val get_match_flags:
-t structure ptr -> Core.regex_match_flags_list
+t structure ptr -> Regex_match_flags.t_list
 val get_max_backref:
 t structure ptr -> int32
 val get_max_lookbehind:
@@ -39,6 +39,6 @@ val escape_nul:
 t structure ptr -> string -> int32 -> string
 (* Not implemented g_regex_escape_string argument types not handled . *)
 val match_simple:
-t structure ptr -> string -> string -> Core.regex_compile_flags_list -> Core.regex_match_flags_list -> bool
+t structure ptr -> string -> string -> Regex_compile_flags.t_list -> Regex_match_flags.t_list -> bool
 (* Not implemented g_regex_split_simple return type not handled . *)
 

@@ -414,7 +414,7 @@ val check_version:
 Unsigned.uint32 -> Unsigned.uint32 -> Unsigned.uint32 -> string
 
 val checksum_type_get_length:
-checksum_type -> int64
+Checksum_type.t -> int64
 
 (* Not implemented g_child_watch_add_full argument types not handled . *)
 
@@ -428,15 +428,15 @@ val close:
 int32 -> Error.t structure ptr ptr option -> bool
 
 val compute_checksum_for_bytes:
-checksum_type -> Bytes.t structure ptr -> string
+Checksum_type.t -> Bytes.t structure ptr -> string
 
 (* Not implemented g_compute_checksum_for_data argument types not handled . *)
 
 val compute_checksum_for_string:
-checksum_type -> string -> int64 -> string
+Checksum_type.t -> string -> int64 -> string
 
 val compute_hmac_for_bytes:
-checksum_type -> Bytes.t structure ptr -> Bytes.t structure ptr -> string
+Checksum_type.t -> Bytes.t structure ptr -> Bytes.t structure ptr -> string
 
 (* Not implemented g_compute_hmac_for_data argument types not handled . *)
 
@@ -493,7 +493,7 @@ unit ptr -> Unsigned.uint32 -> unit ptr option
 (* Not implemented g_dataset_id_set_data_full argument types not handled . *)
 
 val date_get_days_in_month:
-date_month -> Unsigned.uint16 -> Unsigned.uint8
+Date_month.t -> Unsigned.uint16 -> Unsigned.uint8
 
 val date_get_monday_weeks_in_year:
 Unsigned.uint16 -> Unsigned.uint8
@@ -520,16 +520,16 @@ val date_valid_day:
 Unsigned.uint8 -> bool
 
 val date_valid_dmy:
-Unsigned.uint8 -> date_month -> Unsigned.uint16 -> bool
+Unsigned.uint8 -> Date_month.t -> Unsigned.uint16 -> bool
 
 val date_valid_julian:
 Unsigned.uint32 -> bool
 
 val date_valid_month:
-date_month -> bool
+Date_month.t -> bool
 
 val date_valid_weekday:
-date_weekday -> bool
+Date_weekday.t -> bool
 
 val date_valid_year:
 Unsigned.uint16 -> bool
@@ -571,7 +571,7 @@ string option -> string -> string -> string
 (* Not implemented g_environ_unsetenv argument types not handled . *)
 
 val file_error_from_errno:
-int32 -> file_error
+int32 -> File_error.t
 
 val file_error_quark:
 unit -> Unsigned.uint32
@@ -586,7 +586,7 @@ string -> Error.t structure ptr ptr option -> string
 (* Not implemented g_file_set_contents argument types not handled . *)
 
 val file_test:
-string -> file_test_list -> bool
+string -> File_test.t_list -> bool
 
 val filename_display_basename:
 string -> string
@@ -611,7 +611,7 @@ Unsigned.uint64 -> string
 
 (*  !!! DEPRECATED : format_size_for_display . *)
 val format_size_full:
-Unsigned.uint64 -> format_size_flags_list -> string
+Unsigned.uint64 -> Format_size_flags.t_list -> string
 
 val free:
 unit ptr option -> unit
@@ -683,7 +683,7 @@ val get_user_runtime_dir:
 unit -> string
 
 val get_user_special_dir:
-user_directory -> string
+User_directory.t -> string
 
 val getenv:
 string -> string
@@ -791,13 +791,13 @@ string option -> string
 (* Not implemented g_io_add_watch_full argument types not handled . *)
 
 val io_channel_error_from_errno:
-int32 -> iochannel_error
+int32 -> IOChannel_error.t
 
 val io_channel_error_quark:
 unit -> Unsigned.uint32
 
 val io_create_watch:
-IOChannel.t structure ptr -> iocondition_list -> Source.t structure ptr
+IOChannel.t structure ptr -> IOCondition.t_list -> Source.t structure ptr
 
 val key_file_error_quark:
 unit -> Unsigned.uint32
@@ -809,16 +809,16 @@ unit -> Unsigned.uint32
 (* Not implemented g_locale_to_utf8 argument types not handled . *)
 
 val log_default_handler:
-string option -> log_level_flags_list -> string option -> unit ptr option -> unit
+string option -> Log_level_flags.t_list -> string option -> unit ptr option -> unit
 
 val log_remove_handler:
 string -> Unsigned.uint32 -> unit
 
 val log_set_always_fatal:
-log_level_flags_list -> log_level_flags_list
+Log_level_flags.t_list -> Log_level_flags.t_list
 
 val log_set_fatal_mask:
-string -> log_level_flags_list -> log_level_flags_list
+string -> Log_level_flags.t_list -> Log_level_flags.t_list
 
 (* Not implemented g_log_set_handler_full argument types not handled . *)
 
@@ -827,7 +827,7 @@ string -> log_level_flags_list -> log_level_flags_list
 (* Not implemented g_log_structured_array argument types not handled . *)
 
 val log_variant:
-string option -> log_level_flags_list -> Variant.t structure ptr -> unit
+string option -> Log_level_flags.t_list -> Variant.t structure ptr -> unit
 
 (* Not implemented g_log_writer_default argument types not handled . *)
 
@@ -984,7 +984,7 @@ string -> int32 -> string
 (* Not implemented g_regex_escape_string argument types not handled . *)
 
 val regex_match_simple:
-string -> string -> regex_compile_flags_list -> regex_match_flags_list -> bool
+string -> string -> Regex_compile_flags.t_list -> Regex_match_flags.t_list -> bool
 
 (* Not implemented g_regex_split_simple return type not handled . *)
 
@@ -1053,13 +1053,13 @@ val slice_free_chain_with_offset:
 Unsigned.uint64 -> unit ptr option -> Unsigned.uint64 -> unit
 
 val slice_get_config:
-slice_config -> int64
+Slice_config.t -> int64
 
 val slice_get_config_state:
-slice_config -> int64 -> Unsigned.uint32 ptr -> int64 ptr
+Slice_config.t -> int64 -> Unsigned.uint32 ptr -> int64 ptr
 
 val slice_set_config:
-slice_config -> int64 -> unit
+Slice_config.t -> int64 -> unit
 
 val source_remove:
 Unsigned.uint32 -> bool
@@ -1227,7 +1227,7 @@ val test_bug_base:
 string -> unit
 
 val test_expect_message:
-string option -> log_level_flags_list -> string -> unit
+string option -> Log_level_flags.t_list -> string -> unit
 
 val test_fail:
 unit -> unit
@@ -1236,13 +1236,13 @@ val test_failed:
 unit -> bool
 
 val test_get_dir:
-test_file_type -> string
+Test_file_type.t -> string
 
 val test_incomplete:
 string option -> unit
 
 val test_log_type_name:
-test_log_type -> string
+Test_log_type.t -> string
 
 (* Not implemented g_test_queue_destroy argument types not handled . *)
 
@@ -1296,7 +1296,7 @@ val test_trap_reached_timeout:
 unit -> bool
 
 val test_trap_subprocess:
-string option -> Unsigned.uint64 -> test_subprocess_flags_list -> unit
+string option -> Unsigned.uint64 -> Test_subprocess_flags.t_list -> unit
 
 val thread_error_quark:
 unit -> Unsigned.uint32
@@ -1434,10 +1434,10 @@ unit ptr option -> Unsigned.uint64 -> Unsigned.uint64 -> unit ptr option
 (* Not implemented g_unicode_canonical_ordering argument types not handled . *)
 
 val unicode_script_from_iso15924:
-Unsigned.uint32 -> unicode_script
+Unsigned.uint32 -> Unicode_script.t
 
 val unicode_script_to_iso15924:
-unicode_script -> Unsigned.uint32
+Unicode_script.t -> Unsigned.uint32
 
 val unix_error_quark:
 unit -> Unsigned.uint32
@@ -1445,7 +1445,7 @@ unit -> Unsigned.uint32
 (* Not implemented g_unix_fd_add_full argument types not handled . *)
 
 val unix_fd_source_new:
-int32 -> iocondition_list -> Source.t structure ptr
+int32 -> IOCondition.t_list -> Source.t structure ptr
 
 val unix_open_pipe:
 int32 ptr -> int32 -> Error.t structure ptr ptr option -> bool
@@ -1511,7 +1511,7 @@ val utf8_make_valid:
 string -> int64 -> string
 
 val utf8_normalize:
-string -> int64 -> normalize_mode -> string
+string -> int64 -> Normalize_mode.t -> string
 
 val utf8_offset_to_pointer:
 string -> int64 -> string

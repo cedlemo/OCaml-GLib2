@@ -50,7 +50,7 @@ t structure ptr -> t structure ptr
 val check_format_string:
 t structure ptr -> string -> bool -> bool
 val classify:
-t structure ptr -> Core.variant_class
+t structure ptr -> Variant_class.t
 val compare:
 t structure ptr -> t structure ptr -> int32
 (* Not implemented g_variant_dup_bytestring argument types not handled . *)

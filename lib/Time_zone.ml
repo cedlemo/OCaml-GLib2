@@ -10,9 +10,9 @@ foreign "g_time_zone_new_local" (ptr t_typ @-> returning (ptr t_typ))
 let new_utc =
 foreign "g_time_zone_new_utc" (ptr t_typ @-> returning (ptr t_typ))
 let adjust_time =
-foreign "g_time_zone_adjust_time" (ptr t_typ @-> Core.time_type @-> ptr int64_t @-> returning (int32_t))
+foreign "g_time_zone_adjust_time" (ptr t_typ @-> Time_type.t_view @-> ptr int64_t @-> returning (int32_t))
 let find_interval =
-foreign "g_time_zone_find_interval" (ptr t_typ @-> Core.time_type @-> int64_t @-> returning (int32_t))
+foreign "g_time_zone_find_interval" (ptr t_typ @-> Time_type.t_view @-> int64_t @-> returning (int32_t))
 let get_abbreviation =
 foreign "g_time_zone_get_abbreviation" (ptr t_typ @-> int32_t @-> returning (string))
 let get_offset =
