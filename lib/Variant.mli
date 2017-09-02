@@ -14,9 +14,9 @@ t structure ptr -> t structure ptr -> t structure ptr -> t structure ptr
 val new_double:
 t structure ptr -> float -> t structure ptr
 val new_fixed_array:
-t structure ptr -> VariantType.t structure ptr -> unit ptr option -> Unsigned.uint64 -> Unsigned.uint64 -> t structure ptr
+t structure ptr -> Variant_type.t structure ptr -> unit ptr option -> Unsigned.uint64 -> Unsigned.uint64 -> t structure ptr
 val new_from_bytes:
-t structure ptr -> VariantType.t structure ptr -> Bytes.t structure ptr -> bool -> t structure ptr
+t structure ptr -> Variant_type.t structure ptr -> Bytes.t structure ptr -> bool -> t structure ptr
 (* Not implemented g_variant_new_from_data argument types not handled . *)
 val new_handle:
 t structure ptr -> int32 -> t structure ptr
@@ -27,7 +27,7 @@ t structure ptr -> int32 -> t structure ptr
 val new_int64:
 t structure ptr -> int64 -> t structure ptr
 val new_maybe:
-t structure ptr -> VariantType.t structure ptr option -> Variant.t structure ptr option -> t structure ptr
+t structure ptr -> Variant_type.t structure ptr option -> Variant.t structure ptr option -> t structure ptr
 val new_object_path:
 t structure ptr -> string -> t structure ptr
 (* Not implemented g_variant_new_objv argument types not handled . *)
@@ -50,7 +50,7 @@ t structure ptr -> t structure ptr
 val check_format_string:
 t structure ptr -> string -> bool -> bool
 val classify:
-t structure ptr -> Core.variantclass
+t structure ptr -> Core.variant_class
 val compare:
 t structure ptr -> t structure ptr -> int32
 (* Not implemented g_variant_dup_bytestring argument types not handled . *)
@@ -92,7 +92,7 @@ t structure ptr -> Unsigned.uint64
 (* Not implemented g_variant_get_string argument types not handled . *)
 (* Not implemented g_variant_get_strv argument types not handled . *)
 val get_type:
-t structure ptr -> VariantType.t structure ptr
+t structure ptr -> Variant_type.t structure ptr
 val get_type_string:
 t structure ptr -> string
 val get_uint16:
@@ -112,9 +112,9 @@ t structure ptr -> bool
 val is_normal_form:
 t structure ptr -> bool
 val is_of_type:
-t structure ptr -> VariantType.t structure ptr -> bool
+t structure ptr -> Variant_type.t structure ptr -> bool
 val lookup_value:
-t structure ptr -> string -> VariantType.t structure ptr option -> t structure ptr
+t structure ptr -> string -> Variant_type.t structure ptr option -> t structure ptr
 val n_children:
 t structure ptr -> Unsigned.uint64
 val print:
@@ -134,7 +134,7 @@ t structure ptr -> string -> bool
 val is_signature:
 t structure ptr -> string -> bool
 val parse:
-t structure ptr -> VariantType.t structure ptr option -> string -> string option -> string option -> Error.t structure ptr ptr option -> t structure ptr
+t structure ptr -> Variant_type.t structure ptr option -> string -> string option -> string option -> Error.t structure ptr ptr option -> t structure ptr
 val parse_error_print_context:
 t structure ptr -> Error.t structure ptr -> string -> string
 val parse_error_quark:

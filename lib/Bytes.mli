@@ -20,6 +20,6 @@ t structure ptr -> t structure ptr
 val unref:
 t structure ptr -> unit
 val unref_to_array:
-t structure ptr -> ByteArray.t structure ptr
+t structure ptr -> Byte_array.t structure ptr
 (* Not implemented g_bytes_unref_to_data argument types not handled . *)
 

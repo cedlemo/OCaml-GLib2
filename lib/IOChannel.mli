@@ -13,7 +13,7 @@ val f_buf_size: (Unsigned.uint64, t structure) field
 val f_read_buf: (String.t structure ptr, t structure) field
 val f_encoded_read_buf: (String.t structure ptr, t structure) field
 val f_write_buf: (String.t structure ptr, t structure) field
-(* TODO Struct field IOChannel : C Array type for GITypes.Array tag tag not implemented . *)
+(* TODO Struct field IOChannel : C Array type for Types.Array tag tag not implemented . *)
 val f_use_buffer: (Unsigned.uint32, t structure) field
 val f_do_encode: (Unsigned.uint32, t structure) field
 val f_close_on_unref: (Unsigned.uint32, t structure) field
@@ -57,9 +57,9 @@ t structure ptr -> String.t structure ptr -> Unsigned.uint64 ptr option -> Error
 val ref:
 t structure ptr -> t structure ptr
 val seek:
-t structure ptr -> int64 -> Core.seektype -> Core.ioerror
+t structure ptr -> int64 -> Core.seek_type -> Core.ioerror
 val seek_position:
-t structure ptr -> int64 -> Core.seektype -> Error.t structure ptr ptr option -> Core.iostatus
+t structure ptr -> int64 -> Core.seek_type -> Error.t structure ptr ptr option -> Core.iostatus
 val set_buffer_size:
 t structure ptr -> Unsigned.uint64 -> unit
 val set_buffered:
@@ -83,7 +83,7 @@ t structure ptr -> string -> Unsigned.uint64 -> Unsigned.uint64 ptr -> Core.ioer
 (* Not implemented g_io_channel_write_chars argument types not handled . *)
 (* Not implemented g_io_channel_write_unichar argument types not handled . *)
 val error_from_errno:
-t structure ptr -> int32 -> Core.iochannelerror
+t structure ptr -> int32 -> Core.iochannel_error
 val error_quark:
 t structure ptr -> Unsigned.uint32
 

@@ -11,7 +11,7 @@ val f_year: (Unsigned.uint32, t structure) field
 val _new:
 t structure ptr -> t structure ptr
 val new_dmy:
-t structure ptr -> Unsigned.uint8 -> Core.datemonth -> Unsigned.uint16 -> t structure ptr
+t structure ptr -> Unsigned.uint8 -> Core.date_month -> Unsigned.uint16 -> t structure ptr
 val new_julian:
 t structure ptr -> Unsigned.uint32 -> t structure ptr
 val add_days:
@@ -41,11 +41,11 @@ t structure ptr -> Unsigned.uint32
 val get_monday_week_of_year:
 t structure ptr -> Unsigned.uint32
 val get_month:
-t structure ptr -> Core.datemonth
+t structure ptr -> Core.date_month
 val get_sunday_week_of_year:
 t structure ptr -> Unsigned.uint32
 val get_weekday:
-t structure ptr -> Core.dateweekday
+t structure ptr -> Core.date_weekday
 val get_year:
 t structure ptr -> Unsigned.uint16
 val is_first_of_month:
@@ -57,11 +57,11 @@ t structure ptr -> t structure ptr -> unit
 val set_day:
 t structure ptr -> Unsigned.uint8 -> unit
 val set_dmy:
-t structure ptr -> Unsigned.uint8 -> Core.datemonth -> Unsigned.uint16 -> unit
+t structure ptr -> Unsigned.uint8 -> Core.date_month -> Unsigned.uint16 -> unit
 val set_julian:
 t structure ptr -> Unsigned.uint32 -> unit
 val set_month:
-t structure ptr -> Core.datemonth -> unit
+t structure ptr -> Core.date_month -> unit
 val set_parse:
 t structure ptr -> string -> unit
 val set_time:
@@ -69,7 +69,7 @@ t structure ptr -> int32 -> unit
 val set_time_t:
 t structure ptr -> int64 -> unit
 val set_time_val:
-t structure ptr -> TimeVal.t structure ptr -> unit
+t structure ptr -> Time_val.t structure ptr -> unit
 val set_year:
 t structure ptr -> Unsigned.uint16 -> unit
 val subtract_days:
@@ -83,7 +83,7 @@ t structure ptr -> unit ptr -> unit
 val valid:
 t structure ptr -> bool
 val get_days_in_month:
-t structure ptr -> Core.datemonth -> Unsigned.uint16 -> Unsigned.uint8
+t structure ptr -> Core.date_month -> Unsigned.uint16 -> Unsigned.uint8
 val get_monday_weeks_in_year:
 t structure ptr -> Unsigned.uint16 -> Unsigned.uint8
 val get_sunday_weeks_in_year:
@@ -95,13 +95,13 @@ t structure ptr -> string -> Unsigned.uint64 -> string -> t structure ptr -> Uns
 val valid_day:
 t structure ptr -> Unsigned.uint8 -> bool
 val valid_dmy:
-t structure ptr -> Unsigned.uint8 -> Core.datemonth -> Unsigned.uint16 -> bool
+t structure ptr -> Unsigned.uint8 -> Core.date_month -> Unsigned.uint16 -> bool
 val valid_julian:
 t structure ptr -> Unsigned.uint32 -> bool
 val valid_month:
-t structure ptr -> Core.datemonth -> bool
+t structure ptr -> Core.date_month -> bool
 val valid_weekday:
-t structure ptr -> Core.dateweekday -> bool
+t structure ptr -> Core.date_weekday -> bool
 val valid_year:
 t structure ptr -> Unsigned.uint16 -> bool
 

@@ -23,7 +23,7 @@ foreign "g_node_max_height" (ptr t_typ @-> returning (uint32_t))
 let n_children =
 foreign "g_node_n_children" (ptr t_typ @-> returning (uint32_t))
 let n_nodes =
-foreign "g_node_n_nodes" (ptr t_typ @-> Core.traverseflags_list @-> returning (uint32_t))
+foreign "g_node_n_nodes" (ptr t_typ @-> Core.traverse_flags_list @-> returning (uint32_t))
 let reverse_children =
 foreign "g_node_reverse_children" (ptr t_typ @-> returning (void))
 let unlink =

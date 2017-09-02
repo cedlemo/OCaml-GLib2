@@ -15,9 +15,9 @@ foreign "g_variant_new_dict_entry" (ptr t_typ @-> ptr t_typ @-> ptr t_typ @-> re
 let new_double =
 foreign "g_variant_new_double" (ptr t_typ @-> double @-> returning (ptr t_typ))
 let new_fixed_array =
-foreign "g_variant_new_fixed_array" (ptr t_typ @-> ptr VariantType.t_typ @-> ptr_opt void @-> uint64_t @-> uint64_t @-> returning (ptr t_typ))
+foreign "g_variant_new_fixed_array" (ptr t_typ @-> ptr Variant_type.t_typ @-> ptr_opt void @-> uint64_t @-> uint64_t @-> returning (ptr t_typ))
 let new_from_bytes =
-foreign "g_variant_new_from_bytes" (ptr t_typ @-> ptr VariantType.t_typ @-> ptr Bytes.t_typ @-> bool @-> returning (ptr t_typ))
+foreign "g_variant_new_from_bytes" (ptr t_typ @-> ptr Variant_type.t_typ @-> ptr Bytes.t_typ @-> bool @-> returning (ptr t_typ))
 (* Not implemented g_variant_new_from_data argument types not handled . *)
 let new_handle =
 foreign "g_variant_new_handle" (ptr t_typ @-> int32_t @-> returning (ptr t_typ))
@@ -28,7 +28,7 @@ foreign "g_variant_new_int32" (ptr t_typ @-> int32_t @-> returning (ptr t_typ))
 let new_int64 =
 foreign "g_variant_new_int64" (ptr t_typ @-> int64_t @-> returning (ptr t_typ))
 let new_maybe =
-foreign "g_variant_new_maybe" (ptr t_typ @-> ptr_opt VariantType.t_typ @-> ptr_opt Variant.t_typ @-> returning (ptr t_typ))
+foreign "g_variant_new_maybe" (ptr t_typ @-> ptr_opt Variant_type.t_typ @-> ptr_opt Variant.t_typ @-> returning (ptr t_typ))
 let new_object_path =
 foreign "g_variant_new_object_path" (ptr t_typ @-> string @-> returning (ptr t_typ))
 (* Not implemented g_variant_new_objv argument types not handled . *)
@@ -51,7 +51,7 @@ foreign "g_variant_byteswap" (ptr t_typ @-> returning (ptr t_typ))
 let check_format_string =
 foreign "g_variant_check_format_string" (ptr t_typ @-> string @-> bool @-> returning (bool))
 let classify =
-foreign "g_variant_classify" (ptr t_typ @-> returning (Core.variantclass))
+foreign "g_variant_classify" (ptr t_typ @-> returning (Core.variant_class))
 let compare =
 foreign "g_variant_compare" (ptr t_typ @-> ptr t_typ @-> returning (int32_t))
 (* Not implemented g_variant_dup_bytestring argument types not handled . *)
@@ -93,7 +93,7 @@ foreign "g_variant_get_size" (ptr t_typ @-> returning (uint64_t))
 (* Not implemented g_variant_get_string argument types not handled . *)
 (* Not implemented g_variant_get_strv argument types not handled . *)
 let get_type =
-foreign "g_variant_get_type" (ptr t_typ @-> returning (ptr VariantType.t_typ))
+foreign "g_variant_get_type" (ptr t_typ @-> returning (ptr Variant_type.t_typ))
 let get_type_string =
 foreign "g_variant_get_type_string" (ptr t_typ @-> returning (string))
 let get_uint16 =
@@ -113,9 +113,9 @@ foreign "g_variant_is_floating" (ptr t_typ @-> returning (bool))
 let is_normal_form =
 foreign "g_variant_is_normal_form" (ptr t_typ @-> returning (bool))
 let is_of_type =
-foreign "g_variant_is_of_type" (ptr t_typ @-> ptr VariantType.t_typ @-> returning (bool))
+foreign "g_variant_is_of_type" (ptr t_typ @-> ptr Variant_type.t_typ @-> returning (bool))
 let lookup_value =
-foreign "g_variant_lookup_value" (ptr t_typ @-> string @-> ptr_opt VariantType.t_typ @-> returning (ptr t_typ))
+foreign "g_variant_lookup_value" (ptr t_typ @-> string @-> ptr_opt Variant_type.t_typ @-> returning (ptr t_typ))
 let n_children =
 foreign "g_variant_n_children" (ptr t_typ @-> returning (uint64_t))
 let print =
@@ -135,7 +135,7 @@ foreign "g_variant_is_object_path" (ptr t_typ @-> string @-> returning (bool))
 let is_signature =
 foreign "g_variant_is_signature" (ptr t_typ @-> string @-> returning (bool))
 let parse =
-foreign "g_variant_parse" (ptr t_typ @-> ptr_opt VariantType.t_typ @-> string @-> string_opt @-> string_opt  @-> ptr_opt (ptr Error.t_typ) @-> returning (ptr t_typ))
+foreign "g_variant_parse" (ptr t_typ @-> ptr_opt Variant_type.t_typ @-> string @-> string_opt @-> string_opt  @-> ptr_opt (ptr Error.t_typ) @-> returning (ptr t_typ))
 let parse_error_print_context =
 foreign "g_variant_parse_error_print_context" (ptr t_typ @-> ptr Error.t_typ @-> string @-> returning (string))
 let parse_error_quark =

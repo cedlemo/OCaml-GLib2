@@ -4,15 +4,15 @@ open Foreign
 type t
 let t_typ : t structure typ = structure "Regex"
 let _new =
-foreign "g_regex_new" (ptr t_typ @-> string @-> Core.regexcompileflags_list @-> Core.regexmatchflags_list  @-> ptr_opt (ptr Error.t_typ) @-> returning (ptr_opt Regex.t_typ))
+foreign "g_regex_new" (ptr t_typ @-> string @-> Core.regex_compile_flags_list @-> Core.regex_match_flags_list  @-> ptr_opt (ptr Error.t_typ) @-> returning (ptr_opt Regex.t_typ))
 let get_capture_count =
 foreign "g_regex_get_capture_count" (ptr t_typ @-> returning (int32_t))
 let get_compile_flags =
-foreign "g_regex_get_compile_flags" (ptr t_typ @-> returning (Core.regexcompileflags_list))
+foreign "g_regex_get_compile_flags" (ptr t_typ @-> returning (Core.regex_compile_flags_list))
 let get_has_cr_or_lf =
 foreign "g_regex_get_has_cr_or_lf" (ptr t_typ @-> returning (bool))
 let get_match_flags =
-foreign "g_regex_get_match_flags" (ptr t_typ @-> returning (Core.regexmatchflags_list))
+foreign "g_regex_get_match_flags" (ptr t_typ @-> returning (Core.regex_match_flags_list))
 let get_max_backref =
 foreign "g_regex_get_max_backref" (ptr t_typ @-> returning (int32_t))
 let get_max_lookbehind =
@@ -40,6 +40,6 @@ let escape_nul =
 foreign "g_regex_escape_nul" (ptr t_typ @-> string @-> int32_t @-> returning (string))
 (* Not implemented g_regex_escape_string argument types not handled . *)
 let match_simple =
-foreign "g_regex_match_simple" (ptr t_typ @-> string @-> string @-> Core.regexcompileflags_list @-> Core.regexmatchflags_list @-> returning (bool))
+foreign "g_regex_match_simple" (ptr t_typ @-> string @-> string @-> Core.regex_compile_flags_list @-> Core.regex_match_flags_list @-> returning (bool))
 (* Not implemented g_regex_split_simple return type not handled . *)
 

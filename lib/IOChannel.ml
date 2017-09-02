@@ -14,7 +14,7 @@ let f_buf_size = field t_typ "buf_size" (uint64_t)
 let f_read_buf = field t_typ "read_buf" (ptr String.t_typ)
 let f_encoded_read_buf = field t_typ "encoded_read_buf" (ptr String.t_typ)
 let f_write_buf = field t_typ "write_buf" (ptr String.t_typ)
-(* TODO Struct field IOChannel : C Array type for GITypes.Array tag tag not implemented . *)
+(* TODO Struct field IOChannel : C Array type for Types.Array tag tag not implemented . *)
 let f_use_buffer = field t_typ "use_buffer" (uint32_t)
 let f_do_encode = field t_typ "do_encode" (uint32_t)
 let f_close_on_unref = field t_typ "close_on_unref" (uint32_t)
@@ -58,9 +58,9 @@ foreign "g_io_channel_read_line_string" (ptr t_typ @-> ptr String.t_typ @-> ptr_
 let ref =
 foreign "g_io_channel_ref" (ptr t_typ @-> returning (ptr t_typ))
 let seek =
-foreign "g_io_channel_seek" (ptr t_typ @-> int64_t @-> Core.seektype @-> returning (Core.ioerror))
+foreign "g_io_channel_seek" (ptr t_typ @-> int64_t @-> Core.seek_type @-> returning (Core.ioerror))
 let seek_position =
-foreign "g_io_channel_seek_position" (ptr t_typ @-> int64_t @-> Core.seektype  @-> ptr_opt (ptr Error.t_typ) @-> returning (Core.iostatus))
+foreign "g_io_channel_seek_position" (ptr t_typ @-> int64_t @-> Core.seek_type  @-> ptr_opt (ptr Error.t_typ) @-> returning (Core.iostatus))
 let set_buffer_size =
 foreign "g_io_channel_set_buffer_size" (ptr t_typ @-> uint64_t @-> returning (void))
 let set_buffered =
@@ -84,7 +84,7 @@ foreign "g_io_channel_write" (ptr t_typ @-> string @-> uint64_t @-> ptr uint64_t
 (* Not implemented g_io_channel_write_chars argument types not handled . *)
 (* Not implemented g_io_channel_write_unichar argument types not handled . *)
 let error_from_errno =
-foreign "g_io_channel_error_from_errno" (ptr t_typ @-> int32_t @-> returning (Core.iochannelerror))
+foreign "g_io_channel_error_from_errno" (ptr t_typ @-> int32_t @-> returning (Core.iochannel_error))
 let error_quark =
 foreign "g_io_channel_error_quark" (ptr t_typ @-> returning (uint32_t))
 

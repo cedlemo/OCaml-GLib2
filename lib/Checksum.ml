@@ -4,7 +4,7 @@ open Foreign
 type t
 let t_typ : t structure typ = structure "Checksum"
 let _new =
-foreign "g_checksum_new" (ptr t_typ @-> Core.checksumtype @-> returning (ptr t_typ))
+foreign "g_checksum_new" (ptr t_typ @-> Core.checksum_type @-> returning (ptr t_typ))
 let copy =
 foreign "g_checksum_copy" (ptr t_typ @-> returning (ptr t_typ))
 let free =
@@ -15,5 +15,5 @@ let reset =
 foreign "g_checksum_reset" (ptr t_typ @-> returning (void))
 (* Not implemented g_checksum_update argument types not handled . *)
 let type_get_length =
-foreign "g_checksum_type_get_length" (ptr t_typ @-> Core.checksumtype @-> returning (int64_t))
+foreign "g_checksum_type_get_length" (ptr t_typ @-> Core.checksum_type @-> returning (int64_t))
 

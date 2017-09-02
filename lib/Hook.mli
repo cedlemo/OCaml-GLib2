@@ -13,15 +13,15 @@ val f_func: (unit ptr, t structure) field
 val compare_ids:
 t structure ptr -> t structure ptr -> int32
 val destroy:
-t structure ptr -> HookList.t structure ptr -> Unsigned.uint64 -> bool
+t structure ptr -> Hook_list.t structure ptr -> Unsigned.uint64 -> bool
 val destroy_link:
-t structure ptr -> HookList.t structure ptr -> t structure ptr -> unit
+t structure ptr -> Hook_list.t structure ptr -> t structure ptr -> unit
 val free:
-t structure ptr -> HookList.t structure ptr -> t structure ptr -> unit
+t structure ptr -> Hook_list.t structure ptr -> t structure ptr -> unit
 val insert_before:
-t structure ptr -> HookList.t structure ptr -> Hook.t structure ptr option -> t structure ptr -> unit
+t structure ptr -> Hook_list.t structure ptr -> Hook.t structure ptr option -> t structure ptr -> unit
 val prepend:
-t structure ptr -> HookList.t structure ptr -> t structure ptr -> unit
+t structure ptr -> Hook_list.t structure ptr -> t structure ptr -> unit
 val unref:
-t structure ptr -> HookList.t structure ptr -> t structure ptr -> unit
+t structure ptr -> Hook_list.t structure ptr -> t structure ptr -> unit
 

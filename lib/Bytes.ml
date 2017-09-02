@@ -21,6 +21,6 @@ foreign "g_bytes_ref" (ptr t_typ @-> returning (ptr t_typ))
 let unref =
 foreign "g_bytes_unref" (ptr t_typ @-> returning (void))
 let unref_to_array =
-foreign "g_bytes_unref_to_array" (ptr t_typ @-> returning (ptr ByteArray.t_typ))
+foreign "g_bytes_unref_to_array" (ptr t_typ @-> returning (ptr Byte_array.t_typ))
 (* Not implemented g_bytes_unref_to_data argument types not handled . *)
 
