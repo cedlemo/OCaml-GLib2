@@ -4,7 +4,7 @@ open Foreign
 type t
 let t_typ : t structure typ = structure "Regex"
 let _new =
-foreign "g_regex_new" (ptr t_typ @-> string @-> Regex_compile_flags.t_list_view @-> Regex_match_flags.t_list_view  @-> ptr_opt (ptr Error.t_typ) @-> returning (ptr_opt Regex.t_typ))
+foreign "g_regex_new" (ptr t_typ @-> string @-> Regex_compile_flags.t_list_view @-> Regex_match_flags.t_list_view  @-> ptr_opt (ptr Error.t_typ) @-> returning (ptr_opt t_typ))
 let get_capture_count =
 foreign "g_regex_get_capture_count" (ptr t_typ @-> returning (int32_t))
 let get_compile_flags =

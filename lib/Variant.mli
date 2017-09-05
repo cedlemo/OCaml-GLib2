@@ -27,7 +27,7 @@ t structure ptr -> int32 -> t structure ptr
 val new_int64:
 t structure ptr -> int64 -> t structure ptr
 val new_maybe:
-t structure ptr -> Variant_type.t structure ptr option -> Variant.t structure ptr option -> t structure ptr
+t structure ptr -> Variant_type.t structure ptr option -> t structure ptr option -> t structure ptr
 val new_object_path:
 t structure ptr -> string -> t structure ptr
 (* Not implemented g_variant_new_objv argument types not handled . *)
@@ -83,7 +83,7 @@ t structure ptr -> int32
 val get_int64:
 t structure ptr -> int64
 val get_maybe:
-t structure ptr -> Variant.t structure ptr option
+t structure ptr -> t structure ptr option
 val get_normal_form:
 t structure ptr -> t structure ptr
 (* Not implemented g_variant_get_objv argument types not handled . *)

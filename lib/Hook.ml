@@ -20,7 +20,7 @@ foreign "g_hook_destroy_link" (ptr t_typ @-> ptr Hook_list.t_typ @-> ptr t_typ @
 let free =
 foreign "g_hook_free" (ptr t_typ @-> ptr Hook_list.t_typ @-> ptr t_typ @-> returning (void))
 let insert_before =
-foreign "g_hook_insert_before" (ptr t_typ @-> ptr Hook_list.t_typ @-> ptr_opt Hook.t_typ @-> ptr t_typ @-> returning (void))
+foreign "g_hook_insert_before" (ptr t_typ @-> ptr Hook_list.t_typ @-> ptr_opt t_typ @-> ptr t_typ @-> returning (void))
 let prepend =
 foreign "g_hook_prepend" (ptr t_typ @-> ptr Hook_list.t_typ @-> ptr t_typ @-> returning (void))
 let unref =

@@ -28,7 +28,7 @@ foreign "g_variant_new_int32" (ptr t_typ @-> int32_t @-> returning (ptr t_typ))
 let new_int64 =
 foreign "g_variant_new_int64" (ptr t_typ @-> int64_t @-> returning (ptr t_typ))
 let new_maybe =
-foreign "g_variant_new_maybe" (ptr t_typ @-> ptr_opt Variant_type.t_typ @-> ptr_opt Variant.t_typ @-> returning (ptr t_typ))
+foreign "g_variant_new_maybe" (ptr t_typ @-> ptr_opt Variant_type.t_typ @-> ptr_opt t_typ @-> returning (ptr t_typ))
 let new_object_path =
 foreign "g_variant_new_object_path" (ptr t_typ @-> string @-> returning (ptr t_typ))
 (* Not implemented g_variant_new_objv argument types not handled . *)
@@ -84,7 +84,7 @@ foreign "g_variant_get_int32" (ptr t_typ @-> returning (int32_t))
 let get_int64 =
 foreign "g_variant_get_int64" (ptr t_typ @-> returning (int64_t))
 let get_maybe =
-foreign "g_variant_get_maybe" (ptr t_typ @-> returning (ptr_opt Variant.t_typ))
+foreign "g_variant_get_maybe" (ptr t_typ @-> returning (ptr_opt t_typ))
 let get_normal_form =
 foreign "g_variant_get_normal_form" (ptr t_typ @-> returning (ptr t_typ))
 (* Not implemented g_variant_get_objv argument types not handled . *)

@@ -19,7 +19,7 @@ t structure ptr -> Hook_list.t structure ptr -> t structure ptr -> unit
 val free:
 t structure ptr -> Hook_list.t structure ptr -> t structure ptr -> unit
 val insert_before:
-t structure ptr -> Hook_list.t structure ptr -> Hook.t structure ptr option -> t structure ptr -> unit
+t structure ptr -> Hook_list.t structure ptr -> t structure ptr option -> t structure ptr -> unit
 val prepend:
 t structure ptr -> Hook_list.t structure ptr -> t structure ptr -> unit
 val unref:
