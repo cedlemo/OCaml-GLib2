@@ -40,6 +40,6 @@ let test_glib_check_version test_ctxt =
 let tests =
   "GLib functionss tests" >:::
     [
-      "Test glib check version" >:: test_glib_check_version
+(*      "Test glib check version" >:: test_glib_check_version *)
     ]
 
