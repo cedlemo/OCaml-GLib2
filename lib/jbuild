@@ -4,6 +4,7 @@
  ((name        GLib)
   (public_name ocaml-glib2)
   (libraries (ctypes ctypes.foreign))
+  (modules (:standard \ (Bytes Byte_array Hook Hook_list)))
   (c_flags         (:include c_flags.sexp))
   (c_library_flags (:include c_library_flags.sexp))
   (ocamlopt_flags (-ccopt ("-Wl,-no-as-needed")))
