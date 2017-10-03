@@ -2,15 +2,15 @@ open Ctypes
 
 type t
 val t_typ : t structure typ
-(*Not implemented g_variant_new_array argument types not handled*)
+(*Not implemented g_variant_new_array argument typeC Array type for Types.Array tag not handled*)
 val new_boolean:
 t structure ptr -> bool -> t structure ptr
 
 val new_byte:
 t structure ptr -> Unsigned.uint8 -> t structure ptr
 
-(*Not implemented g_variant_new_bytestring argument types not handled*)
-(*Not implemented g_variant_new_bytestring_array argument types not handled*)
+(*Not implemented g_variant_new_bytestring argument typeC Array type for Types.Array tag not handled*)
+(*Not implemented g_variant_new_bytestring_array argument typeC Array type for Types.Array tag not handled*)
 val new_dict_entry:
 t structure ptr -> t structure ptr -> t structure ptr -> t structure ptr
 
@@ -20,10 +20,8 @@ t structure ptr -> float -> t structure ptr
 val new_fixed_array:
 t structure ptr -> Variant_type.t structure ptr -> unit ptr option -> Unsigned.uint64 -> Unsigned.uint64 -> t structure ptr
 
-val new_from_bytes:
-t structure ptr -> Variant_type.t structure ptr -> Bytes.t structure ptr -> bool -> t structure ptr
-
-(*Not implemented g_variant_new_from_data argument types not handled*)
+(*SKIPPED : g_variant_new_from_bytes argument type Bytes.t structure ptr*)
+(*Not implemented g_variant_new_from_data argument typeC Array type for Types.Array tag not handled*)
 val new_handle:
 t structure ptr -> int32 -> t structure ptr
 
@@ -42,15 +40,15 @@ t structure ptr -> Variant_type.t structure ptr option -> t structure ptr option
 val new_object_path:
 t structure ptr -> string -> t structure ptr
 
-(*Not implemented g_variant_new_objv argument types not handled*)
+(*Not implemented g_variant_new_objv argument typeC Array type for Types.Array tag not handled*)
 val new_signature:
 t structure ptr -> string -> t structure ptr
 
 val new_string:
 t structure ptr -> string -> t structure ptr
 
-(*Not implemented g_variant_new_strv argument types not handled*)
-(*Not implemented g_variant_new_tuple argument types not handled*)
+(*Not implemented g_variant_new_strv argument typeC Array type for Types.Array tag not handled*)
+(*Not implemented g_variant_new_tuple argument typeC Array type for Types.Array tag not handled*)
 val new_uint16:
 t structure ptr -> Unsigned.uint16 -> t structure ptr
 
@@ -75,11 +73,11 @@ t structure ptr -> Variant_class.t
 val compare:
 t structure ptr -> t structure ptr -> int32
 
-(*Not implemented g_variant_dup_bytestring argument types not handled*)
-(*Not implemented g_variant_dup_bytestring_array argument types not handled*)
-(*Not implemented g_variant_dup_objv argument types not handled*)
-(*Not implemented g_variant_dup_string argument types not handled*)
-(*Not implemented g_variant_dup_strv argument types not handled*)
+(*Not implemented g_variant_dup_bytestring argument typeArg_info.InOut or Arg_info.Out not handled*)
+(*Not implemented g_variant_dup_bytestring_array argument typeArg_info.InOut or Arg_info.Out not handled*)
+(*Not implemented g_variant_dup_objv argument typeArg_info.InOut or Arg_info.Out not handled*)
+(*Not implemented g_variant_dup_string argument typeArg_info.InOut or Arg_info.Out not handled*)
+(*Not implemented g_variant_dup_strv argument typeArg_info.InOut or Arg_info.Out not handled*)
 val equal:
 t structure ptr -> t structure ptr -> bool
 
@@ -89,17 +87,15 @@ t structure ptr -> bool
 val get_byte:
 t structure ptr -> Unsigned.uint8
 
-(*Not implemented g_variant_get_bytestring return type not handled*)
-(*Not implemented g_variant_get_bytestring_array argument types not handled*)
+(*Not implemented g_variant_get_bytestring return type C Array type for Types.Array tag not handled*)
+(*Not implemented g_variant_get_bytestring_array argument typeArg_info.InOut or Arg_info.Out not handled*)
 val get_child_value:
 t structure ptr -> Unsigned.uint64 -> t structure ptr
 
 val get_data:
 t structure ptr -> unit ptr option
 
-val get_data_as_bytes:
-t structure ptr -> Bytes.t structure ptr
-
+(*SKIPPED : g_variant_get_data_as_bytes return type Bytes.t structure ptr*)
 val get_double:
 t structure ptr -> float
 
@@ -121,12 +117,12 @@ t structure ptr -> t structure ptr option
 val get_normal_form:
 t structure ptr -> t structure ptr
 
-(*Not implemented g_variant_get_objv argument types not handled*)
+(*Not implemented g_variant_get_objv argument typeArg_info.InOut or Arg_info.Out not handled*)
 val get_size:
 t structure ptr -> Unsigned.uint64
 
-(*Not implemented g_variant_get_string argument types not handled*)
-(*Not implemented g_variant_get_strv argument types not handled*)
+(*Not implemented g_variant_get_string argument typeArg_info.InOut or Arg_info.Out not handled*)
+(*Not implemented g_variant_get_strv argument typeArg_info.InOut or Arg_info.Out not handled*)
 val get_type:
 t structure ptr -> Variant_type.t structure ptr
 
