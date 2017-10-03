@@ -20,13 +20,13 @@ open OUnit2
 
 let test_enum_type_of_value test_ctxt =
   let zero = Unsigned.UInt32.zero in
-  let md5 = GLib.Core.checksumtype_of_value zero in
-  assert_equal GLib.Core.Md5 md5
+  let md5 = GLib.Checksum_type.of_value zero in
+  assert_equal GLib.Checksum_type.Md5 md5
 
 let test_enum_type_to_value test_ctxt =
-  let md5 = GLib.Core.Md5 in
+  let md5 = GLib.Checksum_type.Md5 in
   let zero = Unsigned.UInt32.zero in
-  let value = GLib.Core.checksumtype_to_value md5 in
+  let value = GLib.Checksum_type.to_value md5 in
   assert_equal zero value
 
 let test_flags_type_list_of_value test_ctxt =
@@ -34,12 +34,12 @@ let test_flags_type_list_of_value test_ctxt =
   let hidden = of_int 1 in
   let in_main = of_int 2 in
   let hidden_and_in_main = logor hidden in_main in
-  let flags = GLib.Core.optionflags_list_of_value hidden_and_in_main in
+  let flags = GLib.Option_flags.list_of_value hidden_and_in_main in
   let _ = assert_equal_int 2 (List.length flags) in
   let rec check = function
     | [] -> ()
-    | h :: q -> let t = (h == GLib.Core.Hidden || h == GLib.Core.In_main) in
-    if t == false then let v = GLib.Core.optionflags_to_value h in
+    | h :: q -> let t = (h == GLib.Option_flags.Hidden || h == GLib.Option_flags.In_main) in
+    if t == false then let v = GLib.Option_flags.to_value h in
     print_endline (to_string v)
     else let _ = assert_equal_boolean true t in check q
   in
