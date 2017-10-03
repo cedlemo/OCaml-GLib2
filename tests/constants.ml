@@ -19,53 +19,53 @@ open TestUtils
 open OUnit2
 
 let test_boolean_constant test_ctxt =
-  assert_equal_boolean false GLib.Core._SOURCE_REMOVE
+  assert_equal_boolean false GLib.Core.c_SOURCE_REMOVE
 
 let test_int8_constant test_ctxt =
-  let maxint8 = GLib.Core._MAXINT8 in
+  let maxint8 = GLib.Core.c_MAXINT8 in
   assert_equal ~printer:(fun x -> string_of_int x) 127 maxint8
 
 let test_uint8_constant test_ctxt =
-  let maxuint8 = GLib.Core._MAXUINT8 in
+  let maxuint8 = GLib.Core.c_MAXUINT8 in
   assert_equal ~printer:(fun x -> Unsigned.UInt8.to_string x)
                (Unsigned.UInt8.of_int 255) maxuint8
 
 let test_int16_constant test_ctxt =
-  let maxint16 = GLib.Core._MAXINT16 in
+  let maxint16 = GLib.Core.c_MAXINT16 in
   assert_equal ~printer:(fun x -> string_of_int x) 32767 maxint16
 
 let test_uint16_constant test_ctxt =
-  let maxuint16 = GLib.Core._MAXUINT16 in
+  let maxuint16 = GLib.Core.c_MAXUINT16 in
   assert_equal ~printer:(fun x -> Unsigned.UInt16.to_string x)
                (Unsigned.UInt16.of_int 65535) maxuint16
 
 let test_int32_constant test_ctxt =
-  let maxint32 = GLib.Core._MAXINT32 in
+  let maxint32 = GLib.Core.c_MAXINT32 in
   assert_equal ~printer:(fun x -> Int32.to_string x)
                (Int32.of_string "2147483647") maxint32
 
 let test_uint32_constant test_ctxt =
-  let maxuint32 = GLib.Core._MAXUINT32 in
+  let maxuint32 = GLib.Core.c_MAXUINT32 in
   assert_equal ~printer:(fun x -> Unsigned.UInt32.to_string x)
                (Unsigned.UInt32.of_string "4294967295") maxuint32
 
 let test_int64_constant test_ctxt =
-  let maxint64 = GLib.Core._MAXINT64 in
+  let maxint64 = GLib.Core.c_MAXINT64 in
   assert_equal ~printer:(fun x -> Int64.to_string x)
                9223372036854775807L maxint64
 
 let test_uint64_constant test_ctxt =
-  let maxuint64 = GLib.Core._MAXUINT64 in
+  let maxuint64 = GLib.Core.c_MAXUINT64 in
   assert_equal ~printer:(fun x -> Unsigned.UInt64.to_string x)
                (Unsigned.UInt64.of_string "18446744073709551615") maxuint64
 
 let test_double_constant test_ctxt =
-  let e = GLib.Core._E in
+  let e = GLib.Core.c_E in
   assert_equal ~printer:(fun x -> string_of_float x)
                2.718282 e
 
 let test_string_constant test_ctxt =
-  let cset_a_2_z = GLib.Core._CSET_A_2_Z in
+  let cset_a_2_z = GLib.Core.c_CSET_A_2_Z in
   assert_equal "ABCDEFGHIJKLMNOPQRSTUVWXYZ" cset_a_2_z
 
 let tests =
