@@ -68,6 +68,15 @@ let test_string_constant test_ctxt =
   let cset_a_2_z = GLib.Core.c_CSET_A_2_Z in
   assert_equal "ABCDEFGHIJKLMNOPQRSTUVWXYZ" cset_a_2_z
 
+let test_dynamically_loaded_version_constants test_ctxt =
+  let open Unsigned.UInt32 in
+    let major = of_int32 GLib.Core.c_MAJOR_VERSION in
+    let minor = of_int32 GLib.Core.c_MINOR_VERSION in
+    let micro = of_int32 GLib.Core.c_MICRO_VERSION in
+    match GLib.Core.check_version major minor micro with
+    | None -> assert_equal_string "Ok" "Ok"
+    | Some version_mismatch -> assert_equal_string "version mismatch" version_mismatch
+
 let tests =
   "GLib constants tests" >:::
   [
@@ -81,5 +90,6 @@ let tests =
     "Test int64 constant" >:: test_int64_constant;
     "Test uint64 constant" >:: test_uint64_constant;
     "Test double constant" >:: test_double_constant;
-    "Test string constant" >:: test_string_constant
+    "Test string constant" >:: test_string_constant;
+    "Test dynamically loader version constants" >:: test_dynamically_loaded_version_constants
   ]
