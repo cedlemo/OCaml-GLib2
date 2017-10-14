@@ -42,4 +42,3 @@ let tests =
     [
       "Test glib check version" >:: test_glib_check_version
     ]
-
