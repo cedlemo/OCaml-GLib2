@@ -128,6 +128,9 @@ val c_SYSDEF_AF_UNIX : int32
 val c_SYSDEF_MSG_DONTROUTE : int32
 val c_SYSDEF_MSG_OOB : int32
 val c_SYSDEF_MSG_PEEK : int32
+(*SKIPPED : Sequence*)
+(*SKIPPED : SequenceIter*)
+(*SKIPPED : SequenceIterCompareFunc*)
 val c_TIME_SPAN_DAY : int64
 val c_TIME_SPAN_HOUR : int64
 val c_TIME_SPAN_MILLISECOND : int64
@@ -154,6 +157,8 @@ val ascii_strcasecmp:
 string -> string -> int32
 val ascii_strdown:
 string -> int64 -> string
+(*Not implemented g_ascii_string_to_signed argument type Arg_info.In or Arg_info.Out not handled*)
+(*Not implemented g_ascii_string_to_unsigned argument type Arg_info.In or Arg_info.Out not handled*)
 val ascii_strncasecmp:
 string -> string -> Unsigned.uint64 -> int32
 (*Not implemented g_ascii_strtod argument type Arg_info.In or Arg_info.Out not handled*)
@@ -240,7 +245,7 @@ unit -> Unsigned.uint32
 val chdir:
 string -> int32
 val check_version:
-Unsigned.uint32 -> Unsigned.uint32 -> Unsigned.uint32 -> string option
+Unsigned.uint32 -> Unsigned.uint32 -> Unsigned.uint32 -> string
 val checksum_type_get_length:
 Checksum_type.t -> int64
 (*Not implemented g_child_watch_add_full argument type callback not handled*)
@@ -487,27 +492,20 @@ unit -> Unsigned.uint32
 (*Not implemented g_listenv return type C Array type for Types.Array tag not handled*)
 (*Not implemented g_locale_from_utf8 argument type Arg_info.In or Arg_info.Out not handled*)
 (*Not implemented g_locale_to_utf8 argument type Arg_info.In or Arg_info.Out not handled*)
-val log_default_handler:
-string option -> Log_level_flags.t_list -> string option -> unit ptr option -> unit
-val log_remove_handler:
-string -> Unsigned.uint32 -> unit
-val log_set_always_fatal:
-Log_level_flags.t_list -> Log_level_flags.t_list
-val log_set_fatal_mask:
-string -> Log_level_flags.t_list -> Log_level_flags.t_list
-(*Not implemented g_log_set_handler_full argument type callback not handled*)
-(*Not implemented g_log_set_writer_func argument type callback not handled*)
-(*Not implemented g_log_structured_array argument type C Array type for Types.Array tag not handled*)
-val log_variant:
-string option -> Log_level_flags.t_list -> Variant.t structure ptr -> unit
-(*Not implemented g_log_writer_default argument type C Array type for Types.Array tag not handled*)
-(*Not implemented g_log_writer_format_fields argument type C Array type for Types.Array tag not handled*)
-val log_writer_is_journald:
-int32 -> bool
-(*Not implemented g_log_writer_journald argument type C Array type for Types.Array tag not handled*)
-(*Not implemented g_log_writer_standard_streams argument type C Array type for Types.Array tag not handled*)
-val log_writer_supports_color:
-int32 -> bool
+(*SKIPPED : log_default_handler*)
+(*SKIPPED : log_remove_handler*)
+(*SKIPPED : log_set_always_fatal*)
+(*SKIPPED : log_set_fatal_mask*)
+(*SKIPPED : log_set_handler*)
+(*SKIPPED : log_set_writer_func*)
+(*SKIPPED : log_structured_array*)
+(*SKIPPED : log_variant*)
+(*SKIPPED : log_writer_default*)
+(*SKIPPED : log_writer_format_fields*)
+(*SKIPPED : log_writer_is_journald*)
+(*SKIPPED : log_writer_journald*)
+(*SKIPPED : log_writer_standard_streams*)
+(*SKIPPED : log_writer_supports_color*)
 (*SKIPPED : g_main_context_default return type Main_context.t structure ptr*)
 (*SKIPPED : g_main_context_get_thread_default return type Main_context.t structure ptr*)
 (*SKIPPED : g_main_context_ref_thread_default return type Main_context.t structure ptr*)
@@ -536,6 +534,8 @@ val mkdir_with_parents:
 string -> int32 -> int32
 val nullify_pointer:
 unit ptr -> unit
+val number_parser_error_quark:
+unit -> Unsigned.uint32
 val on_error_query:
 string -> unit
 val on_error_stack_trace:
@@ -605,20 +605,15 @@ val reload_user_special_dirs_cache:
 unit -> unit
 val rmdir:
 string -> int32
-val sequence_get:
-Sequence_iter.t structure ptr -> unit ptr option
-val sequence_move:
-Sequence_iter.t structure ptr -> Sequence_iter.t structure ptr -> unit
-val sequence_move_range:
-Sequence_iter.t structure ptr -> Sequence_iter.t structure ptr -> Sequence_iter.t structure ptr -> unit
-val sequence_remove:
-Sequence_iter.t structure ptr -> unit
-val sequence_remove_range:
-Sequence_iter.t structure ptr -> Sequence_iter.t structure ptr -> unit
-val sequence_set:
-Sequence_iter.t structure ptr -> unit ptr option -> unit
-val sequence_swap:
-Sequence_iter.t structure ptr -> Sequence_iter.t structure ptr -> unit
+(*SKIPPED : g_sequence_get argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_insert_before argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_move argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_move_range argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_range_get_midpoint argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_remove argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_remove_range argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_set argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_swap argument type Sequence_iter.t structure ptr*)
 val set_application_name:
 string -> unit
 (*Not implemented g_set_error_literal argument type Arg_info.In or Arg_info.Out not handled*)
@@ -926,7 +921,7 @@ string -> int64 -> string
 val utf8_collate_key_for_filename:
 string -> int64 -> string
 val utf8_find_next_char:
-string -> string option -> string
+string -> string option -> string option
 val utf8_find_prev_char:
 string -> string -> string
 (*Not implemented g_utf8_get_char return type unichar not handled*)

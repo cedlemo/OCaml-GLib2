@@ -84,8 +84,7 @@ let c_LOG_2_BASE_10 = 0.30103
 let c_LOG_DOMAIN = 0
 let c_LOG_FATAL_MASK = Int32.of_string "0"
 let c_LOG_LEVEL_USER_SHIFT = Int32.of_string "8"
-external get_major_version: unit -> int = "get_major_version"
-let c_MAJOR_VERSION = get_major_version () |> Int32.of_int
+let c_MAJOR_VERSION = constant "GLIB_MAJOR_VERSION" int32
 let c_MAXINT16 = 32767
 let c_MAXINT32 = Int32.of_string "2147483647"
 let c_MAXINT64 = 9223372036854775807L
@@ -94,14 +93,12 @@ let c_MAXUINT16 = Unsigned.UInt16.of_int 65535
 let c_MAXUINT32 = Unsigned.UInt32.of_string "4294967295"
 let c_MAXUINT64 = Unsigned.UInt64.of_string "18446744073709551615"
 let c_MAXUINT8 = Unsigned.UInt8.of_int 255
-external get_micro_version: unit -> int = "get_micro_version"
-let c_MICRO_VERSION = get_micro_version () |> Int32.of_int
+let c_MICRO_VERSION = constant "GLIB_MICRO_VERSION" int32
 let c_MININT16 = -32768
 let c_MININT32 = Int32.of_string "-2147483648"
 let c_MININT64 = -9223372036854775808L
 let c_MININT8 = -128
-external get_minor_version: unit -> int = "get_minor_version"
-let c_MINOR_VERSION = get_micro_version () |> Int32.of_int
+let c_MINOR_VERSION = constant "GLIB_MINOR_VERSION" int32
 let c_MODULE_SUFFIX = "so"
 (*SKIPPED : MainContext*)
 let c_OPTION_REMAINING = ""
@@ -132,6 +129,9 @@ let c_SYSDEF_AF_UNIX = Int32.of_string "1"
 let c_SYSDEF_MSG_DONTROUTE = Int32.of_string "4"
 let c_SYSDEF_MSG_OOB = Int32.of_string "1"
 let c_SYSDEF_MSG_PEEK = Int32.of_string "2"
+(*SKIPPED : Sequence*)
+(*SKIPPED : SequenceIter*)
+(*SKIPPED : SequenceIterCompareFunc*)
 let c_TIME_SPAN_DAY = 86400000000L
 let c_TIME_SPAN_HOUR = 3600000000L
 let c_TIME_SPAN_MILLISECOND = 1000L
@@ -158,6 +158,8 @@ let ascii_strcasecmp =
 foreign "g_ascii_strcasecmp" (string @-> string @-> returning (int32_t))
 let ascii_strdown =
 foreign "g_ascii_strdown" (string @-> int64_t @-> returning (string))
+(*Not implemented g_ascii_string_to_signed argument type Arg_info.In or Arg_info.Out not handled*)
+(*Not implemented g_ascii_string_to_unsigned argument type Arg_info.In or Arg_info.Out not handled*)
 let ascii_strncasecmp =
 foreign "g_ascii_strncasecmp" (string @-> string @-> uint64_t @-> returning (int32_t))
 (*Not implemented g_ascii_strtod argument type Arg_info.In or Arg_info.Out not handled*)
@@ -244,7 +246,7 @@ foreign "g_bookmark_file_error_quark" (void @-> returning (uint32_t))
 let chdir =
 foreign "g_chdir" (string @-> returning (int32_t))
 let check_version =
-foreign "glib_check_version" (uint32_t @-> uint32_t @-> uint32_t @-> returning (string_opt))
+foreign "glib_check_version" (uint32_t @-> uint32_t @-> uint32_t @-> returning (string))
 let checksum_type_get_length =
 foreign "g_checksum_type_get_length" (Checksum_type.t_view @-> returning (int64_t))
 (*Not implemented g_child_watch_add_full argument type callback not handled*)
@@ -491,27 +493,20 @@ foreign "g_key_file_error_quark" (void @-> returning (uint32_t))
 (*Not implemented g_listenv return type C Array type for Types.Array tag not handled*)
 (*Not implemented g_locale_from_utf8 argument type Arg_info.In or Arg_info.Out not handled*)
 (*Not implemented g_locale_to_utf8 argument type Arg_info.In or Arg_info.Out not handled*)
-let log_default_handler =
-foreign "g_log_default_handler" (string_opt @-> Log_level_flags.t_list_view @-> string_opt @-> ptr_opt void @-> returning (void))
-let log_remove_handler =
-foreign "g_log_remove_handler" (string @-> uint32_t @-> returning (void))
-let log_set_always_fatal =
-foreign "g_log_set_always_fatal" (Log_level_flags.t_list_view @-> returning (Log_level_flags.t_list_view))
-let log_set_fatal_mask =
-foreign "g_log_set_fatal_mask" (string @-> Log_level_flags.t_list_view @-> returning (Log_level_flags.t_list_view))
-(*Not implemented g_log_set_handler_full argument type callback not handled*)
-(*Not implemented g_log_set_writer_func argument type callback not handled*)
-(*Not implemented g_log_structured_array argument type C Array type for Types.Array tag not handled*)
-let log_variant =
-foreign "g_log_variant" (string_opt @-> Log_level_flags.t_list_view @-> ptr Variant.t_typ @-> returning (void))
-(*Not implemented g_log_writer_default argument type C Array type for Types.Array tag not handled*)
-(*Not implemented g_log_writer_format_fields argument type C Array type for Types.Array tag not handled*)
-let log_writer_is_journald =
-foreign "g_log_writer_is_journald" (int32_t @-> returning (bool))
-(*Not implemented g_log_writer_journald argument type C Array type for Types.Array tag not handled*)
-(*Not implemented g_log_writer_standard_streams argument type C Array type for Types.Array tag not handled*)
-let log_writer_supports_color =
-foreign "g_log_writer_supports_color" (int32_t @-> returning (bool))
+(*SKIPPED : log_default_handler*)
+(*SKIPPED : log_remove_handler*)
+(*SKIPPED : log_set_always_fatal*)
+(*SKIPPED : log_set_fatal_mask*)
+(*SKIPPED : log_set_handler*)
+(*SKIPPED : log_set_writer_func*)
+(*SKIPPED : log_structured_array*)
+(*SKIPPED : log_variant*)
+(*SKIPPED : log_writer_default*)
+(*SKIPPED : log_writer_format_fields*)
+(*SKIPPED : log_writer_is_journald*)
+(*SKIPPED : log_writer_journald*)
+(*SKIPPED : log_writer_standard_streams*)
+(*SKIPPED : log_writer_supports_color*)
 (*SKIPPED : g_main_context_default return type Main_context.t structure ptr*)
 (*SKIPPED : g_main_context_get_thread_default return type Main_context.t structure ptr*)
 (*SKIPPED : g_main_context_ref_thread_default return type Main_context.t structure ptr*)
@@ -540,6 +535,8 @@ let mkdir_with_parents =
 foreign "g_mkdir_with_parents" (string @-> int32_t @-> returning (int32_t))
 let nullify_pointer =
 foreign "g_nullify_pointer" (ptr void @-> returning (void))
+let number_parser_error_quark =
+foreign "g_number_parser_error_quark" (void @-> returning (uint32_t))
 let on_error_query =
 foreign "g_on_error_query" (string @-> returning (void))
 let on_error_stack_trace =
@@ -609,20 +606,15 @@ let reload_user_special_dirs_cache =
 foreign "g_reload_user_special_dirs_cache" (void @-> returning (void))
 let rmdir =
 foreign "g_rmdir" (string @-> returning (int32_t))
-let sequence_get =
-foreign "g_sequence_get" (ptr Sequence_iter.t_typ @-> returning (ptr_opt void))
-let sequence_move =
-foreign "g_sequence_move" (ptr Sequence_iter.t_typ @-> ptr Sequence_iter.t_typ @-> returning (void))
-let sequence_move_range =
-foreign "g_sequence_move_range" (ptr Sequence_iter.t_typ @-> ptr Sequence_iter.t_typ @-> ptr Sequence_iter.t_typ @-> returning (void))
-let sequence_remove =
-foreign "g_sequence_remove" (ptr Sequence_iter.t_typ @-> returning (void))
-let sequence_remove_range =
-foreign "g_sequence_remove_range" (ptr Sequence_iter.t_typ @-> ptr Sequence_iter.t_typ @-> returning (void))
-let sequence_set =
-foreign "g_sequence_set" (ptr Sequence_iter.t_typ @-> ptr_opt void @-> returning (void))
-let sequence_swap =
-foreign "g_sequence_swap" (ptr Sequence_iter.t_typ @-> ptr Sequence_iter.t_typ @-> returning (void))
+(*SKIPPED : g_sequence_get argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_insert_before argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_move argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_move_range argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_range_get_midpoint argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_remove argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_remove_range argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_set argument type Sequence_iter.t structure ptr*)
+(*SKIPPED : g_sequence_swap argument type Sequence_iter.t structure ptr*)
 let set_application_name =
 foreign "g_set_application_name" (string @-> returning (void))
 (*Not implemented g_set_error_literal argument type Arg_info.In or Arg_info.Out not handled*)
@@ -930,7 +922,7 @@ foreign "g_utf8_collate_key" (string @-> int64_t @-> returning (string))
 let utf8_collate_key_for_filename =
 foreign "g_utf8_collate_key_for_filename" (string @-> int64_t @-> returning (string))
 let utf8_find_next_char =
-foreign "g_utf8_find_next_char" (string @-> string_opt @-> returning (string))
+foreign "g_utf8_find_next_char" (string @-> string_opt @-> returning (string_opt))
 let utf8_find_prev_char =
 foreign "g_utf8_find_prev_char" (string @-> string @-> returning (string))
 (*Not implemented g_utf8_get_char return type unichar not handled*)
