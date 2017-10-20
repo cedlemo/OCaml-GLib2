@@ -84,7 +84,8 @@ let c_LOG_2_BASE_10 = 0.30103
 let c_LOG_DOMAIN = 0
 let c_LOG_FATAL_MASK = Int32.of_string "0"
 let c_LOG_LEVEL_USER_SHIFT = Int32.of_string "8"
-let c_MAJOR_VERSION = constant "GLIB_MAJOR_VERSION" int32
+external get_major_version: unit -> int = "get_major_version"
+let c_MAJOR_VERSION = get_major_version () |> Int32.of_int
 let c_MAXINT16 = 32767
 let c_MAXINT32 = Int32.of_string "2147483647"
 let c_MAXINT64 = 9223372036854775807L
@@ -93,12 +94,14 @@ let c_MAXUINT16 = Unsigned.UInt16.of_int 65535
 let c_MAXUINT32 = Unsigned.UInt32.of_string "4294967295"
 let c_MAXUINT64 = Unsigned.UInt64.of_string "18446744073709551615"
 let c_MAXUINT8 = Unsigned.UInt8.of_int 255
-let c_MICRO_VERSION = constant "GLIB_MICRO_VERSION" int32
+external get_minor_version: unit -> int = "get_minor_version"
+let c_MINOR_VERSION = get_minor_version () |> Int32.of_int
 let c_MININT16 = -32768
 let c_MININT32 = Int32.of_string "-2147483648"
 let c_MININT64 = -9223372036854775808L
 let c_MININT8 = -128
-let c_MINOR_VERSION = constant "GLIB_MINOR_VERSION" int32
+external get_micro_version: unit -> int = "get_micro_version"
+let c_MICRO_VERSION = get_micro_version () |> Int32.of_int
 let c_MODULE_SUFFIX = "so"
 (*SKIPPED : MainContext*)
 let c_OPTION_REMAINING = ""
@@ -246,7 +249,7 @@ foreign "g_bookmark_file_error_quark" (void @-> returning (uint32_t))
 let chdir =
 foreign "g_chdir" (string @-> returning (int32_t))
 let check_version =
-foreign "glib_check_version" (uint32_t @-> uint32_t @-> uint32_t @-> returning (string))
+foreign "glib_check_version" (uint32_t @-> uint32_t @-> uint32_t @-> returning (string_opt))
 let checksum_type_get_length =
 foreign "g_checksum_type_get_length" (Checksum_type.t_view @-> returning (int64_t))
 (*Not implemented g_child_watch_add_full argument type callback not handled*)
