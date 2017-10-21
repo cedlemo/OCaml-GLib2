@@ -27,8 +27,18 @@ let test_glib_check_version test_ctxt =
     | None -> assert_equal_string "Ok" "Ok"
     | Some version_mismatch -> assert_equal_string "version mismatch" version_mismatch
 
+let test_ascii_strdown_full test_ctxt =
+  let lowcase = GLib.Core.ascii_strdown "LOW_CASE" (Int64.of_int (-1)) in
+  assert_equal_string "low_case" lowcase
+
+let test_ascii_strdown_partial test_ctxt =
+  let lowcase = GLib.Core.ascii_strdown "LOW_CASE" (Int64.of_int 3) in
+  assert_equal_string "low" lowcase
+
 let tests =
   "GLib functionss tests" >:::
     [
-      "Test glib check version" >:: test_glib_check_version
+      "Test glib check version" >:: test_glib_check_version;
+      "Test glib ascii_strdown full length" >:: test_ascii_strdown_full;
+      "Test glib ascii_strdown partial length" >:: test_ascii_strdown_partial
     ]
