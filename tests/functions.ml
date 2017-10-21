@@ -20,22 +20,12 @@ open OUnit2
 
 let test_glib_check_version test_ctxt =
   let open Unsigned.UInt32 in
-  let major = of_int 2 in
-  let minor = of_int 52 in
-  let micro = of_int 3 in
-  let _ = (
+    let major = of_int32 GLib.Core.c_MAJOR_VERSION in
+    let minor = of_int32 GLib.Core.c_MINOR_VERSION in
+    let micro = of_int32 GLib.Core.c_MICRO_VERSION in
     match GLib.Core.check_version major minor micro with
     | None -> assert_equal_string "Ok" "Ok"
     | Some version_mismatch -> assert_equal_string "version mismatch" version_mismatch
-  )
-  in
-  let major = of_int 3 in
-  let minor = of_int 52 in
-  let micro = of_int 3 in
-  match GLib.Core.check_version major minor micro with
-    | None -> assert_equal_string "Ok" "Ok"
-    | Some version_mismatch -> assert_equal_string "GLib version too old (major mismatch)" version_mismatch
-
 
 let tests =
   "GLib functionss tests" >:::
