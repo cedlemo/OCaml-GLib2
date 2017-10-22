@@ -40,11 +40,18 @@ let test_ascii_strcasecmp test_ctxt =
   assert_equal_int32 zero (GLib.Core.ascii_strcasecmp "Hi, Hallo" "Hi, Hallo");
   assert_equal_int32 zero (GLib.Core.ascii_strcasecmp "hi, hALLO" "Hi, Hallo")
 
+let test_ascii_strncasecmp test_ctxt =
+  let open Int32 in
+  assert_equal_int32 zero (GLib.Core.ascii_strncasecmp "Hi, Hallo" "Hi, Hallo" (Unsigned.UInt64.of_int 8));
+  assert_equal_int32 zero (GLib.Core.ascii_strncasecmp "hi, hALLO" "Hi, Hallo" (Unsigned.UInt64.of_int 8));
+  assert_equal_int32 zero (GLib.Core.ascii_strncasecmp "hi, hALLO" "Hi, Hatoto" (Unsigned.UInt64.of_int 5))
+
 let tests =
   "GLib functionss tests" >:::
     [
       "Test glib check version" >:: test_glib_check_version;
       "Test glib ascii_strdown full length" >:: test_ascii_strdown_full;
       "Test glib ascii_strdown partial length" >:: test_ascii_strdown_partial;
-      "Test glib ascii_strcasecmp" >:: test_ascii_strcasecmp
+      "Test glib ascii_strcasecmp" >:: test_ascii_strcasecmp;
+      "Test glib ascii_strcasencmp" >:: test_ascii_strncasecmp
     ]
