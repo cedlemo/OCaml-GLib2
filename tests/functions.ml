@@ -35,10 +35,16 @@ let test_ascii_strdown_partial test_ctxt =
   let lowcase = GLib.Core.ascii_strdown "LOW_CASE" (Int64.of_int 3) in
   assert_equal_string "low" lowcase
 
+let test_ascii_strcasecmp test_ctxt =
+  let open Int32 in
+  assert_equal_int32 zero (GLib.Core.ascii_strcasecmp "Hi, Hallo" "Hi, Hallo");
+  assert_equal_int32 zero (GLib.Core.ascii_strcasecmp "hi, hALLO" "Hi, Hallo")
+
 let tests =
   "GLib functionss tests" >:::
     [
       "Test glib check version" >:: test_glib_check_version;
       "Test glib ascii_strdown full length" >:: test_ascii_strdown_full;
-      "Test glib ascii_strdown partial length" >:: test_ascii_strdown_partial
+      "Test glib ascii_strdown partial length" >:: test_ascii_strdown_partial;
+      "Test glib ascii_strcasecmp" >:: test_ascii_strcasecmp
     ]
