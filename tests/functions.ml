@@ -46,6 +46,12 @@ let test_ascii_strncasecmp test_ctxt =
   assert_equal_int32 zero (GLib.Core.ascii_strncasecmp "hi, hALLO" "Hi, Hallo" (Unsigned.UInt64.of_int 8));
   assert_equal_int32 zero (GLib.Core.ascii_strncasecmp "hi, hALLO" "Hi, Hatoto" (Unsigned.UInt64.of_int 5))
 
+let test_ascii_strup test_ctxt =
+  let upcase = GLib.Core.ascii_strup "up_case" (Int64.of_int (-1)) in
+  assert_equal_string "UP_CASE" upcase;
+  let upcase = GLib.Core.ascii_strup "up_case" (Int64.of_int 3) in
+  assert_equal_string "UP_" upcase
+
 let tests =
   "GLib functionss tests" >:::
     [
@@ -53,5 +59,6 @@ let tests =
       "Test glib ascii_strdown full length" >:: test_ascii_strdown_full;
       "Test glib ascii_strdown partial length" >:: test_ascii_strdown_partial;
       "Test glib ascii_strcasecmp" >:: test_ascii_strcasecmp;
-      "Test glib ascii_strcasencmp" >:: test_ascii_strncasecmp
+      "Test glib ascii_strcasencmp" >:: test_ascii_strncasecmp;
+      "Test glib ascii_strup" >:: test_ascii_strup
     ]
