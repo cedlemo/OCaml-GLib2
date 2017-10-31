@@ -52,6 +52,26 @@ let test_ascii_strup test_ctxt =
   let upcase = GLib.Core.ascii_strup "up_case" (Int64.of_int 3) in
   assert_equal_string "UP_" upcase
 
+let test_filename_to_uri_ok test_ctxt =
+  let path ="/var" in
+  match GLib.Core.filename_to_uri path None with
+  | Error e -> assert_equal_string "This should not " "have been reached"
+  | Ok uri -> match uri with
+    | None -> assert_equal_string "This should not " "have been reached"
+    | Some uri' -> assert_equal_string "file:///var" uri'
+
+let test_filename_to_uri_error test_ctxt =
+  let path ="a_totally_bad_path_that_should_not_exist" in
+  match GLib.Core.filename_to_uri path None with
+  | Error e -> (
+       match e with
+               | None -> assert_equal_string "This should not " "have been reached"
+               | Some err ->
+                   assert_equal_string "The pathname “a_totally_bad_path_that_should_not_exist” is not an absolute path" Ctypes.(getf (!@ err) GLib.Error.f_message);
+                   assert_equal_int32 (Int32.of_int 5) Ctypes.(getf (!@ err) GLib.Error.f_code)
+  )
+  | Ok uri -> assert_equal_string "This should not " "have been reached"
+
 let tests =
   "GLib functionss tests" >:::
     [
@@ -60,5 +80,7 @@ let tests =
       "Test glib ascii_strdown partial length" >:: test_ascii_strdown_partial;
       "Test glib ascii_strcasecmp" >:: test_ascii_strcasecmp;
       "Test glib ascii_strcasencmp" >:: test_ascii_strncasecmp;
-      "Test glib ascii_strup" >:: test_ascii_strup
+      "Test glib ascii_strup" >:: test_ascii_strup;
+      "Test glib filename_to_uri ok" >:: test_filename_to_uri_ok;
+      "Test glib filename_to_uri with error" >:: test_filename_to_uri_error
     ]
