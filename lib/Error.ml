@@ -18,4 +18,4 @@ let free =
 let matches =
   foreign "g_error_matches" (ptr t_typ @-> uint32_t @-> int32_t @-> returning (bool))
 
-
+let _ = seal t_typ
