@@ -371,7 +371,7 @@ val filename_display_name:
 (*Not implemented g_filename_from_uri argument type Arg_info.In or Arg_info.Out not handled*)
 (*Not implemented g_filename_from_utf8 argument type Arg_info.In or Arg_info.Out not handled*)
 val filename_to_uri:
-  string -> string option -> (string, Error.t structure ptr option) result
+  string -> string option -> (string option, Error.t structure ptr option) result
 (*Not implemented g_filename_to_utf8 argument type Arg_info.In or Arg_info.Out not handled*)
 val find_program_in_path:
   string -> string

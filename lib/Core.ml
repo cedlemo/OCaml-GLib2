@@ -424,7 +424,7 @@ let filename_display_name =
 (*Not implemented g_filename_from_utf8 argument type Arg_info.In or Arg_info.Out not handled*)
 let filename_to_uri arg1 arg2 =
 let filename_to_uri_raw =
-  foreign "g_filename_to_uri" (string @-> string_opt @-> ptr_opt (ptr_opt Error.t_typ) @-> returning (string))
+  foreign "g_filename_to_uri" (string @-> string_opt @-> ptr_opt (ptr_opt Error.t_typ) @-> returning (string_opt))
 in
 let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
 let value = filename_to_uri_raw arg1 arg2 (Some err_ptr_ptr)
