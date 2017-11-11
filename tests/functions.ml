@@ -76,7 +76,7 @@ let test_filename_to_uri_error test_ctxt =
   in at_exit Gc.full_major
 
 let tests =
-  "GLib functionss tests" >:::
+  "GLib functions tests" >:::
     [
       "Test glib check version" >:: test_glib_check_version;
       "Test glib ascii_strdown full length" >:: test_ascii_strdown_full;
