@@ -40,21 +40,21 @@ RUN \
 
 
 RUN \
-  useradd --user-group --create-home ocaml-gi
+  useradd --user-group --create-home ocaml-glib2
 
 RUN \
-  echo "ocaml-gi ALL=(ALL:ALL) NOPASSWD:ALL" | \
-    EDITOR=tee visudo -f /etc/sudoers.d/ocaml-gi
+  echo "ocaml-glib2 ALL=(ALL:ALL) NOPASSWD:ALL" | \
+    EDITOR=tee visudo -f /etc/sudoers.d/ocaml-glib2
 
-USER ocaml-gi
+USER ocaml-glib2
 
-COPY . /home/ocaml-gi/ocaml-gi
+COPY . /home/ocaml-glib2/ocaml-glib2
 
-RUN sudo chown -R ocaml-gi:ocaml-gi /home/ocaml-gi/ocaml-gi
-WORKDIR /home/ocaml-gi/ocaml-gi
+RUN sudo chown -R ocaml-glib2:ocaml-glib2 /home/ocaml-glib2/ocaml-glib2
+WORKDIR /home/ocaml-glib2/ocaml-glib2
 RUN wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sudo sh -s /usr/local/bin
 RUN /usr/local/bin/opam init --comp 4.05.0
 RUN opam install ctypes configurator base stdio ctypes-foreign jbuilder odoc bisect_ppx ounit
-RUN echo ". /home/ocaml-gi/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true" > /home/ocaml-gi/ocaml-gi/runtest.sh
-RUN echo "jbuilder runtest" >> /home/ocaml-gi/ocaml-gi/runtest.sh
-CMD bash -ex /home/ocaml-gi/ocaml-gi/runtest.sh
+RUN echo ". /home/ocaml-glib2/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true" > /home/ocaml-glib2/ocaml-glib2/runtest.sh
+RUN echo "jbuilder runtest" >> /home/ocaml-glib2/ocaml-glib2/runtest.sh
+CMD bash -ex /home/ocaml-glib2/ocaml-glib2/runtest.sh
