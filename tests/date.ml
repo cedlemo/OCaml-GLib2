@@ -20,7 +20,7 @@ open OUnit2
 
 let test_get_days_in_month test_ctxt =
   let open Unsigned in
-  let n_days = GLib.Date.get_days_in_month () November (UInt16.of_int 2017) in
+  let n_days = GLib.Date.get_days_in_month November (UInt16.of_int 2017) in
   assert_equal_int 30 (UInt8.to_int n_days)
 
 let tests =
