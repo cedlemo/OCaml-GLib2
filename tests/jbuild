@@ -2,7 +2,7 @@
 
 (executables
  ((names (tests))
-  (libraries   (ocaml-glib2 oUnit))
+  (libraries   (ocaml-glib2 oUnit str))
 ))
 
 (alias

@@ -62,14 +62,21 @@ let test_filename_to_uri_ok test_ctxt =
 
 let test_filename_to_uri_error test_ctxt =
   let path ="a_totally_bad_path_that_should_not_exist" in
-  let expected = "The pathname “a_totally_bad_path_that_should_not_exist” is \
+  let expected = "The pathname a_totally_bad_path_that_should_not_exist is \
                   not an absolute path" in
+  let filter_meaningless_char str =
+    String.split_on_char '\'' str
+    |> String.concat ""
+    |> Str.(split (regexp "\(“\|”\)"))
+    |> String.concat ""
+  in
   let _ = match GLib.Core.filename_to_uri path None with
   | Error e -> (
        match e with
                | None -> assert_equal_string "This should not " "have been reached"
                | Some err ->
-                   assert_equal_string  expected Ctypes.(getf (!@ err) GLib.Error.f_message);
+                   let error_message = Ctypes.(getf (!@ err) GLib.Error.f_message) in
+                   assert_equal_string  expected (filter_meaningless_char error_message);
                    assert_equal_int32 (Int32.of_int 5) Ctypes.(getf (!@ err) GLib.Error.f_code)
   )
   | Ok uri -> assert_equal_string "This should not " "have been reached"
