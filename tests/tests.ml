@@ -6,6 +6,7 @@ let () =
     [
       Constants.tests;
       Enums.tests;
-      Functions.tests
+      Functions.tests;
+      Date.tests
     ]
   )
