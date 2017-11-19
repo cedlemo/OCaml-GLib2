@@ -24,8 +24,24 @@ let test_get_days_in_month test_ctxt =
   let n_days = GLib.Date.get_days_in_month November (UInt16.of_int 2017) in
   assert_equal_int 30 (UInt8.to_int n_days)
 
+let test_date_create test_ctxt =
+  let open GLib in
+  let open Unsigned in
+  let date = Date.create () in
+  let day = UInt8.of_int 30 in
+  let month = Date_month.November in
+  let year = UInt16.of_int 2017 in
+  let _ = Date.set_day date day in
+  let _ = Date.set_month date month in
+  let _ = Date.set_year date year in
+  let _ = assert_equal_uint8 (Date.get_day date) day in
+  let _ = assert_equal (Date.get_month date) month in
+  let _ = assert_equal_uint16 (Date.get_year date) year in
+  Date.free date
+
 let tests =
   "GLib2 Date module data and functions tests" >:::
     [
-      "test get days in month" >:: test_get_days_in_month
+      "test get days in month" >:: test_get_days_in_month;
+      "Test create date" >:: test_date_create
     ]
