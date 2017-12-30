@@ -24,8 +24,16 @@ let test_random_double test_ctxt =
   assert_equal ~printer:string_of_bool true (rdouble >= 0.0);
   assert_equal ~printer:string_of_bool true (rdouble <= 1.0)
 
+let test_random_double_range test_ctxt =
+  let start = 5.0 in
+  let stop = 6.0 in
+  let rdouble = GLib.Core.random_double_range start stop in
+  assert_equal ~printer:string_of_bool true (rdouble >= start);
+  assert_equal ~printer:string_of_bool true (rdouble <= stop)
+
 let tests =
   "Random functions test" >:::
     [
-      "test random double" >:: test_random_double
+      "test random double" >:: test_random_double;
+      "test random double range" >:: test_random_double_range;
     ]
