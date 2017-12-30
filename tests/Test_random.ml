@@ -31,9 +31,16 @@ let test_random_double_range test_ctxt =
   assert_equal ~printer:string_of_bool true (rdouble >= start);
   assert_equal ~printer:string_of_bool true (rdouble <= stop)
 
+let test_random_int test_ctxt =
+  let open Unsigned in
+  let rint = GLib.Core.random_int () in
+  assert_equal ~printer:string_of_bool true UInt32.((compare rint zero) >= 0);
+  assert_equal ~printer:string_of_bool true UInt32.((compare rint GLib.Core.c_MAXUINT32) <= 0)
+
 let tests =
   "Random functions test" >:::
     [
       "test random double" >:: test_random_double;
       "test random double range" >:: test_random_double_range;
+      "test random int" >:: test_random_int;
     ]
