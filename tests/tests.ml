@@ -7,6 +7,7 @@ let () =
       Constants.tests;
       Enums.tests;
       Functions.tests;
-      Date.tests
+      Date.tests;
+      Test_random.tests;
     ]
   )
