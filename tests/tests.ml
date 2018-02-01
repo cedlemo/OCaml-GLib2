@@ -9,5 +9,6 @@ let () =
       Functions.tests;
       Date.tests;
       Test_random.tests;
+      Test_date_time.tests;
     ]
   )
