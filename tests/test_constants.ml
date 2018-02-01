@@ -1,5 +1,5 @@
 (*
- * Copyright 2017 Cedric LE MOIGNE, cedlemo@gmx.com
+ * Copyright 2017-2018 Cedric LE MOIGNE, cedlemo@gmx.com
  * This file is part of OCaml-GLib2.
  *
  * OCaml-GLib2 is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OCaml-GLib2.  If not, see <http://www.gnu.org/licenses/>.
  *)
-open TestUtils
+open Test_utils
 open OUnit2
 
 let test_boolean_constant test_ctxt =

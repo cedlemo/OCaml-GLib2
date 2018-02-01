@@ -1,5 +1,5 @@
 (*
- * Copyright 2017 Cedric LE MOIGNE, cedlemo@gmx.com
+ * Copyright 20172018 Cedric LE MOIGNE, cedlemo@gmx.com
  * This file is part of OCaml-GLib2.
  *
  * OCaml-GLib2 is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with OCaml-GLib2.  If not, see <http://www.gnu.org/licenses/>.
  *)
 
-open TestUtils
+open Test_utils
 open OUnit2
 
 let test_random_double test_ctxt =

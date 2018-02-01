@@ -16,7 +16,7 @@
  * along with OCaml-GLib2.  If not, see <http://www.gnu.org/licenses/>.
  *)
 
-open TestUtils
+open Test_utils
 open OUnit2
 open Unix
 
