@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OCaml-GLib2.  If not, see <http://www.gnu.org/licenses/>.
  *)
-open TestUtils
+open Test_utils
 open OUnit2
 
 let test_enum_type_of_value test_ctxt =
