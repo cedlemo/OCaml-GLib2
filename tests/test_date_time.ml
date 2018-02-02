@@ -19,19 +19,20 @@
 open Test_utils
 open OUnit2
 open Unix
+open Ctypes
 
 let test_get_ymd test_ctxt =
-  let now = GLib.Date_time.new_now_local in
+  let now = GLib.Date_time.new_now_local () in
   let (year, month, day) = GLib.Date_time.get_ymd now in
-  let now' = Unix.time in
+  let now' = Unix.time () in
   let tm = Unix.gmtime now' in
-  let _ = assert_equal_int tm.tm_year year in
-  let _ = assert_equal_int tm.tm_month month in
-  let _ = assert_equal_int tm.tm_mday day in
-  GLib.Date_time.free now
+  let _ = assert_equal_int32 (Int32.of_int (tm.tm_year + 1900)) year in
+  let _ = assert_equal_int32 (Int32.of_int (tm.tm_mon + 1)) month in
+  let _ = assert_equal_int32 (Int32.of_int tm.tm_mday) day in
+  GLib.Date_time.unref now
 
 let tests =
   "GLib2 Date_time module data and functions tests" >:::
     [
-      "test get ymd" >:: test_get_get_ymd;
+      "test get ymd" >:: test_get_ymd;
     ]
