@@ -35,16 +35,31 @@ let test_filename_to_uri_ok test_ctxt =
     | None -> assert_equal_string "This should not " "have been reached"
     | Some uri' -> assert_equal_string "file:///var" uri'
 
-(*let test_filename_from_uri_ok test_ctxt =
-  let uri = "file:///var" in
+let test_filename_from_uri_no_hostname test_ctxt =
+  let uri = "file:///etc/mpd.conf" in
   match GLib.Core.filename_from_uri uri with
-  | Error e -> assert_equal_string "This should not " "have been reached"
+  | Error e -> assert_equal_string "GError: This should not " "have been reached"
   | Ok (filename, hostname_opt) ->
-      let _ = assert_equal_string "/var" filename in
+      let _ = assert_equal_string "/etc/mpd.conf" filename in
+      match hostname_opt with
+      | None -> assert true
+      | Some h -> assert_equal_string "This should not " "have been reached"
+
+let test_filename_from_uri_bad_uri test_ctxt =
+  let uri = "noprotocoletc/mpd.conf" in
+  match GLib.Core.filename_from_uri uri with
+  | Error e -> assert true
+  | Ok _ -> assert_equal_string "This should not " "have been reached"
+
+let test_filename_from_uri_with_hostname test_ctxt =
+  let uri = "file://localhost/etc/mpd.conf" in
+  match GLib.Core.filename_from_uri uri with
+  | Error e -> assert_equal_string "GError: This should not " "have been reached"
+  | Ok (filename, hostname_opt) ->
+      let _ = assert_equal_string "/etc/mpd.conf" filename in
       match hostname_opt with
       | None -> assert_equal_string "This should not " "have been reached"
       | Some h -> assert_equal_string "localhost" h
-*)
 
 let test_get_charset_ok test_ctxt =
   let (is_utf8, charset) = GLib.Core.get_charset () in
@@ -66,11 +81,11 @@ let test_filename_to_uri_error test_ctxt =
   let _ = match GLib.Core.filename_to_uri path None with
   | Error e -> (
        match e with
-               | None -> assert_equal_string "This should not " "have been reached"
-               | Some err ->
-                   let error_message = Ctypes.(getf (!@ err) GLib.Error.f_message) in
-                   assert_equal_string  expected (filter_meaningless_char error_message);
-                   assert_equal_int32 (Int32.of_int 5) Ctypes.(getf (!@ err) GLib.Error.f_code)
+       | None -> assert_equal_string "This should not " "have been reached"
+       | Some err ->
+           let error_message = Ctypes.(getf (!@ err) GLib.Error.f_message) in
+           assert_equal_string  expected (filter_meaningless_char error_message);
+           assert_equal_int32 (Int32.of_int 5) Ctypes.(getf (!@ err) GLib.Error.f_code)
   )
   | Ok uri -> assert_equal_string "This should not " "have been reached"
   in at_exit Gc.full_major
@@ -90,6 +105,7 @@ let tests =
       "Test glib filename_to_uri with error" >:: test_filename_to_uri_error;
       "Test glib get_charset ok" >:: test_get_charset_ok;
       "Test glib dir_make_tmp" >:: test_dir_make_tmp;
-     (* "Test glib filename from uri ok" >:: test_glib_filename_from_uri_ok;
-      *)
+      "Test glib filename from uri no hostname" >:: test_filename_from_uri_no_hostname;
+      "Test glib filename from uri bad uri" >:: test_filename_from_uri_bad_uri;
+      "Test glib filename from uri with hostname" >:: test_filename_from_uri_with_hostname;
     ]
