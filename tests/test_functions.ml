@@ -44,6 +44,7 @@ let test_filename_to_uri_ok test_ctxt =
       match hostname_opt with
       | None -> assert_equal_string "This should not " "have been reached"
       | Some h -> assert_equal_string "localhost" h
+*)
 
 let test_get_charset_ok test_ctxt =
   let (is_utf8, charset) = GLib.Core.get_charset () in
@@ -51,7 +52,6 @@ let test_get_charset_ok test_ctxt =
     assert_equal_string "UTF-8" charset
   else
     assert ("UTF-8" <> charset)
-*)
 
 let test_filename_to_uri_error test_ctxt =
   let path ="a_totally_bad_path_that_should_not_exist" in
@@ -75,12 +75,21 @@ let test_filename_to_uri_error test_ctxt =
   | Ok uri -> assert_equal_string "This should not " "have been reached"
   in at_exit Gc.full_major
 
+let test_dir_make_tmp test_ctxt =
+  match GLib.Core.dir_make_tmp None with
+  | Error _ -> assert_equal_string "Error with dir_make_tmp " "this should not have been reached"
+  | Ok tmp_opt -> match tmp_opt with
+      | None -> assert_equal_string "no tmp " "this should not have been reached"
+      | Some tmp -> assert_file_exists tmp
+
 let tests =
   "GLib functions tests" >:::
     [
       "Test glib check version" >:: test_glib_check_version;
       "Test glib filename_to_uri ok" >:: test_filename_to_uri_ok;
       "Test glib filename_to_uri with error" >:: test_filename_to_uri_error;
+      "Test glib get_charset ok" >:: test_get_charset_ok;
+      "Test glib dir_make_tmp" >:: test_dir_make_tmp;
      (* "Test glib filename from uri ok" >:: test_glib_filename_from_uri_ok;
-      "Test glib get_charset ok" >:: test_get_charset_ok;*)
+      *)
     ]
