@@ -153,15 +153,15 @@ let is_signature =
   foreign "g_variant_is_signature" (string @-> returning (bool))
 let parse _type text limit endptr =
   let parse_raw =
-    foreign "g_variant_parse" (ptr_opt Variant_type.t_typ @-> string @-> string_opt @-> string_opt@-> ptr_opt (ptr_opt Error.t_typ) @-> returning (ptr t_typ))
+    foreign "g_variant_parse" (ptr_opt Variant_type.t_typ @-> string @-> string_opt @-> string_opt@-> ptr (ptr_opt Error.t_typ) @-> returning (ptr t_typ))
   in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
-  let value = parse_raw _type text limit endptr (Some err_ptr_ptr) in
+  let value = parse_raw _type text limit endptr err_ptr_ptr in
   match (!@ err_ptr_ptr) with
-    | None -> Ok value
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)
+  | None -> Ok value
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)
 let parse_error_print_context =
   foreign "g_variant_parse_error_print_context" (ptr Error.t_typ @-> string @-> returning (string_opt))
 let parse_error_quark =

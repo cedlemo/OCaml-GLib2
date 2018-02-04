@@ -281,27 +281,27 @@ let child_watch_source_new =
 
 let clear_error () =
   let clear_error_raw =
-    foreign "g_clear_error" (ptr_opt (ptr_opt Error.t_typ) @-> returning (void))
+    foreign "g_clear_error" (ptr (ptr_opt Error.t_typ) @-> returning (void))
   in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
-  let value = clear_error_raw  (Some err_ptr_ptr) in
+  let value = clear_error_raw  err_ptr_ptr in
   match (!@ err_ptr_ptr) with
-    | None -> Ok value
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)
+  | None -> Ok value
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)
 
 let close fd =
   let close_raw =
-    foreign "g_close" (int32_t@-> ptr_opt (ptr_opt Error.t_typ) @-> returning (bool))
+    foreign "g_close" (int32_t@-> ptr (ptr_opt Error.t_typ) @-> returning (bool))
   in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
-  let value = close_raw fd (Some err_ptr_ptr) in
+  let value = close_raw fd err_ptr_ptr in
   match (!@ err_ptr_ptr) with
-    | None -> Ok value
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)
+  | None -> Ok value
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)
 
 (*SKIPPED :  g_compute_checksum_for_bytes type Bytes.t structure ptr skipped*)
 
@@ -323,47 +323,47 @@ let convert str len to_codeset from_codeset =
   let bytes_written_ptr = allocate uint64_t Unsigned.UInt64.zero in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
   let convert_raw =
-    foreign "g_convert" (string @-> int64_t @-> string @-> string @-> ptr (uint64_t) @-> ptr (uint64_t) @-> ptr_opt (ptr_opt Error.t_typ) @-> returning (string))
+    foreign "g_convert" (string @-> int64_t @-> string @-> string @-> ptr (uint64_t) @-> ptr (uint64_t) @-> ptr (ptr_opt Error.t_typ) @-> returning (string))
   in
-  let ret = convert_raw str len to_codeset from_codeset bytes_read_ptr bytes_written_ptr (Some err_ptr_ptr) in
-let get_ret_value () =
+  let ret = convert_raw str len to_codeset from_codeset bytes_read_ptr bytes_written_ptr err_ptr_ptr in
+  let get_ret_value () =
     let bytes_read = !@ bytes_read_ptr in
-let get_ret_value () =
+  let get_ret_value () =
     let bytes_written = !@ bytes_written_ptr in
-  (ret, bytes_read, bytes_written)
+    (ret, bytes_read, bytes_written)
   in
   match (!@ err_ptr_ptr) with
-    | None -> Ok (get_ret_value ())
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)*)
+  | None -> Ok (get_ret_value ())
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)*)
 
 let convert_error_quark =
   foreign "g_convert_error_quark" (void @-> returning (uint32_t))
 
 let convert_with_fallback str len to_codeset from_codeset fallback bytes_read bytes_written =
   let convert_with_fallback_raw =
-    foreign "g_convert_with_fallback" (string @-> int64_t @-> string @-> string @-> string @-> ptr uint64_t @-> ptr uint64_t@-> ptr_opt (ptr_opt Error.t_typ) @-> returning (string_opt))
+    foreign "g_convert_with_fallback" (string @-> int64_t @-> string @-> string @-> string @-> ptr uint64_t @-> ptr uint64_t@-> ptr (ptr_opt Error.t_typ) @-> returning (string_opt))
   in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
-  let value = convert_with_fallback_raw str len to_codeset from_codeset fallback bytes_read bytes_written (Some err_ptr_ptr) in
+  let value = convert_with_fallback_raw str len to_codeset from_codeset fallback bytes_read bytes_written err_ptr_ptr in
   match (!@ err_ptr_ptr) with
-    | None -> Ok value
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)
+  | None -> Ok value
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)
 
 let convert_with_iconv str len converter bytes_read bytes_written =
   let convert_with_iconv_raw =
-    foreign "g_convert_with_iconv" (string @-> int64_t @-> ptr IConv.t_typ @-> ptr uint64_t @-> ptr uint64_t@-> ptr_opt (ptr_opt Error.t_typ) @-> returning (string_opt))
+    foreign "g_convert_with_iconv" (string @-> int64_t @-> ptr IConv.t_typ @-> ptr uint64_t @-> ptr uint64_t@-> ptr (ptr_opt Error.t_typ) @-> returning (string_opt))
   in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
-  let value = convert_with_iconv_raw str len converter bytes_read bytes_written (Some err_ptr_ptr) in
+  let value = convert_with_iconv_raw str len converter bytes_read bytes_written err_ptr_ptr in
   match (!@ err_ptr_ptr) with
-    | None -> Ok value
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)
+  | None -> Ok value
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)
 (*SKIPPED : datalist_clear*)
 (*SKIPPED : datalist_get_data*)
 (*SKIPPED : datalist_get_flags*)
@@ -429,15 +429,15 @@ let dgettext =
 
 let dir_make_tmp tmpl =
   let dir_make_tmp_raw =
-    foreign "g_dir_make_tmp" (string_opt@-> ptr_opt (ptr_opt Error.t_typ) @-> returning (string_opt))
+    foreign "g_dir_make_tmp" (string_opt@-> ptr (ptr_opt Error.t_typ) @-> returning (string_opt))
   in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
-  let value = dir_make_tmp_raw tmpl (Some err_ptr_ptr) in
+  let value = dir_make_tmp_raw tmpl err_ptr_ptr in
   match (!@ err_ptr_ptr) with
-    | None -> Ok value
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)
+  | None -> Ok value
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)
 
 let direct_equal =
   foreign "g_direct_equal" (ptr_opt void @-> ptr_opt void @-> returning (bool))
@@ -479,30 +479,30 @@ let file_open_tmp tmpl =
   let name_used_ptr = allocate string " " in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
   let file_open_tmp_raw =
-    foreign "g_file_open_tmp" (string_opt @-> ptr (string) @-> ptr_opt (ptr_opt Error.t_typ) @-> returning (int32_t))
+    foreign "g_file_open_tmp" (string_opt @-> ptr (string) @-> ptr (ptr_opt Error.t_typ) @-> returning (int32_t))
   in
-  let ret = file_open_tmp_raw tmpl name_used_ptr (Some err_ptr_ptr) in
-let get_ret_value () =
+  let ret = file_open_tmp_raw tmpl name_used_ptr err_ptr_ptr in
+  let get_ret_value () =
     let name_used = !@ name_used_ptr in
-  (ret, name_used)
+    (ret, name_used)
   in
   match (!@ err_ptr_ptr) with
-    | None -> Ok (get_ret_value ())
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)*)
+  | None -> Ok (get_ret_value ())
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)*)
 
 let file_read_link filename =
   let file_read_link_raw =
-    foreign "g_file_read_link" (string@-> ptr_opt (ptr_opt Error.t_typ) @-> returning (string_opt))
+    foreign "g_file_read_link" (string@-> ptr (ptr_opt Error.t_typ) @-> returning (string_opt))
   in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
-  let value = file_read_link_raw filename (Some err_ptr_ptr) in
+  let value = file_read_link_raw filename err_ptr_ptr in
   match (!@ err_ptr_ptr) with
-    | None -> Ok value
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)
+  | None -> Ok value
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)
 
 (*Not implemented g_file_set_contents type C Array type for Types.Array tag not implemented*)
 
@@ -516,34 +516,34 @@ let filename_display_name =
   foreign "g_filename_display_name" (string @-> returning (string_opt))
 
 let filename_from_uri uri =
-  let hostname_ptr = allocate string " " in
+  let hostname_ptr = allocate string_opt None in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
   let filename_from_uri_raw =
-    foreign "g_filename_from_uri" (string @-> ptr (string_opt) @-> ptr_opt (ptr_opt Error.t_typ) @-> returning (string))
+    foreign "g_filename_from_uri" (string @-> ptr (string_opt) @-> ptr (ptr_opt Error.t_typ) @-> returning (string))
   in
-  let ret = filename_from_uri_raw uri hostname_ptr (Some err_ptr_ptr) in
-let get_ret_value () =
+  let ret = filename_from_uri_raw uri hostname_ptr err_ptr_ptr in
+  let get_ret_value () =
     let hostname = !@ hostname_ptr in
-  (ret, hostname)
+    (ret, hostname)
   in
   match (!@ err_ptr_ptr) with
-    | None -> Ok (get_ret_value ())
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)
+  | None -> Ok (get_ret_value ())
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)
 (*Not implemented g_filename_from_utf8 return type C Array type for Types.Array tag not handled*)
 
 let filename_to_uri filename hostname =
   let filename_to_uri_raw =
-    foreign "g_filename_to_uri" (string @-> string_opt@-> ptr_opt (ptr_opt Error.t_typ) @-> returning (string_opt))
+    foreign "g_filename_to_uri" (string @-> string_opt@-> ptr (ptr_opt Error.t_typ) @-> returning (string_opt))
   in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
-  let value = filename_to_uri_raw filename hostname (Some err_ptr_ptr) in
+  let value = filename_to_uri_raw filename hostname err_ptr_ptr in
   match (!@ err_ptr_ptr) with
-    | None -> Ok value
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)
+  | None -> Ok value
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)
 
 (*
 let filename_to_utf8 opsysstring len =
@@ -552,20 +552,20 @@ let filename_to_utf8 opsysstring len =
   let bytes_written_ptr = allocate uint64_t Unsigned.UInt64.zero in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
   let filename_to_utf8_raw =
-    foreign "g_filename_to_utf8" (string @-> int64_t @-> ptr (uint64_t) @-> ptr (uint64_t) @-> ptr_opt (ptr_opt Error.t_typ) @-> returning (string))
+    foreign "g_filename_to_utf8" (string @-> int64_t @-> ptr (uint64_t) @-> ptr (uint64_t) @-> ptr (ptr_opt Error.t_typ) @-> returning (string))
   in
-  let ret = filename_to_utf8_raw opsysstring len bytes_read_ptr bytes_written_ptr (Some err_ptr_ptr) in
-let get_ret_value () =
+  let ret = filename_to_utf8_raw opsysstring len bytes_read_ptr bytes_written_ptr err_ptr_ptr in
+  let get_ret_value () =
     let bytes_read = !@ bytes_read_ptr in
-let get_ret_value () =
+  let get_ret_value () =
     let bytes_written = !@ bytes_written_ptr in
-  (ret, bytes_read, bytes_written)
+    (ret, bytes_read, bytes_written)
   in
   match (!@ err_ptr_ptr) with
-    | None -> Ok (get_ret_value ())
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)*)
+  | None -> Ok (get_ret_value ())
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)*)
 
 let find_program_in_path =
   foreign "g_find_program_in_path" (string @-> returning (string_opt))
@@ -787,20 +787,20 @@ let locale_from_utf8 utf8string len =
   let bytes_written_ptr = allocate uint64_t Unsigned.UInt64.zero in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
   let locale_from_utf8_raw =
-    foreign "g_locale_from_utf8" (string @-> int64_t @-> ptr (uint64_t) @-> ptr (uint64_t) @-> ptr_opt (ptr_opt Error.t_typ) @-> returning (string))
+    foreign "g_locale_from_utf8" (string @-> int64_t @-> ptr (uint64_t) @-> ptr (uint64_t) @-> ptr (ptr_opt Error.t_typ) @-> returning (string))
   in
-  let ret = locale_from_utf8_raw utf8string len bytes_read_ptr bytes_written_ptr (Some err_ptr_ptr) in
-let get_ret_value () =
+  let ret = locale_from_utf8_raw utf8string len bytes_read_ptr bytes_written_ptr err_ptr_ptr in
+  let get_ret_value () =
     let bytes_read = !@ bytes_read_ptr in
-let get_ret_value () =
+  let get_ret_value () =
     let bytes_written = !@ bytes_written_ptr in
-  (ret, bytes_read, bytes_written)
+    (ret, bytes_read, bytes_written)
   in
   match (!@ err_ptr_ptr) with
-    | None -> Ok (get_ret_value ())
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)*)
+  | None -> Ok (get_ret_value ())
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)*)
 
 (*
 let locale_to_utf8 opsysstring len =
@@ -809,20 +809,20 @@ let locale_to_utf8 opsysstring len =
   let bytes_written_ptr = allocate uint64_t Unsigned.UInt64.zero in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
   let locale_to_utf8_raw =
-    foreign "g_locale_to_utf8" (string @-> int64_t @-> ptr (uint64_t) @-> ptr (uint64_t) @-> ptr_opt (ptr_opt Error.t_typ) @-> returning (string))
+    foreign "g_locale_to_utf8" (string @-> int64_t @-> ptr (uint64_t) @-> ptr (uint64_t) @-> ptr (ptr_opt Error.t_typ) @-> returning (string))
   in
-  let ret = locale_to_utf8_raw opsysstring len bytes_read_ptr bytes_written_ptr (Some err_ptr_ptr) in
-let get_ret_value () =
+  let ret = locale_to_utf8_raw opsysstring len bytes_read_ptr bytes_written_ptr err_ptr_ptr in
+  let get_ret_value () =
     let bytes_read = !@ bytes_read_ptr in
-let get_ret_value () =
+  let get_ret_value () =
     let bytes_written = !@ bytes_written_ptr in
-  (ret, bytes_read, bytes_written)
+    (ret, bytes_read, bytes_written)
   in
   match (!@ err_ptr_ptr) with
-    | None -> Ok (get_ret_value ())
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)*)
+  | None -> Ok (get_ret_value ())
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)*)
 (*SKIPPED : log_default_handler*)
 (*SKIPPED : log_remove_handler*)
 (*SKIPPED : log_set_always_fatal*)
@@ -968,18 +968,18 @@ let regex_check_replacement replacement =
   let has_references_ptr = allocate bool false in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
   let regex_check_replacement_raw =
-    foreign "g_regex_check_replacement" (string @-> ptr (bool) @-> ptr_opt (ptr_opt Error.t_typ) @-> returning (bool))
+    foreign "g_regex_check_replacement" (string @-> ptr (bool) @-> ptr (ptr_opt Error.t_typ) @-> returning (bool))
   in
-  let ret = regex_check_replacement_raw replacement has_references_ptr (Some err_ptr_ptr) in
-let get_ret_value () =
+  let ret = regex_check_replacement_raw replacement has_references_ptr err_ptr_ptr in
+  let get_ret_value () =
     let has_references = !@ has_references_ptr in
-  (ret, has_references)
+    (ret, has_references)
   in
   match (!@ err_ptr_ptr) with
-    | None -> Ok (get_ret_value ())
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)*)
+  | None -> Ok (get_ret_value ())
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)*)
 
 let regex_error_quark =
   foreign "g_regex_error_quark" (void @-> returning (uint32_t))
@@ -1048,15 +1048,15 @@ let shell_quote =
 
 let shell_unquote quoted_string =
   let shell_unquote_raw =
-    foreign "g_shell_unquote" (string@-> ptr_opt (ptr_opt Error.t_typ) @-> returning (string_opt))
+    foreign "g_shell_unquote" (string@-> ptr (ptr_opt Error.t_typ) @-> returning (string_opt))
   in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
-  let value = shell_unquote_raw quoted_string (Some err_ptr_ptr) in
+  let value = shell_unquote_raw quoted_string err_ptr_ptr in
   match (!@ err_ptr_ptr) with
-    | None -> Ok value
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)
+  | None -> Ok value
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)
 (*SKIPPED : slice_alloc*)
 (*SKIPPED : slice_alloc0*)
 (*SKIPPED : slice_copy*)
@@ -1087,30 +1087,30 @@ let spaced_primes_closest =
 
 let spawn_check_exit_status exit_status =
   let spawn_check_exit_status_raw =
-    foreign "g_spawn_check_exit_status" (int32_t@-> ptr_opt (ptr_opt Error.t_typ) @-> returning (bool))
+    foreign "g_spawn_check_exit_status" (int32_t@-> ptr (ptr_opt Error.t_typ) @-> returning (bool))
   in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
-  let value = spawn_check_exit_status_raw exit_status (Some err_ptr_ptr) in
+  let value = spawn_check_exit_status_raw exit_status err_ptr_ptr in
   match (!@ err_ptr_ptr) with
-    | None -> Ok value
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)
+  | None -> Ok value
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)
 
 let spawn_close_pid =
   foreign "g_spawn_close_pid" (int32_t @-> returning (void))
 
 let spawn_command_line_async command_line =
   let spawn_command_line_async_raw =
-    foreign "g_spawn_command_line_async" (string@-> ptr_opt (ptr_opt Error.t_typ) @-> returning (bool))
+    foreign "g_spawn_command_line_async" (string@-> ptr (ptr_opt Error.t_typ) @-> returning (bool))
   in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
-  let value = spawn_command_line_async_raw command_line (Some err_ptr_ptr) in
+  let value = spawn_command_line_async_raw command_line err_ptr_ptr in
   match (!@ err_ptr_ptr) with
-    | None -> Ok value
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)
+  | None -> Ok value
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)
 
 (*Not implemented g_spawn_command_line_sync type C Array type for Types.Array tag not implemented*)
 
@@ -1419,27 +1419,27 @@ let unix_fd_source_new =
 
 let unix_open_pipe fds flags =
   let unix_open_pipe_raw =
-    foreign "g_unix_open_pipe" (ptr int32_t @-> int32_t@-> ptr_opt (ptr_opt Error.t_typ) @-> returning (bool))
+    foreign "g_unix_open_pipe" (ptr int32_t @-> int32_t@-> ptr (ptr_opt Error.t_typ) @-> returning (bool))
   in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
-  let value = unix_open_pipe_raw fds flags (Some err_ptr_ptr) in
+  let value = unix_open_pipe_raw fds flags err_ptr_ptr in
   match (!@ err_ptr_ptr) with
-    | None -> Ok value
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)
+  | None -> Ok value
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)
 
 let unix_set_fd_nonblocking fd nonblock =
   let unix_set_fd_nonblocking_raw =
-    foreign "g_unix_set_fd_nonblocking" (int32_t @-> bool@-> ptr_opt (ptr_opt Error.t_typ) @-> returning (bool))
+    foreign "g_unix_set_fd_nonblocking" (int32_t @-> bool@-> ptr (ptr_opt Error.t_typ) @-> returning (bool))
   in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
-  let value = unix_set_fd_nonblocking_raw fd nonblock (Some err_ptr_ptr) in
+  let value = unix_set_fd_nonblocking_raw fd nonblock err_ptr_ptr in
   match (!@ err_ptr_ptr) with
-    | None -> Ok value
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)
+  | None -> Ok value
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)
 
 (*Not implemented g_unix_signal_add_full type callback not implemented*)
 
@@ -1478,20 +1478,20 @@ let utf16_to_utf8 str len =
   let items_written_ptr = allocate int64_t Int64.zero in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
   let utf16_to_utf8_raw =
-    foreign "g_utf16_to_utf8" (ptr uint16_t @-> int64_t @-> ptr (int64_t) @-> ptr (int64_t) @-> ptr_opt (ptr_opt Error.t_typ) @-> returning (string))
+    foreign "g_utf16_to_utf8" (ptr uint16_t @-> int64_t @-> ptr (int64_t) @-> ptr (int64_t) @-> ptr (ptr_opt Error.t_typ) @-> returning (string))
   in
-  let ret = utf16_to_utf8_raw str len items_read_ptr items_written_ptr (Some err_ptr_ptr) in
-let get_ret_value () =
+  let ret = utf16_to_utf8_raw str len items_read_ptr items_written_ptr err_ptr_ptr in
+  let get_ret_value () =
     let items_read = !@ items_read_ptr in
-let get_ret_value () =
+  let get_ret_value () =
     let items_written = !@ items_written_ptr in
-  (ret, items_read, items_written)
+    (ret, items_read, items_written)
   in
   match (!@ err_ptr_ptr) with
-    | None -> Ok (get_ret_value ())
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)*)
+  | None -> Ok (get_ret_value ())
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)*)
 (*SKIPPED : utf8_casefold*)
 (*SKIPPED : utf8_collate*)
 (*SKIPPED : utf8_collate_key*)
@@ -1530,15 +1530,15 @@ let variant_is_signature =
 
 let variant_parse _type text limit endptr =
   let variant_parse_raw =
-    foreign "g_variant_parse" (ptr_opt Variant_type.t_typ @-> string @-> string_opt @-> string_opt@-> ptr_opt (ptr_opt Error.t_typ) @-> returning (ptr Variant.t_typ))
+    foreign "g_variant_parse" (ptr_opt Variant_type.t_typ @-> string @-> string_opt @-> string_opt@-> ptr (ptr_opt Error.t_typ) @-> returning (ptr Variant.t_typ))
   in
   let err_ptr_ptr = allocate (ptr_opt Error.t_typ) None in
-  let value = variant_parse_raw _type text limit endptr (Some err_ptr_ptr) in
+  let value = variant_parse_raw _type text limit endptr err_ptr_ptr in
   match (!@ err_ptr_ptr) with
-    | None -> Ok value
-    | Some _ -> let err_ptr = !@ err_ptr_ptr in
-      let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
-      Error (err_ptr)
+  | None -> Ok value
+  | Some _ -> let err_ptr = !@ err_ptr_ptr in
+    let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
+    Error (err_ptr)
 
 let variant_parse_error_print_context =
   foreign "g_variant_parse_error_print_context" (ptr Error.t_typ @-> string @-> returning (string_opt))
