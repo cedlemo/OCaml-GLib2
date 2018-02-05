@@ -18,6 +18,12 @@
 open Test_utils
 open OUnit2
 
+let filter_meaningless_char str =
+    String.split_on_char '\'' str
+    |> String.concat ""
+    |> Str.(split (regexp "\(“\|”\)"))
+    |> String.concat ""
+
 let test_glib_check_version test_ctxt =
   let open Unsigned.UInt32 in
     let major = of_int32 GLib.Core.c_MAJOR_VERSION in
@@ -39,45 +45,19 @@ let test_filename_from_uri_no_hostname test_ctxt =
   let uri = "file:///etc/mpd.conf" in
   match GLib.Core.filename_from_uri uri with
   | Error e -> assert_equal_string "GError: This should not " "have been reached"
-  | Ok (filename, hostname_opt) ->
-      let _ = assert_equal_string "/etc/mpd.conf" filename in
+  | Ok (filename_opt, hostname_opt) ->
+      let _ = match filename_opt with
+      | None -> assert_equal_string "It should " "return a filename"
+      | Some filename -> assert_equal_string "/etc/mpd.conf" filename
+      in
       match hostname_opt with
       | None -> assert true
       | Some h -> assert_equal_string "This should not " "have been reached"
-
-let test_filename_from_uri_bad_uri test_ctxt =
-  let uri = "noprotocoletcmpd.conf" in
-  match GLib.Core.filename_from_uri uri with
-  | Error e -> assert true
-  | Ok _ -> assert_equal_string "This should not " "have been reached"
-
-let test_filename_from_uri_with_hostname test_ctxt =
-  let uri = "file://localhost/etc/mpd.conf" in
-  match GLib.Core.filename_from_uri uri with
-  | Error e -> assert_equal_string "GError: This should not " "have been reached"
-  | Ok (filename, hostname_opt) ->
-      let _ = assert_equal_string "/etc/mpd.conf" filename in
-      match hostname_opt with
-      | None -> assert_equal_string "This should not " "have been reached"
-      | Some h -> assert_equal_string "localhost" h
-
-let test_get_charset_ok test_ctxt =
-  let (is_utf8, charset) = GLib.Core.get_charset () in
-  if is_utf8 then
-    assert_equal_string "UTF-8" charset
-  else
-    assert ("UTF-8" <> charset)
 
 let test_filename_to_uri_error test_ctxt =
   let path ="a_totally_bad_path_that_should_not_exist" in
   let expected = "The pathname a_totally_bad_path_that_should_not_exist is \
                   not an absolute path" in
-  let filter_meaningless_char str =
-    String.split_on_char '\'' str
-    |> String.concat ""
-    |> Str.(split (regexp "\(“\|”\)"))
-    |> String.concat ""
-  in
   let _ = match GLib.Core.filename_to_uri path None with
   | Error e -> (
        match e with
@@ -89,6 +69,41 @@ let test_filename_to_uri_error test_ctxt =
   )
   | Ok uri -> assert_equal_string "This should not " "have been reached"
   in at_exit Gc.full_major
+
+let test_filename_from_uri_bad_uri test_ctxt =
+  let uri = "noprotocoletcmpd.conf" in
+  let expected = "The URI noprotocoletcmpd.conf is not an absolute URI using the file scheme" in
+  match GLib.Core.filename_from_uri uri with
+  | Error e -> (
+       match e with
+       | None -> assert_equal_string "This should not " "have been reached"
+       | Some err ->
+           let error_message = Ctypes.(getf (!@ err) GLib.Error.f_message) in
+           assert_equal_string  expected (filter_meaningless_char error_message);
+           assert_equal_int32 (Int32.of_int 4) Ctypes.(getf (!@ err) GLib.Error.f_code)
+  )
+
+  | Ok _ -> assert_equal_string "This should not " "have been reached"
+
+let test_filename_from_uri_with_hostname test_ctxt =
+  let uri = "file://localhost/etc/mpd.conf" in
+  match GLib.Core.filename_from_uri uri with
+  | Error e -> assert_equal_string "GError: This should not " "have been reached"
+  | Ok (filename_opt, hostname_opt) ->
+      let _ = match filename_opt with
+      | None -> assert_equal_string "It should " "return a filename"
+      | Some filename -> assert_equal_string "/etc/mpd.conf" filename
+      in
+      match hostname_opt with
+      | None -> assert_equal_string "This should not " "have been reached"
+      | Some h -> assert_equal_string "localhost" h
+
+let test_get_charset_ok test_ctxt =
+  let (is_utf8, charset) = GLib.Core.get_charset () in
+  if is_utf8 then
+    assert_equal_string "UTF-8" charset
+  else
+    assert ("UTF-8" <> charset)
 
 let test_dir_make_tmp test_ctxt =
   match GLib.Core.dir_make_tmp None with
@@ -106,6 +121,6 @@ let tests =
       "Test glib get_charset ok" >:: test_get_charset_ok;
       "Test glib dir_make_tmp" >:: test_dir_make_tmp;
       "Test glib filename from uri no hostname" >:: test_filename_from_uri_no_hostname;
-      (* "Test glib filename from uri bad uri" >:: test_filename_from_uri_bad_uri; *)
+      "Test glib filename from uri bad uri" >:: test_filename_from_uri_bad_uri;
       "Test glib filename from uri with hostname" >:: test_filename_from_uri_with_hostname;
     ]
