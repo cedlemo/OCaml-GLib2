@@ -114,6 +114,7 @@ external get_minor_version: unit -> int = "get_minor_version"
 let c_MINOR_VERSION = get_minor_version () |> Int32.of_int
 let c_MODULE_SUFFIX = "so"
 (*SKIPPED : MainContext*)
+(*SKIPPED : MatchInfo*)
 let c_OPTION_REMAINING = ""
 let c_PDP_ENDIAN = Int32.of_string "3412"
 let c_PI = 3.141593
@@ -127,6 +128,11 @@ let c_PRIORITY_HIGH = Int32.of_string "-100"
 let c_PRIORITY_HIGH_IDLE = Int32.of_string "100"
 let c_PRIORITY_LOW = Int32.of_string "300"
 (*SKIPPED : Rand*)
+(*SKIPPED : Regex*)
+(*SKIPPED : RegexCompileFlags*)
+(*SKIPPED : RegexError*)
+(*SKIPPED : RegexEvalCallback*)
+(*SKIPPED : RegexMatchFlags*)
 let c_SEARCHPATH_SEPARATOR = Int32.of_string "59"
 let c_SEARCHPATH_SEPARATOR_S = ";"
 let c_SIZEOF_LONG = Int32.of_string "8"
@@ -276,7 +282,7 @@ let checksum_type_get_length =
 
 (*Not implemented g_child_watch_add_full type callback not implemented*)
 
-let child_watch_source_new =
+let child_watch_source_create =
   foreign "g_child_watch_source_new" (int32_t @-> returning (ptr Source.t_typ))
 
 let clear_error () =
@@ -737,7 +743,7 @@ let iconv =
 let idle_remove_by_data =
   foreign "g_idle_remove_by_data" (ptr_opt void @-> returning (bool))
 
-let idle_source_new =
+let idle_source_create =
   foreign "g_idle_source_new" (void @-> returning (ptr Source.t_typ))
 
 let int64_equal =
@@ -979,10 +985,9 @@ let regex_escape_nul =
 
 (*Not implemented g_regex_escape_string type C Array type for Types.Array tag not implemented*)
 
-let regex_match_simple =
-  foreign "g_regex_match_simple" (string @-> string @-> Regex_compile_flags.t_list_view @-> Regex_match_flags.t_list_view @-> returning (bool))
+(*SKIPPED :  g_regex_match_simple type Regex_compile_flags.t_list skipped*)
 
-(*Not implemented g_regex_split_simple return type C Array type for Types.Array tag not handled*)
+(*SKIPPED :  g_regex_split_simple type Regex_compile_flags.t_list skipped*)
 
 let reload_user_special_dirs_cache =
   foreign "g_reload_user_special_dirs_cache" (void @-> returning (void))
@@ -1170,13 +1175,13 @@ let strescape =
 let strfreev =
   foreign "g_strfreev" (string_opt @-> returning (void))
 
-let string_new =
+let string_create =
   foreign "g_string_new" (string_opt @-> returning (ptr String.t_typ))
 
-let string_new_len =
+let string_create_len =
   foreign "g_string_new_len" (string @-> int64_t @-> returning (ptr String.t_typ))
 
-let string_sized_new =
+let string_sized_create =
   foreign "g_string_sized_new" (uint64_t @-> returning (ptr String.t_typ))
 
 let strip_context =
@@ -1306,10 +1311,10 @@ let time_val_from_iso8601 iso_date =
 
 (*Not implemented g_timeout_add_seconds_full type callback not implemented*)
 
-let timeout_source_new =
+let timeout_source_create =
   foreign "g_timeout_source_new" (uint32_t @-> returning (ptr Source.t_typ))
 
-let timeout_source_new_seconds =
+let timeout_source_create_seconds =
   foreign "g_timeout_source_new_seconds" (uint32_t @-> returning (ptr Source.t_typ))
 (*DEPRECATED : trash_stack_height*)
 (*DEPRECATED : trash_stack_peek*)
@@ -1404,7 +1409,7 @@ let unix_error_quark =
 
 (*Not implemented g_unix_fd_add_full type callback not implemented*)
 
-let unix_fd_source_new =
+let unix_fd_source_create =
   foreign "g_unix_fd_source_new" (int32_t @-> IOCondition.t_list_view @-> returning (ptr Source.t_typ))
 
 let unix_open_pipe fds flags =
@@ -1433,7 +1438,7 @@ let unix_set_fd_nonblocking fd nonblock =
 
 (*Not implemented g_unix_signal_add_full type callback not implemented*)
 
-let unix_signal_source_new =
+let unix_signal_source_create =
   foreign "g_unix_signal_source_new" (int32_t @-> returning (ptr Source.t_typ))
 
 let unlink =

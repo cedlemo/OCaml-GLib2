@@ -110,6 +110,7 @@ val c_MININT8 : int
 val c_MINOR_VERSION : int32
 val c_MODULE_SUFFIX : string
 (*SKIPPED : MainContext*)
+(*SKIPPED : MatchInfo*)
 val c_OPTION_REMAINING : string
 val c_PDP_ENDIAN : int32
 val c_PI : float
@@ -123,6 +124,11 @@ val c_PRIORITY_HIGH : int32
 val c_PRIORITY_HIGH_IDLE : int32
 val c_PRIORITY_LOW : int32
 (*SKIPPED : Rand*)
+(*SKIPPED : Regex*)
+(*SKIPPED : RegexCompileFlags*)
+(*SKIPPED : RegexError*)
+(*SKIPPED : RegexEvalCallback*)
+(*SKIPPED : RegexMatchFlags*)
 val c_SEARCHPATH_SEPARATOR : int32
 val c_SEARCHPATH_SEPARATOR_S : string
 val c_SIZEOF_LONG : int32
@@ -272,7 +278,7 @@ val checksum_type_get_length:
 
 (*Not implemented g_child_watch_add_full type callback not implemented*)
 
-val child_watch_source_new:
+val child_watch_source_create:
   int32 -> Source.t structure ptr
 
 val clear_error:
@@ -600,7 +606,7 @@ val iconv:
 val idle_remove_by_data:
   unit ptr option -> bool
 
-val idle_source_new:
+val idle_source_create:
   unit -> Source.t structure ptr
 
 val int64_equal:
@@ -793,10 +799,9 @@ val regex_escape_nul:
 
 (*Not implemented g_regex_escape_string type C Array type for Types.Array tag not implemented*)
 
-val regex_match_simple:
-  string -> string -> Regex_compile_flags.t_list -> Regex_match_flags.t_list -> bool
+(*SKIPPED :  g_regex_match_simple type Regex_compile_flags.t_list skipped*)
 
-(*Not implemented g_regex_split_simple return type C Array type for Types.Array tag not handled*)
+(*SKIPPED :  g_regex_split_simple type Regex_compile_flags.t_list skipped*)
 
 val reload_user_special_dirs_cache:
   unit -> unit
@@ -951,13 +956,13 @@ val strescape:
 val strfreev:
   string option -> unit
 
-val string_new:
+val string_create:
   string option -> String.t structure ptr
 
-val string_new_len:
+val string_create_len:
   string -> int64 -> String.t structure ptr
 
-val string_sized_new:
+val string_sized_create:
   Unsigned.uint64 -> String.t structure ptr
 
 val strip_context:
@@ -1075,10 +1080,10 @@ val time_val_from_iso8601 :
 
 (*Not implemented g_timeout_add_seconds_full type callback not implemented*)
 
-val timeout_source_new:
+val timeout_source_create:
   Unsigned.uint32 -> Source.t structure ptr
 
-val timeout_source_new_seconds:
+val timeout_source_create_seconds:
   Unsigned.uint32 -> Source.t structure ptr
 (*DEPRECATED : trash_stack_height*)
 (*DEPRECATED : trash_stack_peek*)
@@ -1173,7 +1178,7 @@ val unix_error_quark:
 
 (*Not implemented g_unix_fd_add_full type callback not implemented*)
 
-val unix_fd_source_new:
+val unix_fd_source_create:
   int32 -> IOCondition.t_list -> Source.t structure ptr
 
 val unix_open_pipe:
@@ -1184,7 +1189,7 @@ val unix_set_fd_nonblocking:
 
 (*Not implemented g_unix_signal_add_full type callback not implemented*)
 
-val unix_signal_source_new:
+val unix_signal_source_create:
   int32 -> Source.t structure ptr
 
 val unlink:

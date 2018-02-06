@@ -5,23 +5,23 @@ val t_typ : t structure typ
 
 val create:
   Time_zone.t structure ptr -> int32 -> int32 -> int32 -> int32 -> int32 -> float -> t structure ptr
-val new_from_timeval_local:
+val create_from_timeval_local:
   Time_val.t structure ptr -> t structure ptr
-val new_from_timeval_utc:
+val create_from_timeval_utc:
   Time_val.t structure ptr -> t structure ptr
-val new_from_unix_local:
+val create_from_unix_local:
   int64 -> t structure ptr
-val new_from_unix_utc:
+val create_from_unix_utc:
   int64 -> t structure ptr
-val new_local:
+val create_local:
   int32 -> int32 -> int32 -> int32 -> int32 -> float -> t structure ptr
-val new_now:
+val create_now:
   Time_zone.t structure ptr -> t structure ptr
-val new_now_local:
+val create_now_local:
   unit -> t structure ptr
-val new_now_utc:
+val create_now_utc:
   unit -> t structure ptr
-val new_utc:
+val create_utc:
   int32 -> int32 -> int32 -> int32 -> int32 -> float -> t structure ptr
 val add:
   t structure ptr -> int64 -> t structure ptr
@@ -77,7 +77,7 @@ val get_ymd :
   t structure ptr -> (int32 * int32 * int32)
 val is_daylight_savings:
   t structure ptr -> bool
-val ref:
+val incr_ref:
   t structure ptr -> t structure ptr
 val to_local:
   t structure ptr -> t structure ptr
