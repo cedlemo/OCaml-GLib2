@@ -21,7 +21,7 @@ open OUnit2
 let filter_meaningless_char str =
     String.split_on_char '\'' str
     |> String.concat ""
-    |> Str.(split (regexp "\(“\|”\)"))
+    |> Str.(split (regexp "\(\“\|\”\|\"\)"))
     |> String.concat ""
 
 let test_glib_check_version test_ctxt =
