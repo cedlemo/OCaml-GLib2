@@ -22,7 +22,7 @@ open Unix
 open Ctypes
 
 let test_get_ymd test_ctxt =
-  let now = GLib.Date_time.new_now_local () in
+  let now = GLib.Date_time.create_now_local () in
   let (year, month, day) = GLib.Date_time.get_ymd now in
   let now' = Unix.time () in
   let tm = Unix.gmtime now' in
