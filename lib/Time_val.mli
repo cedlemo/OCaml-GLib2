@@ -10,7 +10,5 @@ val add:
   t structure ptr -> int64 -> unit
 val to_iso8601:
   t structure ptr -> string option
-(*
 val from_iso8601 :
   string -> (bool * t structure)
-*)

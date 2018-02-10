@@ -412,10 +412,8 @@ val file_error_quark:
 
 (*Not implemented g_file_get_contents type C Array type for Types.Array tag not implemented*)
 
-(*
 val file_open_tmp :
   string option -> (int32 * string, Error.t structure ptr option) result
-*)
 
 val file_read_link:
   string -> (string option, Error.t structure ptr option) result
@@ -439,10 +437,8 @@ val filename_from_uri :
 val filename_to_uri:
   string -> string option -> (string option, Error.t structure ptr option) result
 
-(*
 val filename_to_utf8 :
   string -> int64 -> (string option * Unsigned.uint64 * Unsigned.uint64, Error.t structure ptr option) result
-*)
 
 val find_program_in_path:
   string -> string option
@@ -545,10 +541,8 @@ val hash_table_insert:
 val hash_table_lookup:
   Hash_table.t structure ptr -> unit ptr option -> unit ptr option
 
-(*
 val hash_table_lookup_extended :
   Hash_table.t structure ptr -> unit ptr option -> (bool * unit ptr option * unit ptr option)
-*)
 
 val hash_table_remove:
   Hash_table.t structure ptr -> unit ptr option -> bool
@@ -643,15 +637,11 @@ val key_file_error_quark:
 
 (*Not implemented g_listenv return type C Array type for Types.Array tag not handled*)
 
-(*
 val locale_from_utf8 :
   string -> int64 -> (string option * Unsigned.uint64 * Unsigned.uint64, Error.t structure ptr option) result
-*)
 
-(*
 val locale_to_utf8 :
   string -> int64 -> (string option * Unsigned.uint64 * Unsigned.uint64, Error.t structure ptr option) result
-*)
 (*SKIPPED : log_default_handler*)
 (*SKIPPED : log_remove_handler*)
 (*SKIPPED : log_set_always_fatal*)
@@ -752,10 +742,8 @@ val pointer_bit_unlock:
 val poll:
   Poll_fd.t structure ptr -> Unsigned.uint32 -> int32 -> int32
 
-(*
 val propagate_error :
   Error.t structure ptr -> (Error.t structure ptr option)
-*)
 
 val quark_from_static_string:
   string option -> Unsigned.uint32
@@ -786,10 +774,8 @@ val random_set_seed:
 (*SKIPPED : realloc*)
 (*SKIPPED : realloc_n*)
 
-(*
 val regex_check_replacement :
   string -> (bool * bool, Error.t structure ptr option) result
-*)
 
 val regex_error_quark:
   unit -> Unsigned.uint32
@@ -829,11 +815,7 @@ val rmdir:
 
 val set_application_name:
   string -> unit
-
-(*
-val set_error_literal :
-  Unsigned.uint32 -> int32 -> string -> (Error.t structure ptr)
-*)
+(*SKIPPED : set_error_literal*)
 
 val set_prgname:
   string -> unit
@@ -999,10 +981,8 @@ val strsignal:
 val strstr_len:
   string -> int64 -> string -> string option
 
-(*
 val strtod :
   string -> (float * string)
-*)
 (*DEPRECATED : strup*)
 (*SKIPPED : strv_contains*)
 
@@ -1071,10 +1051,8 @@ val thread_pool_stop_unused_threads:
 val thread_yield:
   unit -> unit
 
-(*
 val time_val_from_iso8601 :
   string -> (bool * Time_val.t structure)
-*)
 
 (*Not implemented g_timeout_add_full type callback not implemented*)
 
@@ -1217,10 +1195,8 @@ val usleep:
 
 (*Not implemented g_utf16_to_ucs4 return type unichar not handled*)
 
-(*
 val utf16_to_utf8 :
   Unsigned.uint16 ptr -> int64 -> (string option * int64 * int64, Error.t structure ptr option) result
-*)
 (*SKIPPED : utf8_casefold*)
 (*SKIPPED : utf8_collate*)
 (*SKIPPED : utf8_collate_key*)
@@ -1273,7 +1249,5 @@ val variant_type_checked_:
 val variant_type_string_is_valid:
   string -> bool
 
-(*
 val variant_type_string_scan :
   string -> string option -> (bool * string)
-*)
