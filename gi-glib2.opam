@@ -17,4 +17,6 @@ depends: [
   "base"
   "stdio"
   "configurator"
+  "gobject-introspection"
+  "gi-bindings-generator"
   ]
