@@ -17,3 +17,7 @@
   (deps    (../config/discover.exe))
   (action  (run ${<} -ocamlc ${OCAMLC}))))
 
+(rule
+ ((targets (Core.ml Core.mli))
+  (deps    (../generator/gen.exe))
+  (action  (run ${<} -o ${@}))))
