@@ -18,6 +18,6 @@
   (action  (run ${<} -ocamlc ${OCAMLC}))))
 
 (rule
- ((targets (Core.ml Core.mli))
+ ((targets (Error.ml Error.mli))
   (deps    (../generator/gen.exe))
   (action  (run ${<} -o ${@}))))
