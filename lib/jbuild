@@ -18,6 +18,11 @@
   (action  (run ${<} -ocamlc ${OCAMLC}))))
 
 (rule
- ((targets (Error.ml Error.mli))
+ ((targets (Error.ml Error.mli
+	    Rand.ml Rand.mli
+	    Date.ml Date.mli
+	    Date_time.ml Date_time.mli
+	    Time_val.ml Time_val.mli
+	    Time_zone.ml Time_zone.mli))
   (deps    (../generator/gen.exe))
   (action  (run ${<} -o ${@}))))
