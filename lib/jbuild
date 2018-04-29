@@ -18,7 +18,8 @@
   (action  (run ${<} -ocamlc ${OCAMLC}))))
 
 (rule
- ((targets (Error.ml Error.mli
+ ((targets (Core.ml Core.mli
+	    Error.ml Error.mli
 	    Rand.ml Rand.mli
 	    Date.ml Date.mli
 	    Date_time.ml Date_time.mli

@@ -4,4 +4,5 @@ module Loader = BG.Loader
 let data_structures = ["Error"; "Rand"; "Date"; "DateTime"; "TimeVal"; "TimeZone"]
 
 let () =
-      Loader.write_bindings_for "GLib" data_structures
+  let _ = Loader.write_constant_bindings_for "GLib" [] [] in
+  Loader.write_bindings_for "GLib" data_structures
