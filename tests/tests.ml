@@ -6,10 +6,11 @@ let () =
     [
       Test_constants.tests;
       Test_enums.tests;
-      Test_functions.tests;
       Test_date.tests;
-      Test_random.tests;
       Test_date_time.tests;
-      Test_time_val.tests;
+      (* Test_random.tests;
+         Test_time_val.tests;
+         Test_functions.tests;
+       *)
     ]
   )
