@@ -54,7 +54,7 @@
 	    Regex_match_flags.ml Regex_match_flags.mli
 	    Seek_type.ml Seek_type.mli
 	    Shell_error.ml Shell_error.mli
-	    Core.ml Core.mli
+	    Core_raw.ml Core_raw.mli
 	    Error.ml Error.mli
 	    Rand.ml Rand.mli
 	    Date.ml Date.mli
