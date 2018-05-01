@@ -1,25 +1,4 @@
-(jbuild_version 1)
-
-(library
- ((name        GLib)
-  (public_name gi-glib2)
-  (libraries (ctypes ctypes.foreign))
-  (c_names         (dyn_load_constants_stubs))
-  (c_flags         (:include c_flags.sexp))
-  (c_library_flags (:include c_library_flags.sexp))
-  (ocamlopt_flags (-ccopt ("-Wl,-no-as-needed")))
- )
-)
-
-(rule
- ((targets (c_flags.sexp
-            c_library_flags.sexp))
-  (deps    (../config/discover.exe))
-  (action  (run ${<} -ocamlc ${OCAMLC}))))
-
-(rule
- ((targets (
-	    Ascii_type.ml Ascii_type.mli
+(Ascii_type.ml Ascii_type.mli
 	    Bookmark_file_error.ml Bookmark_file_error.mli
 	    Checksum_type.ml Checksum_type.mli
 	    Convert_error.ml Convert_error.mli
@@ -44,6 +23,7 @@
 	    Markup_error.ml Markup_error.mli
 	    Markup_parse_flags.ml Markup_parse_flags.mli
 	    Normalize_mode.ml Normalize_mode.mli
+	    Number_parser_error.ml Number_parser_error.mli
 	    Once_status.ml Once_status.mli
 	    Option_arg.ml Option_arg.mli
 	    Option_error.ml Option_error.mli
@@ -60,8 +40,5 @@
 	    Date_time.ml Date_time.mli
 	    Time_val.ml Time_val.mli
 	    Time_type.ml Time_type.mli
-	    Time_zone.ml Time_zone.mli
+	    Time_zone.ml Time_zone.mli)
 
-	    ))
-  (deps    (../generator/gen.exe))
-  (action  (run ${<} -o ${@}))))
