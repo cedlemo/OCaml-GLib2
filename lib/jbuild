@@ -39,7 +39,6 @@
             Key_file_error.ml Key_file_error.mli
             Key_file_flags.ml Key_file_flags.mli
             Log_level_flags.ml Log_level_flags.mli
-	    Log_writer_output.ml Log_writer_output.mli
 	    Markup_collect_type.ml Markup_collect_type.mli
 	    Markup_error.ml Markup_error.mli
 	    Markup_parse_flags.ml Markup_parse_flags.mli
