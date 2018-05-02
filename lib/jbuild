@@ -60,7 +60,6 @@
 	    Time_val.ml Time_val.mli
 	    Time_type.ml Time_type.mli
 	    Time_zone.ml Time_zone.mli
-
 	    ))
   (deps    (../generator/gen.exe))
   (action  (run ${<} -o ${@}))))
