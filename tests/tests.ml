@@ -8,8 +8,8 @@ let () =
       Test_enums.tests;
       Test_date.tests;
       Test_date_time.tests;
-      (* Test_random.tests;
-         Test_time_val.tests;
+       Test_random.tests;
+      (*   Test_time_val.tests;
          Test_functions.tests;
        *)
     ]
