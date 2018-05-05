@@ -35,6 +35,56 @@ let test_list_int_append test_ctxt =
    let length = Int_list.length dllist in
    assert_equal ~printer:Unsigned.UInt.to_string Unsigned.UInt.(of_int 2) length
 
+let test_list_int_first test_ctxt =
+  let module Int_list =
+    GLib.Dllist.Make(struct
+                    type t = int
+                    type ctype = int
+                    let t_typ = int
+                  end)
+    in
+    let v = allocate int 1 in
+    let dllist = Int_list.append None v in
+    let v = allocate int 2 in
+    let dllist = Int_list.append dllist v in
+    match Int_list.first dllist with
+    | None ->
+        let msg = "the first element of the dllist should not be none"
+        in assert_equal ~msg false true
+    | first -> match Int_list.data first with
+        | None ->
+          let msg = "the data of the first element of the dllist should not be none"
+          in assert_equal ~msg false true
+        | Some v ->
+            assert_equal ~printer:string_of_int 1 v
+
+let test_list_int_last test_ctxt =
+  let module Int_list =
+    GLib.Dllist.Make(struct
+                    type t = int
+                    type ctype = int
+                    let t_typ = int
+                  end)
+    in
+    let v = allocate int 1 in
+    let dllist = Int_list.append None v in
+    let v = allocate int 2 in
+    let dllist = Int_list.append dllist v in
+    match Int_list.last dllist with
+    | None ->
+        let msg = "the last element of the dllist should not be none"
+        in assert_equal ~msg false true
+    | last -> match Int_list.data last with
+        | None ->
+          let msg = "the data of the last element of the dllist should not be none"
+          in assert_equal ~msg false true
+        | Some v ->
+            assert_equal ~printer:string_of_int 2 v
+
 let tests =
   "GLib2 Dl List module tests" >:::
-    ["Dl list of int append test" >:: test_list_int_append;]
+    [
+      "Dl list of int append test" >:: test_list_int_append;
+      "Dl list of int first test" >:: test_list_int_first;
+      "Dl list of int last test" >:: test_list_int_last;
+    ]
