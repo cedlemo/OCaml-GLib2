@@ -107,6 +107,6 @@ module Make(Data : DataTypes) = struct
   let data = function
     | None -> None
     | Some dllist_ptr ->
-        let data = getf (!@dllist_ptr) glist_data in
-        Some data
+        let data_ptr = getf (!@dllist_ptr) glist_data in
+        Some (!@data_ptr)
 end
