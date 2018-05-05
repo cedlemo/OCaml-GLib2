@@ -5,7 +5,7 @@ let namespace = "GLib"
 
 let files_suffix = "Raw"
 
-let data_structures = ["Error"; "Rand"; "Date"; "DateTime"; "TimeVal"; "TimeZone"]
+let data_structures = ["Error"; "Rand"; "Date"; "DateTime"; "TimeVal"; "TimeZone";"List"]
 
 let const_to_skip = ["MAJOR_VERSION"; "MINOR_VERSION"; "MICRO_VERSION"]
 
