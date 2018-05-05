@@ -12,10 +12,11 @@ let const_to_skip = ["MAJOR_VERSION"; "MINOR_VERSION"; "MICRO_VERSION"]
 let functions = ["random_double"; "random_double_range";
                  "random_int"; "random_int_range";
                  "get_current_time";
-                 "filename_from_uri"; "filename_to_uri"; "get_charset";
+                 "filename_to_uri"; "get_charset";
                  "dir_make_tmp"]
 
 let sources = Loader.generate_files ("Core" ^ files_suffix)
+
 let () =
   let _ = Loader.write_constant_bindings_for namespace sources const_to_skip in
   let _ = Loader.write_function_bindings_for namespace sources functions in

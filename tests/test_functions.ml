@@ -42,8 +42,6 @@ let test_filename_to_uri_ok test_ctxt =
     | Some uri' -> assert_equal_string "file:///var" uri'
 
 let test_filename_from_uri_no_hostname test_ctxt =
-  if GLib.Core.c_MAJOR_VERSION >= (Int32.of_int 2) &&
-     GLib.Core.c_MINOR_VERSION >= (Int32.of_int 50) then begin
     let uri = "file:///etc/mpd.conf" in
     match GLib.Core.filename_from_uri uri with
     | Error e -> assert_equal_string "GError: This should not " "have been reached"
@@ -55,7 +53,6 @@ let test_filename_from_uri_no_hostname test_ctxt =
         match hostname_opt with
         | None -> assert true
         | Some h -> assert_equal_string "This should not " "have been reached"
-  end
 
 let test_filename_to_uri_error test_ctxt =
   let path ="a_totally_bad_path_that_should_not_exist" in
