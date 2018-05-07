@@ -35,13 +35,14 @@ let test_list_int_append test_ctxt =
   let length = Int_list.length dllist in
   assert_equal ~printer:Unsigned.UInt.to_string Unsigned.UInt.(of_int 2) length
 
+let one = allocate int 1
+let two = allocate int 2
+let three = allocate int 3
+
 let build_dllist () =
-  let v = allocate int 1 in
-  let dllist = Int_list.append None v in
-  let v = allocate int 2 in
-  let dllist = Int_list.append dllist v in
-  let v = allocate int 3 in
-  Int_list.append dllist v
+  let dllist = Int_list.append None one in
+  let dllist = Int_list.append dllist two in
+  Int_list.append dllist three
 
 let test_list_int_previous_next test_ctxt =
   let dllist = build_dllist () in
@@ -86,6 +87,22 @@ let test_list_int_last test_ctxt =
       | Some v ->
           assert_equal ~printer:string_of_int 3 v
 
+let test_list_int_remove test_ctxt =
+  let dllist = build_dllist () in
+  let dllist' = Int_list.remove dllist two in
+  let length = Int_list.length dllist' in
+  let _ =
+    Unsigned.(assert_equal ~printer:UInt.to_string UInt.(of_int 2) length) in
+  let last = Int_list.last dllist' in
+  let _ = match Int_list.data last with
+    | None -> assert_failure "the last element should have some data"
+    | Some d -> assert_equal ~printer:string_of_int 3 d
+  in
+  let first = Int_list.first dllist' in
+  match Int_list.data first with
+  | None -> assert_failure "the first element should have some data"
+  | Some d -> assert_equal ~printer:string_of_int 1 d
+
 let tests =
   "GLib2 Dl List module tests" >:::
     [
@@ -93,4 +110,5 @@ let tests =
       "Dl list of int previous next test" >:: test_list_int_previous_next;
       "Dl list of int first test" >:: test_list_int_first;
       "Dl list of int last test" >:: test_list_int_last;
+      "Dl list of int remove test" >:: test_list_int_remove;
     ]
