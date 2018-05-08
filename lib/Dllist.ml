@@ -82,6 +82,26 @@ module Make(Data : DataTypes) = struct
       let _ = Gc.finalise free dllist' in
       dllist'
 
+  let prepend dllist element =
+    let is_start = match dllist with
+    | None -> true
+    | Some node -> match getf (!@node) glist_prev with
+      | None -> true
+      | Some _ -> false
+    in
+    if is_start then begin
+      let prepend_raw =
+        foreign "g_list_prepend" (ptr_opt glist @-> ptr data @-> returning (ptr_opt glist))
+      in
+      match dllist with
+      | Some _ -> prepend_raw dllist element
+      | None -> let dllist' = prepend_raw dllist element in
+        let _ = Gc.finalise free dllist' in
+        dllist'
+      end
+    else
+      raise (Invalid_argument "The element is not the start of the list")
+
   let remove =
     foreign "g_list_remove" (ptr_opt glist @-> ptr data @-> returning (ptr_opt glist))
 
