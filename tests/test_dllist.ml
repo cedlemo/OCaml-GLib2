@@ -103,6 +103,45 @@ let test_list_int_remove test_ctxt =
   | None -> assert_failure "the first element should have some data"
   | Some d -> assert_equal ~printer:string_of_int 1 d
 
+let test_list_int_prepend test_ctxt =
+  let dllist = Int_list.prepend None one in
+  let dllist = Int_list.prepend dllist two in
+  let dllist = Int_list.prepend dllist three in
+  let _ = match Int_list.last dllist with
+    | None ->
+        let msg = "the last element of the dllist should not be none"
+        in assert_equal ~msg false true
+    | last -> match Int_list.data last with
+      | None ->
+        let msg = "the data of the last element of the dllist should not be none"
+        in assert_equal ~msg false true
+      | Some v ->
+        assert_equal ~printer:string_of_int 1 v
+  in
+  match Int_list.first dllist with
+    | None ->
+        let msg = "the first element of the dllist should not be none"
+        in assert_equal ~msg false true
+    | first -> match Int_list.data first with
+      | None ->
+        let msg = "the data of the first element of the dllist should not be none"
+        in assert_equal ~msg false true
+      | Some v ->
+          assert_equal ~printer:string_of_int 3 v
+
+let test_list_int_prepend_invalid_argument test_ctxt =
+  let dllist = build_dllist () in
+  let dllist = Int_list.last dllist in
+  try
+    let _ = Int_list.prepend dllist one in
+    let msg = "prepend on a node that is not the first should raise an exception."
+    in assert_equal ~msg false true
+  with
+  | Invalid_argument _ -> assert true
+  | _ ->
+      let msg = "the exception should be an Invalid_argument"
+      in assert_equal ~msg false true
+
 let tests =
   "GLib2 Dl List module tests" >:::
     [
@@ -111,4 +150,6 @@ let tests =
       "Dl list of int first test" >:: test_list_int_first;
       "Dl list of int last test" >:: test_list_int_last;
       "Dl list of int remove test" >:: test_list_int_remove;
+      "Dl list of int prepend" >:: test_list_int_prepend;
+      "Dl list of int prepend invalid argument" >:: test_list_int_prepend_invalid_argument;
     ]
