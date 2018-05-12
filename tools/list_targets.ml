@@ -2,6 +2,12 @@ module GI = GObject_introspection
 module BG = GI_bindings_generator
 module Utils = BG.Binding_utils
 
+(** Generate a list of the files generated automatically for enum and flags
+ *  bindings with the gen/generator.ml bindings generator. Those files are
+ *  are numberous and jbuild files need that the user specify them all the
+ *  generated targets.
+ **)
+
 let file = Utils.File.create "targets"
 let namespace = "GLib"
 
