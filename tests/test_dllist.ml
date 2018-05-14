@@ -18,10 +18,10 @@
 open Test_utils
 open OUnit2
 open Ctypes
-open GLib.Dllist
+open GLib.DLList
 
 module Int_list =
-    GLib.Dllist.Make(struct
+    GLib.DLList.Make(struct
                     type t = int
                     type ctype = int
                     let t_typ = int
