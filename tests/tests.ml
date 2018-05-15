@@ -12,5 +12,6 @@ let () =
       Test_time_val.tests;
       Test_functions.tests;
       Test_dllist.tests;
+      Test_sllist.tests;
     ]
   )
