@@ -15,7 +15,48 @@ module Make(Data : DataTypes) = struct
   type data = Data.t
   let data = Data.t_typ
 
-  let glist_data  = field slist "data" (ptr data)
-  let glist_next  = field slist "next" (ptr_opt slist)
+  let slist_data  = field slist "data" (ptr data)
+  let slist_next  = field slist "next" (ptr_opt slist)
   let () = seal slist
+
+  let free =
+    foreign "g_slist_free" (ptr_opt slist @-> returning void)
+
+  let append sllist element =
+    let append_raw =
+      foreign "g_slist_append" (ptr_opt slist @-> ptr data @-> returning (ptr_opt slist))
+    in
+    match sllist with
+    | Some _ -> append_raw sllist element
+    | None -> let sllist' = append_raw sllist element in
+      let _ = Gc.finalise free sllist' in
+      sllist'
+
+  let prepend sllist element =
+    let is_start = match sllist with
+    | None -> true
+    | Some _ -> false
+    in
+    if is_start then begin
+      let prepend_raw =
+        foreign "g_slist_prepend" (ptr_opt slist @-> ptr data @-> returning (ptr_opt slist))
+      in
+      match sllist with
+      | Some _ -> prepend_raw sllist element
+      | None -> let sllist' = prepend_raw sllist element in
+        let _ = Gc.finalise free sllist' in
+        sllist'
+      end
+    else
+      raise (Invalid_argument "The element is not the start of the list")
+
+  let length =
+    foreign "g_slist_length" (ptr_opt slist @-> returning uint)
+
+  let next = function
+    | None -> None
+    | Some sllist_ptr ->
+        getf (!@sllist_ptr) slist_next
+
+
 end
