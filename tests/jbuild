@@ -2,7 +2,7 @@
 
 (executables
  ((names (tests))
-  (libraries   (gi-glib2 oUnit str))
+  (libraries   (gi-glib2 oUnit str memcpy))
 ))
 
 (alias
