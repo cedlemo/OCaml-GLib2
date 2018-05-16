@@ -46,19 +46,17 @@ let build_sllist () =
 
 let test_list_int_next test_ctxt =
   let sllist = build_sllist () in
-  let _ = match Int_list.data sllist with
-    | None -> assert_failure "The next node should have data"
-    | Some v -> assert_equal_int 1 v
-  in
-  let elt = Int_list.next sllist in
-  let _ = match Int_list.data elt with
-    | None -> assert_failure "The next node should have data"
-    | Some v -> assert_equal_int 2 v
-  in
-  let elt = Int_list.next elt in
-  match Int_list.data elt with
-  | None -> assert_failure "The next node should have data"
-  | Some v -> assert_equal_int 3 v
+  let values = [1; 2; 3] in
+  let rec check_loop elt = function
+    | [] -> ()
+    | h :: q ->
+      let _ = match Int_list.data elt with
+        | None -> assert_failure "The next node should have data"
+        | Some v -> assert_equal_int h v
+      in
+      let next = Int_list.next elt in
+      check_loop next q
+    in check_loop sllist values
 
 let tests =
   "GLib2 Sl List module tests" >:::
