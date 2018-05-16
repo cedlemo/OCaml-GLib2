@@ -35,8 +35,34 @@ let test_list_int_append test_ctxt =
   let length = Int_list.length sllist in
   assert_equal ~printer:Unsigned.UInt.to_string Unsigned.UInt.(of_int 2) length
 
+let one = allocate int 1
+let two = allocate int 2
+let three = allocate int 3
+
+let build_sllist () =
+  let sllist = Int_list.append None one in
+  let sllist = Int_list.append sllist two in
+  Int_list.append sllist three
+
+let test_list_int_next test_ctxt =
+  let sllist = build_sllist () in
+  let _ = match Int_list.data sllist with
+    | None -> assert_failure "The next node should have data"
+    | Some v -> assert_equal_int 1 v
+  in
+  let elt = Int_list.next sllist in
+  let _ = match Int_list.data elt with
+    | None -> assert_failure "The next node should have data"
+    | Some v -> assert_equal_int 2 v
+  in
+  let elt = Int_list.next elt in
+  match Int_list.data elt with
+  | None -> assert_failure "The next node should have data"
+  | Some v -> assert_equal_int 3 v
+
 let tests =
   "GLib2 Sl List module tests" >:::
     [
       "Sl list of int create append length test" >:: test_list_int_append;
+      "Sl list of int next test" >:: test_list_int_next;
     ]
