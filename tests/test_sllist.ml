@@ -21,11 +21,11 @@ open Ctypes
 open GLib.SLList
 
 module Int_list =
-    GLib.SLList.Make(struct
-                    type t = int
-                    type ctype = int
-                    let t_typ = int
-                  end)
+  GLib.SLList.Make(struct
+    type t = int
+    type ctype = int
+    let t_typ = int
+  end)
 
 let test_list_int_append test_ctxt =
   let v = allocate int 1 in
@@ -56,26 +56,26 @@ let test_list_int_next test_ctxt =
       in
       let next = Int_list.next elt in
       check_loop next q
-    in check_loop sllist values
+  in check_loop sllist values
 
 let test_list_int_last test_ctxt =
   let sllist = build_sllist () in
   match Int_list.last sllist with
   | None ->
-      let msg = "the last element of the sllist should not be none"
-      in assert_equal ~msg false true
+    let msg = "the last element of the sllist should not be none"
+    in assert_equal ~msg false true
   | last -> match Int_list.data last with
-      | None ->
-        let msg = "the data of the last element of the sllist should not be none"
-        in assert_equal ~msg false true
-      | Some v ->
-          assert_equal ~printer:string_of_int 3 v
+    | None ->
+      let msg = "the data of the last element of the sllist should not be none"
+      in assert_equal ~msg false true
+    | Some v ->
+      assert_equal ~printer:string_of_int 3 v
 
 
 let tests =
   "GLib2 Sl List module tests" >:::
-    [
-      "Sl list of int create append length test" >:: test_list_int_append;
-      "Sl list of int next test" >:: test_list_int_next;
-      "Sl list of int last test" >:: test_list_int_last;
-    ]
+  [
+    "Sl list of int create append length test" >:: test_list_int_append;
+    "Sl list of int next test" >:: test_list_int_next;
+    "Sl list of int last test" >:: test_list_int_last;
+  ]
