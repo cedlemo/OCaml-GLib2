@@ -58,5 +58,10 @@ module Make(Data : DataTypes) = struct
     | Some sllist_ptr ->
         getf (!@sllist_ptr) slist_next
 
+  let data = function
+    | None -> None
+    | Some sllist_ptr ->
+        let data_ptr = getf (!@sllist_ptr) slist_data in
+        Some (!@data_ptr)
 
 end
