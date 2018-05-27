@@ -35,6 +35,8 @@ let filename_from_uri uri =
 
 (** C String utilities *)
 
+(** Ctypes binding to the C strlen function. It returns the length of a C
+    string (ie C char array terminated by '\0'.*)
 let c_strlen =
   foreign "strlen" (ptr char @-> returning int)
 
