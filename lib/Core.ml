@@ -1,8 +1,8 @@
 open Ctypes
 open Foreign
+open Memcpy
 
 include Core_raw
-
 
 external get_major_version: unit -> int = "get_major_version"
 let c_MAJOR_VERSION = get_major_version () |> Int32.of_int
@@ -33,3 +33,22 @@ let filename_from_uri uri =
     let _ = Gc.finalise (function | Some e -> Error.free e | None -> () ) err_ptr in
     Error (err_ptr)
 
+(** C String utilities *)
+
+let str_len =
+  foreign "strlen" (ptr char @-> returning int)
+
+let string_to_char_ptr str =
+  let open Memcpy in
+  let len = String.length str in
+  let dst = allocate_n char (len + 1) in (* Ctypes.allocate* allocate zero filled mem.*)
+  let src = Bytes.of_string str in
+  let () = unsafe_memcpy ocaml_bytes pointer src dst len in
+  dst
+
+let char_ptr_to_string _ptr =
+  let open Memcpy in
+  let len = str_len _ptr in
+  let buf = Bytes.make len '\000' in
+  let () = unsafe_memcpy pointer ocaml_bytes _ptr buf len in
+  Bytes.to_string buf
