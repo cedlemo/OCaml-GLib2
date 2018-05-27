@@ -3,7 +3,7 @@
 (library
  ((name        GLib)
   (public_name gi-glib2)
-  (libraries (ctypes ctypes.foreign))
+  (libraries (ctypes ctypes.foreign memcpy))
   (c_names         (dyn_load_constants_stubs))
   (c_flags         (:include c_flags.sexp))
   (c_library_flags (:include c_library_flags.sexp))

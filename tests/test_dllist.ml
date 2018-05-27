@@ -142,6 +142,49 @@ let test_list_int_prepend_invalid_argument test_ctxt =
       let msg = "the exception should be an Invalid_argument"
       in assert_equal ~msg false true
 
+module Char_ptr_list =
+    GLib.DLList.Make(struct
+                    type t = char ptr
+                    type ctype = char ptr
+                    let t_typ = ptr char
+                  end)
+
+(* let s_one = string_to_char_ptr "one" |> allocate (ptr char)
+let s_two = string_to_char_ptr "two" |> allocate (ptr char)
+let s_three = string_to_char_ptr "three" |> allocate (ptr char)
+
+let test_list_char_ptr_append test_ctxt =
+  let dllist = Char_ptr_list.append None s_one in
+  let dllist = Char_ptr_list.append dllist s_two in
+  let dllist = Char_ptr_list.append dllist s_three in
+  let ref_len = Unsigned.UInt.of_int 3 in
+  let len = Char_ptr_list.length dllist in
+  let printer = Unsigned.UInt.to_string in
+  assert_equal ~printer ref_len len
+
+let test_list_char_ptr_previous_next test_ctxt =
+  let dllist = Char_ptr_list.append None s_one in
+  let dllist = Char_ptr_list.append dllist s_two in
+  let dllist = Char_ptr_list.append dllist s_three in
+  let prev = Char_ptr_list.previous dllist in
+  let _ = match Char_ptr_list.data prev with
+    | None -> assert true
+    | Some v -> assert_failure "The prev node not should have data"
+  in
+  let next = Char_ptr_list.next dllist in
+  let _ = match Char_ptr_list.data next with
+    | None -> assert_failure "The next node should have data"
+    | Some v ->
+      let str = char_ptr_to_string v in
+      assert_equal_string str "two"
+  in
+  let prev = Char_ptr_list.previous next in
+  match Char_ptr_list.data prev with
+  | None -> assert_failure "The prev node should have data"
+  | Some v ->
+    let str = char_ptr_to_string v in
+    assert_equal_string str "one"
+*)
 let tests =
   "GLib2 Dl List module tests" >:::
     [
@@ -152,4 +195,7 @@ let tests =
       "Dl list of int remove test" >:: test_list_int_remove;
       "Dl list of int prepend" >:: test_list_int_prepend;
       "Dl list of int prepend invalid argument" >:: test_list_int_prepend_invalid_argument;
+      (* "Dl list of char ptr create append length test" >:: test_list_char_ptr_append;
+      "DL list of char ptr previous next test" >:: test_list_char_ptr_previous_next;
+      "String convertion helpers" >:: test_char_ptr_converters; *)
     ]
