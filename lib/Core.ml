@@ -35,7 +35,7 @@ let filename_from_uri uri =
 
 (** C String utilities *)
 
-let str_len =
+let c_strlen =
   foreign "strlen" (ptr char @-> returning int)
 
 let string_to_char_ptr str =
@@ -48,7 +48,7 @@ let string_to_char_ptr str =
 
 let char_ptr_to_string _ptr =
   let open Memcpy in
-  let len = str_len _ptr in
+  let len = c_strlen _ptr in
   let buf = Bytes.make len '\000' in
   let () = unsafe_memcpy pointer ocaml_bytes _ptr buf len in
   Bytes.to_string buf

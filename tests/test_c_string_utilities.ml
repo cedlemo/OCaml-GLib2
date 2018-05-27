@@ -18,11 +18,11 @@
 open Test_utils
 open OUnit2
 
-let test_strlen test_ctxt =
+let test_c_strlen test_ctxt =
   let str = "abcd" in
   let len = String.length str in
   let char_ptr = GLib.Core.string_to_char_ptr str in
-  let len' = GLib.Core.str_len char_ptr in
+  let len' = GLib.Core.c_strlen char_ptr in
   assert_equal_int len' len
 
 let test_OCaml_C_string_converters test_ctxt =
@@ -34,7 +34,7 @@ let test_OCaml_C_string_converters test_ctxt =
 let tests =
   "GLib Core C strings utilities" >:::
   [
-    "Test strlen" >:: test_strlen;
+    "Test strlen" >:: test_c_strlen;
     "Test OCaml C string converters" >:: test_OCaml_C_string_converters;
   ]
 
