@@ -7,8 +7,7 @@ open Foreign
 
 module type DataTypes = sig
   type t
-  type ctype
-  val t_typ : ctype Ctypes.typ
+  val t_typ : t Ctypes.typ
 end
 
 module Make(Data : DataTypes) = struct

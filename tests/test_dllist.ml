@@ -23,7 +23,6 @@ open GLib.DLList
 module Int_list =
     GLib.DLList.Make(struct
                     type t = int
-                    type ctype = int
                     let t_typ = int
                   end)
 
@@ -143,7 +142,6 @@ let test_list_int_prepend_invalid_argument test_ctxt =
 module Char_ptr_list =
     GLib.DLList.Make(struct
                     type t = char ptr
-                    type ctype = char ptr
                     let t_typ = ptr char
                   end)
 
