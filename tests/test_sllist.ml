@@ -23,7 +23,6 @@ open GLib.SLList
 module Int_list =
   GLib.SLList.Make(struct
     type t = int
-    type ctype = int
     let t_typ = int
   end)
 
