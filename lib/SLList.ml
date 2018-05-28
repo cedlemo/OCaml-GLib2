@@ -63,6 +63,12 @@ module Make(Data : DataTypes) = struct
         let data_ptr = getf (!@sllist_ptr) slist_data in
         Some (!@data_ptr)
 
-  let last =
+  let data_ptr = function
+    | None -> None
+    | Some sllist_ptr ->
+        let data_ptr = getf (!@sllist_ptr) slist_data in
+        Some data_ptr
+
+let last =
     foreign "g_slist_last" (ptr_opt slist @-> returning (ptr_opt slist))
 end
