@@ -16,9 +16,9 @@ module Make(Data : DataTypes) = struct
   type data = Data.t
   let data = Data.t_typ
 
-  let glist_data  = field glist "data" (ptr data)
-  let glist_next  = field glist "next" (ptr_opt glist)
-  let glist_prev  = field glist "prev" (ptr_opt glist)
+  let glist_data = field glist "data" (ptr data)
+  let glist_next = field glist "next" (ptr_opt glist)
+  let glist_prev = field glist "prev" (ptr_opt glist)
   let () = seal glist
 
   let free =
