@@ -70,6 +70,42 @@ let test_list_int_last test_ctxt =
     | Some v ->
       assert_equal ~printer:string_of_int 3 v
 
+module Char_ptr_list =
+    GLib.SLList.Make(struct
+                    type t = char
+                    let t_typ = char
+                  end)
+
+let s_one = GLib.Core.string_to_char_ptr "one"
+let s_two = GLib.Core.string_to_char_ptr "two"
+let s_three = GLib.Core.string_to_char_ptr "three"
+
+let test_list_char_ptr_append_length test_ctxt =
+  let dllist = Char_ptr_list.append None s_one in
+  let dllist = Char_ptr_list.append dllist s_two in
+  let dllist = Char_ptr_list.append dllist s_three in
+  let ref_len = Unsigned.UInt.of_int 3 in
+  let len = Char_ptr_list.length dllist in
+  let printer = Unsigned.UInt.to_string in
+  assert_equal ~printer ref_len len
+
+let test_list_char_ptr_next test_ctxt =
+  let dllist = Char_ptr_list.append None s_one in
+  let dllist = Char_ptr_list.append dllist s_two in
+  let dllist = Char_ptr_list.append dllist s_three in
+  let node = Char_ptr_list.next dllist in
+  let _ = match Char_ptr_list.data_ptr node with
+    | None -> assert_failure "The next node should have data"
+    | Some v ->
+      let str = GLib.Core.char_ptr_to_string v in
+      assert_equal_string str "two"
+  in
+  let node = Char_ptr_list.next node in
+  match Char_ptr_list.data_ptr node with
+  | None -> assert_failure "The next node should have data"
+  | Some v ->
+    let str = GLib.Core.char_ptr_to_string v in
+    assert_equal_string str "three"
 
 let tests =
   "GLib2 Sl List module tests" >:::
@@ -77,4 +113,6 @@ let tests =
     "Sl list of int create append length test" >:: test_list_int_append;
     "Sl list of int next test" >:: test_list_int_next;
     "Sl list of int last test" >:: test_list_int_last;
+    "SL list of char ptr append length test" >:: test_list_char_ptr_append_length;
+    "SL list of char ptr next" >:: test_list_char_ptr_next;
   ]
