@@ -28,10 +28,9 @@ module Make(Data : DataTypes) = struct
     let append_raw =
       foreign "g_list_append" (ptr_opt glist @-> ptr data @-> returning (ptr_opt glist))
     in
-    let ptr_element = allocate Data.t_typ element in
     match dllist with
-    | Some _ -> append_raw dllist ptr_element
-    | None -> let dllist' = append_raw dllist ptr_element in
+    | Some _ -> append_raw dllist element
+    | None -> let dllist' = append_raw dllist element in
       let _ = Gc.finalise free dllist' in
       dllist'
 
@@ -46,10 +45,9 @@ module Make(Data : DataTypes) = struct
       let prepend_raw =
         foreign "g_list_prepend" (ptr_opt glist @-> ptr data @-> returning (ptr_opt glist))
       in
-      let ptr_element = allocate Data.t_typ element in
       match dllist with
-      | Some _ -> prepend_raw dllist ptr_element
-      | None -> let dllist' = prepend_raw dllist ptr_element in
+      | Some _ -> prepend_raw dllist element
+      | None -> let dllist' = prepend_raw dllist element in
         let _ = Gc.finalise free dllist' in
         dllist'
       end
@@ -82,5 +80,5 @@ module Make(Data : DataTypes) = struct
     | None -> None
     | Some dllist_ptr ->
         let data_ptr = getf (!@dllist_ptr) glist_data in
-        Some (!@data_ptr)
+        Some data_ptr
 end
