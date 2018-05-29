@@ -26,15 +26,15 @@ module Int_list =
                     let t_typ = int
                   end)
 
+let one = allocate int 1
+let two = allocate int 2
+let three = allocate int 3
+
 let test_list_int_append test_ctxt =
-  let dllist = Int_list.append None 1 in
-  let dllist = Int_list.append dllist 2 in
+  let dllist = Int_list.append None one in
+  let dllist = Int_list.append dllist one in
   let length = Int_list.length dllist in
   assert_equal ~printer:Unsigned.UInt.to_string Unsigned.UInt.(of_int 2) length
-
-let one = 1
-let two = 2
-let three = 3
 
 let build_dllist () =
   let dllist = Int_list.append None one in
@@ -51,12 +51,12 @@ let test_list_int_previous_next test_ctxt =
   let next = Int_list.next dllist in
   let _ = match Int_list.data next with
     | None -> assert_failure "The next node should have data"
-    | Some v -> assert_equal_int 2 v
+    | Some v -> assert_equal_int 2 !@v
   in
   let prev = Int_list.previous next in
   match Int_list.data prev with
   | None -> assert_failure "The prev node should have data"
-  | Some v -> assert_equal_int 1 v
+  | Some v -> assert_equal_int 1 !@v
 
 let test_list_int_first test_ctxt =
   let dllist = build_dllist () in
@@ -69,7 +69,7 @@ let test_list_int_first test_ctxt =
         let msg = "the data of the first element of the dllist should not be none"
         in assert_equal ~msg false true
       | Some v ->
-        assert_equal ~printer:string_of_int 1 v
+        assert_equal ~printer:string_of_int 1 !@v
 
 let test_list_int_last test_ctxt =
   let dllist = build_dllist () in
@@ -82,7 +82,7 @@ let test_list_int_last test_ctxt =
         let msg = "the data of the last element of the dllist should not be none"
         in assert_equal ~msg false true
       | Some v ->
-          assert_equal ~printer:string_of_int 3 v
+          assert_equal ~printer:string_of_int 3 !@v
 
 (* let test_list_int_remove test_ctxt =
   let dllist = build_dllist () in
@@ -113,7 +113,7 @@ let test_list_int_prepend test_ctxt =
         let msg = "the data of the last element of the dllist should not be none"
         in assert_equal ~msg false true
       | Some v ->
-        assert_equal ~printer:string_of_int 1 v
+        assert_equal ~printer:string_of_int 1 !@v
   in
   match Int_list.first dllist with
     | None ->
@@ -124,7 +124,7 @@ let test_list_int_prepend test_ctxt =
         let msg = "the data of the first element of the dllist should not be none"
         in assert_equal ~msg false true
       | Some v ->
-          assert_equal ~printer:string_of_int 3 v
+          assert_equal ~printer:string_of_int 3 !@v
 
 let test_list_int_prepend_invalid_argument test_ctxt =
   let dllist = build_dllist () in
@@ -141,8 +141,8 @@ let test_list_int_prepend_invalid_argument test_ctxt =
 
 module Char_ptr_list =
     GLib.DLList.Make(struct
-                    type t = char ptr
-                    let t_typ = ptr char
+                    type t = char
+                    let t_typ = char
                   end)
 
 let s_one = GLib.Core.string_to_char_ptr "one"
