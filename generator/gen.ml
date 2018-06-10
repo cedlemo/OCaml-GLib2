@@ -5,6 +5,8 @@ module Loader = BG.Loader
  *  generated. *)
 let namespace = "GLib"
 
+let version = "2.0"
+
 (** A suffix for the filenames of the raw bindings of the Core part. For example,
  *  all the constants and functions defined directly in the namespace are defined
  *  in a "Core" module and generated in "Core.ml" and "Core.mli" files. But, in
@@ -35,8 +37,8 @@ let functions = ["random_double"; "random_double_range";
 let sources = Loader.generate_files ("Core" ^ files_suffix)
 
 let () =
-  let _ = Loader.write_constant_bindings_for namespace sources const_to_skip in
-  let _ = Loader.write_function_bindings_for namespace sources functions in
-  let _ = Loader.write_enum_and_flag_bindings_for namespace in
-  let _ = Loader.write_bindings_for namespace data_structures in
+  let () = Loader.write_constant_bindings_for namespace ~version sources const_to_skip in
+  let () = Loader.write_function_bindings_for namespace ~version sources functions in
+  let () = Loader.write_enum_and_flag_bindings_for namespace ~version () in
+  let () = Loader.write_bindings_for namespace ~version data_structures in
   BG.Binding_utils.Sources.close sources
