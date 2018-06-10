@@ -66,17 +66,17 @@ module Make(Data : DataTypes) = struct
   let length =
     foreign "g_list_length" (ptr_opt glist @-> returning uint)
 
-  let previous = function
+  let get_previous = function
     | None -> None
     | Some dllist_ptr ->
         getf (!@dllist_ptr) glist_prev
 
-  let next = function
+  let get_next = function
     | None -> None
     | Some dllist_ptr ->
         getf (!@dllist_ptr) glist_next
 
-  let data = function
+  let get_data = function
     | None -> None
     | Some dllist_ptr ->
         let data_ptr = getf (!@dllist_ptr) glist_data in
