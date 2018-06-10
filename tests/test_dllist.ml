@@ -139,6 +139,40 @@ let test_list_int_prepend_invalid_argument test_ctxt =
       let msg = "the exception should be an Invalid_argument"
       in assert_equal ~msg false true
 
+let test_list_int_sort test_ctxt =
+  let dllist = Int_list.prepend None one in
+  let dllist = Int_list.prepend dllist two in
+  let dllist = Int_list.prepend dllist three in
+  let dllist = Int_list.sort dllist (fun ptr_a ptr_b ->
+      let a = !@ptr_a in
+      let b = !@ptr_b in
+      if a = b then 0
+      else if a > b then 1
+      else -1)
+  in
+  let _ = match Int_list.last dllist with
+    | None ->
+        let msg = "the last element of the dllist should not be none"
+        in assert_equal ~msg false true
+    | last -> match Int_list.get_data last with
+      | None ->
+        let msg = "the data of the last element of the dllist should not be none"
+        in assert_equal ~msg false true
+      | Some v ->
+        assert_equal ~printer:string_of_int 3 !@v
+  in
+  match Int_list.first dllist with
+    | None ->
+        let msg = "the first element of the dllist should not be none"
+        in assert_equal ~msg false true
+    | first -> match Int_list.get_data first with
+      | None ->
+        let msg = "the data of the first element of the dllist should not be none"
+        in assert_equal ~msg false true
+      | Some v ->
+          assert_equal ~printer:string_of_int 1 !@v
+
+
 module Char_ptr_list =
     GLib.DLList.Make(struct
                     type t = char
@@ -214,6 +248,7 @@ let tests =
       "Dl list of int remove test" >:: test_list_int_remove;
       "Dl list of int prepend" >:: test_list_int_prepend;
       "Dl list of int prepend invalid argument" >:: test_list_int_prepend_invalid_argument;
+      "Dl list of int sort test" >:: test_list_int_sort;
       "Dl list of char ptr create append length test" >:: test_list_char_ptr_append;
       "DL list of char ptr previous next test" >:: test_list_char_ptr_previous_next;
       "DL list of char remove test" >:: test_list_char_ptr_remove;
