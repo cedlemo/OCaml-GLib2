@@ -237,6 +237,35 @@ let test_list_char_ptr_remove test_ctxt =
       let str = GLib.Core.char_ptr_to_string v in
       assert_equal_string str "one"
 
+let test_list_char_ptr_sort test_ctxt =
+  let aaaaaa = GLib.Core.string_to_char_ptr "aaaaaa" in
+  let a = GLib.Core.string_to_char_ptr "a" in
+  let aaaa = GLib.Core.string_to_char_ptr "aaaa" in
+  let dllist = Char_ptr_list.append None aaaaaa in
+  let dllist = Char_ptr_list.append dllist a in
+  let dllist = Char_ptr_list.append dllist aaaa in
+  let sort_fun a b =
+    let len_a = GLib.Core.char_ptr_to_string a |> String.length in
+    let len_b = GLib.Core.char_ptr_to_string b |> String.length in
+    if len_a = len_b then 0
+    else if len_a > len_b then 1
+    else -1
+  in
+  let dllist = Char_ptr_list.sort dllist sort_fun in
+  let last = Char_ptr_list.last dllist in
+  let _ = match Char_ptr_list.get_data last with
+    | None -> assert_failure "The next node should have data"
+    | Some v ->
+      let str = GLib.Core.char_ptr_to_string v in
+      assert_equal_string str "aaaaaa"
+  in
+  let first = Char_ptr_list.first dllist in
+  match Char_ptr_list.get_data first with
+    | None -> assert_failure "The next node should have data"
+    | Some v ->
+      let str = GLib.Core.char_ptr_to_string v in
+      assert_equal_string str "a"
+
 
 let tests =
   "GLib2 Dl List module tests" >:::
@@ -252,4 +281,5 @@ let tests =
       "Dl list of char ptr create append length test" >:: test_list_char_ptr_append;
       "DL list of char ptr previous next test" >:: test_list_char_ptr_previous_next;
       "DL list of char remove test" >:: test_list_char_ptr_remove;
+      "DL list of char ptr sort test" >:: test_list_char_ptr_sort;
     ]
