@@ -21,10 +21,10 @@ open Ctypes
 open GLib.DLList
 
 module Int_list =
-    GLib.DLList.Make(struct
-                    type t = int
-                    let t_typ = int
-                  end)
+  GLib.DLList.Make(struct
+    type t = int
+    let t_typ = int
+  end)
 
 let one = allocate int 1
 let two = allocate int 2
@@ -62,27 +62,27 @@ let test_list_int_first test_ctxt =
   let dllist = build_dllist () in
   match Int_list.first dllist with
   | None ->
-      let msg = "the first element of the dllist should not be none"
-      in assert_equal ~msg false true
+    let msg = "the first element of the dllist should not be none"
+    in assert_equal ~msg false true
   | first -> match Int_list.get_data first with
-      | None ->
-        let msg = "the data of the first element of the dllist should not be none"
-        in assert_equal ~msg false true
-      | Some v ->
-        assert_equal ~printer:string_of_int 1 !@v
+    | None ->
+      let msg = "the data of the first element of the dllist should not be none"
+      in assert_equal ~msg false true
+    | Some v ->
+      assert_equal ~printer:string_of_int 1 !@v
 
 let test_list_int_last test_ctxt =
   let dllist = build_dllist () in
   match Int_list.last dllist with
   | None ->
-      let msg = "the last element of the dllist should not be none"
-      in assert_equal ~msg false true
+    let msg = "the last element of the dllist should not be none"
+    in assert_equal ~msg false true
   | last -> match Int_list.get_data last with
-      | None ->
-        let msg = "the data of the last element of the dllist should not be none"
-        in assert_equal ~msg false true
-      | Some v ->
-          assert_equal ~printer:string_of_int 3 !@v
+    | None ->
+      let msg = "the data of the last element of the dllist should not be none"
+      in assert_equal ~msg false true
+    | Some v ->
+      assert_equal ~printer:string_of_int 3 !@v
 
 let test_list_int_remove test_ctxt =
   let dllist = build_dllist () in
@@ -106,8 +106,8 @@ let test_list_int_prepend test_ctxt =
   let dllist = Int_list.prepend dllist three in
   let _ = match Int_list.last dllist with
     | None ->
-        let msg = "the last element of the dllist should not be none"
-        in assert_equal ~msg false true
+      let msg = "the last element of the dllist should not be none"
+      in assert_equal ~msg false true
     | last -> match Int_list.get_data last with
       | None ->
         let msg = "the data of the last element of the dllist should not be none"
@@ -116,15 +116,15 @@ let test_list_int_prepend test_ctxt =
         assert_equal ~printer:string_of_int 1 !@v
   in
   match Int_list.first dllist with
+  | None ->
+    let msg = "the first element of the dllist should not be none"
+    in assert_equal ~msg false true
+  | first -> match Int_list.get_data first with
     | None ->
-        let msg = "the first element of the dllist should not be none"
-        in assert_equal ~msg false true
-    | first -> match Int_list.get_data first with
-      | None ->
-        let msg = "the data of the first element of the dllist should not be none"
-        in assert_equal ~msg false true
-      | Some v ->
-          assert_equal ~printer:string_of_int 3 !@v
+      let msg = "the data of the first element of the dllist should not be none"
+      in assert_equal ~msg false true
+    | Some v ->
+      assert_equal ~printer:string_of_int 3 !@v
 
 let test_list_int_prepend_invalid_argument test_ctxt =
   let dllist = build_dllist () in
@@ -136,8 +136,8 @@ let test_list_int_prepend_invalid_argument test_ctxt =
   with
   | Invalid_argument _ -> assert true
   | _ ->
-      let msg = "the exception should be an Invalid_argument"
-      in assert_equal ~msg false true
+    let msg = "the exception should be an Invalid_argument"
+    in assert_equal ~msg false true
 
 let test_list_int_sort test_ctxt =
   let dllist = Int_list.prepend None one in
@@ -152,8 +152,8 @@ let test_list_int_sort test_ctxt =
   in
   let _ = match Int_list.last dllist with
     | None ->
-        let msg = "the last element of the dllist should not be none"
-        in assert_equal ~msg false true
+      let msg = "the last element of the dllist should not be none"
+      in assert_equal ~msg false true
     | last -> match Int_list.get_data last with
       | None ->
         let msg = "the data of the last element of the dllist should not be none"
@@ -162,22 +162,22 @@ let test_list_int_sort test_ctxt =
         assert_equal ~printer:string_of_int 3 !@v
   in
   match Int_list.first dllist with
+  | None ->
+    let msg = "the first element of the dllist should not be none"
+    in assert_equal ~msg false true
+  | first -> match Int_list.get_data first with
     | None ->
-        let msg = "the first element of the dllist should not be none"
-        in assert_equal ~msg false true
-    | first -> match Int_list.get_data first with
-      | None ->
-        let msg = "the data of the first element of the dllist should not be none"
-        in assert_equal ~msg false true
-      | Some v ->
-          assert_equal ~printer:string_of_int 1 !@v
+      let msg = "the data of the first element of the dllist should not be none"
+      in assert_equal ~msg false true
+    | Some v ->
+      assert_equal ~printer:string_of_int 1 !@v
 
 
 module Char_ptr_list =
-    GLib.DLList.Make(struct
-                    type t = char
-                    let t_typ = char
-                  end)
+  GLib.DLList.Make(struct
+    type t = char
+    let t_typ = char
+  end)
 
 let s_one = GLib.Core.string_to_char_ptr "one"
 let s_two = GLib.Core.string_to_char_ptr "two"
@@ -232,10 +232,10 @@ let test_list_char_ptr_remove test_ctxt =
   in
   let first = Char_ptr_list.first dllist' in
   match Char_ptr_list.get_data first with
-    | None -> assert_failure "The next node should have data"
-    | Some v ->
-      let str = GLib.Core.char_ptr_to_string v in
-      assert_equal_string str "one"
+  | None -> assert_failure "The next node should have data"
+  | Some v ->
+    let str = GLib.Core.char_ptr_to_string v in
+    assert_equal_string str "one"
 
 let test_list_char_ptr_sort test_ctxt =
   let aaaaaa = GLib.Core.string_to_char_ptr "aaaaaa" in
@@ -261,25 +261,25 @@ let test_list_char_ptr_sort test_ctxt =
   in
   let first = Char_ptr_list.first dllist in
   match Char_ptr_list.get_data first with
-    | None -> assert_failure "The next node should have data"
-    | Some v ->
-      let str = GLib.Core.char_ptr_to_string v in
-      assert_equal_string str "a"
+  | None -> assert_failure "The next node should have data"
+  | Some v ->
+    let str = GLib.Core.char_ptr_to_string v in
+    assert_equal_string str "a"
 
 
 let tests =
   "GLib2 Dl List module tests" >:::
-    [
-      "Dl list of int create append length test" >:: test_list_int_append;
-      "Dl list of int previous next test" >:: test_list_int_previous_next;
-      "Dl list of int first test" >:: test_list_int_first;
-      "Dl list of int last test" >:: test_list_int_last;
-      "Dl list of int remove test" >:: test_list_int_remove;
-      "Dl list of int prepend" >:: test_list_int_prepend;
-      "Dl list of int prepend invalid argument" >:: test_list_int_prepend_invalid_argument;
-      "Dl list of int sort test" >:: test_list_int_sort;
-      "Dl list of char ptr create append length test" >:: test_list_char_ptr_append;
-      "DL list of char ptr previous next test" >:: test_list_char_ptr_previous_next;
-      "DL list of char remove test" >:: test_list_char_ptr_remove;
-      "DL list of char ptr sort test" >:: test_list_char_ptr_sort;
-    ]
+  [
+    "Dl list of int create append length test" >:: test_list_int_append;
+    "Dl list of int previous next test" >:: test_list_int_previous_next;
+    "Dl list of int first test" >:: test_list_int_first;
+    "Dl list of int last test" >:: test_list_int_last;
+    "Dl list of int remove test" >:: test_list_int_remove;
+    "Dl list of int prepend" >:: test_list_int_prepend;
+    "Dl list of int prepend invalid argument" >:: test_list_int_prepend_invalid_argument;
+    "Dl list of int sort test" >:: test_list_int_sort;
+    "Dl list of char ptr create append length test" >:: test_list_char_ptr_append;
+    "DL list of char ptr previous next test" >:: test_list_char_ptr_previous_next;
+    "DL list of char remove test" >:: test_list_char_ptr_remove;
+    "DL list of char ptr sort test" >:: test_list_char_ptr_sort;
+  ]
