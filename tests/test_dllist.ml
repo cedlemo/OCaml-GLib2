@@ -293,6 +293,24 @@ let test_list_char_ptr_sort test_ctxt =
     let str = GLib.Core.char_ptr_to_string v in
     assert_equal_string str "a"
 
+let test_list_char_ptr_reverse test_ctxt =
+  let dllist = Char_ptr_list.append None s_one in
+  let dllist = Char_ptr_list.append dllist s_two in
+  let dllist = Char_ptr_list.append dllist s_three in
+  let dllist = Char_ptr_list.reverse dllist in
+  let last = Char_ptr_list.last dllist in
+  let _ = match Char_ptr_list.get_data last with
+    | None -> assert_failure "The next node should have data"
+    | Some v ->
+      let str = GLib.Core.char_ptr_to_string v in
+      assert_equal_string str "one"
+  in
+  let first = Char_ptr_list.first dllist in
+  match Char_ptr_list.get_data first with
+  | None -> assert_failure "The next node should have data"
+  | Some v ->
+    let str = GLib.Core.char_ptr_to_string v in
+    assert_equal_string str "three"
 
 let tests =
   "GLib2 Dl List module tests" >:::
@@ -310,4 +328,5 @@ let tests =
     "DL list of char ptr previous next test" >:: test_list_char_ptr_previous_next;
     "DL list of char remove test" >:: test_list_char_ptr_remove;
     "DL list of char ptr sort test" >:: test_list_char_ptr_sort;
+    "DL list of char ptr reverse test" >:: test_list_char_ptr_reverse;
   ]
