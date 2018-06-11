@@ -66,6 +66,9 @@ module Make(Data : DataTypes) = struct
   let length =
     foreign "g_list_length" (ptr_opt glist @-> returning uint)
 
+  let reverse =
+    foreign "g_list_reverse" (ptr_opt glist @-> returning (ptr_opt glist))
+
   let get_previous = function
     | None -> None
     | Some dllist_ptr ->
