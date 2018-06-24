@@ -70,6 +70,28 @@ let test_list_int_last test_ctxt =
     | Some v ->
       assert_equal ~printer:string_of_int 3 v
 
+let test_list_int_sort test_ctxt =
+  let sllist = Int_list.append None three in
+  let sllist = Int_list.append sllist one in
+  let sllist = Int_list.append sllist two in
+  let sllist = Int_list.sort sllist (fun ptr_a ptr_b ->
+      let a = !@ptr_a in
+      let b = !@ptr_b in
+      if a = b then 0
+      else if a > b then 1
+      else -1)
+  in
+  match Int_list.last sllist with
+    | None ->
+      let msg = "the last element of the dllist should not be none"
+      in assert_equal ~msg false true
+    | last -> match Int_list.data_ptr last with
+      | None ->
+        let msg = "the data of the last element of the dllist should not be none"
+        in assert_equal ~msg false true
+      | Some v ->
+        assert_equal ~printer:string_of_int 3 !@v
+
 module Char_ptr_list =
     GLib.SLList.Make(struct
                     type t = char
@@ -113,6 +135,7 @@ let tests =
     "Sl list of int create append length test" >:: test_list_int_append;
     "Sl list of int next test" >:: test_list_int_next;
     "Sl list of int last test" >:: test_list_int_last;
+    "Sl list of int sort test" >:: test_list_int_sort;
     "SL list of char ptr append length test" >:: test_list_char_ptr_append_length;
     "SL list of char ptr next" >:: test_list_char_ptr_next;
   ]
