@@ -91,9 +91,6 @@ module Make(Data : DataTypes) = struct
       let t_typ = data
     end)
 
-  let sort dllist =
-    let sort_raw =
-      foreign "g_list_sort" (ptr_opt glist @-> Comp_func.funptr @-> returning (ptr_opt glist))
-    in
-    sort_raw dllist
+  let sort =
+    foreign "g_list_sort" (ptr_opt glist @-> Comp_func.funptr @-> returning (ptr_opt glist))
 end
