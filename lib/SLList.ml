@@ -8,6 +8,7 @@ module type DataTypes = sig
   type t
   val t_typ : t Ctypes.typ
 end
+
 module Make(Data : DataTypes) = struct
   type slist
   let slist : slist structure typ = structure "SList"
@@ -33,8 +34,8 @@ module Make(Data : DataTypes) = struct
 
   let prepend sllist element =
     let is_start = match sllist with
-    | None -> true
-    | Some _ -> false
+      | None -> true
+      | Some _ -> false
     in
     if is_start then begin
       let prepend_raw =
@@ -45,7 +46,7 @@ module Make(Data : DataTypes) = struct
       | None -> let sllist' = prepend_raw sllist element in
         let _ = Gc.finalise free sllist' in
         sllist'
-      end
+    end
     else
       raise (Invalid_argument "The element is not the start of the list")
 
@@ -55,20 +56,20 @@ module Make(Data : DataTypes) = struct
   let next = function
     | None -> None
     | Some sllist_ptr ->
-        getf (!@sllist_ptr) slist_next
+      getf (!@sllist_ptr) slist_next
 
   let data = function
     | None -> None
     | Some sllist_ptr ->
-        let data_ptr = getf (!@sllist_ptr) slist_data in
-        Some (!@data_ptr)
+      let data_ptr = getf (!@sllist_ptr) slist_data in
+      Some (!@data_ptr)
 
   let data_ptr = function
     | None -> None
     | Some sllist_ptr ->
-        let data_ptr = getf (!@sllist_ptr) slist_data in
-        Some data_ptr
+      let data_ptr = getf (!@sllist_ptr) slist_data in
+      Some data_ptr
 
-let last =
+  let last =
     foreign "g_slist_last" (ptr_opt slist @-> returning (ptr_opt slist))
 end
