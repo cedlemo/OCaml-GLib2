@@ -73,9 +73,6 @@ module Make(Data : DataTypes) = struct
   let last =
     foreign "g_slist_last" (ptr_opt slist @-> returning (ptr_opt slist))
 
-  let sort sllist =
-    let sort_raw =
+  let sort =
       foreign "g_slist_sort" (ptr_opt slist @-> Comp_func.funptr @-> returning (ptr_opt slist))
-    in
-    sort_raw sllist
 end
