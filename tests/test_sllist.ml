@@ -49,9 +49,9 @@ let test_list_int_next test_ctxt =
   let rec check_loop elt = function
     | [] -> ()
     | h :: q ->
-      let _ = match Int_list.data elt with
+      let _ = match Int_list.get_data elt with
         | None -> assert_failure "The next node should have data"
-        | Some v -> assert_equal_int h v
+        | Some v -> assert_equal_int h (!@v)
       in
       let next = Int_list.next elt in
       check_loop next q
@@ -63,12 +63,12 @@ let test_list_int_last test_ctxt =
   | None ->
     let msg = "the last element of the sllist should not be none"
     in assert_equal ~msg false true
-  | last -> match Int_list.data last with
+  | last -> match Int_list.get_data last with
     | None ->
       let msg = "the data of the last element of the sllist should not be none"
       in assert_equal ~msg false true
     | Some v ->
-      assert_equal ~printer:string_of_int 3 v
+      assert_equal ~printer:string_of_int 3 (!@v)
 
 let test_list_int_sort test_ctxt =
   let sllist = Int_list.append None three in
@@ -85,12 +85,12 @@ let test_list_int_sort test_ctxt =
     | None ->
       let msg = "the last element of the dllist should not be none"
       in assert_equal ~msg false true
-    | last -> match Int_list.data_ptr last with
+    | last -> match Int_list.get_data last with
       | None ->
         let msg = "the data of the last element of the dllist should not be none"
         in assert_equal ~msg false true
       | Some v ->
-        assert_equal ~printer:string_of_int 3 !@v
+        assert_equal ~printer:string_of_int 3 (!@v)
 
 module Char_ptr_list =
     GLib.SLList.Make(struct
@@ -116,14 +116,14 @@ let test_list_char_ptr_next test_ctxt =
   let dllist = Char_ptr_list.append dllist s_two in
   let dllist = Char_ptr_list.append dllist s_three in
   let node = Char_ptr_list.next dllist in
-  let _ = match Char_ptr_list.data_ptr node with
+  let _ = match Char_ptr_list.get_data node with
     | None -> assert_failure "The next node should have data"
     | Some v ->
       let str = GLib.Core.char_ptr_to_string v in
       assert_equal_string str "two"
   in
   let node = Char_ptr_list.next node in
-  match Char_ptr_list.data_ptr node with
+  match Char_ptr_list.get_data node with
   | None -> assert_failure "The next node should have data"
   | Some v ->
     let str = GLib.Core.char_ptr_to_string v in
