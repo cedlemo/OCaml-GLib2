@@ -6,6 +6,9 @@ module type DataType = sig
   val t_typ : t Ctypes.typ
 end
 
+(** CompareFunc functor.
+ * Functor that generates a Ctypes signature for argument that are callback.
+ * It is used in DLList and SLList for example.*)
 module CompareFunc = struct
   module Make(Data : DataType) = struct
     type data = Data.t
