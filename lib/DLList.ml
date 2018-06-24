@@ -85,10 +85,15 @@ module Make(Data : DataTypes) = struct
         let data_ptr = getf (!@dllist_ptr) glist_data in
         Some data_ptr
 
+  module Comp_func =
+    GCallback.CompareFunc.Make(struct
+      type t = data
+      let t_typ = data
+    end)
+
   let sort dllist =
-    let compare_func = ptr data @-> ptr data @-> returning int in
     let sort_raw =
-      foreign "g_list_sort" (ptr_opt glist @-> funptr compare_func @-> returning (ptr_opt glist))
+      foreign "g_list_sort" (ptr_opt glist @-> Comp_func.funptr @-> returning (ptr_opt glist))
     in
     sort_raw dllist
 end
