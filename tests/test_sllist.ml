@@ -70,6 +70,20 @@ let test_list_int_last test_ctxt =
     | Some v ->
       assert_equal ~printer:string_of_int 3 (!@v)
 
+let assert_node node value =
+  match Int_list.get_data node with
+  | None ->
+    let msg = "This node should have data" in
+    assert_equal ~msg false true
+  | Some v ->
+    assert_equal ~printer:string_of_int value (!@v)
+
+let test_list_int_nth test_ctxt =
+  let sllist = build_sllist () in
+  let () = assert_node (Int_list.nth sllist 0) 1 in
+  let () = assert_node (Int_list.nth sllist 1) 2 in
+  assert_node (Int_list.nth sllist 2) 3
+
 let test_list_int_sort test_ctxt =
   let sllist = Int_list.append None three in
   let sllist = Int_list.append sllist one in
@@ -82,21 +96,21 @@ let test_list_int_sort test_ctxt =
       else -1)
   in
   match Int_list.last sllist with
+  | None ->
+    let msg = "the last element of the dllist should not be none"
+    in assert_equal ~msg false true
+  | last -> match Int_list.get_data last with
     | None ->
-      let msg = "the last element of the dllist should not be none"
+      let msg = "the data of the last element of the dllist should not be none"
       in assert_equal ~msg false true
-    | last -> match Int_list.get_data last with
-      | None ->
-        let msg = "the data of the last element of the dllist should not be none"
-        in assert_equal ~msg false true
-      | Some v ->
-        assert_equal ~printer:string_of_int 3 (!@v)
+    | Some v ->
+      assert_equal ~printer:string_of_int 3 (!@v)
 
 module Char_ptr_list =
-    GLib.SLList.Make(struct
-                    type t = char
-                    let t_typ = char
-                  end)
+  GLib.SLList.Make(struct
+    type t = char
+    let t_typ = char
+  end)
 
 let s_one = GLib.Core.string_to_char_ptr "one"
 let s_two = GLib.Core.string_to_char_ptr "two"
@@ -136,6 +150,7 @@ let tests =
     "Sl list of int next test" >:: test_list_int_next;
     "Sl list of int last test" >:: test_list_int_last;
     "Sl list of int sort test" >:: test_list_int_sort;
+    "Sl list of int nth test" >:: test_list_int_nth;
     "SL list of char ptr append length test" >:: test_list_char_ptr_append_length;
     "SL list of char ptr next" >:: test_list_char_ptr_next;
   ]

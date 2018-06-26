@@ -74,5 +74,8 @@ module Make(Data : DataTypes) = struct
     foreign "g_slist_last" (ptr_opt slist @-> returning (ptr_opt slist))
 
   let sort =
-      foreign "g_slist_sort" (ptr_opt slist @-> Comp_func.funptr @-> returning (ptr_opt slist))
+    foreign "g_slist_sort" (ptr_opt slist @-> Comp_func.funptr @-> returning (ptr_opt slist))
+
+  let nth =
+    foreign "g_slist_nth" (ptr_opt slist @-> int @-> returning (ptr_opt slist))
 end
