@@ -156,6 +156,22 @@ let test_list_int_reverse test_ctxt =
   let () = assert_node (Int_list.nth dllist 1) 2 string_of_int in
   assert_node (Int_list.nth dllist 2) 1 string_of_int
 
+let test_list_int_concat test_ctxt =
+  let dllist = build_dllist () in
+  let dllist' = Int_list.append None (allocate int 4) in
+  let dllist' = Int_list.append dllist' (allocate int 5) in
+  let dllist' = Int_list.append dllist' (allocate int 6) in
+  let dllist'' = Int_list.concat dllist dllist' in
+  let length = Int_list.length dllist'' in
+  let () =
+    Unsigned.(assert_equal ~printer:UInt.to_string UInt.(of_int 6) length) in
+  let () = assert_node (Int_list.nth dllist'' 0) 1 string_of_int in
+  let () = assert_node (Int_list.nth dllist'' 1) 2 string_of_int in
+  let () = assert_node (Int_list.nth dllist'' 2) 3 string_of_int in
+  let () = assert_node (Int_list.nth dllist'' 3) 4 string_of_int in
+  let () = assert_node (Int_list.nth dllist'' 4) 5 string_of_int in
+  assert_node (Int_list.nth dllist 5) 6 string_of_int
+
 module Char_ptr_list =
   GLib.DLList.Make(struct
     type t = char
@@ -266,6 +282,7 @@ let tests =
     "Dl list of int sort test" >:: test_list_int_sort;
     "Dl list of int nth test" >:: test_list_int_nth;
     "Dl list of int reverse test" >:: test_list_int_reverse;
+    "Dl list of int concat test" >:: test_list_int_concat;
     "Dl list of char ptr create append length test" >:: test_list_char_ptr_append;
     "DL list of char ptr nth test" >:: test_list_char_ptr_nth;
     "DL list of char ptr previous next test" >:: test_list_char_ptr_previous_next;

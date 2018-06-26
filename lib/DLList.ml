@@ -96,4 +96,7 @@ module Make(Data : DataTypes) = struct
 
   let nth =
     foreign "g_list_nth" (ptr_opt glist @-> int @-> returning (ptr_opt glist))
+
+  let concat =
+    foreign "g_list_concat" (ptr_opt glist @-> ptr_opt glist @-> returning (ptr_opt glist))
 end
