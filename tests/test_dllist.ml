@@ -100,31 +100,27 @@ let test_list_int_remove test_ctxt =
   | None -> assert_failure "the first element should have some data"
   | Some d -> assert_equal ~printer:string_of_int 1 !@d
 
+let assert_node node value printer =
+  match Int_list.get_data node with
+  | None ->
+    let msg = "This node should have data" in
+    assert_equal ~msg false true
+  | Some v ->
+    assert_equal ~printer value (!@v)
+
+let test_list_int_nth test_ctxt =
+  let dllist = build_dllist () in
+  let () = assert_node (Int_list.nth dllist 0) 1 string_of_int in
+  let () = assert_node (Int_list.nth dllist 1) 2 string_of_int in
+  assert_node (Int_list.nth dllist 2) 3 string_of_int
+
 let test_list_int_prepend test_ctxt =
   let dllist = Int_list.prepend None one in
   let dllist = Int_list.prepend dllist two in
   let dllist = Int_list.prepend dllist three in
-  let _ = match Int_list.last dllist with
-    | None ->
-      let msg = "the last element of the dllist should not be none"
-      in assert_equal ~msg false true
-    | last -> match Int_list.get_data last with
-      | None ->
-        let msg = "the data of the last element of the dllist should not be none"
-        in assert_equal ~msg false true
-      | Some v ->
-        assert_equal ~printer:string_of_int 1 !@v
-  in
-  match Int_list.first dllist with
-  | None ->
-    let msg = "the first element of the dllist should not be none"
-    in assert_equal ~msg false true
-  | first -> match Int_list.get_data first with
-    | None ->
-      let msg = "the data of the first element of the dllist should not be none"
-      in assert_equal ~msg false true
-    | Some v ->
-      assert_equal ~printer:string_of_int 3 !@v
+  let () = assert_node (Int_list.nth dllist 0) 3 string_of_int in
+  let () = assert_node (Int_list.nth dllist 1) 2 string_of_int in
+  assert_node (Int_list.nth dllist 2) 1 string_of_int
 
 let test_list_int_prepend_invalid_argument test_ctxt =
   let dllist = build_dllist () in
@@ -150,68 +146,15 @@ let test_list_int_sort test_ctxt =
       else if a > b then 1
       else -1)
   in
-  let _ = match Int_list.last dllist with
-    | None ->
-      let msg = "the last element of the dllist should not be none"
-      in assert_equal ~msg false true
-    | last -> match Int_list.get_data last with
-      | None ->
-        let msg = "the data of the last element of the dllist should not be none"
-        in assert_equal ~msg false true
-      | Some v ->
-        assert_equal ~printer:string_of_int 3 !@v
-  in
-  match Int_list.first dllist with
-  | None ->
-    let msg = "the first element of the dllist should not be none"
-    in assert_equal ~msg false true
-  | first -> match Int_list.get_data first with
-    | None ->
-      let msg = "the data of the first element of the dllist should not be none"
-      in assert_equal ~msg false true
-    | Some v ->
-      assert_equal ~printer:string_of_int 1 !@v
-
-let test_list_int_reverse test_ctxt =
-  let dllist = Int_list.prepend None one in
-  let dllist = Int_list.prepend dllist two in
-  let dllist = Int_list.prepend dllist three in
-  let dllist = Int_list.reverse dllist in
-  let _ = match Int_list.last dllist with
-    | None ->
-      let msg = "the last element of the dllist should not be none"
-      in assert_equal ~msg false true
-    | last -> match Int_list.get_data last with
-      | None ->
-        let msg = "the data of the last element of the dllist should not be none"
-        in assert_equal ~msg false true
-      | Some v ->
-        assert_equal ~printer:string_of_int 3 !@v
-  in
-  match Int_list.first dllist with
-  | None ->
-    let msg = "the first element of the dllist should not be none"
-    in assert_equal ~msg false true
-  | first -> match Int_list.get_data first with
-    | None ->
-      let msg = "the data of the first element of the dllist should not be none"
-      in assert_equal ~msg false true
-    | Some v ->
-      assert_equal ~printer:string_of_int 1 !@v
-
-let assert_node node value printer =
-  match Int_list.get_data node with
-  | None ->
-    let msg = "This node should have data" in
-    assert_equal ~msg false true
-  | Some v ->
-    assert_equal ~printer value (!@v)
-
-let test_list_int_nth test_ctxt =
-  let dllist = build_dllist () in
   let () = assert_node (Int_list.nth dllist 0) 1 string_of_int in
   let () = assert_node (Int_list.nth dllist 1) 2 string_of_int in
   assert_node (Int_list.nth dllist 2) 3 string_of_int
+
+let test_list_int_reverse test_ctxt =
+  let dllist = Int_list.reverse (build_dllist ()) in
+  let () = assert_node (Int_list.nth dllist 0) 3 string_of_int in
+  let () = assert_node (Int_list.nth dllist 1) 2 string_of_int in
+  assert_node (Int_list.nth dllist 2) 1 string_of_int
 
 module Char_ptr_list =
   GLib.DLList.Make(struct
@@ -223,59 +166,55 @@ let s_one = GLib.Core.string_to_char_ptr "one"
 let s_two = GLib.Core.string_to_char_ptr "two"
 let s_three = GLib.Core.string_to_char_ptr "three"
 
-let test_list_char_ptr_append test_ctxt =
+let build_char_ptr_dllist () =
   let dllist = Char_ptr_list.append None s_one in
   let dllist = Char_ptr_list.append dllist s_two in
-  let dllist = Char_ptr_list.append dllist s_three in
+  Char_ptr_list.append dllist s_three
+
+let assert_char_ptr_node node value =
+  match Char_ptr_list.get_data node with
+  | None ->
+    let msg = "This node should have data" in
+    assert_equal ~msg false true
+  | Some v ->
+    let str = GLib.Core.char_ptr_to_string v in
+    assert_equal_string value str
+
+let test_list_char_ptr_append test_ctxt =
+  let dllist = build_char_ptr_dllist () in
   let ref_len = Unsigned.UInt.of_int 3 in
   let len = Char_ptr_list.length dllist in
   let printer = Unsigned.UInt.to_string in
   assert_equal ~printer ref_len len
 
+let test_list_char_ptr_nth test_ctxt =
+  let dllist = build_char_ptr_dllist () in
+  let () = assert_char_ptr_node (Char_ptr_list.nth dllist 0) "one" in
+  let () = assert_char_ptr_node (Char_ptr_list.nth dllist 1) "two" in
+  assert_char_ptr_node (Char_ptr_list.nth dllist 2) "three"
+
 let test_list_char_ptr_previous_next test_ctxt =
-  let dllist = Char_ptr_list.append None s_one in
-  let dllist = Char_ptr_list.append dllist s_two in
-  let dllist = Char_ptr_list.append dllist s_three in
+  let dllist = build_char_ptr_dllist () in
   let prev = Char_ptr_list.get_previous dllist in
   let _ = match Char_ptr_list.get_data prev with
     | None -> assert true
     | Some v -> assert_failure "The prev node not should have data"
   in
   let next = Char_ptr_list.get_next dllist in
-  let _ = match Char_ptr_list.get_data next with
-    | None -> assert_failure "The next node should have data"
-    | Some v ->
-      let str = GLib.Core.char_ptr_to_string v in
-      assert_equal_string str "two"
-  in
+  let () = assert_char_ptr_node next "two" in
   let prev = Char_ptr_list.get_previous next in
-  match Char_ptr_list.get_data prev with
-  | None -> assert_failure "The prev node should have data"
-  | Some v ->
-    let str = GLib.Core.char_ptr_to_string v in
-    assert_equal_string str "one"
+  assert_char_ptr_node prev "one"
 
 let test_list_char_ptr_remove test_ctxt =
-  let dllist = Char_ptr_list.append None s_one in
-  let dllist = Char_ptr_list.append dllist s_two in
-  let dllist = Char_ptr_list.append dllist s_three in
+  let dllist = build_char_ptr_dllist () in
   let dllist' = Char_ptr_list.remove dllist s_two in
   let length = Char_ptr_list.length dllist' in
   let _ =
     Unsigned.(assert_equal ~printer:UInt.to_string UInt.(of_int 2) length) in
   let last = Char_ptr_list.last dllist' in
-  let _ = match Char_ptr_list.get_data last with
-    | None -> assert_failure "The next node should have data"
-    | Some v ->
-      let str = GLib.Core.char_ptr_to_string v in
-      assert_equal_string str "three"
-  in
+  let () = assert_char_ptr_node last "three" in
   let first = Char_ptr_list.first dllist' in
-  match Char_ptr_list.get_data first with
-  | None -> assert_failure "The next node should have data"
-  | Some v ->
-    let str = GLib.Core.char_ptr_to_string v in
-    assert_equal_string str "one"
+  assert_char_ptr_node first "one"
 
 let test_list_char_ptr_sort test_ctxt =
   let aaaaaa = GLib.Core.string_to_char_ptr "aaaaaa" in
@@ -307,23 +246,12 @@ let test_list_char_ptr_sort test_ctxt =
     assert_equal_string str "a"
 
 let test_list_char_ptr_reverse test_ctxt =
-  let dllist = Char_ptr_list.append None s_one in
-  let dllist = Char_ptr_list.append dllist s_two in
-  let dllist = Char_ptr_list.append dllist s_three in
+  let dllist = build_char_ptr_dllist () in
   let dllist = Char_ptr_list.reverse dllist in
   let last = Char_ptr_list.last dllist in
-  let _ = match Char_ptr_list.get_data last with
-    | None -> assert_failure "The next node should have data"
-    | Some v ->
-      let str = GLib.Core.char_ptr_to_string v in
-      assert_equal_string str "one"
-  in
+  let () = assert_char_ptr_node last "one" in
   let first = Char_ptr_list.first dllist in
-  match Char_ptr_list.get_data first with
-  | None -> assert_failure "The next node should have data"
-  | Some v ->
-    let str = GLib.Core.char_ptr_to_string v in
-    assert_equal_string str "three"
+  assert_char_ptr_node first "three"
 
 let tests =
   "GLib2 Dl List module tests" >:::
@@ -336,9 +264,10 @@ let tests =
     "Dl list of int prepend" >:: test_list_int_prepend;
     "Dl list of int prepend invalid argument" >:: test_list_int_prepend_invalid_argument;
     "Dl list of int sort test" >:: test_list_int_sort;
-    "Dl list of int reverse test" >:: test_list_int_reverse;
     "Dl list of int nth test" >:: test_list_int_nth;
+    "Dl list of int reverse test" >:: test_list_int_reverse;
     "Dl list of char ptr create append length test" >:: test_list_char_ptr_append;
+    "DL list of char ptr nth test" >:: test_list_char_ptr_nth;
     "DL list of char ptr previous next test" >:: test_list_char_ptr_previous_next;
     "DL list of char remove test" >:: test_list_char_ptr_remove;
     "DL list of char ptr sort test" >:: test_list_char_ptr_sort;
