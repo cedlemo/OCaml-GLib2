@@ -38,13 +38,13 @@ let one = allocate int 1
 let two = allocate int 2
 let three = allocate int 3
 
-let build_sllist () =
+let build_int_sllist () =
   let sllist = Int_list.append None one in
   let sllist = Int_list.append sllist two in
   Int_list.append sllist three
 
 let test_list_int_next test_ctxt =
-  let sllist = build_sllist () in
+  let sllist = build_int_sllist () in
   let values = [1; 2; 3] in
   let rec check_loop elt = function
     | [] -> ()
@@ -57,37 +57,30 @@ let test_list_int_next test_ctxt =
       check_loop next q
   in check_loop sllist values
 
-let test_list_int_last test_ctxt =
-  let sllist = build_sllist () in
-  match Int_list.last sllist with
-  | None ->
-    let msg = "the last element of the sllist should not be none"
-    in assert_equal ~msg false true
-  | last -> match Int_list.get_data last with
-    | None ->
-      let msg = "the data of the last element of the sllist should not be none"
-      in assert_equal ~msg false true
-    | Some v ->
-      assert_equal ~printer:string_of_int 3 (!@v)
-
-let assert_node node value =
+let assert_node node value printer =
   match Int_list.get_data node with
   | None ->
     let msg = "This node should have data" in
     assert_equal ~msg false true
   | Some v ->
-    assert_equal ~printer:string_of_int value (!@v)
+    assert_equal ~printer value (!@v)
+
+let test_list_int_last test_ctxt =
+  let sllist = build_int_sllist () in
+  match Int_list.last sllist with
+  | None ->
+    let msg = "the last element of the sllist should not be none"
+    in assert_equal ~msg false true
+  | last -> assert_node last 3 string_of_int
 
 let test_list_int_nth test_ctxt =
-  let sllist = build_sllist () in
-  let () = assert_node (Int_list.nth sllist 0) 1 in
-  let () = assert_node (Int_list.nth sllist 1) 2 in
-  assert_node (Int_list.nth sllist 2) 3
+  let sllist = build_int_sllist () in
+  let () = assert_node (Int_list.nth sllist 0) 1 string_of_int in
+  let () = assert_node (Int_list.nth sllist 1) 2 string_of_int in
+  assert_node (Int_list.nth sllist 2) 3 string_of_int
 
 let test_list_int_sort test_ctxt =
-  let sllist = Int_list.append None three in
-  let sllist = Int_list.append sllist one in
-  let sllist = Int_list.append sllist two in
+  let sllist = build_int_sllist () in
   let sllist = Int_list.sort sllist (fun ptr_a ptr_b ->
       let a = !@ptr_a in
       let b = !@ptr_b in
@@ -99,12 +92,7 @@ let test_list_int_sort test_ctxt =
   | None ->
     let msg = "the last element of the dllist should not be none"
     in assert_equal ~msg false true
-  | last -> match Int_list.get_data last with
-    | None ->
-      let msg = "the data of the last element of the dllist should not be none"
-      in assert_equal ~msg false true
-    | Some v ->
-      assert_equal ~printer:string_of_int 3 (!@v)
+  | last -> assert_node last 3 string_of_int
 
 module Char_ptr_list =
   GLib.SLList.Make(struct
@@ -116,20 +104,21 @@ let s_one = GLib.Core.string_to_char_ptr "one"
 let s_two = GLib.Core.string_to_char_ptr "two"
 let s_three = GLib.Core.string_to_char_ptr "three"
 
+let build_char_ptr_sllist () =
+  let sllist = Char_ptr_list.append None s_one in
+  let sllist = Char_ptr_list.append sllist s_two in
+  Char_ptr_list.append sllist s_three
+
 let test_list_char_ptr_append_length test_ctxt =
-  let dllist = Char_ptr_list.append None s_one in
-  let dllist = Char_ptr_list.append dllist s_two in
-  let dllist = Char_ptr_list.append dllist s_three in
+  let sllist = build_char_ptr_sllist () in
   let ref_len = Unsigned.UInt.of_int 3 in
-  let len = Char_ptr_list.length dllist in
+  let len = Char_ptr_list.length sllist in
   let printer = Unsigned.UInt.to_string in
   assert_equal ~printer ref_len len
 
 let test_list_char_ptr_next test_ctxt =
-  let dllist = Char_ptr_list.append None s_one in
-  let dllist = Char_ptr_list.append dllist s_two in
-  let dllist = Char_ptr_list.append dllist s_three in
-  let node = Char_ptr_list.next dllist in
+  let sllist = build_char_ptr_sllist () in
+  let node = Char_ptr_list.next sllist in
   let _ = match Char_ptr_list.get_data node with
     | None -> assert_failure "The next node should have data"
     | Some v ->
