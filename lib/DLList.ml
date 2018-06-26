@@ -93,4 +93,7 @@ module Make(Data : DataTypes) = struct
 
   let sort =
     foreign "g_list_sort" (ptr_opt glist @-> Comp_func.funptr @-> returning (ptr_opt glist))
+
+  let nth =
+    foreign "g_list_nth" (ptr_opt glist @-> int @-> returning (ptr_opt glist))
 end

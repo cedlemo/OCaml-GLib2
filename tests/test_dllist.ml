@@ -199,6 +199,19 @@ let test_list_int_reverse test_ctxt =
     | Some v ->
       assert_equal ~printer:string_of_int 1 !@v
 
+let assert_node node value printer =
+  match Int_list.get_data node with
+  | None ->
+    let msg = "This node should have data" in
+    assert_equal ~msg false true
+  | Some v ->
+    assert_equal ~printer value (!@v)
+
+let test_list_int_nth test_ctxt =
+  let dllist = build_dllist () in
+  let () = assert_node (Int_list.nth dllist 0) 1 string_of_int in
+  let () = assert_node (Int_list.nth dllist 1) 2 string_of_int in
+  assert_node (Int_list.nth dllist 2) 3 string_of_int
 
 module Char_ptr_list =
   GLib.DLList.Make(struct
@@ -324,6 +337,7 @@ let tests =
     "Dl list of int prepend invalid argument" >:: test_list_int_prepend_invalid_argument;
     "Dl list of int sort test" >:: test_list_int_sort;
     "Dl list of int reverse test" >:: test_list_int_reverse;
+    "Dl list of int nth test" >:: test_list_int_nth;
     "Dl list of char ptr create append length test" >:: test_list_char_ptr_append;
     "DL list of char ptr previous next test" >:: test_list_char_ptr_previous_next;
     "DL list of char remove test" >:: test_list_char_ptr_remove;
