@@ -108,6 +108,25 @@ let test_list_int_concat test_ctxt =
   let () = assert_node (Int_list.nth sllist'' 4) 5 string_of_int in
   assert_node (Int_list.nth sllist 5) 6 string_of_int
 
+let test_list_int_free_full test_ctxt =
+  let counter = ref 0 in
+  let module Int_list =
+    GLib.SLList.Make(struct
+      type t = int
+      let t_typ = int
+      let free_func = Some (fun v ->
+          counter := (!counter + (!@v)))
+  end)
+  in
+  (** In the following lines, the finalise is disabled in order so that the
+   *  values are not de-allocated by the Gc.full_major. If the Garbage Collector
+   *  clean those values, the test fails because !@v reference freed memory
+   *  zone. *)
+  let sllist = Int_list.append None (allocate ~finalise:(fun _-> ()) int 4) in
+  let sllist = Int_list.append sllist (allocate ~finalise:(fun _-> ()) int 5) in
+  let _ = Int_list.append sllist (allocate ~finalise:(fun _-> ()) int 6) in
+  let () = Gc.full_major () in
+  assert_equal_int 15 (!counter)
 
 module Char_ptr_list =
   GLib.SLList.Make(struct
@@ -157,6 +176,7 @@ let tests =
     "Sl list of int sort test" >:: test_list_int_sort;
     "Sl list of int nth test" >:: test_list_int_nth;
     "Sl list of int concat test" >:: test_list_int_concat;
+    "Sl list of int free_full test" >:: test_list_int_free_full;
     "SL list of char ptr append length test" >:: test_list_char_ptr_append_length;
     "SL list of char ptr next" >:: test_list_char_ptr_next;
   ]
