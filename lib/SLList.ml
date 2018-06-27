@@ -7,6 +7,7 @@ open Foreign
 module type DataTypes = sig
   type t
   val t_typ : t Ctypes.typ
+  val free_func : (t ptr -> unit) option
 end
 
 module Make(Data : DataTypes) = struct
@@ -14,9 +15,16 @@ module Make(Data : DataTypes) = struct
   let slist : slist structure typ = structure "SList"
   type data = Data.t
   let data = Data.t_typ
+  let free_func = Data.free_func
 
   module Comp_func =
     GCallback.CompareFunc.Make(struct
+      type t = data
+      let t_typ = data
+    end)
+
+  module GDestroy_notify =
+    GCallback.GDestroyNotify.Make(struct
       type t = data
       let t_typ = data
     end)
@@ -28,6 +36,16 @@ module Make(Data : DataTypes) = struct
   let free =
     foreign "g_slist_free" (ptr_opt slist @-> returning void)
 
+  let free_full =
+      foreign "g_slist_free_full" (ptr_opt slist @-> GDestroy_notify.funptr @-> returning void)
+
+  let finalise sllist =
+    match free_func with
+    | None -> Gc.finalise free sllist
+    | Some fn ->
+      let free_full' sl = free_full sl fn in
+      Gc.finalise free_full' sllist
+
   let append sllist element =
     let append_raw =
       foreign "g_slist_append" (ptr_opt slist @-> ptr data @-> returning (ptr_opt slist))
@@ -35,7 +53,7 @@ module Make(Data : DataTypes) = struct
     match sllist with
     | Some _ -> append_raw sllist element
     | None -> let sllist' = append_raw sllist element in
-      let _ = Gc.finalise free sllist' in
+      let () = finalise sllist' in
       sllist'
 
   let prepend sllist element =
@@ -50,7 +68,7 @@ module Make(Data : DataTypes) = struct
       match sllist with
       | Some _ -> prepend_raw sllist element
       | None -> let sllist' = prepend_raw sllist element in
-        let _ = Gc.finalise free sllist' in
+        let () = finalise sllist' in
         sllist'
     end
     else

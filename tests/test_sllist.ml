@@ -24,6 +24,7 @@ module Int_list =
   GLib.SLList.Make(struct
     type t = int
     let t_typ = int
+    let free_func = None
   end)
 
 let test_list_int_append test_ctxt =
@@ -112,6 +113,7 @@ module Char_ptr_list =
   GLib.SLList.Make(struct
     type t = char
     let t_typ = char
+    let free_func = None
   end)
 
 let s_one = GLib.Core.string_to_char_ptr "one"
