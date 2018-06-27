@@ -94,6 +94,20 @@ let test_list_int_sort test_ctxt =
     in assert_equal ~msg false true
   | last -> assert_node last 3 string_of_int
 
+let test_list_int_concat test_ctxt =
+  let sllist = build_int_sllist () in
+  let sllist' = Int_list.append None (allocate int 4) in
+  let sllist' = Int_list.append sllist' (allocate int 5) in
+  let sllist' = Int_list.append sllist' (allocate int 6) in
+  let sllist'' = Int_list.concat sllist sllist' in
+  let () = assert_node (Int_list.nth sllist'' 0) 1 string_of_int in
+  let () = assert_node (Int_list.nth sllist'' 1) 2 string_of_int in
+  let () = assert_node (Int_list.nth sllist'' 2) 3 string_of_int in
+  let () = assert_node (Int_list.nth sllist'' 3) 4 string_of_int in
+  let () = assert_node (Int_list.nth sllist'' 4) 5 string_of_int in
+  assert_node (Int_list.nth sllist 5) 6 string_of_int
+
+
 module Char_ptr_list =
   GLib.SLList.Make(struct
     type t = char
@@ -140,6 +154,7 @@ let tests =
     "Sl list of int last test" >:: test_list_int_last;
     "Sl list of int sort test" >:: test_list_int_sort;
     "Sl list of int nth test" >:: test_list_int_nth;
+    "Sl list of int concat test" >:: test_list_int_concat;
     "SL list of char ptr append length test" >:: test_list_char_ptr_append_length;
     "SL list of char ptr next" >:: test_list_char_ptr_next;
   ]

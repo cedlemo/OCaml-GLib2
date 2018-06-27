@@ -78,4 +78,7 @@ module Make(Data : DataTypes) = struct
 
   let nth =
     foreign "g_slist_nth" (ptr_opt slist @-> int @-> returning (ptr_opt slist))
+
+  let concat =
+    foreign "g_slist_concat" (ptr_opt slist @-> ptr_opt slist @-> returning (ptr_opt slist))
 end
