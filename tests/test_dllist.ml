@@ -196,7 +196,7 @@ let test_list_int_free_full test_ctxt =
 let test_list_int_foreach test_ctxt =
   let dllist = build_dllist () in
   let counter = ref 0 in
-  let () = Int_list.foreach dllist (fun v _ ->
+  let () = Int_list.foreach dllist (fun v ->
       counter := (!counter + (!@v))
     ) in
   assert_equal_int 6 (!counter)

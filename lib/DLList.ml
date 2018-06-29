@@ -146,5 +146,22 @@ let free_func = Data.free_func
     let foreign_raw =
       foreign "g_list_foreach" (ptr_opt glist @-> GFunc.funptr @-> returning void)
     in
-    foreign_raw dllist f
+    (* the following function wrapper is used to ignore the 'gpointer user_data'
+     * of the C callback.
+     * In C, 'gpointer user_data' are used to pass variables defined in other
+     * environment to the callback body.
+     * In OCaml a function can be a closure.
+     * Closures are functions which carry around some of the "environment" in
+     * which they were defined. In particular, a closure can reference variables
+     * which were available at the point of its definition.
+     * I just have to pass a function that can carry variables from other environment
+     * than the callback itself.
+     *
+     * Ctypes absolutly want the same signature than in C, using f_raw allows
+     * user to define the callback to foreach with a signature like
+     * ptr data @-> returning void instead of
+     * ptr data @-> ptr_opt void @-> returning void.
+     *)
+    let f_raw a b = f a in
+    foreign_raw dllist f_raw
 end
