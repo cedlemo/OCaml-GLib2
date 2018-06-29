@@ -47,6 +47,12 @@ module Make(Data : DataTypes) = struct
       let t_typ = data
     end)
 
+  module GFunc =
+    GCallback.GFunc.Make(struct
+      type t = data
+      let t_typ = data
+    end)
+
   let slist_data  = field slist "data" (ptr data)
   let slist_next  = field slist "next" (ptr_opt slist)
   let () = seal slist
@@ -117,4 +123,13 @@ module Make(Data : DataTypes) = struct
 
   let concat =
     foreign "g_slist_concat" (ptr_opt slist @-> ptr_opt slist @-> returning (ptr_opt slist))
+
+  let foreach dllist f =
+    let foreign_raw =
+      foreign "g_list_foreach" (ptr_opt slist @-> GFunc.funptr @-> returning void)
+    in
+    (* See the DLList foreach for explanation *)
+    let f_raw a b = f a in
+    foreign_raw dllist f_raw
+
 end

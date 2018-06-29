@@ -128,6 +128,14 @@ let test_list_int_free_full test_ctxt =
   let () = Gc.full_major () in
   assert_equal_int 15 (!counter)
 
+let test_list_int_foreach test_ctxt =
+  let sllist = build_int_sllist () in
+  let counter = ref 0 in
+  let () = Int_list.foreach sllist (fun v ->
+      counter := (!counter + (!@v))
+    ) in
+  assert_equal_int 6 (!counter)
+
 module Char_ptr_list =
   GLib.SLList.Make(struct
     type t = char
@@ -177,6 +185,7 @@ let tests =
     "Sl list of int nth test" >:: test_list_int_nth;
     "Sl list of int concat test" >:: test_list_int_concat;
     "Sl list of int free_full test" >:: test_list_int_free_full;
+    "Sl list of int foreach test" >:: test_list_int_foreach;
     "SL list of char ptr append length test" >:: test_list_char_ptr_append_length;
     "SL list of char ptr next" >:: test_list_char_ptr_next;
   ]
