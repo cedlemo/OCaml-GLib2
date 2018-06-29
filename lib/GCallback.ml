@@ -44,3 +44,12 @@ module GDestroyNotify = struct
     let funptr = funptr f
   end
 end
+
+module GFunc = struct
+  module Make(Data : DataType) = struct
+    type data = Data.t
+    let data = Data.t_typ
+    let f = ptr data @-> ptr_opt void @-> returning void
+    let funptr = funptr f
+  end
+end
