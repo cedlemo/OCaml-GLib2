@@ -193,6 +193,14 @@ let test_list_int_free_full test_ctxt =
   let () = Gc.full_major () in
   assert_equal_int 15 (!counter)
 
+let test_list_int_foreach test_ctxt =
+  let dllist = build_dllist () in
+  let counter = ref 0 in
+  let () = Int_list.foreach dllist (fun v _ ->
+      counter := (!counter + (!@v))
+    ) in
+  assert_equal_int 6 (!counter)
+
 module Char_ptr_list =
   GLib.DLList.Make(struct
     type t = char
@@ -306,6 +314,7 @@ let tests =
     "Dl list of int reverse test" >:: test_list_int_reverse;
     "Dl list of int concat test" >:: test_list_int_concat;
     "Dl list of int free_full test" >:: test_list_int_free_full;
+    "Dl list of int foreach test" >:: test_list_int_foreach;
     "Dl list of char ptr create append length test" >:: test_list_char_ptr_append;
     "DL list of char ptr nth test" >:: test_list_char_ptr_nth;
     "DL list of char ptr previous next test" >:: test_list_char_ptr_previous_next;

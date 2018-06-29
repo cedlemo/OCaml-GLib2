@@ -48,6 +48,12 @@ let free_func = Data.free_func
       let t_typ = data
     end)
 
+  module GFunc =
+    GCallback.GFunc.Make(struct
+      type t = data
+      let t_typ = data
+    end)
+
   let glist_data = field glist "data" (ptr data)
   let glist_next = field glist "next" (ptr_opt glist)
   let glist_prev = field glist "prev" (ptr_opt glist)
@@ -135,4 +141,10 @@ let free_func = Data.free_func
 
   let concat =
     foreign "g_list_concat" (ptr_opt glist @-> ptr_opt glist @-> returning (ptr_opt glist))
+
+  let foreach dllist f =
+    let foreign_raw =
+      foreign "g_list_foreach" (ptr_opt glist @-> GFunc.funptr @-> returning void)
+    in
+    foreign_raw dllist f
 end
