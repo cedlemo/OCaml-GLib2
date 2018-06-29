@@ -24,6 +24,7 @@ module Int_list =
   GLib.DLList.Make(struct
     type t = int
     let t_typ = int
+    let free_func = None
   end)
 
 let one = allocate int 1
@@ -172,10 +173,31 @@ let test_list_int_concat test_ctxt =
   let () = assert_node (Int_list.nth dllist'' 4) 5 string_of_int in
   assert_node (Int_list.nth dllist 5) 6 string_of_int
 
+let test_list_int_free_full test_ctxt =
+  let counter = ref 0 in
+  let module Int_list =
+    GLib.DLList.Make(struct
+      type t = int
+      let t_typ = int
+      let free_func = Some (fun v ->
+          counter := (!counter + (!@v)))
+  end)
+  in
+  (** In the following lines, the finalise is disabled in order so that the
+   *  values are not de-allocated by the Gc.full_major. If the Garbage Collector
+   *  clean those values, the test fails because !@v reference freed memory
+   *  zone. *)
+  let sllist = Int_list.append None (allocate ~finalise:(fun _-> ()) int 4) in
+  let sllist = Int_list.append sllist (allocate ~finalise:(fun _-> ()) int 5) in
+  let _ = Int_list.append sllist (allocate ~finalise:(fun _-> ()) int 6) in
+  let () = Gc.full_major () in
+  assert_equal_int 15 (!counter)
+
 module Char_ptr_list =
   GLib.DLList.Make(struct
     type t = char
     let t_typ = char
+    let free_func = None
   end)
 
 let s_one = GLib.Core.string_to_char_ptr "one"
@@ -283,6 +305,7 @@ let tests =
     "Dl list of int nth test" >:: test_list_int_nth;
     "Dl list of int reverse test" >:: test_list_int_reverse;
     "Dl list of int concat test" >:: test_list_int_concat;
+    "Dl list of int free_full test" >:: test_list_int_free_full;
     "Dl list of char ptr create append length test" >:: test_list_char_ptr_append;
     "DL list of char ptr nth test" >:: test_list_char_ptr_nth;
     "DL list of char ptr previous next test" >:: test_list_char_ptr_previous_next;

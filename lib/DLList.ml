@@ -26,6 +26,7 @@ open Foreign
 module type DataTypes = sig
   type t
   val t_typ : t Ctypes.typ
+  val free_func : (t ptr -> unit) option
 end
 
 module Make(Data : DataTypes) = struct
@@ -33,6 +34,19 @@ module Make(Data : DataTypes) = struct
   let glist : glist structure typ = structure "GList"
   type data = Data.t
   let data = Data.t_typ
+let free_func = Data.free_func
+
+  module Comp_func =
+    GCallback.CompareFunc.Make(struct
+      type t = data
+      let t_typ = data
+    end)
+
+  module GDestroy_notify =
+    GCallback.GDestroyNotify.Make(struct
+      type t = data
+      let t_typ = data
+    end)
 
   let glist_data = field glist "data" (ptr data)
   let glist_next = field glist "next" (ptr_opt glist)
@@ -42,6 +56,16 @@ module Make(Data : DataTypes) = struct
   let free =
     foreign "g_list_free" (ptr_opt glist @-> returning void)
 
+  let free_full =
+      foreign "g_list_free_full" (ptr_opt glist @-> GDestroy_notify.funptr @-> returning void)
+
+  let finalise dllist =
+    match free_func with
+    | None -> Gc.finalise free dllist
+    | Some fn ->
+      let free_full' sl = free_full sl fn in
+      Gc.finalise free_full' dllist
+
   let append dllist element =
     let append_raw =
       foreign "g_list_append" (ptr_opt glist @-> ptr data @-> returning (ptr_opt glist))
@@ -49,7 +73,7 @@ module Make(Data : DataTypes) = struct
     match dllist with
     | Some _ -> append_raw dllist element
     | None -> let dllist' = append_raw dllist element in
-      let _ = Gc.finalise free dllist' in
+      let () = finalise dllist' in
       dllist'
 
   let prepend dllist element =
@@ -66,7 +90,7 @@ module Make(Data : DataTypes) = struct
       match dllist with
       | Some _ -> prepend_raw dllist element
       | None -> let dllist' = prepend_raw dllist element in
-        let _ = Gc.finalise free dllist' in
+        let () = finalise dllist' in
         dllist'
       end
     else
@@ -102,12 +126,6 @@ module Make(Data : DataTypes) = struct
     | Some dllist_ptr ->
         let data_ptr = getf (!@dllist_ptr) glist_data in
         Some data_ptr
-
-  module Comp_func =
-    GCallback.CompareFunc.Make(struct
-      type t = data
-      let t_typ = data
-    end)
 
   let sort =
     foreign "g_list_sort" (ptr_opt glist @-> Comp_func.funptr @-> returning (ptr_opt glist))
