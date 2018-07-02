@@ -54,3 +54,12 @@ let char_ptr_to_string _ptr =
   let buf = Bytes.make len '\000' in
   let () = unsafe_memcpy pointer ocaml_bytes _ptr buf len in
   Bytes.to_string buf
+
+(** Hash table utilities
+ *  see https://developer.gnome.org/glib/stable/glib-Hash-Tables.html#g-direct-equal
+ *)
+let int_hash =
+  foreign "g_int_hash" (ptr int @-> returning uint)
+
+let int_equal =
+  foreign "g_int_equal" (ptr int @-> returning bool)
