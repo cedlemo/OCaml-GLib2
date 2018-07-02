@@ -53,3 +53,12 @@ module GFunc = struct
     let funptr = funptr f
   end
 end
+
+module GHashFunc = struct
+  module Make(Data : DataType) = struct
+    type data = Data.t
+    let data = Data.t_typ
+    let f = ptr data @-> returning uint
+    let funptr = funptr f
+  end
+end
