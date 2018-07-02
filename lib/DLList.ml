@@ -34,7 +34,7 @@ module Make(Data : DataTypes) = struct
   let glist : glist structure typ = structure "GList"
   type data = Data.t
   let data = Data.t_typ
-let free_func = Data.free_func
+  let free_func = Data.free_func
 
   module Comp_func =
     GCallback.CompareFunc.Make(struct
@@ -63,7 +63,7 @@ let free_func = Data.free_func
     foreign "g_list_free" (ptr_opt glist @-> returning void)
 
   let free_full =
-      foreign "g_list_free_full" (ptr_opt glist @-> GDestroy_notify.funptr @-> returning void)
+    foreign "g_list_free_full" (ptr_opt glist @-> GDestroy_notify.funptr @-> returning void)
 
   let finalise dllist =
     match free_func with
@@ -84,10 +84,10 @@ let free_func = Data.free_func
 
   let prepend dllist element =
     let is_start = match dllist with
-    | None -> true
-    | Some node -> match getf (!@node) glist_prev with
       | None -> true
-      | Some _ -> false
+      | Some node -> match getf (!@node) glist_prev with
+        | None -> true
+        | Some _ -> false
     in
     if is_start then begin
       let prepend_raw =
@@ -98,7 +98,7 @@ let free_func = Data.free_func
       | None -> let dllist' = prepend_raw dllist element in
         let () = finalise dllist' in
         dllist'
-      end
+    end
     else
       raise (Invalid_argument "The element is not the start of the list")
 
@@ -120,18 +120,18 @@ let free_func = Data.free_func
   let get_previous = function
     | None -> None
     | Some dllist_ptr ->
-        getf (!@dllist_ptr) glist_prev
+      getf (!@dllist_ptr) glist_prev
 
   let get_next = function
     | None -> None
     | Some dllist_ptr ->
-        getf (!@dllist_ptr) glist_next
+      getf (!@dllist_ptr) glist_next
 
   let get_data = function
     | None -> None
     | Some dllist_ptr ->
-        let data_ptr = getf (!@dllist_ptr) glist_data in
-        Some data_ptr
+      let data_ptr = getf (!@dllist_ptr) glist_data in
+      Some data_ptr
 
   let sort =
     foreign "g_list_sort" (ptr_opt glist @-> Comp_func.funptr @-> returning (ptr_opt glist))
@@ -161,7 +161,7 @@ let free_func = Data.free_func
      * user to define the callback to foreach with a signature like
      * ptr data @-> returning void instead of
      * ptr data @-> ptr_opt void @-> returning void.
-     *)
+    *)
     let f_raw a b = f a in
     foreign_raw dllist f_raw
 end
