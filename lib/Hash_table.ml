@@ -59,6 +59,8 @@ module Make(Data : DataTypes) = struct
   let insert =
     foreign "g_hash_table_insert" (ptr hash @-> ptr key @-> ptr value @-> returning void)
 
+  let size =
+    foreign "g_hash_table_size" (ptr hash @-> returning uint)
 end
 
 (*
