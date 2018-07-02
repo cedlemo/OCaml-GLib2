@@ -32,8 +32,8 @@ end
 
 module Make(Data : DataTypes) = struct
   type hash
-  let hash : t structure typ = structure "Hash_table"
-  let () = seal glist
+  let hash : hash structure typ = structure "Hash_table"
+  let () = seal hash
   type key = Data.key
   let key = Data.key
   type value = Data.value
