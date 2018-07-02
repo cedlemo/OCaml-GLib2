@@ -13,6 +13,7 @@ let () =
       Test_functions.tests;
       Test_dllist.tests;
       Test_sllist.tests;
+      Test_hash_table.tests;
       Test_c_string_utilities.tests;
     ]
   )
