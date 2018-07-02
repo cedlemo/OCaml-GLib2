@@ -23,9 +23,9 @@ open Foreign
  *)
 module type DataTypes = sig
   type key
-  val key_typ : key Ctypes.typ
+  val key : key Ctypes.typ
   type value
-  type value_typ : value Ctypes.typ
+  val value : value Ctypes.typ
   val key_destroy_func : (key ptr -> unit) option
   val value_destroy_func : (value ptr -> unit) option
 end
@@ -34,6 +34,10 @@ module Make(Data : DataTypes) = struct
   type hash
   let hash : t structure typ = structure "Hash_table"
   let () = seal glist
+  type key = Data.key
+  let key = Data.key
+  type value = Data.value
+  let value = Data.value
 
   module Hash_func = struct
     GCallback.GHashFunc.Make(struct
@@ -51,6 +55,10 @@ module Make(Data : DataTypes) = struct
 
   let make =
     foreign "g_hash_table_new" (Hash_func.funptr @-> Key_equal_func.funptr @-> returning hash ptr)
+
+  let insert =
+    foreign "g_hash_table_insert" (ptr hash @-> ptr key @-> ptr value @-> returning void)
+
 end
 
 (*
