@@ -18,6 +18,32 @@
 open Test_utils
 open OUnit2
 open Ctypes
-open GLib.SLList
+open GLib
 
+module String_hash =
+  GLib.Hash_table.Make(struct
+    type key = char
+    let key = char
+    type value = char
+    let value = char
+  end)
+
+let test_hash_table_create_insert_size test_ctxt =
+  let h = String_hash.create Core.int_hash Core.int_equal in
+  let france = GLib.Core.string_to_char_ptr "france" in
+  let paris = GLib.Core.string_to_char_ptr "paris" in
+  let () = String_hash.insert h france paris in
+  let allemagne = GLib.Core.string_to_char_ptr "allemagne" in
+  let berlin = GLib.Core.string_to_char_ptr "berlin" in
+  let () = String_hash.insert h allemagne berlin in
+  let s = String_hash.size h in
+  let s_ref = Unsigned.UInt.of_int 2 in
+  let printer = Unsigned.UInt.to_string in
+  assert_equal ~printer s_ref s
+
+let tests =
+  "GLib2 Hash_table module tests" >:::
+  [
+    "Test hash table create/insert/size" >:: test_hash_table_create_insert_size;
+  ]
 
