@@ -31,9 +31,8 @@ module type DataTypes = sig
 end
 
 module Make(Data : DataTypes) = struct
-  type hash
-  let hash : hash structure typ = structure "Hash_table"
-  let () = seal hash
+  type hash = unit ptr
+  let hash : hash typ = ptr void
   type key = Data.key
   let key = Data.key
   type value = Data.value
@@ -53,13 +52,13 @@ module Make(Data : DataTypes) = struct
     end)
 
   let create =
-    foreign "g_hash_table_new" (Hash_func.funptr @-> Key_equal_func.funptr @-> returning (ptr hash))
+    foreign "g_hash_table_new" (Hash_func.funptr @-> Key_equal_func.funptr @-> returning hash)
 
   let insert =
-    foreign "g_hash_table_insert" (ptr hash @-> ptr key @-> ptr value @-> returning void)
+    foreign "g_hash_table_insert" (hash @-> ptr key @-> ptr value @-> returning void)
 
   let size =
-    foreign "g_hash_table_size" (ptr hash @-> returning uint)
+    foreign "g_hash_table_size" (hash @-> returning uint)
 end
 
 (*
