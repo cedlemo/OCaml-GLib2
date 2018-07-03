@@ -48,4 +48,3 @@ let tests =
   [
     "Test hash table create/insert/size" >:: test_hash_table_create_insert_size;
   ]
-
