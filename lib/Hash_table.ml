@@ -39,22 +39,21 @@ module Make(Data : DataTypes) = struct
   type value = Data.value
   let value = Data.value
 
-  module Hash_func = struct
+  module Hash_func =
     GCallback.GHashFunc.Make(struct
-      type t = hash
-      let t_typ = hash
+      type t = key
+      let t_typ = key
     end)
-  end
 
-  module Key_equal_func = struct
+
+  module Key_equal_func =
     GCallback.GEqualFunc.Make(struct
-      type t = hash
-      let t_typ = hash
+      type t = key
+      let t_typ = key
     end)
-  end
 
   let make =
-    foreign "g_hash_table_new" (Hash_func.funptr @-> Key_equal_func.funptr @-> returning hash ptr)
+    foreign "g_hash_table_new" (Hash_func.funptr @-> Key_equal_func.funptr @-> returning (ptr hash))
 
   let insert =
     foreign "g_hash_table_insert" (ptr hash @-> ptr key @-> ptr value @-> returning void)
