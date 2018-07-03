@@ -52,7 +52,7 @@ module Make(Data : DataTypes) = struct
       let t_typ = key
     end)
 
-  let make =
+  let create =
     foreign "g_hash_table_new" (Hash_func.funptr @-> Key_equal_func.funptr @-> returning (ptr hash))
 
   let insert =
