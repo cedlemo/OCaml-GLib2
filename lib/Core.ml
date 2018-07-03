@@ -63,3 +63,9 @@ let int_hash =
 
 let int_equal =
   foreign "g_int_equal" (ptr int @-> returning bool)
+
+let str_hash =
+  foreign "g_str_hash" (ptr char @-> returning uint)
+
+let str_equal =
+  foreign "g_str_equal" (ptr char @-> returning bool)
