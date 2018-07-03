@@ -26,10 +26,12 @@ module String_hash =
     let key = char
     type value = char
     let value = char
+    let key_destroy_func = None
+    let value_destroy_func = None
   end)
 
 let test_hash_table_create_insert_size test_ctxt =
-  let h = String_hash.create Core.int_hash Core.int_equal in
+  let h = String_hash.create Core.str_hash Core.str_equal in
   let france = GLib.Core.string_to_char_ptr "france" in
   let paris = GLib.Core.string_to_char_ptr "paris" in
   let () = String_hash.insert h france paris in
