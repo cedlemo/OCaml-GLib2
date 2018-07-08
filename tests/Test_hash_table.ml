@@ -64,9 +64,33 @@ let test_hash_table_lookup test_ctxt =
     let printer = fun s -> s in
     assert_equal ~printer (GLib.Core.char_ptr_to_string capital) "berlin"
 
+let test_hash_table_lookup_extended test_ctxt =
+  let h = String_hash.create Core.str_hash Core.str_equal in
+  let france = GLib.Core.string_to_char_ptr "france" in
+  let paris = GLib.Core.string_to_char_ptr "paris" in
+  let () = String_hash.insert h france paris in
+  let allemagne = GLib.Core.string_to_char_ptr "allemagne" in
+  let berlin = GLib.Core.string_to_char_ptr "berlin" in
+  let () = String_hash.insert h allemagne berlin in
+  let espagne = GLib.Core.string_to_char_ptr "espagne" in
+  let () = match String_hash.lookup_extended h espagne with
+    | Some _ -> let msg ="Lookup bad key: this should not have been reached" in
+      assert_equal ~msg false true
+    | None -> ()
+  in
+  match String_hash.lookup_extended h allemagne with
+  | None -> let msg ="Lookup good key: this should not have been reached" in
+    assert_equal ~msg false true
+  | Some (key, value) ->
+    let printer = fun s -> s in
+    let () = assert_equal ~printer (GLib.Core.char_ptr_to_string key) "allemagne" in
+    assert_equal ~printer (GLib.Core.char_ptr_to_string value) "berlin"
+
+
 let tests =
   "GLib2 Hash_table module tests" >:::
   [
     "Test hash table create/insert/size" >:: test_hash_table_create_insert_size;
     "Test hash table lookup" >:: test_hash_table_lookup;
+    "Test hash table lookup_extended" >:: test_hash_table_lookup_extended;
   ]

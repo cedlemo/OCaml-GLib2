@@ -62,6 +62,21 @@ module Make(Data : DataTypes) = struct
 
   let lookup =
     foreign "g_hash_table_lookup" (hash @-> ptr key @-> returning (ptr_opt value))
+
+  let lookup_extended hash_table lookup_key =
+  let lookup_extended_raw =
+    foreign "g_hash_table_lookup_extended"
+      (hash @-> ptr key @-> ptr (ptr_opt key) @-> ptr (ptr_opt value) @->
+       returning bool)
+  in
+  let orig_key_ptr = allocate (ptr_opt key) None in
+  let value_ptr = allocate (ptr_opt value) None in
+  let ret = lookup_extended_raw hash_table lookup_key orig_key_ptr value_ptr in
+  let orig_key_opt = !@ orig_key_ptr in
+  let value_opt = !@ value_ptr in
+  match ret, orig_key_opt, value_opt with
+  | true, Some orig_key, Some value -> Some (orig_key, value)
+  |_ -> None
 end
 
 (*
