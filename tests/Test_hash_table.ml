@@ -86,6 +86,22 @@ let test_hash_table_lookup_extended test_ctxt =
     let () = assert_equal ~printer (GLib.Core.char_ptr_to_string key) "allemagne" in
     assert_equal ~printer (GLib.Core.char_ptr_to_string value) "berlin"
 
+let test_hash_table_foreach test_ctxt =
+  let h = String_hash.create Core.str_hash Core.str_equal in
+  let france = GLib.Core.string_to_char_ptr "france" in
+  let paris = GLib.Core.string_to_char_ptr "paris" in
+  let () = String_hash.insert h france paris in
+  let allemagne = GLib.Core.string_to_char_ptr "allemagne" in
+  let berlin = GLib.Core.string_to_char_ptr "berlin" in
+  let () = String_hash.insert h allemagne berlin in
+  let buf = ref "" in
+  let () = String_hash.foreach h (fun k v ->
+      let key = GLib.Core.char_ptr_to_string k in
+      let value = GLib.Core.char_ptr_to_string v in
+      buf := String.concat " " [!buf ; key; value] ) in
+  let printer = fun s -> s in
+  let expected = " allemagne berlin france paris" in
+  assert_equal ~printer expected !buf
 
 let tests =
   "GLib2 Hash_table module tests" >:::
@@ -93,4 +109,5 @@ let tests =
     "Test hash table create/insert/size" >:: test_hash_table_create_insert_size;
     "Test hash table lookup" >:: test_hash_table_lookup;
     "Test hash table lookup_extended" >:: test_hash_table_lookup_extended;
+    "Test hash table foreach" >:: test_hash_table_foreach;
   ]

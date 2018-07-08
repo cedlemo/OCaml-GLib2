@@ -51,6 +51,14 @@ module Make(Data : DataTypes) = struct
       let t_typ = key
     end)
 
+  module GHFunc =
+    GCallback.GHFunc.Make(struct
+      type t = key
+      let t = key
+      type t' = value
+      let t' = value
+    end)
+
   let create =
     foreign "g_hash_table_new" (Hash_func.funptr @-> Key_equal_func.funptr @-> returning hash)
 
@@ -77,6 +85,17 @@ module Make(Data : DataTypes) = struct
   match ret, orig_key_opt, value_opt with
   | true, Some orig_key, Some value -> Some (orig_key, value)
   |_ -> None
+
+  let foreach hash_table f =
+    let foreign_raw =
+      foreign "g_hash_table_foreach" (hash @-> GHFunc.funptr @-> returning void)
+    in
+    (*
+     * See DLList implementation of foreach for an explanation
+     * *)
+    let f_raw a b c = f a b in
+    foreign_raw hash_table f_raw
+
 end
 
 (*
