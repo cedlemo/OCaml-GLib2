@@ -67,7 +67,7 @@ module GEqualFunc = struct
   module Make(Data : DataType) = struct
     type data = Data.t
     let data = Data.t_typ
-    let f = ptr data @-> returning bool
+    let f = ptr data @-> ptr data @-> returning bool
     let funptr = funptr f
   end
 end
