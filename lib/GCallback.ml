@@ -73,18 +73,18 @@ module GEqualFunc = struct
 end
 
 module type HashDataTypes = sig
-  type key
-  val key : key Ctypes.typ
-  type value
-  val value : value Ctypes.typ
+  type t
+  val t : t Ctypes.typ
+  type t'
+  val t' : t' Ctypes.typ
 end
 
 module GHFunc = struct
   module Make(Data : HashDataTypes) = struct
-    type key = Data.key
-    let key = Data.key
-    type value = Data.value
-    let value = Data.value
+    type key = Data.t
+    let key = Data.t
+    type value = Data.t'
+    let value = Data.t'
     let f = ptr key @-> ptr value @-> ptr_opt void @-> returning void
     let funptr = funptr f
   end
