@@ -68,4 +68,4 @@ let str_hash =
   foreign "g_str_hash" (ptr char @-> returning uint)
 
 let str_equal =
-  foreign "g_str_equal" (ptr char @-> returning bool)
+  foreign "g_str_equal" (ptr char @-> ptr char @-> returning bool)
