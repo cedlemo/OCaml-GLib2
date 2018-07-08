@@ -59,6 +59,9 @@ module Make(Data : DataTypes) = struct
 
   let size =
     foreign "g_hash_table_size" (hash @-> returning uint)
+
+  let lookup =
+    foreign "g_hash_table_lookup" (hash @-> ptr key @-> returning (ptr_opt value))
 end
 
 (*
