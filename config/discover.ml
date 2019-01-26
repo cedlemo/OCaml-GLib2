@@ -32,11 +32,9 @@ let () =
           let glib = Option.value query ~default in
           let  module P = C.Pkg_config in
           { libs =
-              (libffi.P.libs @ glib.P.libs) @
-              ["-L/usr/lib/x86_64-linux-gnu";"-L/usr/lib"];
+              (libffi.P.libs @ glib.P.libs);
             cflags =
-              (libffi.P.cflags @ glib.P.cflags) @
-              ["-I/usr/include"; "-I/usr/include/x86_64-linux-gnu"]
+              (libffi.P.cflags @ glib.P.cflags)
           }
       in
 
