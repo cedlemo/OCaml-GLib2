@@ -39,6 +39,11 @@ let () =
               ["-I/usr/include"; "-I/usr/include/x86_64-linux-gnu"]
           }
       in
+
+      let os_type = C.ocaml_config_var_exn (C.create "") "system" in
+      let ccopts = if Base.String.(os_type = "macosx") then [""] else ["-Wl,-no-as-needed"] in
       let list_of_string_to_sexp = sexp_of_list sexp_of_string in
+
       write_sexp "c_flags.sexp"         (list_of_string_to_sexp conf.cflags);
-      write_sexp "c_library_flags.sexp" (list_of_string_to_sexp conf.libs))
+      write_sexp "c_library_flags.sexp" (list_of_string_to_sexp conf.libs);
+      write_sexp "ccopts.sexp" (sexp_of_list sexp_of_string ccopts))
