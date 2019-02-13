@@ -1,0 +1,3 @@
+(executables
+ (names list_targets)
+ (libraries gobject-introspection gi-bindings-generator))

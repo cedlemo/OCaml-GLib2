@@ -1,0 +1,10 @@
+(executables
+ (names tests)
+ (libraries gi-glib2 oUnit str memcpy))
+
+(alias
+ (name runtest)
+ (deps
+  (:< tests.exe))
+ (action
+  (run %{<})))

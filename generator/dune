@@ -1,0 +1,3 @@
+(executables
+ (names gen)
+ (libraries gobject-introspection gi-bindings-generator))
