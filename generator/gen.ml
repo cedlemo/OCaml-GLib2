@@ -19,7 +19,7 @@ let files_suffix = "Raw"
 (** Instead of generate all the data structures (and theirs related methods or
  *  constants), the idea is to choose what is needed. *)
 let data_structures =
-  ["Error"; "Rand"; "Date"; "DateTime"; "TimeVal"; "TimeZone";]
+  ["Error"; "Rand"; "Date"; "DateTime"; "TimeVal"; "TimeZone"; "Sequence"]
 
 (** One can choose to skip the bindings of some constants because they are not
  *  needed or because you want to create manually the bindings in the "Core.ml"
@@ -28,17 +28,25 @@ let const_to_skip = ["MAJOR_VERSION"; "MINOR_VERSION"; "MICRO_VERSION"]
 
 (** Like for the data_structures, you have to choose with function should have
  *  its bindings generated. *)
-let functions = ["random_double"; "random_double_range";
-                 "random_int"; "random_int_range";
-                 "get_current_time";
-                 "filename_to_uri"; "get_charset";
-                 "dir_make_tmp"]
+let functions =
+  [ "random_double"
+  ; "random_double_range"
+  ; "random_int"
+  ; "random_int_range"
+  ; "get_current_time"
+  ; "filename_to_uri"
+  ; "get_charset"
+  ; "dir_make_tmp" ]
 
 let sources = Loader.generate_files ("Core" ^ files_suffix)
 
 let () =
-  let () = Loader.write_constant_bindings_for namespace ~version sources const_to_skip in
-  let () = Loader.write_function_bindings_for namespace ~version sources functions in
+  let () =
+    Loader.write_constant_bindings_for namespace ~version sources const_to_skip
+  in
+  let () =
+    Loader.write_function_bindings_for namespace ~version sources functions
+  in
   let () = Loader.write_enum_and_flag_bindings_for namespace ~version () in
   let () = Loader.write_bindings_for namespace ~version data_structures in
   BG.Binding_utils.Sources.close sources
