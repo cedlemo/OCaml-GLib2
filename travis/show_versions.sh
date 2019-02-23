@@ -4,7 +4,7 @@
 echo "########################################################################"
 echo "########################### LIBS VERSIONS ##############################"
 echo
-echo $(ocaml --version)
+echo $(opam list --short --columns=package installed ocaml)
 echo $(opam list --short --columns=package installed ctypes)
 echo $(opam list --short --columns=package installed ctypes-foreign)
 echo $(opam list --short --columns=package installed memcpy)

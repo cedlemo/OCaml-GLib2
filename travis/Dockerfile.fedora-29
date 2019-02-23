@@ -1,0 +1,35 @@
+FROM ocaml/opam2:fedora
+
+RUN \
+    sudo dnf install -y \
+    gtk+-devel \
+    glib-devel \
+    gobject-introspection-devel \
+    xorg-x11-server-Xvfb \
+    darcs \
+    mercurial \
+    m4 \
+    openssl-devel \
+    readline-devel \
+    zlib-devel \
+    dejavu-sans-fonts \
+    gnome-icon-theme \
+    adwaita-gtk2-theme \
+    vte3 \
+    vte3-devel \
+    clutter-gtk \
+    gtksourceview3 \
+    dbus-x11 \
+    wget
+
+
+COPY . /home/opam/ocaml-glib2
+
+WORKDIR /home/opam/ocaml-glib2
+RUN opam init --comp 4.05.0
+RUN opam install ctypes configurator base stdio ctypes-foreign jbuilder dune odoc bisect_ppx ounit memcpy
+RUN opam pin add --yes gobject-introspection https://github.com/cedlemo/OCaml-GObject-Introspection.git
+RUN opam pin add --yes gi-bindings-generator https://github.com/cedlemo/OCaml-GI-ctypes-bindings-generator.git
+
+RUN ./travis/show_versions.sh
+CMD bash -ex ./travis/runtest.sh
