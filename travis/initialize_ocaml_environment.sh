@@ -1,5 +1,5 @@
 #!/bin/bash
-wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sudo sh -s /usr/local/bin
+sh <(curl -sL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)
 /usr/local/bin/opam init --comp 4.05.0
 opam install ctypes configurator base stdio ctypes-foreign jbuilder dune odoc bisect_ppx ounit memcpy
 opam pin add --yes gobject-introspection https://github.com/cedlemo/OCaml-GObject-Introspection.git
