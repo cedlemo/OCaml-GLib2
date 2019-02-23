@@ -59,4 +59,4 @@ WORKDIR /home/ocaml-glib2/ocaml-glib2
 # RUN echo "dune runtest --profile=release" >> /home/ocaml-glib2/ocaml-glib2/runtest.sh
 RUN ./travis/initialize_ocaml_environment.sh
 RUN ./travis/show_versions.sh
-CMD bash -ex ./runtest.sh
+CMD bash -ex ./travis/runtest.sh
