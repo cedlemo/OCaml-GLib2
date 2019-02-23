@@ -44,9 +44,9 @@ RUN sudo chown -R ocaml-glib2:ocaml-glib2 /home/ocaml-glib2/ocaml-glib2
 WORKDIR /home/ocaml-glib2/ocaml-glib2
 RUN wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sudo sh -s /usr/local/bin
 RUN /usr/local/bin/opam init --comp 4.05.0
-RUN opam install ctypes configurator base stdio ctypes-foreign jbuilder odoc bisect_ppx ounit memcpy
+RUN opam install ctypes configurator base stdio ctypes-foreign dune odoc bisect_ppx ounit memcpy
 RUN opam pin add --yes gobject-introspection https://github.com/cedlemo/OCaml-GObject-Introspection.git
 RUN opam pin add --yes gi-bindings-generator https://github.com/cedlemo/OCaml-GI-ctypes-bindings-generator.git
 RUN echo ". /home/ocaml-glib2/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true" > /home/ocaml-glib2/ocaml-glib2/runtest.sh
-RUN echo "jbuilder runtest" >> /home/ocaml-glib2/ocaml-glib2/runtest.sh
+RUN echo "dune runtest --profile=release" >> /home/ocaml-glib2/ocaml-glib2/runtest.sh
 CMD bash -ex /home/ocaml-glib2/ocaml-glib2/runtest.sh
