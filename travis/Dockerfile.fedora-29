@@ -24,7 +24,7 @@ RUN \
 
 
 COPY . /home/opam/ocaml-glib2
-
+RUN sudo chown -R opam:opam /home/opam/ocaml-glib2
 WORKDIR /home/opam/ocaml-glib2
 RUN opam init --comp 4.05.0
 RUN opam install ctypes configurator base stdio ctypes-foreign jbuilder dune odoc bisect_ppx ounit memcpy
