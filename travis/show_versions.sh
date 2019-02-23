@@ -1,5 +1,6 @@
 #!/bin/bash
 
+. /home/ocaml-glib2/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 echo "########################################################################"
 echo "########################### LIBS VERSIONS ##############################"
 echo
