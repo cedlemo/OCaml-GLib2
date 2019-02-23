@@ -57,6 +57,6 @@ WORKDIR /home/ocaml-glib2/ocaml-glib2
 # RUN opam pin add --yes gobject-introspection https://github.com/cedlemo/OCaml-GObject-Introspection.git
 # RUN opam pin add --yes gi-bindings-generator https://github.com/cedlemo/OCaml-GI-ctypes-bindings-generator.git
 # RUN echo "dune runtest --profile=release" >> /home/ocaml-glib2/ocaml-glib2/runtest.sh
-RUN ./initialize_ocaml_environment.sh
-RUN ./show_versions.sh
+RUN ./travis/initialize_ocaml_environment.sh
+RUN ./travis/show_versions.sh
 CMD bash -ex ./runtest.sh
