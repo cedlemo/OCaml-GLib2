@@ -1,10 +1,9 @@
-FROM centos:7
+FROM ocaml/opam2:centos
 
+ RUN \
+   sudo yum install -y epel-release
 RUN \
-  yum install -y epel-release
-RUN \
-  yum install -y \
-    sudo \
+  sudo yum install -y \
     gtk+-devel \
     glib-devel \
     gobject-introspection-devel \
@@ -36,20 +35,13 @@ RUN \
     wget \
     patch
 
+COPY . /home/opam/ocaml-glib2
+RUN sudo chown -R opam:opam /home/opam/ocaml-glib2
+WORKDIR /home/opam/ocaml-glib2
+RUN opam init --comp 4.05.0
+RUN opam install ctypes configurator base stdio ctypes-foreign jbuilder dune odoc bisect_ppx ounit memcpy
+RUN opam pin add --yes gobject-introspection https://github.com/cedlemo/OCaml-GObject-Introspection.git
+RUN opam pin add --yes gi-bindings-generator https://github.com/cedlemo/OCaml-GI-ctypes-bindings-generator.git
 
-RUN \
-  useradd --user-group --create-home ocaml-glib2
-
-RUN \
-  echo "ocaml-glib2 ALL=(ALL:ALL) NOPASSWD:ALL" | \
-    EDITOR=tee visudo -f /etc/sudoers.d/ocaml-glib2
-
-USER ocaml-glib2
-
-COPY . /home/ocaml-glib2/ocaml-glib2
-
-RUN sudo chown -R ocaml-glib2:ocaml-glib2 /home/ocaml-glib2/ocaml-glib2
-WORKDIR /home/ocaml-glib2/ocaml-glib2
-RUN ./travis/initialize_ocaml_environment.sh
 RUN ./travis/show_versions.sh
 CMD bash -ex ./travis/runtest.sh
