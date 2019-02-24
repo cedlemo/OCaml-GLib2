@@ -27,5 +27,6 @@ RUN sudo chown -R opam:opam /home/opam/ocaml-glib2
 WORKDIR /home/opam/ocaml-glib2
 RUN opam switch 4.05
 RUN eval $(opam env)
+RUN ./travis/initialize_ocaml_environment.sh
 RUN ./travis/show_versions.sh
 CMD bash -ex ./travis/runtest.sh
