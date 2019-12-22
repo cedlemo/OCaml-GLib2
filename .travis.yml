@@ -14,15 +14,23 @@ matrix:
     - env: TYPE=ubuntu-18.10 OCAML_VERSION=4.05
     - env: TYPE=ubuntu-18.10 OCAML_VERSION=4.06
     - env: TYPE=ubuntu-18.10 OCAML_VERSION=4.07
+    - env: TYPE=ubuntu-18.10 OCAML_VERSION=4.08
+    - env: TYPE=ubuntu-18.10 OCAML_VERSION=4.09
     - env: TYPE=debian-buster OCAML_VERSION=4.05
     - env: TYPE=debian-buster OCAML_VERSION=4.06
     - env: TYPE=debian-buster OCAML_VERSION=4.07
+    - env: TYPE=debian-buster OCAML_VERSION=4.08
+    - env: TYPE=debian-buster OCAML_VERSION=4.09
     - env: TYPE=centos-7 OCAML_VERSION=4.05
     - env: TYPE=centos-7 OCAML_VERSION=4.06
     - env: TYPE=centos-7 OCAML_VERSION=4.07
-    - env: TYPE=fedora-29 OCAML_VERSION=4.05
-    - env: TYPE=fedora-29 OCAML_VERSION=4.06
-    - env: TYPE=fedora-29 OCAML_VERSION=4.07
+    - env: TYPE=centos-7 OCAML_VERSION=4.08
+    - env: TYPE=centos-7 OCAML_VERSION=4.08
+    - env: TYPE=fedora OCAML_VERSION=4.05
+    - env: TYPE=fedora OCAML_VERSION=4.06
+    - env: TYPE=fedora OCAML_VERSION=4.07
+    - env: TYPE=fedora OCAML_VERSION=4.08
+    - env: TYPE=fedora OCAML_VERSION=4.09
 
 install:
   - docker build
