@@ -9,7 +9,6 @@ let () =
       Test_date.tests;
       Test_date_time.tests;
       Test_random.tests;
-      Test_time_val.tests;
       Test_functions.tests;
       Test_dllist.tests;
       Test_sllist.tests;
