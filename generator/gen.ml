@@ -34,11 +34,13 @@ let functions = ["random_double"; "random_double_range";
                  "filename_to_uri"; "get_charset";
                  "dir_make_tmp"]
 
-let sources = Loader.generate_files ("Core" ^ files_suffix)
+let cwd = Sys.getcwd ()
+let dest_dir = cwd ^ "/lib"
+let sources = Loader.generate_files dest_dir ("Core" ^ files_suffix)
 
 let () =
   let () = Loader.write_constant_bindings_for namespace ~version sources const_to_skip in
   let () = Loader.write_function_bindings_for namespace ~version sources functions in
-  let () = Loader.write_enum_and_flag_bindings_for namespace ~version () in
-  let () = Loader.write_bindings_for namespace ~version data_structures in
+  let () = Loader.write_enum_and_flag_bindings_for namespace ~version dest_dir () in
+  let () = Loader.write_bindings_for namespace ~version dest_dir data_structures in
   BG.Binding_utils.Sources.close sources
