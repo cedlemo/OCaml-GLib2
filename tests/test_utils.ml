@@ -36,6 +36,9 @@ let assert_equal_uint8 int1 int2 =
 let assert_equal_uint16 int1 int2 =
   assert_equal ~printer: (fun s -> Unsigned.UInt16.to_string s) int1 int2
 
+let assert_equal_uint int1 int2 =
+  assert_equal ~printer: (fun s -> Unsigned.UInt.to_string s) int1 int2
+
 let assert_equal_or_greater int1 int2 =
     assert_equal ~printer: (fun s ->
         String.concat " " [string_of_int int1;
