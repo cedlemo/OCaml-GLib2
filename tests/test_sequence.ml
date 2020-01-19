@@ -38,9 +38,9 @@ module String_sequence =
 *)
 
 let test_empty_sequence test_ctxt =
-  let s = String_sequence.create None in
+  let s = String_sequence.create (fun _ -> ()) in
   let len = String_sequence.length s in
-  let () = assert_equal_int 0 len in
+  let () = assert_equal_uint (Unsigned.UInt.zero) len in
   let is_empty = String_sequence.is_empty s in
   assert_equal_boolean true is_empty
 

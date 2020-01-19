@@ -14,5 +14,6 @@ let () =
       Test_sllist.tests;
       Test_hash_table.tests;
       Test_c_string_utilities.tests;
+      Test_sequence.tests;
     ]
   )
