@@ -50,6 +50,6 @@ module Make(Data : DataTypes) = struct
   let length =
     foreign "g_sequence_get_length" (sequence @-> returning uint)
 
-  let empty =
+  let is_empty =
     foreign "g_sequence_is_empty" (sequence @-> returning bool)
 end
