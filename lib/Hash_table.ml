@@ -1,5 +1,5 @@
 (*
- * Copyright 2018 Cedric LE MOIGNE, cedlemo@gmx.com
+ * Copyright 2018-2020 Cedric LE MOIGNE, cedlemo@gmx.com
  * This file is part of OCaml-GLib2.
  *
  * OCaml-GLib2 is free software: you can redistribute it and/or modify
@@ -59,8 +59,19 @@ module Make(Data : DataTypes) = struct
       let t' = value
     end)
 
-  let create =
-    foreign "g_hash_table_new" (Hash_func.funptr @-> Key_equal_func.funptr @-> returning hash)
+  let unref =
+    foreign "g_hash_table_unref" (hash @-> returning void)
+
+  let finalise hash =
+    Gc.finalise unref hash
+
+  let create hash_func key_equal_func =
+    let create_raw =
+      foreign "g_hash_table_new" (Hash_func.funptr @-> Key_equal_func.funptr @-> returning hash)
+    in
+    let h = create_raw hash_func key_equal_func in
+    let () = finalise h in
+    h
 
   let insert =
     foreign "g_hash_table_insert" (hash @-> ptr key @-> ptr value @-> returning void)
