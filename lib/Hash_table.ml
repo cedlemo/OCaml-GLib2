@@ -37,13 +37,14 @@ module Make(Data : DataTypes) = struct
   let key = Data.key
   type value = Data.value
   let value = Data.value
+  let key_destroy_func = Data.key_destroy_func
+  let value_destroy_func = Data.value_destroy_func
 
   module Hash_func =
     GCallback.GHashFunc.Make(struct
       type t = key
       let t_typ = key
     end)
-
 
   module Key_equal_func =
     GCallback.GEqualFunc.Make(struct
@@ -59,8 +60,22 @@ module Make(Data : DataTypes) = struct
       let t' = value
     end)
 
+  module GDestroy_notify_key =
+    GCallback.GDestroyNotify.Make(struct
+      type t = key
+      let t_typ = key
+    end)
+
+  module GDestroy_notify_value =
+    GCallback.GDestroyNotify.Make(struct
+      type t = value
+      let t_typ = value
+    end)
+
   let unref =
     foreign "g_hash_table_unref" (hash @-> returning void)
+
+  (** TODO: g_hash_table_remove_all*)
 
   let finalise hash =
     Gc.finalise unref hash
@@ -70,6 +85,24 @@ module Make(Data : DataTypes) = struct
       foreign "g_hash_table_new" (Hash_func.funptr @-> Key_equal_func.funptr @-> returning hash)
     in
     let h = create_raw hash_func key_equal_func in
+    let () = finalise h in
+    h
+
+  let create_full hash_func key_equal_func =
+    let create_full_raw =
+    foreign "g_hash_table_new_full"
+      (Hash_func.funptr @-> Key_equal_func.funptr @->
+       GDestroy_notify_key.funptr @-> GDestroy_notify_value.funptr @-> returning hash)
+    in
+    let _key_destroy_func = match key_destroy_func with
+      | None -> fun _ -> ()
+      | Some fn -> fn
+    in
+    let _value_destroy_func = match value_destroy_func with
+      | None -> fun _ -> ()
+      | Some fn -> fn
+    in
+    let h = create_full_raw hash_func key_equal_func _key_destroy_func _value_destroy_func in
     let () = finalise h in
     h
 

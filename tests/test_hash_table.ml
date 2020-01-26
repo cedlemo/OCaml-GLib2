@@ -1,5 +1,5 @@
 (*
- * Copyright 2018 Cedric LE MOIGNE, cedlemo@gmx.com
+ * Copyright 2018-2020 Cedric LE MOIGNE, cedlemo@gmx.com
  * This file is part of OCaml-GLib2.
  *
  * OCaml-GLib2 is free software: you can redistribute it and/or modify
@@ -39,6 +39,7 @@ let build_hash_sample () =
   let berlin = GLib.Core.string_to_char_ptr "berlin" in
   let () = String_hash.insert h allemagne berlin in
   h
+
 let test_hash_table_create_insert_size test_ctxt =
   let h = build_hash_sample () in
   let s = String_hash.size h in
@@ -90,6 +91,31 @@ let test_hash_table_foreach test_ctxt =
   let expected = " allemagne berlin france paris" in
   assert_equal ~printer expected !buf
 
+let test_hash_table_create_full test_ctxt =
+  let counter_key = ref 0 in
+  let counter_val = ref 0 in
+  let module Int_hash_wth_destroy =
+    GLib.Hash_table.Make(struct
+      type key = int
+      let key = int
+      type value = int
+      let value = int
+      let key_destroy_func = Some (fun v -> counter_key := (!counter_key + (!@v)))
+      let value_destroy_func = Some (fun v -> counter_val := (!counter_val + (!@v)))
+    end)
+  in
+  let h = Int_hash_wth_destroy.create_full Core.int_hash Core.int_equal in
+  let insert_vals key value =
+    let value = allocate ~finalise:(fun _-> ()) int value in
+    let key =  allocate ~finalise:(fun _-> ()) int key in
+    Int_hash_wth_destroy.insert h key value
+  in
+  let () = insert_vals 1 4 in
+  let () = insert_vals 2 10 in
+  let () = Gc.full_major () in
+  let () = assert_equal_int 3 (!counter_key) in
+  assert_equal_int 14 (!counter_val)
+
 let tests =
   "GLib2 Hash_table module tests" >:::
   [
@@ -97,4 +123,5 @@ let tests =
     "Test hash table lookup" >:: test_hash_table_lookup;
     "Test hash table lookup_extended" >:: test_hash_table_lookup_extended;
     "Test hash table foreach" >:: test_hash_table_foreach;
+    "Test hash table create_full" >:: test_hash_table_create_full;
   ]
