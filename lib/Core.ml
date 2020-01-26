@@ -62,7 +62,7 @@ let int_hash =
   foreign "g_int_hash" (ptr int @-> returning uint)
 
 let int_equal =
-  foreign "g_int_equal" (ptr int @-> returning bool)
+  foreign "g_int_equal" (ptr int @-> ptr int @-> returning bool)
 
 let str_hash =
   foreign "g_str_hash" (ptr char @-> returning uint)
