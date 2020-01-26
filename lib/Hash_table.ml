@@ -75,10 +75,14 @@ module Make(Data : DataTypes) = struct
   let unref =
     foreign "g_hash_table_unref" (hash @-> returning void)
 
-  (** TODO: g_hash_table_remove_all*)
+  let remove_all =
+    foreign "g_hash_table_remove_all" (hash @-> returning void)
 
   let finalise hash =
-    Gc.finalise unref hash
+    let _finalize h =
+      let () = remove_all h in unref h
+    in
+    Gc.finalise _finalize hash
 
   let create hash_func key_equal_func =
     let create_raw =
