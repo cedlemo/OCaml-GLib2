@@ -30,13 +30,16 @@ module String_hash =
     let value_destroy_func = None
   end)
 
+let str_to_chr_ptr = GLib.Core.string_to_char_ptr
+let chr_ptr_to_str = GLib.Core.char_ptr_to_string
+
 let build_hash_sample () =
   let h = String_hash.create Core.str_hash Core.str_equal in
-  let france = GLib.Core.string_to_char_ptr "france" in
-  let paris = GLib.Core.string_to_char_ptr "paris" in
+  let france = str_to_chr_ptr "france" in
+  let paris = str_to_chr_ptr "paris" in
   let () = String_hash.insert h france paris in
-  let allemagne = GLib.Core.string_to_char_ptr "allemagne" in
-  let berlin = GLib.Core.string_to_char_ptr "berlin" in
+  let allemagne = str_to_chr_ptr "allemagne" in
+  let berlin = str_to_chr_ptr "berlin" in
   let () = String_hash.insert h allemagne berlin in
   h
 
@@ -49,29 +52,29 @@ let test_hash_table_create_insert_size test_ctxt =
 
 let test_hash_table_lookup test_ctxt =
   let h = build_hash_sample () in
-  let espagne = GLib.Core.string_to_char_ptr "espagne" in
+  let espagne = str_to_chr_ptr "espagne" in
   let () = match String_hash.lookup h espagne with
     | Some _ -> let msg ="Lookup bad key: this should not have been reached" in
       assert_equal ~msg false true
     | None -> ()
   in
-  let allemagne = GLib.Core.string_to_char_ptr "allemagne" in
+  let allemagne = str_to_chr_ptr "allemagne" in
   match String_hash.lookup h allemagne with
   | None -> let msg ="Lookup good key: this should not have been reached" in
     assert_equal ~msg false true
   | Some capital ->
     let printer = fun s -> s in
-    assert_equal ~printer (GLib.Core.char_ptr_to_string capital) "berlin"
+    assert_equal ~printer (chr_ptr_to_str capital) "berlin"
 
 let test_hash_table_lookup_extended test_ctxt =
   let h = build_hash_sample () in
-  let espagne = GLib.Core.string_to_char_ptr "espagne" in
+  let espagne = str_to_chr_ptr "espagne" in
   let () = match String_hash.lookup_extended h espagne with
     | Some _ -> let msg ="Lookup bad key: this should not have been reached" in
       assert_equal ~msg false true
     | None -> ()
   in
-  let allemagne = GLib.Core.string_to_char_ptr "allemagne" in
+  let allemagne = str_to_chr_ptr "allemagne" in
   match String_hash.lookup_extended h allemagne with
   | None -> let msg ="Lookup good key: this should not have been reached" in
     assert_equal ~msg false true
@@ -84,8 +87,8 @@ let test_hash_table_foreach test_ctxt =
   let h = build_hash_sample () in
   let buf = ref "" in
   let () = String_hash.foreach h (fun k v ->
-      let key = GLib.Core.char_ptr_to_string k in
-      let value = GLib.Core.char_ptr_to_string v in
+      let key = chr_ptr_to_str k in
+      let value = chr_ptr_to_str v in
       buf := String.concat " " [!buf ; key; value] ) in
   let printer = fun s -> s in
   let expected = " allemagne berlin france paris" in

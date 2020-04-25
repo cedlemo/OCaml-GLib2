@@ -1,5 +1,5 @@
 (*
- * Copyright 2017-2018 Cedric LE MOIGNE, cedlemo@gmx.com
+ * Copyright 2017-2020 Cedric LE MOIGNE, cedlemo@gmx.com
  * This file is part of OCaml-GLib2.
  *
  * OCaml-GLib2 is free software: you can redistribute it and/or modify
@@ -31,12 +31,12 @@ let test_date_create test_ctxt =
   let day = UInt8.of_int 30 in
   let month = Date_month.November in
   let year = UInt16.of_int 2017 in
-  let _ = Date.set_day date day in
-  let _ = Date.set_month date month in
-  let _ = Date.set_year date year in
-  let _ = assert_equal_uint8 (Date.get_day date) day in
-  let _ = assert_equal (Date.get_month date) month in
-  let _ = assert_equal_uint16 (Date.get_year date) year in
+  let () = Date.set_day date day in
+  let () = Date.set_month date month in
+  let () = Date.set_year date year in
+  let () = assert_equal_uint8 (Date.get_day date) day in
+  let () = assert_equal (Date.get_month date) month in
+  let () = assert_equal_uint16 (Date.get_year date) year in
   Date.free date
 
 let tests =
