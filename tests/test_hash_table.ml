@@ -94,7 +94,7 @@ let test_hash_table_foreach test_ctxt =
   let expected = " allemagne berlin france paris" in
   assert_equal ~printer expected !buf
 
-let test_hash_table_create_full test_ctxt =
+let test_int_hash_table_create_full test_ctxt =
   let counter_key = ref 0 in
   let counter_val = ref 0 in
   let module Int_hash_wth_destroy =
@@ -119,6 +119,32 @@ let test_hash_table_create_full test_ctxt =
   let () = assert_equal_int 3 (!counter_key) in
   assert_equal_int 14 (!counter_val)
 
+let test_int64_hash_table_create_full test_ctxt =
+  let counter_key = ref (Int64.zero) in
+  let counter_val = ref (Int64.zero) in
+  let module Int64_hash_wth_destroy =
+    GLib.Hash_table.Make(struct
+      type key = int64
+      let key = int64_t
+      type value = int64
+      let value = int64_t
+      let key_destroy_func = Some (fun v -> counter_key := (Int64.add !counter_key (!@v)))
+      let value_destroy_func = Some (fun v -> counter_val := (Int64.add !counter_val (!@v)))
+    end)
+  in
+  let h = Int64_hash_wth_destroy.create_full Core.int64_hash Core.int64_equal in
+  let insert_vals key value =
+    let value = allocate ~finalise:(fun _-> ()) int64_t value in
+    let key =  allocate ~finalise:(fun _-> ()) int64_t key in
+    Int64_hash_wth_destroy.insert h key value
+  in
+  let () = insert_vals 1L 4L in
+  let () = insert_vals 2L 10L in
+  let () = Gc.full_major () in
+  let () = assert_equal_int64 3L (!counter_key) in
+  assert_equal_int64 14L (!counter_val)
+
+
 let tests =
   "GLib2 Hash_table module tests" >:::
   [
@@ -126,5 +152,6 @@ let tests =
     "Test hash table lookup" >:: test_hash_table_lookup;
     "Test hash table lookup_extended" >:: test_hash_table_lookup_extended;
     "Test hash table foreach" >:: test_hash_table_foreach;
-    "Test hash table create_full" >:: test_hash_table_create_full;
+    "Test int hash table create_full" >:: test_int_hash_table_create_full;
+    "Test int64 hash table create_full" >:: test_int64_hash_table_create_full;
   ]
