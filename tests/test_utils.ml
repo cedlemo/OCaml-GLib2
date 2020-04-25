@@ -1,5 +1,5 @@
 (*
- * Copyright 2017 Cedric LE MOIGNE, cedlemo@gmx.com
+ * Copyright 2017-2020 Cedric LE MOIGNE, cedlemo@gmx.com
  * This file is part of OCaml-GLib2.
  *
  * OCaml-GLib2 is free software: you can redistribute it and/or modify
@@ -29,6 +29,9 @@ let assert_equal_int int1 int2 =
 
 let assert_equal_int32 int1 int2 =
   assert_equal ~printer: (fun s -> Int32.to_string s) int1 int2
+
+let assert_equal_int64 int1 int2 =
+  assert_equal ~printer: (fun s -> Int64.to_string s) int1 int2
 
 let assert_equal_uint8 int1 int2 =
   assert_equal ~printer: (fun s -> Unsigned.UInt8.to_string s) int1 int2
