@@ -64,8 +64,26 @@ let int_hash =
 let int_equal =
   foreign "g_int_equal" (ptr int @-> ptr int @-> returning bool)
 
+let int64_hash =
+  foreign "g_int64_hash" (ptr int64_t @-> returning uint)
+
+let int64_equal =
+  foreign "g_int64_equal" (ptr int64_t @-> ptr int64_t @-> returning bool)
+
+let double_hash =
+  foreign "g_double_hash" (ptr double @-> returning uint)
+
+let double_equal =
+  foreign "g_double_equal" (ptr double @-> ptr double @-> returning bool)
+
 let str_hash =
   foreign "g_str_hash" (ptr char @-> returning uint)
 
 let str_equal =
   foreign "g_str_equal" (ptr char @-> ptr char @-> returning bool)
+
+let direct_hash =
+  foreign "g_direct_hash" (ptr void @-> returning uint)
+
+let direct_equal =
+  foreign "g_direct_equal" (ptr void @-> ptr void @-> returning bool)
